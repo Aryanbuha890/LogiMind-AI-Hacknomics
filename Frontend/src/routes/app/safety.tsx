@@ -3,7 +3,15 @@ import { AppTopBar } from "@/components/AppSidebar";
 import { Panel, ChartTip } from "./index";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { Flame, Heart, Beaker, Lock, Camera } from "lucide-react";
 
 export const Route = createFileRoute("/app/safety")({
@@ -47,9 +55,30 @@ function SafetyPage() {
               <div className="absolute inset-0 bg-grid-sm opacity-15" />
               {/* fake person boxes */}
               {[
-                { x: 18, y: 30, w: 14, h: 36, ok: true, label: "Worker · PPE OK" },
-                { x: 44, y: 38, w: 12, h: 32, ok: false, label: "No Helmet · 0.94" },
-                { x: 68, y: 28, w: 13, h: 38, ok: true, label: "Worker · PPE OK" },
+                {
+                  x: 18,
+                  y: 30,
+                  w: 14,
+                  h: 36,
+                  ok: true,
+                  label: "Worker · PPE OK",
+                },
+                {
+                  x: 44,
+                  y: 38,
+                  w: 12,
+                  h: 32,
+                  ok: false,
+                  label: "No Helmet · 0.94",
+                },
+                {
+                  x: 68,
+                  y: 28,
+                  w: 13,
+                  h: 38,
+                  ok: true,
+                  label: "Worker · PPE OK",
+                },
               ].map((b, i) => (
                 <motion.div
                   key={i}
@@ -103,19 +132,24 @@ function SafetyPage() {
                   >
                     <Icon className="h-5 w-5" style={{ color: a.c }} />
                     <div className="mt-2 text-sm font-semibold">{a.l}</div>
-                    <div className="text-[10px] text-muted-foreground">Trigger response</div>
+                    <div className="text-[10px] text-muted-foreground">
+                      Trigger response
+                    </div>
                   </button>
                 );
               })}
             </div>
             <div className="mt-4 rounded-md bg-muted/60 p-3 text-[11px] text-muted-foreground">
-              All emergency actions auto-dispatch trained personnel, notify command, and create an
-              immutable audit trail.
+              All emergency actions auto-dispatch trained personnel, notify
+              command, and create an immutable audit trail.
             </div>
           </Panel>
         </div>
 
-        <Panel title="Camera Grid" subtitle="14 active streams · 3 with active alerts">
+        <Panel
+          title="Camera Grid"
+          subtitle="14 active streams · 3 with active alerts"
+        >
           <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
             {cameras.map((c) => (
               <div
@@ -134,7 +168,9 @@ function SafetyPage() {
                     </div>
                   )}
                 </div>
-                <div className="mt-2 truncate text-xs font-medium">{c.name}</div>
+                <div className="mt-2 truncate text-xs font-medium">
+                  {c.name}
+                </div>
               </div>
             ))}
           </div>
@@ -170,7 +206,10 @@ function SafetyPage() {
             </ResponsiveContainer>
           </Panel>
 
-          <Panel title="Violation Categories" className="col-span-12 xl:col-span-4">
+          <Panel
+            title="Violation Categories"
+            className="col-span-12 xl:col-span-4"
+          >
             <ul className="space-y-2 text-sm">
               {[
                 ["PPE Non-compliance", 58, "#D97706"],
@@ -196,7 +235,8 @@ function SafetyPage() {
               ))}
             </ul>
             <div className="mt-4 rounded-md bg-muted/60 p-3 text-xs">
-              <span className="font-semibold">Avg response time</span> · 4m 12s (↓ 38% YoY)
+              <span className="font-semibold">Avg response time</span> · 4m 12s
+              (↓ 38% YoY)
             </div>
           </Panel>
         </div>
@@ -216,10 +256,12 @@ function SafetyPage() {
             <div className="text-xs font-semibold uppercase text-[color:var(--color-destructive)]">
               Confirm emergency response
             </div>
-            <h3 className="mt-1 font-display text-xl font-semibold">{modal} protocol</h3>
+            <h3 className="mt-1 font-display text-xl font-semibold">
+              {modal} protocol
+            </h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              This will immediately dispatch response teams, sound zone alarms, lock affected gates,
-              and notify port command.
+              This will immediately dispatch response teams, sound zone alarms,
+              lock affected gates, and notify port command.
             </p>
             <div className="mt-5 flex justify-end gap-2">
               <button

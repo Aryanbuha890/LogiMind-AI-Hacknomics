@@ -26,7 +26,10 @@ function Forgot() {
         <SubmitButton>Send recovery link</SubmitButton>
         <div className="text-center text-xs text-muted-foreground">
           Remembered it?{" "}
-          <Link to="/auth/login" className="text-[color:var(--color-secondary)] hover:underline">
+          <Link
+            to="/auth/login"
+            className="text-[color:var(--color-secondary)] hover:underline"
+          >
             Back to sign in
           </Link>
         </div>

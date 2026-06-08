@@ -181,7 +181,11 @@
 }
 
 @utility bg-radial-fade {
-  background: radial-gradient(60% 50% at 50% 0%, rgba(37, 99, 235, 0.18), transparent 70%);
+  background: radial-gradient(
+    60% 50% at 50% 0%,
+    rgba(37, 99, 235, 0.18),
+    transparent 70%
+  );
 }
 
 @utility text-gradient-brand {

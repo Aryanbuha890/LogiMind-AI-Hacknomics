@@ -121,9 +121,33 @@ const FEEDS: CamFeed[] = [
       trips: 1284,
     },
     boxes: [
-      { x: 8, y: 18, w: 56, h: 54, label: "CONTAINER · 0.97", conf: 0.97, color: "#10B981" },
-      { x: 12, y: 62, w: 42, h: 14, label: "PLATE · 0.98", conf: 0.98, color: "#67E8F9" },
-      { x: 70, y: 38, w: 22, h: 30, label: "DAMAGE · 0.91", conf: 0.91, color: "#DC2626" },
+      {
+        x: 8,
+        y: 18,
+        w: 56,
+        h: 54,
+        label: "CONTAINER · 0.97",
+        conf: 0.97,
+        color: "#10B981",
+      },
+      {
+        x: 12,
+        y: 62,
+        w: 42,
+        h: 14,
+        label: "PLATE · 0.98",
+        conf: 0.98,
+        color: "#67E8F9",
+      },
+      {
+        x: 70,
+        y: 38,
+        w: 22,
+        h: 30,
+        label: "DAMAGE · 0.91",
+        conf: 0.91,
+        color: "#DC2626",
+      },
     ],
     bg: "linear-gradient(135deg,#0B1A33,#1B3A6B 60%,#0F2547)",
   },
@@ -165,8 +189,24 @@ const FEEDS: CamFeed[] = [
       trips: 842,
     },
     boxes: [
-      { x: 14, y: 22, w: 64, h: 56, label: "CONTAINER · 0.96", conf: 0.96, color: "#10B981" },
-      { x: 22, y: 70, w: 36, h: 12, label: "PLATE · 0.94", conf: 0.94, color: "#67E8F9" },
+      {
+        x: 14,
+        y: 22,
+        w: 64,
+        h: 56,
+        label: "CONTAINER · 0.96",
+        conf: 0.96,
+        color: "#10B981",
+      },
+      {
+        x: 22,
+        y: 70,
+        w: 36,
+        h: 12,
+        label: "PLATE · 0.94",
+        conf: 0.94,
+        color: "#67E8F9",
+      },
     ],
     bg: "linear-gradient(135deg,#0F2547,#1B3A6B,#0B1A33)",
   },
@@ -208,8 +248,24 @@ const FEEDS: CamFeed[] = [
       trips: 612,
     },
     boxes: [
-      { x: 10, y: 24, w: 58, h: 52, label: "CONTAINER · 0.95", conf: 0.95, color: "#10B981" },
-      { x: 18, y: 68, w: 40, h: 14, label: "PLATE · 0.92", conf: 0.92, color: "#67E8F9" },
+      {
+        x: 10,
+        y: 24,
+        w: 58,
+        h: 52,
+        label: "CONTAINER · 0.95",
+        conf: 0.95,
+        color: "#10B981",
+      },
+      {
+        x: 18,
+        y: 68,
+        w: 40,
+        h: 14,
+        label: "PLATE · 0.92",
+        conf: 0.92,
+        color: "#67E8F9",
+      },
     ],
     bg: "linear-gradient(135deg,#1B3A6B,#0B1A33,#0F2547)",
   },
@@ -233,7 +289,14 @@ const FEEDS: CamFeed[] = [
       origin: "Le Havre (FRLEH)",
       destination: "Cochin (INCOK)",
     },
-    truck: { plate: "—", plateConf: 0, make: "Yard mover", color: "—", axle: "—", speed: "0 km/h" },
+    truck: {
+      plate: "—",
+      plateConf: 0,
+      make: "Yard mover",
+      color: "—",
+      axle: "—",
+      speed: "0 km/h",
+    },
     driver: {
       name: "Vikram Shetty",
       license: "KL07 20200012883",
@@ -244,8 +307,24 @@ const FEEDS: CamFeed[] = [
       trips: 2104,
     },
     boxes: [
-      { x: 6, y: 16, w: 42, h: 60, label: "CONTAINER · 0.92", conf: 0.92, color: "#10B981" },
-      { x: 52, y: 20, w: 40, h: 56, label: "CONTAINER · 0.89", conf: 0.89, color: "#10B981" },
+      {
+        x: 6,
+        y: 16,
+        w: 42,
+        h: 60,
+        label: "CONTAINER · 0.92",
+        conf: 0.92,
+        color: "#10B981",
+      },
+      {
+        x: 52,
+        y: 20,
+        w: 40,
+        h: 56,
+        label: "CONTAINER · 0.89",
+        conf: 0.89,
+        color: "#10B981",
+      },
     ],
     bg: "linear-gradient(135deg,#0B1A33,#0F2547,#1B3A6B)",
   },
@@ -287,8 +366,24 @@ const FEEDS: CamFeed[] = [
       trips: 941,
     },
     boxes: [
-      { x: 12, y: 20, w: 62, h: 54, label: "CONTAINER · 0.97", conf: 0.97, color: "#10B981" },
-      { x: 20, y: 68, w: 40, h: 14, label: "PLATE · 0.96", conf: 0.96, color: "#67E8F9" },
+      {
+        x: 12,
+        y: 20,
+        w: 62,
+        h: 54,
+        label: "CONTAINER · 0.97",
+        conf: 0.97,
+        color: "#10B981",
+      },
+      {
+        x: 20,
+        y: 68,
+        w: 40,
+        h: 14,
+        label: "PLATE · 0.96",
+        conf: 0.96,
+        color: "#67E8F9",
+      },
     ],
     bg: "linear-gradient(135deg,#0F2547,#0B1A33,#1B3A6B)",
   },
@@ -312,7 +407,14 @@ const FEEDS: CamFeed[] = [
       origin: "Hamburg (DEHAM)",
       destination: "Nhava (INNSA)",
     },
-    truck: { plate: "—", plateConf: 0, make: "Rail wagon", color: "—", axle: "—", speed: "0 km/h" },
+    truck: {
+      plate: "—",
+      plateConf: 0,
+      make: "Rail wagon",
+      color: "—",
+      axle: "—",
+      speed: "0 km/h",
+    },
     driver: {
       name: "—",
       license: "—",
@@ -323,9 +425,33 @@ const FEEDS: CamFeed[] = [
       trips: 0,
     },
     boxes: [
-      { x: 8, y: 28, w: 30, h: 44, label: "CONTAINER · 0.90", conf: 0.9, color: "#10B981" },
-      { x: 40, y: 28, w: 30, h: 44, label: "CONTAINER · 0.88", conf: 0.88, color: "#10B981" },
-      { x: 72, y: 30, w: 22, h: 42, label: "RUST · 0.78", conf: 0.78, color: "#D97706" },
+      {
+        x: 8,
+        y: 28,
+        w: 30,
+        h: 44,
+        label: "CONTAINER · 0.90",
+        conf: 0.9,
+        color: "#10B981",
+      },
+      {
+        x: 40,
+        y: 28,
+        w: 30,
+        h: 44,
+        label: "CONTAINER · 0.88",
+        conf: 0.88,
+        color: "#10B981",
+      },
+      {
+        x: 72,
+        y: 30,
+        w: 22,
+        h: 42,
+        label: "RUST · 0.78",
+        conf: 0.78,
+        color: "#D97706",
+      },
     ],
     bg: "linear-gradient(135deg,#1B3A6B,#0F2547,#0B1A33)",
   },
@@ -369,7 +495,10 @@ function ContainersPage() {
                 ["Detections", active.boxes.length],
                 ["GPU", "61%"],
               ].map(([l, v]) => (
-                <div key={l as string} className="rounded border border-border bg-background p-2">
+                <div
+                  key={l as string}
+                  className="rounded border border-border bg-background p-2"
+                >
                   <div className="text-muted-foreground">{l}</div>
                   <div className="text-sm font-semibold">{v}</div>
                 </div>
@@ -474,7 +603,10 @@ function ContainersPage() {
               </AreaChart>
             </ResponsiveContainer>
           </Panel>
-          <Panel title="Damage Categories" className="col-span-12 xl:col-span-4">
+          <Panel
+            title="Damage Categories"
+            className="col-span-12 xl:col-span-4"
+          >
             <ResponsiveContainer width="100%" height={220}>
               <PieChart>
                 <Pie
@@ -495,7 +627,10 @@ function ContainersPage() {
             <div className="mt-1 grid grid-cols-2 gap-1 text-xs">
               {damageCats.map((d) => (
                 <div key={d.name} className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full" style={{ background: d.color }} />
+                  <span
+                    className="h-2 w-2 rounded-full"
+                    style={{ background: d.color }}
+                  />
                   {d.name}
                   <span className="ml-auto font-mono">{d.value}%</span>
                 </div>
@@ -506,7 +641,9 @@ function ContainersPage() {
       </div>
 
       <AnimatePresence>
-        {expanded && <ExpandedModal feed={expanded} onClose={() => setExpanded(null)} />}
+        {expanded && (
+          <ExpandedModal feed={expanded} onClose={() => setExpanded(null)} />
+        )}
       </AnimatePresence>
     </>
   );
@@ -522,9 +659,15 @@ function LiveBadge({ status }: { status: CamFeed["status"] }) {
   return (
     <span
       className="inline-flex items-center gap-1.5 rounded-md px-2 py-0.5 text-[10px] font-bold"
-      style={{ background: `color-mix(in oklab, ${s.c} 12%, transparent)`, color: s.c }}
+      style={{
+        background: `color-mix(in oklab, ${s.c} 12%, transparent)`,
+        color: s.c,
+      }}
     >
-      <span className="h-1.5 w-1.5 rounded-full pulse-ring" style={{ background: s.c }} />
+      <span
+        className="h-1.5 w-1.5 rounded-full pulse-ring"
+        style={{ background: s.c }}
+      />
       {s.l}
     </span>
   );
@@ -609,8 +752,8 @@ function FeedFrame({
 
       {/* HUD overlays */}
       <div className="absolute top-2 left-2 flex items-center gap-1.5 rounded bg-black/70 px-2 py-1 text-[10px] font-mono text-white">
-        <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" /> {feed.id} ·{" "}
-        {feed.name.toUpperCase()}
+        <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />{" "}
+        {feed.id} · {feed.name.toUpperCase()}
       </div>
       <div className="absolute top-2 right-2 rounded bg-black/70 px-2 py-1 text-[10px] font-mono text-cyan-300">
         {ts}
@@ -654,7 +797,15 @@ function SyntheticScene() {
       <rect x="0" y="55" width="160" height="35" fill="url(#road)" />
       {/* lane dashes */}
       {Array.from({ length: 8 }).map((_, i) => (
-        <rect key={i} x={i * 22 + 4} y={72} width="10" height="1.5" fill="#FBBF24" opacity="0.5" />
+        <rect
+          key={i}
+          x={i * 22 + 4}
+          y={72}
+          width="10"
+          height="1.5"
+          fill="#FBBF24"
+          opacity="0.5"
+        />
       ))}
       {/* container body */}
       <rect
@@ -701,10 +852,25 @@ function SyntheticScene() {
         stroke="#3A5680"
         strokeWidth="0.5"
       />
-      <rect x="113" y="36" width="14" height="9" fill="#67E8F9" opacity="0.35" />
+      <rect
+        x="113"
+        y="36"
+        width="14"
+        height="9"
+        fill="#67E8F9"
+        opacity="0.35"
+      />
       {/* wheels */}
       {[26, 46, 66, 86, 116, 128].map((x) => (
-        <circle key={x} cx={x} cy={62} r="3" fill="#0A0F1A" stroke="#3A5680" strokeWidth="0.4" />
+        <circle
+          key={x}
+          cx={x}
+          cy={62}
+          r="3"
+          fill="#0A0F1A"
+          stroke="#3A5680"
+          strokeWidth="0.4"
+        />
       ))}
       {/* plate */}
       <rect x="118" y="55" width="12" height="3.5" fill="#FBBF24" />
@@ -715,10 +881,22 @@ function SyntheticScene() {
 function AnalysisCards({ feed }: { feed: CamFeed }) {
   return (
     <div className="space-y-3 text-xs">
-      <Card icon={<ContainerIcon className="h-4 w-4" />} title="Container" accent="#10B981">
-        <Row k="Code (OCR)" v={feed.container.code} mono confidence={feed.container.ocr} />
+      <Card
+        icon={<ContainerIcon className="h-4 w-4" />}
+        title="Container"
+        accent="#10B981"
+      >
+        <Row
+          k="Code (OCR)"
+          v={feed.container.code}
+          mono
+          confidence={feed.container.ocr}
+        />
         <Row k="Carrier" v={feed.container.carrier} />
-        <Row k="Type / ISO" v={`${feed.container.type} · ${feed.container.iso}`} />
+        <Row
+          k="Type / ISO"
+          v={`${feed.container.type} · ${feed.container.iso}`}
+        />
         <Row k="Gross weight" v={feed.container.weight} />
         <Row k="Seal" v={feed.container.seal} mono />
         <Row
@@ -734,8 +912,18 @@ function AnalysisCards({ feed }: { feed: CamFeed }) {
         />
       </Card>
 
-      <Card icon={<Truck className="h-4 w-4" />} title="Truck / Vehicle" accent="#67E8F9">
-        <Row k="Number plate" v={feed.truck.plate} mono big confidence={feed.truck.plateConf} />
+      <Card
+        icon={<Truck className="h-4 w-4" />}
+        title="Truck / Vehicle"
+        accent="#67E8F9"
+      >
+        <Row
+          k="Number plate"
+          v={feed.truck.plate}
+          mono
+          big
+          confidence={feed.truck.plateConf}
+        />
         <Row k="Make / Model" v={feed.truck.make} />
         <Row k="Color · Axle" v={`${feed.truck.color} · ${feed.truck.axle}`} />
         <Row k="Speed" v={feed.truck.speed} />
@@ -747,8 +935,12 @@ function AnalysisCards({ feed }: { feed: CamFeed }) {
             {feed.driver.photo}
           </div>
           <div className="min-w-0">
-            <div className="truncate text-sm font-semibold">{feed.driver.name}</div>
-            <div className="truncate text-[10px] text-muted-foreground">{feed.driver.company}</div>
+            <div className="truncate text-sm font-semibold">
+              {feed.driver.name}
+            </div>
+            <div className="truncate text-[10px] text-muted-foreground">
+              {feed.driver.company}
+            </div>
           </div>
           <ClearanceBadge c={feed.driver.clearance} />
         </div>
@@ -771,7 +963,10 @@ function ClearanceBadge({ c }: { c: CamFeed["driver"]["clearance"] }) {
   return (
     <span
       className="ml-auto inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] font-bold"
-      style={{ background: `color-mix(in oklab, ${s.c} 14%, transparent)`, color: s.c }}
+      style={{
+        background: `color-mix(in oklab, ${s.c} 14%, transparent)`,
+        color: s.c,
+      }}
     >
       <I className="h-3 w-3" /> {c}
     </span>
@@ -794,11 +989,16 @@ function Card({
       <div className="mb-2 flex items-center gap-2">
         <span
           className="grid h-6 w-6 place-items-center rounded"
-          style={{ background: `color-mix(in oklab, ${accent} 14%, transparent)`, color: accent }}
+          style={{
+            background: `color-mix(in oklab, ${accent} 14%, transparent)`,
+            color: accent,
+          }}
         >
           {icon}
         </span>
-        <span className="text-[11px] font-semibold uppercase tracking-wider">{title}</span>
+        <span className="text-[11px] font-semibold uppercase tracking-wider">
+          {title}
+        </span>
       </div>
       <div className="space-y-1">{children}</div>
     </div>
@@ -824,7 +1024,9 @@ function Row({
 }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{k}</span>
+      <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+        {k}
+      </span>
       <span
         className={`flex items-center gap-1.5 ${mono ? "font-mono" : ""} ${big ? "text-sm font-bold" : small ? "text-[11px]" : "text-xs font-medium"}`}
       >
@@ -846,7 +1048,13 @@ function Row({
   );
 }
 
-function ExpandedModal({ feed, onClose }: { feed: CamFeed; onClose: () => void }) {
+function ExpandedModal({
+  feed,
+  onClose,
+}: {
+  feed: CamFeed;
+  onClose: () => void;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -893,7 +1101,10 @@ function ExpandedModal({ feed, onClose }: { feed: CamFeed; onClose: () => void }
                 `${Math.round((feed.boxes.reduce((s, b) => s + b.conf, 0) / feed.boxes.length) * 100)}%`,
               ],
             ].map(([l, v]) => (
-              <div key={l as string} className="rounded border border-border bg-background p-2">
+              <div
+                key={l as string}
+                className="rounded border border-border bg-background p-2"
+              >
                 <div className="text-muted-foreground">{l}</div>
                 <div className="text-sm font-semibold">{v}</div>
               </div>
@@ -901,13 +1112,18 @@ function ExpandedModal({ feed, onClose }: { feed: CamFeed; onClose: () => void }
           </div>
           <div className="rounded-md border border-border bg-background p-3">
             <div className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider">
-              <ScanLine className="h-3.5 w-3.5 text-cyan-400" /> Inference timeline
+              <ScanLine className="h-3.5 w-3.5 text-cyan-400" /> Inference
+              timeline
             </div>
             <div className="space-y-1.5 text-[11px]">
               {[
                 ["14:32:18.041", "Vehicle entered ROI", "info"],
                 ["14:32:18.214", `Plate detected · ${feed.truck.plate}`, "ok"],
-                ["14:32:18.331", `Container OCR · ${feed.container.code}`, "ok"],
+                [
+                  "14:32:18.331",
+                  `Container OCR · ${feed.container.code}`,
+                  "ok",
+                ],
                 [
                   "14:32:18.502",
                   `Damage classifier · ${feed.container.damage}`,
@@ -921,7 +1137,9 @@ function ExpandedModal({ feed, onClose }: { feed: CamFeed; onClose: () => void }
                 ["14:32:18.702", "Gate workflow dispatched", "info"],
               ].map(([t, m, k]) => (
                 <div key={t as string} className="flex items-center gap-2">
-                  <span className="font-mono text-[10px] text-muted-foreground">{t}</span>
+                  <span className="font-mono text-[10px] text-muted-foreground">
+                    {t}
+                  </span>
                   <span
                     className={`h-1.5 w-1.5 rounded-full ${k === "ok" ? "bg-[color:var(--color-success)]" : k === "warn" ? "bg-[color:var(--color-destructive)]" : "bg-cyan-400"}`}
                   />
@@ -934,13 +1152,21 @@ function ExpandedModal({ feed, onClose }: { feed: CamFeed; onClose: () => void }
 
         <div className="space-y-3 overflow-y-auto max-h-[88vh] pr-1">
           <AnalysisCards feed={feed} />
-          <Card icon={<MapPin className="h-4 w-4" />} title="Routing" accent="#C4B5FD">
+          <Card
+            icon={<MapPin className="h-4 w-4" />}
+            title="Routing"
+            accent="#C4B5FD"
+          >
             <Row k="Origin" v={feed.container.origin} small />
             <Row k="Destination" v={feed.container.destination} small />
             <Row k="Assigned bay" v="Yard A · Stack 12 · Tier 3" small />
             <Row k="ETA gate-out" v="14:48 IST" small />
           </Card>
-          <Card icon={<Gauge className="h-4 w-4" />} title="Risk score" accent="#8B5CF6">
+          <Card
+            icon={<Gauge className="h-4 w-4" />}
+            title="Risk score"
+            accent="#8B5CF6"
+          >
             <div className="mb-1 flex items-center justify-between text-[11px]">
               <span>Composite</span>
               <span className="font-mono font-bold">
@@ -953,12 +1179,15 @@ function ExpandedModal({ feed, onClose }: { feed: CamFeed; onClose: () => void }
                 style={{
                   width: feed.driver.clearance === "PENDING" ? "42%" : "8%",
                   background:
-                    feed.driver.clearance === "PENDING" ? "#D97706" : "var(--color-success)",
+                    feed.driver.clearance === "PENDING"
+                      ? "#D97706"
+                      : "var(--color-success)",
                 }}
               />
             </div>
             <div className="mt-2 text-[10px] text-muted-foreground">
-              Combines OCR confidence, damage class, driver clearance and historical incidents.
+              Combines OCR confidence, damage class, driver clearance and
+              historical incidents.
             </div>
           </Card>
           <button

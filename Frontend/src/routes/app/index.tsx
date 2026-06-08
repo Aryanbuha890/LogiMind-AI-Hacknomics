@@ -66,12 +66,42 @@ const weatherData = Array.from({ length: 12 }, (_, i) => ({
 }));
 
 const initialEvents = [
-  { t: "14:32", msg: "No helmet detected · Yard B", sev: "warn", icon: ShieldAlert },
-  { t: "14:28", msg: "Crane 4 vibration spike (4.2g)", sev: "danger", icon: Wrench },
-  { t: "14:15", msg: "Vessel MV-228 arrived at Berth 7", sev: "ok", icon: Ship },
-  { t: "14:10", msg: "Container TCLU 818201 damage detected", sev: "warn", icon: Container },
-  { t: "14:02", msg: "Weather: wind gust 28 kn at Pier 3", sev: "warn", icon: Activity },
-  { t: "13:55", msg: "Auto-dispatched safety officer to Yard B", sev: "ok", icon: CheckCircle2 },
+  {
+    t: "14:32",
+    msg: "No helmet detected · Yard B",
+    sev: "warn",
+    icon: ShieldAlert,
+  },
+  {
+    t: "14:28",
+    msg: "Crane 4 vibration spike (4.2g)",
+    sev: "danger",
+    icon: Wrench,
+  },
+  {
+    t: "14:15",
+    msg: "Vessel MV-228 arrived at Berth 7",
+    sev: "ok",
+    icon: Ship,
+  },
+  {
+    t: "14:10",
+    msg: "Container TCLU 818201 damage detected",
+    sev: "warn",
+    icon: Container,
+  },
+  {
+    t: "14:02",
+    msg: "Weather: wind gust 28 kn at Pier 3",
+    sev: "warn",
+    icon: Activity,
+  },
+  {
+    t: "13:55",
+    msg: "Auto-dispatched safety officer to Yard B",
+    sev: "ok",
+    icon: CheckCircle2,
+  },
 ];
 
 function CommandCenter() {
@@ -81,7 +111,10 @@ function CommandCenter() {
       setEvents((prev) =>
         [
           {
-            t: new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }),
+            t: new Date().toLocaleTimeString("en-GB", {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
             msg: [
               "Container detected · Gate 4",
               "Crane 2 cycle complete",
@@ -108,7 +141,13 @@ function CommandCenter() {
         <div className="grid grid-cols-12 gap-4">
           <RiskScore />
           <div className="col-span-12 lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Kpi icon={Ship} label="Active Vessels" value={217} accent="#2563EB" trend="+12" />
+            <Kpi
+              icon={Ship}
+              label="Active Vessels"
+              value={217}
+              accent="#2563EB"
+              trend="+12"
+            />
             <Kpi
               icon={Container}
               label="Containers Today"
@@ -212,7 +251,10 @@ function CommandCenter() {
             <div className="mt-2 grid grid-cols-2 gap-2 text-xs">
               {riskDist.map((r) => (
                 <div key={r.name} className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full" style={{ background: r.color }} />
+                  <span
+                    className="h-2 w-2 rounded-full"
+                    style={{ background: r.color }}
+                  />
                   {r.name} <span className="ml-auto font-mono">{r.value}%</span>
                 </div>
               ))}
@@ -272,8 +314,20 @@ function CommandCenter() {
                   tickLine={false}
                 />
                 <Tooltip content={<ChartTip />} />
-                <Line type="monotone" dataKey="wind" stroke="#D97706" strokeWidth={2} dot={false} />
-                <Line type="monotone" dataKey="vis" stroke="#0D9488" strokeWidth={2} dot={false} />
+                <Line
+                  type="monotone"
+                  dataKey="wind"
+                  stroke="#D97706"
+                  strokeWidth={2}
+                  dot={false}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="vis"
+                  stroke="#0D9488"
+                  strokeWidth={2}
+                  dot={false}
+                />
               </LineChart>
             </ResponsiveContainer>
           </Panel>
@@ -329,7 +383,11 @@ function CommandCenter() {
               {events.map((e, i) => {
                 const Icon = e.icon;
                 const color =
-                  e.sev === "danger" ? "#DC2626" : e.sev === "warn" ? "#D97706" : "#15803D";
+                  e.sev === "danger"
+                    ? "#DC2626"
+                    : e.sev === "warn"
+                      ? "#D97706"
+                      : "#15803D";
                 return (
                   <motion.li
                     key={`${e.t}-${i}`}
@@ -337,7 +395,9 @@ function CommandCenter() {
                     animate={{ opacity: 1, x: 0 }}
                     className="flex items-center gap-3 py-2.5"
                   >
-                    <span className="font-mono text-xs text-muted-foreground w-12">{e.t}</span>
+                    <span className="font-mono text-xs text-muted-foreground w-12">
+                      {e.t}
+                    </span>
                     <span
                       className="inline-flex h-7 w-7 items-center justify-center rounded-md"
                       style={{ background: `${color}15`, color }}
@@ -383,8 +443,12 @@ export function Panel({
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--color-secondary)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       <header className="mb-4 flex items-start justify-between gap-2">
         <div>
-          <h3 className="font-display text-sm font-semibold tracking-tight">{title}</h3>
-          {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
+          <h3 className="font-display text-sm font-semibold tracking-tight">
+            {title}
+          </h3>
+          {subtitle && (
+            <p className="text-xs text-muted-foreground">{subtitle}</p>
+          )}
         </div>
         {right}
       </header>
@@ -447,8 +511,12 @@ function RiskScore() {
     >
       <div className="flex items-start justify-between">
         <div>
-          <h3 className="font-display text-sm font-semibold">Global Port Risk Score</h3>
-          <p className="text-xs text-muted-foreground">Composite of 47 live signals</p>
+          <h3 className="font-display text-sm font-semibold">
+            Global Port Risk Score
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Composite of 47 live signals
+          </p>
         </div>
         <span className="rounded-full bg-[color:var(--color-success)]/10 px-2 py-0.5 text-[10px] font-semibold text-[color:var(--color-success)]">
           Healthy
@@ -490,7 +558,9 @@ function RiskScore() {
               <div className="font-display text-3xl font-semibold">
                 <AnimatedCounter value={score} />
               </div>
-              <div className="text-[10px] uppercase text-muted-foreground">of 100</div>
+              <div className="text-[10px] uppercase text-muted-foreground">
+                of 100
+              </div>
             </div>
           </div>
         </div>
@@ -507,7 +577,10 @@ function RiskScore() {
               <div className="h-1 w-16 overflow-hidden rounded-full bg-muted">
                 <div
                   className="h-full rounded-full"
-                  style={{ width: `${v}%`, background: s === "warn" ? "#D97706" : "#15803D" }}
+                  style={{
+                    width: `${v}%`,
+                    background: s === "warn" ? "#D97706" : "#15803D",
+                  }}
                 />
               </div>
               <span className="font-mono tabular-nums">{v}</span>
@@ -523,7 +596,9 @@ export function ChartTip({ active, payload, label }: any) {
   if (!active || !payload?.length) return null;
   return (
     <div className="rounded-md border border-border bg-card/95 px-3 py-2 text-xs shadow-lg backdrop-blur">
-      {label && <div className="mb-1 font-mono text-muted-foreground">{label}</div>}
+      {label && (
+        <div className="mb-1 font-mono text-muted-foreground">{label}</div>
+      )}
       {payload.map((p: any) => (
         <div key={p.dataKey ?? p.name} className="flex items-center gap-2">
           <span

@@ -19,13 +19,15 @@ function AuthLayout() {
         </div>
         <div className="relative max-w-md">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs">
-            <Ship className="h-3.5 w-3.5 text-[color:var(--color-accent)]" /> Maritime command suite
+            <Ship className="h-3.5 w-3.5 text-[color:var(--color-accent)]" />{" "}
+            Maritime command suite
           </div>
           <h2 className="mt-5 font-display text-4xl font-semibold leading-tight">
             The operating system for the world's smartest ports.
           </h2>
           <p className="mt-4 text-sm text-white/60">
-            Trusted by operations leads across DP World, Adani Ports, PSA Singapore and Maersk.
+            Trusted by operations leads across DP World, Adani Ports, PSA
+            Singapore and Maersk.
           </p>
           <div className="mt-8 grid grid-cols-3 gap-3">
             {[
@@ -33,7 +35,10 @@ function AuthLayout() {
               ["217", "Active vessels"],
               ["99.2%", "Compliance"],
             ].map(([v, l]) => (
-              <div key={l} className="rounded-lg border border-white/10 bg-white/5 p-3">
+              <div
+                key={l}
+                className="rounded-lg border border-white/10 bg-white/5 p-3"
+              >
                 <div className="font-display text-xl font-semibold">{v}</div>
                 <div className="text-[10px] text-white/50">{l}</div>
               </div>
@@ -41,7 +46,8 @@ function AuthLayout() {
           </div>
         </div>
         <div className="relative flex items-center gap-2 text-xs text-white/50">
-          <ShieldCheck className="h-3.5 w-3.5" /> SOC 2 Type II · IEC 62443 · IMO compliant
+          <ShieldCheck className="h-3.5 w-3.5" /> SOC 2 Type II · IEC 62443 ·
+          IMO compliant
         </div>
       </div>
       {/* Right form */}
@@ -68,7 +74,9 @@ function AuthLayout() {
 export function AuthHeader({ title, sub }: { title: string; sub: string }) {
   return (
     <div className="mb-6">
-      <h1 className="font-display text-2xl font-semibold tracking-tight">{title}</h1>
+      <h1 className="font-display text-2xl font-semibold tracking-tight">
+        {title}
+      </h1>
       <p className="mt-1 text-sm text-muted-foreground">{sub}</p>
     </div>
   );

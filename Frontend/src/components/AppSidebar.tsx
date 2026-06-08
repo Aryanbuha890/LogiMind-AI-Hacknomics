@@ -101,8 +101,12 @@ export function AppSidebar() {
             <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-[#0B1226]" />
           </div>
           <div className="min-w-0 flex-1">
-            <div className="truncate text-xs font-semibold text-white">Arjun R.</div>
-            <div className="truncate text-[10px] text-white/50">Port Operations Lead</div>
+            <div className="truncate text-xs font-semibold text-white">
+              Arjun R.
+            </div>
+            <div className="truncate text-[10px] text-white/50">
+              Port Operations Lead
+            </div>
           </div>
           <Link
             to="/auth/login"
@@ -128,8 +132,12 @@ export function AppTopBar({
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-border/70 bg-background/70 px-6 backdrop-blur-xl backdrop-saturate-150 shadow-[0_1px_0_0_rgba(255,255,255,0.04)]">
       <div className="min-w-0 flex-1">
-        <h1 className="font-display text-lg font-semibold tracking-tight truncate">{title}</h1>
-        {subtitle && <p className="text-xs text-muted-foreground truncate">{subtitle}</p>}
+        <h1 className="font-display text-lg font-semibold tracking-tight truncate">
+          {title}
+        </h1>
+        {subtitle && (
+          <p className="text-xs text-muted-foreground truncate">{subtitle}</p>
+        )}
       </div>
       <div className="flex items-center gap-2">
         {right}

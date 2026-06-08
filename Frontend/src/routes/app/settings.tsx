@@ -35,7 +35,10 @@ function SettingsPage() {
   const [tab, setTab] = useState("general");
   return (
     <>
-      <AppTopBar title="Settings" subtitle="Workspace · PortMind Mundra Operations" />
+      <AppTopBar
+        title="Settings"
+        subtitle="Workspace · PortMind Mundra Operations"
+      />
       <div className="p-6 grid grid-cols-12 gap-6">
         <aside className="col-span-12 md:col-span-3 xl:col-span-2">
           <nav className="rounded-xl border border-border bg-card p-1.5">
@@ -71,7 +74,15 @@ function SettingsPage() {
   );
 }
 
-function Row({ label, children, sub }: { label: string; children: React.ReactNode; sub?: string }) {
+function Row({
+  label,
+  children,
+  sub,
+}: {
+  label: string;
+  children: React.ReactNode;
+  sub?: string;
+}) {
   return (
     <div className="flex items-center justify-between border-b border-border py-4 last:border-b-0">
       <div>
@@ -146,7 +157,11 @@ function AgentsPanel() {
   return (
     <Panel title="AI Agents" subtitle="Multi-agent runtime configuration">
       {[
-        ["Operations Orchestrator", "Routes tasks across the agent network", true],
+        [
+          "Operations Orchestrator",
+          "Routes tasks across the agent network",
+          true,
+        ],
         ["Safety Agent", "Monitors PPE, intrusion, fire", true],
         ["Container Agent", "Detection, OCR, damage classification", true],
         ["Crane Agent", "Predictive maintenance recommendations", true],
@@ -236,7 +251,11 @@ function ApiKeysPanel() {
     >
       <div className="space-y-2">
         {[
-          ["Production · Operations", "pmk_live_••••••••2f91", "Created Oct 04"],
+          [
+            "Production · Operations",
+            "pmk_live_••••••••2f91",
+            "Created Oct 04",
+          ],
           ["Staging · CV Pipeline", "pmk_test_••••••••a830", "Created Sep 12"],
         ].map(([l, k, d]) => (
           <div
@@ -248,7 +267,9 @@ function ApiKeysPanel() {
               <div className="text-sm font-medium">{l}</div>
               <div className="text-xs text-muted-foreground font-mono">{k}</div>
             </div>
-            <div className="text-xs text-muted-foreground hidden md:block">{d}</div>
+            <div className="text-xs text-muted-foreground hidden md:block">
+              {d}
+            </div>
             <button className="rounded border border-border p-1.5 hover:bg-muted">
               <Copy className="h-3.5 w-3.5" />
             </button>
@@ -269,13 +290,18 @@ function HealthPanel() {
           ["AIS Stream", "Degraded", "#D97706", "184ms"],
           ["Camera Mesh (14)", "Healthy", "#15803D", "58 FPS avg"],
         ].map(([l, s, c, sub]) => (
-          <div key={l} className="rounded-lg border border-border bg-background p-3">
+          <div
+            key={l}
+            className="rounded-lg border border-border bg-background p-3"
+          >
             <div className="text-xs text-muted-foreground">{l}</div>
             <div className="mt-1 flex items-center gap-1.5">
               <CheckCircle2 className="h-3.5 w-3.5" style={{ color: c }} />
               <span className="text-sm font-semibold">{s}</span>
             </div>
-            <div className="mt-1 font-mono text-[10px] text-muted-foreground">{sub}</div>
+            <div className="mt-1 font-mono text-[10px] text-muted-foreground">
+              {sub}
+            </div>
           </div>
         ))}
       </div>
@@ -285,11 +311,21 @@ function HealthPanel() {
 
 function AuditPanel() {
   const rows = [
-    ["14:32:18", "arjun@dpworld.com", "Triggered Safety dispatch · CAM-01", "INFO"],
+    [
+      "14:32:18",
+      "arjun@dpworld.com",
+      "Triggered Safety dispatch · CAM-01",
+      "INFO",
+    ],
     ["14:18:02", "system", "Predictive model run · Crane fleet", "INFO"],
     ["13:55:44", "priya@dpworld.com", "Updated MFA policy", "AUDIT"],
     ["12:01:10", "system", "Auto-archived 412 events (>30d)", "INFO"],
-    ["09:22:39", "rajesh@adani.com", "Approved access · vessel ops dashboard", "AUDIT"],
+    [
+      "09:22:39",
+      "rajesh@adani.com",
+      "Approved access · vessel ops dashboard",
+      "AUDIT",
+    ],
   ];
   return (
     <Panel title="Audit Logs" subtitle="Last 24h · 1,408 events">
@@ -310,7 +346,9 @@ function AuditPanel() {
               <td className="py-2.5 px-3 text-xs">{r[1]}</td>
               <td className="py-2.5 px-3 text-xs">{r[2]}</td>
               <td className="py-2.5 px-3">
-                <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-mono">{r[3]}</span>
+                <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-mono">
+                  {r[3]}
+                </span>
               </td>
             </tr>
           ))}

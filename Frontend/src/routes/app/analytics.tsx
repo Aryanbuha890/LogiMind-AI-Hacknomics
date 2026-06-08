@@ -20,7 +20,13 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { TrendingUp, ShieldCheck, DollarSign, Wrench, Activity } from "lucide-react";
+import {
+  TrendingUp,
+  ShieldCheck,
+  DollarSign,
+  Wrench,
+  Activity,
+} from "lucide-react";
 
 export const Route = createFileRoute("/app/analytics")({
   component: AnalyticsPage,
@@ -42,14 +48,30 @@ const incidents = [
 ];
 
 const weatherImpact = Array.from({ length: 12 }, (_, i) => ({
-  m: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][i],
+  m: [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ][i],
   delay: Math.round(20 + Math.sin(i / 2) * 14 + Math.random() * 6),
 }));
 
 function AnalyticsPage() {
   return (
     <>
-      <AppTopBar title="Analytics" subtitle="Executive reporting · 30-day rolling window" />
+      <AppTopBar
+        title="Analytics"
+        subtitle="Executive reporting · 30-day rolling window"
+      />
       <div className="p-6 space-y-6">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           <Kpi
@@ -100,7 +122,10 @@ function AnalyticsPage() {
         </div>
 
         <div className="grid grid-cols-12 gap-4">
-          <Panel title="30-Day Throughput vs Safety Compliance" className="col-span-12">
+          <Panel
+            title="30-Day Throughput vs Safety Compliance"
+            className="col-span-12"
+          >
             <ResponsiveContainer width="100%" height={300}>
               <AreaChart data={thirty}>
                 <defs>
@@ -183,7 +208,10 @@ function AnalyticsPage() {
             <div className="mt-1 grid grid-cols-2 gap-1 text-xs">
               {incidents.map((d) => (
                 <div key={d.name} className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full" style={{ background: d.c }} />
+                  <span
+                    className="h-2 w-2 rounded-full"
+                    style={{ background: d.c }}
+                  />
                   {d.name}
                   <span className="ml-auto font-mono">{d.v}</span>
                 </div>
@@ -203,10 +231,16 @@ function AnalyticsPage() {
                 ["Yard tractor 22", "89 days", "#15803D", 84],
                 ["Crane 1", "412 days", "#15803D", 96],
               ].map(([l, eta, c, pct]) => (
-                <li key={l as string} className="rounded-lg border border-border p-2.5">
+                <li
+                  key={l as string}
+                  className="rounded-lg border border-border p-2.5"
+                >
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-mono font-semibold">{l}</span>
-                    <span style={{ color: c as string }} className="font-semibold">
+                    <span
+                      style={{ color: c as string }}
+                      className="font-semibold"
+                    >
                       {eta}
                     </span>
                   </div>
@@ -297,7 +331,17 @@ function AnalyticsPage() {
   );
 }
 
-function Kpi({ icon: Icon, label, value, suffix, prefix, color, trend, warn, dec }: any) {
+function Kpi({
+  icon: Icon,
+  label,
+  value,
+  suffix,
+  prefix,
+  color,
+  trend,
+  warn,
+  dec,
+}: any) {
   return (
     <div className="rounded-xl border border-border bg-card p-4">
       <div className="flex items-center justify-between">
@@ -309,7 +353,12 @@ function Kpi({ icon: Icon, label, value, suffix, prefix, color, trend, warn, dec
         </span>
       </div>
       <div className="mt-3 font-display text-2xl font-semibold">
-        <AnimatedCounter value={value} suffix={suffix} prefix={prefix} decimals={dec ?? 0} />
+        <AnimatedCounter
+          value={value}
+          suffix={suffix}
+          prefix={prefix}
+          decimals={dec ?? 0}
+        />
       </div>
       <div className="text-xs text-muted-foreground">{label}</div>
     </div>

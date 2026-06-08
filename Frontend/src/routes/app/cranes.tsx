@@ -54,7 +54,14 @@ const vibration = Array.from({ length: 30 }, (_, i) => ({
 }));
 
 const sensors = [
-  { l: "Temperature", v: 78, unit: "°C", max: 95, icon: Thermometer, c: "#D97706" },
+  {
+    l: "Temperature",
+    v: 78,
+    unit: "°C",
+    max: 95,
+    icon: Thermometer,
+    c: "#D97706",
+  },
   { l: "Vibration", v: 4.2, unit: "g", max: 5, icon: Vibrate, c: "#DC2626" },
   { l: "Load", v: 82, unit: "%", max: 100, icon: Weight, c: "#2563EB" },
   { l: "Pressure", v: 187, unit: "bar", max: 250, icon: Gauge, c: "#0D9488" },
@@ -92,7 +99,9 @@ function CranesPage() {
                   </span>
                 )}
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-sm font-semibold">{c.id}</span>
+                  <span className="font-mono text-sm font-semibold">
+                    {c.id}
+                  </span>
                   <Wrench className="h-4 w-4 text-muted-foreground" />
                 </div>
                 <div className="mt-3 font-display text-2xl font-semibold">
@@ -104,7 +113,10 @@ function CranesPage() {
                     className="h-1.5 w-1.5 rounded-full"
                     style={{ background: statusColor[c.status] }}
                   />
-                  <span style={{ color: statusColor[c.status] }} className="font-semibold">
+                  <span
+                    style={{ color: statusColor[c.status] }}
+                    className="font-semibold"
+                  >
                     {c.status}
                   </span>
                 </div>
@@ -136,7 +148,12 @@ function CranesPage() {
                 suffix="%"
                 color="#DC2626"
               />
-              <Metric label="Remaining Useful Life" value={crane.rul} suffix="d" color="#D97706" />
+              <Metric
+                label="Remaining Useful Life"
+                value={crane.rul}
+                suffix="d"
+                color="#D97706"
+              />
             </div>
             <div className="text-xs font-medium text-muted-foreground mb-2">
               Vibration trend (last 30 cycles)
@@ -187,7 +204,10 @@ function CranesPage() {
                 const Icon = s.icon;
                 const pct = (s.v / s.max) * 100;
                 return (
-                  <div key={s.l} className="rounded-lg border border-border p-3">
+                  <div
+                    key={s.l}
+                    className="rounded-lg border border-border p-3"
+                  >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 text-xs">
                         <Icon className="h-3.5 w-3.5" style={{ color: s.c }} />
@@ -255,7 +275,9 @@ function CranesPage() {
             />
           </div>
           <div className="mt-4 rounded-lg border border-border bg-background p-4">
-            <div className="text-xs font-semibold text-foreground mb-2">Recommended Actions</div>
+            <div className="text-xs font-semibold text-foreground mb-2">
+              Recommended Actions
+            </div>
             <ol className="space-y-2 text-sm">
               {[
                 "Inspect main hoist gearbox bearings (vibration anomaly at 4.2g, 2.3× baseline)",
@@ -264,7 +286,9 @@ function CranesPage() {
                 "Run full diagnostic on PLC unit during next maintenance window",
               ].map((a, i) => (
                 <li key={i} className="flex gap-3">
-                  <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    0{i + 1}
+                  </span>
                   <span>{a}</span>
                 </li>
               ))}
@@ -284,7 +308,11 @@ function CranesPage() {
                 { d: "Nov 02", t: "Routine inspection", s: "done" },
                 { d: "Nov 18", t: "Lubrication cycle", s: "done" },
                 { d: "Dec 04", t: "Sensor drift detected · T-04", s: "alert" },
-                { d: "Dec 14", t: "Predicted maintenance window", s: "planned" },
+                {
+                  d: "Dec 14",
+                  t: "Predicted maintenance window",
+                  s: "planned",
+                },
                 { d: "Dec 20", t: "Estimated failure date", s: "danger" },
               ].map((e, i) => {
                 const c =
@@ -302,7 +330,9 @@ function CranesPage() {
                       style={{ background: c }}
                     />
                     <div className="flex items-center gap-3 rounded-md border border-border bg-background p-2.5">
-                      <span className="font-mono text-xs text-muted-foreground w-16">{e.d}</span>
+                      <span className="font-mono text-xs text-muted-foreground w-16">
+                        {e.d}
+                      </span>
                       <span className="text-sm">{e.t}</span>
                       <span
                         className="ml-auto rounded px-1.5 py-0.5 text-[10px] font-medium uppercase"
@@ -328,7 +358,10 @@ function CranesPage() {
                 ["Accuracy", "93.4%"],
                 ["RMSE", "2.8 days"],
                 ["Last trained", "Nov 21, 2026"],
-                ["Top features", "Vibration variance · Temp drift · Cycle count"],
+                [
+                  "Top features",
+                  "Vibration variance · Temp drift · Cycle count",
+                ],
               ].map(([k, v]) => (
                 <div
                   key={k}
@@ -352,14 +385,18 @@ function CranesPage() {
                   ["Load peaks", 0.13],
                 ].map(([l, v]) => (
                   <div key={l as string} className="flex items-center gap-2">
-                    <span className="w-24 truncate text-muted-foreground">{l}</span>
+                    <span className="w-24 truncate text-muted-foreground">
+                      {l}
+                    </span>
                     <div className="h-1 flex-1 overflow-hidden rounded-full bg-background">
                       <div
                         className="h-full rounded-full bg-[color:var(--color-secondary)]"
                         style={{ width: `${(v as number) * 100}%` }}
                       />
                     </div>
-                    <span className="font-mono">{((v as number) * 100).toFixed(0)}%</span>
+                    <span className="font-mono">
+                      {((v as number) * 100).toFixed(0)}%
+                    </span>
                   </div>
                 ))}
               </div>
@@ -385,7 +422,10 @@ function Metric({
   return (
     <div className="rounded-lg border border-border p-3">
       <div className="text-[11px] text-muted-foreground">{label}</div>
-      <div className="mt-1 font-display text-2xl font-semibold" style={{ color }}>
+      <div
+        className="mt-1 font-display text-2xl font-semibold"
+        style={{ color }}
+      >
         <AnimatedCounter value={value} suffix={suffix} />
       </div>
     </div>
@@ -408,7 +448,9 @@ function RecCard({
   return (
     <div className="rounded-lg border border-border bg-background p-3">
       <Icon className="h-4 w-4" style={{ color }} />
-      <div className="mt-2 text-[10px] uppercase tracking-wider text-muted-foreground">{label}</div>
+      <div className="mt-2 text-[10px] uppercase tracking-wider text-muted-foreground">
+        {label}
+      </div>
       <div className="mt-0.5 font-display text-base font-semibold">{value}</div>
       <div className="text-[11px] text-muted-foreground">{sub}</div>
     </div>

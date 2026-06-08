@@ -19,7 +19,9 @@ function NotFoundComponent() {
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold">Signal lost</h2>
-        <p className="mt-2 text-sm text-muted-foreground">This route is not on our radar.</p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          This route is not on our radar.
+        </p>
         <div className="mt-6">
           <Link
             to="/"
@@ -68,38 +70,50 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "PortMind AI — Autonomous Intelligence for Modern Ports" },
-      {
-        name: "description",
-        content:
-          "PortMind AI is the unified command center combining computer vision, predictive maintenance, multi-agent AI, vessel intelligence and operational analytics for modern ports.",
-      },
-      { name: "author", content: "PortMind AI" },
-      { property: "og:title", content: "PortMind AI — Autonomous Intelligence for Modern Ports" },
-      { property: "og:description", content: "The operating system for smart ports." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
-      },
-    ],
-  }),
-  shellComponent: RootShell,
-  component: RootComponent,
-  notFoundComponent: NotFoundComponent,
-  errorComponent: ErrorComponent,
-});
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
+  {
+    head: () => ({
+      meta: [
+        { charSet: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { title: "PortMind AI — Autonomous Intelligence for Modern Ports" },
+        {
+          name: "description",
+          content:
+            "PortMind AI is the unified command center combining computer vision, predictive maintenance, multi-agent AI, vessel intelligence and operational analytics for modern ports.",
+        },
+        { name: "author", content: "PortMind AI" },
+        {
+          property: "og:title",
+          content: "PortMind AI — Autonomous Intelligence for Modern Ports",
+        },
+        {
+          property: "og:description",
+          content: "The operating system for smart ports.",
+        },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+      links: [
+        { rel: "stylesheet", href: appCss },
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossOrigin: "anonymous",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
+        },
+      ],
+    }),
+    shellComponent: RootShell,
+    component: RootComponent,
+    notFoundComponent: NotFoundComponent,
+    errorComponent: ErrorComponent,
+  },
+);
 
 function RootShell({ children }: { children: ReactNode }) {
   return (

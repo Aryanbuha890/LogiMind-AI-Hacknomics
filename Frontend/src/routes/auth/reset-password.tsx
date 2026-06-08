@@ -28,7 +28,10 @@ function Reset() {
         ))}
         <SubmitButton>Update password</SubmitButton>
         <div className="text-center text-xs text-muted-foreground">
-          <Link to="/auth/login" className="text-[color:var(--color-secondary)] hover:underline">
+          <Link
+            to="/auth/login"
+            className="text-[color:var(--color-secondary)] hover:underline"
+          >
             Back to sign in
           </Link>
         </div>

@@ -104,7 +104,10 @@ function VesselsPage() {
 
   return (
     <>
-      <AppTopBar title="Vessel Intelligence" subtitle="Live AIS · 217 vessels in monitored zone" />
+      <AppTopBar
+        title="Vessel Intelligence"
+        subtitle="Live AIS · 217 vessels in monitored zone"
+      />
       <div className="p-6 grid grid-cols-12 gap-4">
         <Panel
           title="Operational Map"
@@ -139,7 +142,8 @@ function VesselsPage() {
                 width: 80,
                 height: 80,
                 borderRadius: "50%",
-                background: "radial-gradient(closest-side, rgba(220,38,38,0.35), transparent)",
+                background:
+                  "radial-gradient(closest-side, rgba(220,38,38,0.35), transparent)",
               }}
             />
             {/* Vessels */}
@@ -157,7 +161,10 @@ function VesselsPage() {
                   />
                   <Navigation2
                     className="relative h-4 w-4 text-white drop-shadow"
-                    style={{ transform: `rotate(${v.head}deg)`, color: riskColor(v.risk) }}
+                    style={{
+                      transform: `rotate(${v.head}deg)`,
+                      color: riskColor(v.risk),
+                    }}
                   />
                 </div>
                 <div
@@ -180,7 +187,10 @@ function VesselsPage() {
                   key={l}
                   className="inline-flex items-center gap-1 rounded bg-black/60 px-2 py-1 text-white"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full" style={{ background: c }} />
+                  <span
+                    className="h-1.5 w-1.5 rounded-full"
+                    style={{ background: c }}
+                  />
                   {l}
                 </span>
               ))}
@@ -196,12 +206,19 @@ function VesselsPage() {
           <div className="rounded-lg border border-border bg-background p-4">
             <div className="flex items-start justify-between">
               <div>
-                <div className="font-display text-lg font-semibold">{sel.name}</div>
-                <div className="text-xs text-muted-foreground">Flag · {sel.flag}</div>
+                <div className="font-display text-lg font-semibold">
+                  {sel.name}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  Flag · {sel.flag}
+                </div>
               </div>
               <span
                 className="rounded px-2 py-0.5 text-[10px] font-semibold"
-                style={{ background: `${riskColor(sel.risk)}15`, color: riskColor(sel.risk) }}
+                style={{
+                  background: `${riskColor(sel.risk)}15`,
+                  color: riskColor(sel.risk),
+                }}
               >
                 {sel.risk} risk
               </span>
@@ -227,14 +244,18 @@ function VesselsPage() {
                 AI Prediction
               </div>
               <div className="mt-1 text-muted-foreground">
-                Berthing window optimal at 14:42 · weather window holds for 6h · no conflicting
-                vessels in approach lane.
+                Berthing window optimal at 14:42 · weather window holds for 6h ·
+                no conflicting vessels in approach lane.
               </div>
             </div>
           </div>
         </Panel>
 
-        <Panel title="Vessel List" subtitle="All monitored AIS contacts" className="col-span-12">
+        <Panel
+          title="Vessel List"
+          subtitle="All monitored AIS contacts"
+          className="col-span-12"
+        >
           <div className="mb-3 flex items-center gap-2">
             <div className="relative flex-1 max-w-sm">
               <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
@@ -258,13 +279,20 @@ function VesselsPage() {
             <table className="w-full text-sm">
               <thead className="text-[11px] uppercase text-muted-foreground">
                 <tr className="border-b border-border">
-                  {["ID", "Vessel", "Flag", "Status", "Speed", "ETA", "Destination", "Risk"].map(
-                    (h) => (
-                      <th key={h} className="py-2 px-3 text-left font-medium">
-                        {h}
-                      </th>
-                    ),
-                  )}
+                  {[
+                    "ID",
+                    "Vessel",
+                    "Flag",
+                    "Status",
+                    "Speed",
+                    "ETA",
+                    "Destination",
+                    "Risk",
+                  ].map((h) => (
+                    <th key={h} className="py-2 px-3 text-left font-medium">
+                      {h}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
@@ -286,7 +314,9 @@ function VesselsPage() {
                     </td>
                     <td className="py-2.5 px-3 text-xs">{v.flag}</td>
                     <td className="py-2.5 px-3 text-xs">{v.status}</td>
-                    <td className="py-2.5 px-3 font-mono text-xs">{v.speed} kn</td>
+                    <td className="py-2.5 px-3 font-mono text-xs">
+                      {v.speed} kn
+                    </td>
                     <td className="py-2.5 px-3 font-mono text-xs">{v.eta}</td>
                     <td className="py-2.5 px-3 text-xs">
                       <MapPin className="inline h-3 w-3 mr-1 text-muted-foreground" />
@@ -295,7 +325,10 @@ function VesselsPage() {
                     <td className="py-2.5 px-3">
                       <span
                         className="rounded px-1.5 py-0.5 text-[10px] font-semibold"
-                        style={{ background: `${riskColor(v.risk)}15`, color: riskColor(v.risk) }}
+                        style={{
+                          background: `${riskColor(v.risk)}15`,
+                          color: riskColor(v.risk),
+                        }}
                       >
                         {v.risk}
                       </span>

@@ -67,13 +67,20 @@ function Login() {
           />
         </Field>
         <label className="flex items-center gap-2 text-xs text-muted-foreground">
-          <input type="checkbox" defaultChecked className="h-3.5 w-3.5 rounded border-border" />
+          <input
+            type="checkbox"
+            defaultChecked
+            className="h-3.5 w-3.5 rounded border-border"
+          />
           Keep me signed in on this workstation
         </label>
         <SubmitButton>Launch command center</SubmitButton>
         <div className="mt-2 text-center text-xs text-muted-foreground">
           New to PortMind?{" "}
-          <a className="text-[color:var(--color-secondary)] hover:underline" href="#">
+          <a
+            className="text-[color:var(--color-secondary)] hover:underline"
+            href="#"
+          >
             Request access
           </a>
         </div>

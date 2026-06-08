@@ -1,6 +1,12 @@
 import { Link } from "@tanstack/react-router";
 
-export function Logo({ className = "", to = "/" }: { className?: string; to?: string }) {
+export function Logo({
+  className = "",
+  to = "/",
+}: {
+  className?: string;
+  to?: string;
+}) {
   return (
     <Link to={to} className={`inline-flex items-center gap-2 ${className}`}>
       <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#1B3A6B] to-[#2563EB] shadow-[0_6px_20px_-6px_rgba(37,99,235,0.6)]">
@@ -11,7 +17,11 @@ export function Logo({ className = "", to = "/" }: { className?: string; to?: st
           stroke="currentColor"
           strokeWidth="2.2"
         >
-          <path d="M3 17l9-12 9 12" strokeLinecap="round" strokeLinejoin="round" />
+          <path
+            d="M3 17l9-12 9 12"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
           <circle cx="12" cy="14" r="2.2" fill="currentColor" stroke="none" />
         </svg>
       </span>

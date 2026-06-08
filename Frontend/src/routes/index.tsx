@@ -30,8 +30,14 @@ export const Route = createFileRoute("/")({
         content:
           "Unified AI command center combining computer vision, predictive maintenance, multi-agent AI, vessel intelligence and operational analytics.",
       },
-      { property: "og:title", content: "PortMind AI — Autonomous Intelligence for Modern Ports" },
-      { property: "og:description", content: "The operating system for smart ports." },
+      {
+        property: "og:title",
+        content: "PortMind AI — Autonomous Intelligence for Modern Ports",
+      },
+      {
+        property: "og:description",
+        content: "The operating system for smart ports.",
+      },
     ],
   }),
   component: Landing,
@@ -114,7 +120,8 @@ function Nav() {
           style={{
             background:
               "linear-gradient(120deg, rgba(167,139,250,0.55), rgba(34,211,238,0.4), rgba(99,102,241,0.5))",
-            WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+            WebkitMask:
+              "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
             WebkitMaskComposite: "xor",
             maskComposite: "exclude",
             padding: 1,
@@ -152,7 +159,8 @@ function Nav() {
             to="/app"
             className="group relative inline-flex h-9 items-center gap-1.5 overflow-hidden rounded-full px-4 text-sm font-semibold text-white shadow-[0_10px_30px_-8px_rgba(99,102,241,0.7),inset_0_1px_0_0_rgba(255,255,255,0.35)] transition-transform hover:-translate-y-px"
             style={{
-              backgroundImage: "linear-gradient(120deg, #6366F1 0%, #8B5CF6 50%, #22D3EE 110%)",
+              backgroundImage:
+                "linear-gradient(120deg, #6366F1 0%, #8B5CF6 50%, #22D3EE 110%)",
             }}
           >
             <span className="relative z-10">Launch Platform</span>
@@ -167,7 +175,10 @@ function Nav() {
 
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
   const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
 
   return (
@@ -229,9 +240,9 @@ function Hero() {
             transition={{ delay: 0.12 }}
             className="mx-auto mt-6 max-w-2xl text-base text-white/65 sm:text-lg"
           >
-            PortMind AI combines Computer Vision, Predictive Maintenance, Multi-Agent AI, Vessel
-            Intelligence, Weather Monitoring and Operational Analytics into one unified command
-            center.
+            PortMind AI combines Computer Vision, Predictive Maintenance,
+            Multi-Agent AI, Vessel Intelligence, Weather Monitoring and
+            Operational Analytics into one unified command center.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -243,7 +254,8 @@ function Hero() {
               to="/app"
               className="group relative inline-flex h-12 items-center gap-2 overflow-hidden rounded-full px-6 text-sm font-semibold text-white shadow-[0_18px_40px_-12px_rgba(124,58,237,0.7)] transition-transform hover:-translate-y-0.5"
               style={{
-                backgroundImage: "linear-gradient(120deg, #1B3A6B 0%, #2563EB 45%, #7C3AED 100%)",
+                backgroundImage:
+                  "linear-gradient(120deg, #1B3A6B 0%, #2563EB 45%, #7C3AED 100%)",
               }}
             >
               <span className="relative z-10">Launch Command Center</span>
@@ -263,16 +275,20 @@ function Hero() {
             className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] text-white/45"
           >
             <span className="inline-flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> SOC 2 Type II
+              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> SOC 2
+              Type II
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> ISO 27001
+              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> ISO
+              27001
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Deployed in 14 ports
+              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Deployed
+              in 14 ports
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> 99.99% uptime
+              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> 99.99%
+              uptime
             </span>
           </motion.div>
         </motion.div>
@@ -292,11 +308,19 @@ function Hero() {
             { v: 98.7, dec: 1, suffix: "%", label: "AI Accuracy" },
           ].map((m, i) => (
             <div key={i} className="relative bg-transparent px-6 py-7">
-              {i > 0 && <span className="absolute inset-y-4 left-0 w-px bg-white/10" />}
+              {i > 0 && (
+                <span className="absolute inset-y-4 left-0 w-px bg-white/10" />
+              )}
               <div className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                <AnimatedCounter value={m.v} decimals={m.dec ?? 0} suffix={m.suffix ?? ""} />
+                <AnimatedCounter
+                  value={m.v}
+                  decimals={m.dec ?? 0}
+                  suffix={m.suffix ?? ""}
+                />
               </div>
-              <div className="mt-1 text-xs font-medium text-white/55">{m.label}</div>
+              <div className="mt-1 text-xs font-medium text-white/55">
+                {m.label}
+              </div>
             </div>
           ))}
         </motion.div>
@@ -427,8 +451,12 @@ function FloatingDashboard() {
                     </svg>
                     <div className="absolute inset-0 grid place-items-center">
                       <div className="text-center">
-                        <div className="font-display text-xl font-semibold text-white">82</div>
-                        <div className="text-[8px] font-mono uppercase text-white/40">/100</div>
+                        <div className="font-display text-xl font-semibold text-white">
+                          82
+                        </div>
+                        <div className="text-[8px] font-mono uppercase text-white/40">
+                          /100
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -466,27 +494,50 @@ function FloatingDashboard() {
                       Container Throughput · 24h
                     </div>
                     <div className="mt-1 font-display text-2xl font-semibold text-white">
-                      12,408 <span className="text-xs font-medium text-emerald-300">↑ 8.4%</span>
+                      12,408{" "}
+                      <span className="text-xs font-medium text-emerald-300">
+                        ↑ 8.4%
+                      </span>
                     </div>
                   </div>
                   <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-0.5 text-[10px] font-mono text-white/50">
-                    <span className="rounded-full bg-white/10 px-2 py-0.5 text-white">24h</span>
+                    <span className="rounded-full bg-white/10 px-2 py-0.5 text-white">
+                      24h
+                    </span>
                     <span className="px-2 py-0.5">7d</span>
                     <span className="px-2 py-0.5">30d</span>
                   </div>
                 </div>
                 <div className="relative mt-3">
-                  <svg viewBox="0 0 400 120" preserveAspectRatio="none" className="h-32 w-full">
+                  <svg
+                    viewBox="0 0 400 120"
+                    preserveAspectRatio="none"
+                    className="h-32 w-full"
+                  >
                     <defs>
                       <linearGradient id="ar1" x1="0" x2="0" y1="0" y2="1">
-                        <stop offset="0%" stopColor="#7C3AED" stopOpacity="0.55" />
-                        <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
+                        <stop
+                          offset="0%"
+                          stopColor="#7C3AED"
+                          stopOpacity="0.55"
+                        />
+                        <stop
+                          offset="100%"
+                          stopColor="#2563EB"
+                          stopOpacity="0"
+                        />
                       </linearGradient>
                       <linearGradient id="line1" x1="0" x2="1" y1="0" y2="0">
                         <stop offset="0%" stopColor="#A78BFA" />
                         <stop offset="100%" stopColor="#22D3EE" />
                       </linearGradient>
-                      <filter id="glow1" x="-20%" y="-20%" width="140%" height="140%">
+                      <filter
+                        id="glow1"
+                        x="-20%"
+                        y="-20%"
+                        width="140%"
+                        height="140%"
+                      >
                         <feGaussianBlur stdDeviation="2.5" result="b" />
                         <feMerge>
                           <feMergeNode in="b" />
@@ -557,21 +608,31 @@ function FloatingDashboard() {
                       stroke="#0A0E1F"
                       strokeWidth="2.5"
                     />
-                    <circle cx="270" cy="62" r="9" fill="none" stroke="rgba(167,139,250,0.35)" />
+                    <circle
+                      cx="270"
+                      cy="62"
+                      r="9"
+                      fill="none"
+                      stroke="rgba(167,139,250,0.35)"
+                    />
                     {/* x-axis labels */}
-                    {["00:00", "06:00", "12:00", "18:00", "24:00"].map((l, i) => (
-                      <text
-                        key={l}
-                        x={i * 100}
-                        y="118"
-                        fill="rgba(255,255,255,0.3)"
-                        fontSize="7"
-                        fontFamily="ui-monospace,monospace"
-                        textAnchor={i === 0 ? "start" : i === 4 ? "end" : "middle"}
-                      >
-                        {l}
-                      </text>
-                    ))}
+                    {["00:00", "06:00", "12:00", "18:00", "24:00"].map(
+                      (l, i) => (
+                        <text
+                          key={l}
+                          x={i * 100}
+                          y="118"
+                          fill="rgba(255,255,255,0.3)"
+                          fontSize="7"
+                          fontFamily="ui-monospace,monospace"
+                          textAnchor={
+                            i === 0 ? "start" : i === 4 ? "end" : "middle"
+                          }
+                        >
+                          {l}
+                        </text>
+                      ),
+                    )}
                   </svg>
                   {/* floating value card */}
                   <div
@@ -580,8 +641,12 @@ function FloatingDashboard() {
                   >
                     <div className="rounded-lg border border-white/10 bg-[#0B1024]/90 px-2.5 py-1.5 text-[10px] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] backdrop-blur-xl">
                       <div className="font-mono text-white/40">18:00</div>
-                      <div className="font-display text-sm font-semibold text-white">11,842</div>
-                      <div className="text-[9px] text-emerald-300">+6.2% vs avg</div>
+                      <div className="font-display text-sm font-semibold text-white">
+                        11,842
+                      </div>
+                      <div className="text-[9px] text-emerald-300">
+                        +6.2% vs avg
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -625,7 +690,10 @@ function FloatingDashboard() {
                 const Icon = k.t;
                 const max = Math.max(...k.spark);
                 const pts = k.spark
-                  .map((v, idx) => `${(idx / (k.spark.length - 1)) * 100},${30 - (v / max) * 24}`)
+                  .map(
+                    (v, idx) =>
+                      `${(idx / (k.spark.length - 1)) * 100},${30 - (v / max) * 24}`,
+                  )
                   .join(" ");
                 return (
                   <div
@@ -650,7 +718,9 @@ function FloatingDashboard() {
                         {k.d}
                       </span>
                     </div>
-                    <div className="mt-2 font-display text-xl font-semibold text-white">{k.v}</div>
+                    <div className="mt-2 font-display text-xl font-semibold text-white">
+                      {k.v}
+                    </div>
                     <div className="text-[10px] text-white/45">{k.l}</div>
                     <svg
                       viewBox="0 0 100 30"
@@ -666,7 +736,11 @@ function FloatingDashboard() {
                         strokeLinejoin="round"
                         opacity="0.9"
                       />
-                      <polyline points={`${pts} 100,30 0,30`} fill={k.c} opacity="0.12" />
+                      <polyline
+                        points={`${pts} 100,30 0,30`}
+                        fill={k.c}
+                        opacity="0.12"
+                      />
                     </svg>
                   </div>
                 );
@@ -698,7 +772,9 @@ function FloatingDashboard() {
                         className="h-1.5 w-1.5 rounded-full"
                         style={{ background: c as string }}
                       />
-                      <span className="flex-1 truncate text-white/80">{msg}</span>
+                      <span className="flex-1 truncate text-white/80">
+                        {msg}
+                      </span>
                       <span
                         className="rounded-full px-1.5 py-0.5 text-[9px] font-mono uppercase"
                         style={{ background: `${c}22`, color: c as string }}
@@ -726,7 +802,9 @@ function FloatingDashboard() {
         </div>
         <div>
           <div className="font-semibold">YOLOv11 · 62 FPS</div>
-          <div className="text-[10px] text-white/50">Cam · Berth 04 · running</div>
+          <div className="text-[10px] text-white/50">
+            Cam · Berth 04 · running
+          </div>
         </div>
       </motion.div>
       <motion.div
@@ -757,7 +835,16 @@ function FloatingDashboard() {
 }
 
 function TrustedBy() {
-  const logos = ["DP World", "Maersk", "MSC", "Adani Ports", "PSA", "JNPT", "CMA CGM", "Evergreen"];
+  const logos = [
+    "DP World",
+    "Maersk",
+    "MSC",
+    "Adani Ports",
+    "PSA",
+    "JNPT",
+    "CMA CGM",
+    "Evergreen",
+  ];
   return (
     <section className="border-b border-border bg-card/40 py-12">
       <div className="mx-auto max-w-7xl px-6">
@@ -800,7 +887,11 @@ function ProblemSection() {
     },
     {
       t: "Fragmented Data",
-      pts: ["Multiple systems", "No centralized intelligence", "Poor visibility"],
+      pts: [
+        "Multiple systems",
+        "No centralized intelligence",
+        "Poor visibility",
+      ],
       i: Database,
     },
   ];
@@ -808,10 +899,13 @@ function ProblemSection() {
     <section className="border-b border-border py-24">
       <div className="mx-auto max-w-7xl px-6">
         <SectionLabel>The problem</SectionLabel>
-        <SectionHeading>Modern ports run on yesterday's systems.</SectionHeading>
+        <SectionHeading>
+          Modern ports run on yesterday's systems.
+        </SectionHeading>
         <p className="mt-4 max-w-2xl text-muted-foreground">
-          Disconnected tools, manual workflows and blind spots quietly cost billions every year — in
-          lost throughput, safety incidents and unplanned downtime.
+          Disconnected tools, manual workflows and blind spots quietly cost
+          billions every year — in lost throughput, safety incidents and
+          unplanned downtime.
         </p>
         <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {cards.map((c, i) => {
@@ -828,11 +922,14 @@ function ProblemSection() {
                 <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[color:var(--color-destructive)]/10 text-[color:var(--color-destructive)]">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 font-display text-lg font-semibold">{c.t}</h3>
+                <h3 className="mt-4 font-display text-lg font-semibold">
+                  {c.t}
+                </h3>
                 <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
                   {c.pts.map((p) => (
                     <li key={p} className="flex items-center gap-2">
-                      <span className="h-1 w-1 rounded-full bg-muted-foreground/60" /> {p}
+                      <span className="h-1 w-1 rounded-full bg-muted-foreground/60" />{" "}
+                      {p}
                     </li>
                   ))}
                 </ul>
@@ -913,7 +1010,9 @@ function SolutionFlow() {
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="mx-auto max-w-3xl text-center">
-          <SectionLabel className="text-[color:var(--color-accent)]">The platform</SectionLabel>
+          <SectionLabel className="text-[color:var(--color-accent)]">
+            The platform
+          </SectionLabel>
           <SectionHeading className="text-white">
             From raw signal to operator decision in{" "}
             <span className="bg-gradient-to-r from-[#60A5FA] via-[#22D3EE] to-[#34D399] bg-clip-text text-transparent">
@@ -921,8 +1020,8 @@ function SolutionFlow() {
             </span>
           </SectionHeading>
           <p className="mx-auto mt-4 max-w-2xl text-white/60">
-            A single intelligence stack that ingests every sensor in your port and surfaces
-            decisions, not dashboards.
+            A single intelligence stack that ingests every sensor in your port
+            and surfaces decisions, not dashboards.
           </p>
         </div>
 
@@ -954,7 +1053,12 @@ function SolutionFlow() {
                 initial={{ opacity: 0, y: 30, rotateX: -8 }}
                 whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ delay: i * 0.06, type: "spring", stiffness: 80, damping: 18 }}
+                transition={{
+                  delay: i * 0.06,
+                  type: "spring",
+                  stiffness: 80,
+                  damping: 18,
+                }}
                 whileHover={{ y: -6, rotateX: 4, rotateY: -4 }}
                 style={{ transformStyle: "preserve-3d" }}
                 className="group relative"
@@ -994,7 +1098,9 @@ function SolutionFlow() {
                     <div className="flex items-center gap-3">
                       <div
                         className="grid h-11 w-11 place-items-center rounded-xl text-white shadow-[0_10px_25px_-10px_rgba(0,0,0,0.6),inset_0_1px_0_0_rgba(255,255,255,0.25)]"
-                        style={{ background: `linear-gradient(135deg, ${l.from}, ${l.to})` }}
+                        style={{
+                          background: `linear-gradient(135deg, ${l.from}, ${l.to})`,
+                        }}
                       >
                         <Icon className="h-5 w-5" />
                       </div>
@@ -1008,8 +1114,13 @@ function SolutionFlow() {
                     </span>
                   </div>
 
-                  <div className="relative mt-6" style={{ transform: "translateZ(20px)" }}>
-                    <div className="font-display text-xl font-semibold text-white">{l.t}</div>
+                  <div
+                    className="relative mt-6"
+                    style={{ transform: "translateZ(20px)" }}
+                  >
+                    <div className="font-display text-xl font-semibold text-white">
+                      {l.t}
+                    </div>
                     <div className="mt-1.5 text-sm text-white/55">{l.d}</div>
                   </div>
 
@@ -1022,16 +1133,24 @@ function SolutionFlow() {
                       <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/40">
                         throughput
                       </span>
-                      <span className="font-mono text-xs text-white/80">{l.metric}</span>
+                      <span className="font-mono text-xs text-white/80">
+                        {l.metric}
+                      </span>
                     </div>
                     <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.06]">
                       <motion.div
                         initial={{ width: "0%" }}
                         whileInView={{ width: `${65 + ((i * 7) % 30)}%` }}
                         viewport={{ once: true }}
-                        transition={{ duration: 1.2, delay: 0.2 + i * 0.06, ease: "easeOut" }}
+                        transition={{
+                          duration: 1.2,
+                          delay: 0.2 + i * 0.06,
+                          ease: "easeOut",
+                        }}
                         className="h-full rounded-full"
-                        style={{ background: `linear-gradient(90deg, ${l.from}, ${l.to})` }}
+                        style={{
+                          background: `linear-gradient(90deg, ${l.from}, ${l.to})`,
+                        }}
                       />
                     </div>
                   </div>
@@ -1044,7 +1163,9 @@ function SolutionFlow() {
         {/* bottom flow caption */}
         <div className="mt-12 flex items-center justify-center gap-4 text-xs text-white/50">
           <div className="h-px w-16 bg-gradient-to-r from-transparent to-white/30" />
-          <span className="font-mono uppercase tracking-[0.2em]">closed-loop autonomy</span>
+          <span className="font-mono uppercase tracking-[0.2em]">
+            closed-loop autonomy
+          </span>
           <div className="h-px w-16 bg-gradient-to-l from-transparent to-white/30" />
         </div>
       </div>
@@ -1057,7 +1178,9 @@ function ModulesBento() {
     <section id="modules" className="border-b border-border py-28">
       <div className="mx-auto max-w-7xl px-6">
         <SectionLabel>AI modules</SectionLabel>
-        <SectionHeading>Six intelligence layers. One operating system.</SectionHeading>
+        <SectionHeading>
+          Six intelligence layers. One operating system.
+        </SectionHeading>
         <div className="mt-12 grid grid-cols-12 gap-4 auto-rows-[minmax(180px,auto)]">
           <BentoCard
             className="col-span-12 lg:col-span-6 lg:row-span-2"
@@ -1073,7 +1196,11 @@ function ModulesBento() {
             icon={Wrench}
             title="Crane Intelligence"
             accent="#0D9488"
-            tags={["Predict failures", "Remaining useful life", "Health monitoring"]}
+            tags={[
+              "Predict failures",
+              "Remaining useful life",
+              "Health monitoring",
+            ]}
           >
             <CraneVis />
           </BentoCard>
@@ -1103,7 +1230,11 @@ function ModulesBento() {
             icon={Sparkles}
             title="AI Copilot"
             accent="#8B5CF6"
-            tags={["Natural language queries", "RAG search", "Operational guidance"]}
+            tags={[
+              "Natural language queries",
+              "RAG search",
+              "Operational guidance",
+            ]}
           />
         </div>
       </div>
@@ -1135,7 +1266,9 @@ function BentoCard({
     >
       <div
         className="absolute inset-x-0 top-0 h-px"
-        style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }}
+        style={{
+          background: `linear-gradient(90deg, transparent, ${accent}, transparent)`,
+        }}
       />
       <div className="flex items-start justify-between">
         <div
@@ -1144,7 +1277,9 @@ function BentoCard({
         >
           <Icon className="h-5 w-5" />
         </div>
-        <span className="text-[10px] font-mono uppercase text-muted-foreground">module</span>
+        <span className="text-[10px] font-mono uppercase text-muted-foreground">
+          module
+        </span>
       </div>
       <h3 className="mt-4 font-display text-xl font-semibold">{title}</h3>
       <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
@@ -1340,7 +1475,8 @@ function AgentsGraph() {
           backgroundImage:
             "linear-gradient(to right, rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.6) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
-          maskImage: "radial-gradient(ellipse at center, black 40%, transparent 90%)",
+          maskImage:
+            "radial-gradient(ellipse at center, black 40%, transparent 90%)",
         }}
       />
       {/* drifting particles */}
@@ -1374,9 +1510,9 @@ function AgentsGraph() {
             </span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-white/65 md:text-lg">
-            From vessel arrival to customs clearance, PortMind orchestrates a fleet of specialized
-            AI agents that ingest, reason, predict, and act across every port operation — in real
-            time.
+            From vessel arrival to customs clearance, PortMind orchestrates a
+            fleet of specialized AI agents that ingest, reason, predict, and act
+            across every port operation — in real time.
           </p>
         </div>
 
@@ -1397,7 +1533,9 @@ function AgentsGraph() {
                 <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
               </span>
               <div>
-                <div className="font-mono text-[9px] tracking-[0.2em] text-white/45">{l}</div>
+                <div className="font-mono text-[9px] tracking-[0.2em] text-white/45">
+                  {l}
+                </div>
                 <div className="text-[11px] font-semibold text-white">{v}</div>
               </div>
             </div>
@@ -1423,7 +1561,8 @@ function AgentsGraph() {
           <div
             className="relative overflow-hidden rounded-3xl border border-violet-400/30 bg-gradient-to-b from-violet-500/[0.06] via-transparent to-transparent p-6 backdrop-blur-xl"
             style={{
-              boxShadow: "0 0 0 1px rgba(255,122,0,0.18), 0 40px 100px -30px rgba(255,122,0,0.45)",
+              boxShadow:
+                "0 0 0 1px rgba(255,122,0,0.18), 0 40px 100px -30px rgba(255,122,0,0.45)",
             }}
           >
             <div className="flex items-start justify-between">
@@ -1439,7 +1578,8 @@ function AgentsGraph() {
                 </div>
               </div>
               <div className="hidden items-center gap-2 rounded-full border border-violet-400/30 bg-violet-500/10 px-3 py-1 font-mono text-[10px] text-violet-200 sm:inline-flex">
-                <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" /> Live mesh
+                <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />{" "}
+                Live mesh
               </div>
             </div>
 
@@ -1464,8 +1604,12 @@ function AgentsGraph() {
               <div className="font-mono text-[10px] tracking-[0.22em] text-violet-300/90">
                 RUNTIME IMPACT
               </div>
-              <div className="mt-1 text-lg font-semibold text-white">Every shift, measured.</div>
-              <div className="text-[12px] text-white/55">Live across 184 partner ports</div>
+              <div className="mt-1 text-lg font-semibold text-white">
+                Every shift, measured.
+              </div>
+              <div className="text-[12px] text-white/55">
+                Live across 184 partner ports
+              </div>
 
               <div className="mt-5 grid grid-cols-2 gap-3">
                 {impact.map((k) => (
@@ -1479,7 +1623,9 @@ function AgentsGraph() {
                         {k.v}
                       </span>
                     </div>
-                    <div className="mt-0.5 text-[11px] text-white/70">{k.l}</div>
+                    <div className="mt-0.5 text-[11px] text-white/70">
+                      {k.l}
+                    </div>
                     <div className="mt-1 font-mono text-[9px] tracking-wider text-violet-300/70">
                       {k.t}
                     </div>
@@ -1531,7 +1677,9 @@ function AgentsGraph() {
               key={t}
               className="rounded-xl border border-white/10 bg-white/[0.02] p-3 backdrop-blur-xl hover:border-violet-400/40 transition"
             >
-              <div className="font-mono text-[10px] tracking-[0.2em] text-violet-300/90">{t}</div>
+              <div className="font-mono text-[10px] tracking-[0.2em] text-violet-300/90">
+                {t}
+              </div>
               <div className="mt-1 text-[11px] text-white/55">{s}</div>
             </div>
           ))}
@@ -1542,7 +1690,15 @@ function AgentsGraph() {
 }
 
 /* ---------- shared layout helpers ---------- */
-function RowLabel({ n, title, sub }: { n: string; title: string; sub: string }) {
+function RowLabel({
+  n,
+  title,
+  sub,
+}: {
+  n: string;
+  title: string;
+  sub: string;
+}) {
   return (
     <div className="mb-5 flex items-end justify-between gap-3">
       <div className="flex items-center gap-3">
@@ -1578,7 +1734,14 @@ function ConnectorRow() {
           <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
         </linearGradient>
       </defs>
-      <line x1="0" y1="2" x2="1000" y2="2" stroke="url(#connRow)" strokeWidth="1.2" />
+      <line
+        x1="0"
+        y1="2"
+        x2="1000"
+        y2="2"
+        stroke="url(#connRow)"
+        strokeWidth="1.2"
+      />
     </svg>
   );
 }
@@ -1596,7 +1759,8 @@ function StageCard({ stage, delay }: { stage: any; delay: number }) {
       <div
         className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition"
         style={{
-          background: "radial-gradient(60% 40% at 50% 0%, rgba(255,122,0,0.18), transparent 70%)",
+          background:
+            "radial-gradient(60% 40% at 50% 0%, rgba(255,122,0,0.18), transparent 70%)",
         }}
       />
       <div
@@ -1609,8 +1773,12 @@ function StageCard({ stage, delay }: { stage: any; delay: number }) {
         </div>
       </div>
       <div className="relative mt-3">
-        <div className="text-[14px] font-semibold text-white">{stage.title}</div>
-        <div className="mt-0.5 truncate font-mono text-[10.5px] text-white/55">{stage.sub}</div>
+        <div className="text-[14px] font-semibold text-white">
+          {stage.title}
+        </div>
+        <div className="mt-0.5 truncate font-mono text-[10.5px] text-white/55">
+          {stage.sub}
+        </div>
       </div>
       <div className="relative mt-3 grid grid-cols-3 gap-1.5">
         {stage.metrics.map(([v, l]: any) => (
@@ -1618,8 +1786,12 @@ function StageCard({ stage, delay }: { stage: any; delay: number }) {
             key={l}
             className="rounded-md border border-white/10 bg-[#0F2547] px-2 py-1.5 text-center"
           >
-            <div className="font-display text-[12px] font-semibold text-violet-200">{v}</div>
-            <div className="font-mono text-[8.5px] tracking-wider text-white/40">{l}</div>
+            <div className="font-display text-[12px] font-semibold text-violet-200">
+              {v}
+            </div>
+            <div className="font-mono text-[8.5px] tracking-wider text-white/40">
+              {l}
+            </div>
           </div>
         ))}
       </div>
@@ -1630,8 +1802,12 @@ function StageCard({ stage, delay }: { stage: any; delay: number }) {
 function CorePill({ v, l }: { v: string; l: string }) {
   return (
     <div className="rounded-lg border border-violet-400/25 bg-gradient-to-b from-violet-500/[0.08] to-transparent px-3 py-2 text-center">
-      <div className="font-display text-base font-semibold text-violet-200">{v}</div>
-      <div className="font-mono text-[9px] tracking-[0.18em] text-white/45">{l}</div>
+      <div className="font-display text-base font-semibold text-violet-200">
+        {v}
+      </div>
+      <div className="font-mono text-[9px] tracking-[0.18em] text-white/45">
+        {l}
+      </div>
     </div>
   );
 }
@@ -1669,9 +1845,20 @@ function OrchestratorHub({ agents }: { agents: { n: string; a: number }[] }) {
             strokeDasharray="2 4"
           />
         ))}
-        <circle cx="200" cy="200" r="180" fill="none" stroke="rgba(255,122,0,0.08)" />
+        <circle
+          cx="200"
+          cy="200"
+          r="180"
+          fill="none"
+          stroke="rgba(255,122,0,0.08)"
+        />
         {/* rotating ring */}
-        <g style={{ transformOrigin: "200px 200px", animation: "spin 24s linear infinite" }}>
+        <g
+          style={{
+            transformOrigin: "200px 200px",
+            animation: "spin 24s linear infinite",
+          }}
+        >
           <circle
             cx="200"
             cy="200"
@@ -1690,7 +1877,14 @@ function OrchestratorHub({ agents }: { agents: { n: string; a: number }[] }) {
           const y = 200 + 160 * Math.sin(rad);
           return (
             <g key={i}>
-              <line x1="200" y1="200" x2={x} y2={y} stroke="url(#spoke)" strokeWidth="1.2" />
+              <line
+                x1="200"
+                y1="200"
+                x2={x}
+                y2={y}
+                stroke="url(#spoke)"
+                strokeWidth="1.2"
+              />
               <circle r="3" fill="#A78BFA">
                 <animateMotion
                   dur={`${3 + i * 0.4}s`}
@@ -1710,7 +1904,14 @@ function OrchestratorHub({ agents }: { agents: { n: string; a: number }[] }) {
         })}
 
         {/* core halo */}
-        <circle cx="200" cy="200" r="80" fill="url(#coreG)" filter="url(#hubGlow)" opacity="0.85" />
+        <circle
+          cx="200"
+          cy="200"
+          r="80"
+          fill="url(#coreG)"
+          filter="url(#hubGlow)"
+          opacity="0.85"
+        />
         <circle
           cx="200"
           cy="200"
@@ -1719,9 +1920,26 @@ function OrchestratorHub({ agents }: { agents: { n: string; a: number }[] }) {
           stroke="rgba(255,122,0,0.6)"
           strokeWidth="1.5"
         />
-        <circle cx="200" cy="200" r="46" fill="none" stroke="#A78BFA" strokeWidth="0.6">
-          <animate attributeName="r" values="46;58;46" dur="3s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.9;0;0.9" dur="3s" repeatCount="indefinite" />
+        <circle
+          cx="200"
+          cy="200"
+          r="46"
+          fill="none"
+          stroke="#A78BFA"
+          strokeWidth="0.6"
+        >
+          <animate
+            attributeName="r"
+            values="46;58;46"
+            dur="3s"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="opacity"
+            values="0.9;0;0.9"
+            dur="3s"
+            repeatCount="indefinite"
+          />
         </circle>
         <text
           x="200"
@@ -1767,7 +1985,9 @@ function OrchestratorHub({ agents }: { agents: { n: string; a: number }[] }) {
               <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
               <span className="font-semibold tracking-wider">{ag.n}</span>
             </div>
-            <div className="font-mono text-[8px] tracking-[0.16em] text-white/45">AGENT</div>
+            <div className="font-mono text-[8px] tracking-[0.16em] text-white/45">
+              AGENT
+            </div>
           </div>
         );
       })}
@@ -1793,7 +2013,9 @@ function ExecutiveDashboard() {
             portmind / command / executive.dashboard
           </span>
         </div>
-        <div className="font-mono text-[10px] text-violet-300/80">streaming · last 24h</div>
+        <div className="font-mono text-[10px] text-violet-300/80">
+          streaming · last 24h
+        </div>
       </div>
 
       {/* KPI row */}
@@ -1806,13 +2028,20 @@ function ExecutiveDashboard() {
           { v: "98.7%", l: "Doc accuracy", t: "+2.1" },
           { v: "$4.2M", l: "Savings YTD", t: "+18%" },
         ].map((k) => (
-          <div key={k.l} className="rounded-xl border border-white/10 bg-[#0F2547] p-3">
+          <div
+            key={k.l}
+            className="rounded-xl border border-white/10 bg-[#0F2547] p-3"
+          >
             <div className="font-mono text-[9px] tracking-[0.18em] text-white/45">
               {k.l.toUpperCase()}
             </div>
             <div className="mt-1 flex items-baseline justify-between">
-              <span className="font-display text-lg font-semibold text-white">{k.v}</span>
-              <span className="font-mono text-[9px] text-violet-300">{k.t}</span>
+              <span className="font-display text-lg font-semibold text-white">
+                {k.v}
+              </span>
+              <span className="font-mono text-[9px] text-violet-300">
+                {k.t}
+              </span>
             </div>
           </div>
         ))}
@@ -1827,7 +2056,9 @@ function ExecutiveDashboard() {
               <div className="font-mono text-[10px] tracking-[0.18em] text-white/50">
                 CONTAINER THROUGHPUT
               </div>
-              <div className="mt-0.5 text-[12px] text-white/70">Last 12 hours · TEU processed</div>
+              <div className="mt-0.5 text-[12px] text-white/70">
+                Last 12 hours · TEU processed
+              </div>
             </div>
             <span className="rounded-md border border-violet-400/30 bg-violet-500/10 px-2 py-0.5 font-mono text-[10px] text-violet-200">
               +12.4%
@@ -1860,15 +2091,19 @@ function ExecutiveDashboard() {
               points="0,120 50,100 100,110 150,70 200,90 250,55 300,68 350,38 400,55 450,28 500,40 550,18 600,30 600,180 0,180"
               fill="url(#thG)"
             />
-            {[0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600].map((x, i) => (
-              <circle
-                key={i}
-                cx={x}
-                cy={[120, 100, 110, 70, 90, 55, 68, 38, 55, 28, 40, 18, 30][i]}
-                r="2.5"
-                fill="#A78BFA"
-              />
-            ))}
+            {[0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600].map(
+              (x, i) => (
+                <circle
+                  key={i}
+                  cx={x}
+                  cy={
+                    [120, 100, 110, 70, 90, 55, 68, 38, 55, 28, 40, 18, 30][i]
+                  }
+                  r="2.5"
+                  fill="#A78BFA"
+                />
+              ),
+            )}
           </svg>
         </div>
 
@@ -1877,13 +2112,18 @@ function ExecutiveDashboard() {
           <div className="font-mono text-[10px] tracking-[0.18em] text-white/50">
             PORT UTILIZATION
           </div>
-          <div className="mt-0.5 text-[12px] text-white/70">Per berth · live</div>
+          <div className="mt-0.5 text-[12px] text-white/70">
+            Per berth · live
+          </div>
           <div className="mt-4 flex h-32 items-end gap-1.5">
             {bars.map((b, i) => (
               <div
                 key={i}
                 className="flex-1 rounded-t-sm bg-gradient-to-t from-indigo-700 via-violet-500 to-cyan-300"
-                style={{ height: `${b}%`, boxShadow: "0 -2px 12px rgba(255,122,0,0.45)" }}
+                style={{
+                  height: `${b}%`,
+                  boxShadow: "0 -2px 12px rgba(255,122,0,0.45)",
+                }}
               />
             ))}
           </div>
@@ -1895,13 +2135,21 @@ function ExecutiveDashboard() {
 
         {/* risk heatmap */}
         <div className="rounded-2xl border border-white/10 bg-[#0F2547] p-4">
-          <div className="font-mono text-[10px] tracking-[0.18em] text-white/50">RISK HEATMAP</div>
+          <div className="font-mono text-[10px] tracking-[0.18em] text-white/50">
+            RISK HEATMAP
+          </div>
           <div className="mt-0.5 text-[12px] text-white/70">Yards × shifts</div>
           <div className="mt-3 grid grid-cols-8 gap-1">
             {Array.from({ length: 40 }).map((_, i) => {
               const v = ((i * 37) % 100) / 100;
               const bg =
-                v > 0.75 ? "#8B5CF6" : v > 0.5 ? "#67E8F9" : v > 0.25 ? "#1E1B4B" : "#0F2547";
+                v > 0.75
+                  ? "#8B5CF6"
+                  : v > 0.5
+                    ? "#67E8F9"
+                    : v > 0.25
+                      ? "#1E1B4B"
+                      : "#0F2547";
               return (
                 <div
                   key={i}
@@ -1931,18 +2179,33 @@ function ExecutiveDashboard() {
             LIVE EVENT STREAM
           </div>
           <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-violet-300">
-            <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" /> streaming
+            <span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />{" "}
+            streaming
           </span>
         </div>
         <ul className="divide-y divide-white/5 text-[12px] text-white/70">
           {[
             ["14:32", "PPE violation auto-dispatched · Yard B · CAM-04", "ok"],
-            ["14:28", "Crane C-4 vibration spike (4.2g) · maintenance window 02:40", "warn"],
-            ["14:15", "Vessel MV-228 docked at Berth 7 · ETA met within ±3m", "ok"],
-            ["14:10", "Container TCLU 818201 · damage flagged 87% · review queued", "warn"],
+            [
+              "14:28",
+              "Crane C-4 vibration spike (4.2g) · maintenance window 02:40",
+              "warn",
+            ],
+            [
+              "14:15",
+              "Vessel MV-228 docked at Berth 7 · ETA met within ±3m",
+              "ok",
+            ],
+            [
+              "14:10",
+              "Container TCLU 818201 · damage flagged 87% · review queued",
+              "warn",
+            ],
           ].map(([t, m, s], i) => (
             <li key={i} className="flex items-center gap-3 px-4 py-2.5">
-              <span className="font-mono text-[10px] text-white/40 w-12">{t as string}</span>
+              <span className="font-mono text-[10px] text-white/40 w-12">
+                {t as string}
+              </span>
               <span
                 className={`h-1.5 w-1.5 rounded-full ${s === "warn" ? "bg-violet-400" : "bg-emerald-400"}`}
               />
@@ -1990,7 +2253,12 @@ function IngestArt() {
         <rect width="14" height="6" fill="#A78BFA" />
         <rect x="-10" y="1" width="8" height="4" fill="#8B5CF6" />
         <rect x="16" y="1" width="8" height="4" fill="#8B5CF6" />
-        <path d="M7 8 L7 30" stroke="#A78BFA" strokeWidth="0.5" strokeDasharray="1 2" />
+        <path
+          d="M7 8 L7 30"
+          stroke="#A78BFA"
+          strokeWidth="0.5"
+          strokeDasharray="1 2"
+        />
       </g>
       {/* signal arcs from satellite */}
       <path
@@ -2019,13 +2287,24 @@ function IngestArt() {
         {[16, 32, 48, 64, 80, 96, 112].map((x) => (
           <g key={x}>
             <rect x={x} y="24" width="14" height="7" fill="url(#shipG)" />
-            <rect x={x} y="31.5" width="14" height="7" fill="#67E8F9" opacity="0.85" />
+            <rect
+              x={x}
+              y="31.5"
+              width="14"
+              height="7"
+              fill="#67E8F9"
+              opacity="0.85"
+            />
           </g>
         ))}
         <rect x="100" y="8" width="26" height="14" fill="#8B5CF6" />
         <rect x="112" y="-4" width="4" height="12" fill="#A78BFA" />
         {/* wake */}
-        <path d="M-20 56 Q40 50 80 56 T160 56" stroke="rgba(255,122,0,0.4)" fill="none" />
+        <path
+          d="M-20 56 Q40 50 80 56 T160 56"
+          stroke="rgba(255,122,0,0.4)"
+          fill="none"
+        />
       </g>
       {/* IoT/CCTV chips */}
       {[
@@ -2036,8 +2315,21 @@ function IngestArt() {
         [280, 116, "API"],
       ].map(([x, y, t]: any) => (
         <g key={t} transform={`translate(${x},${y})`}>
-          <rect width="34" height="12" rx="2" fill="#0F2547" stroke="#8B5CF6" strokeWidth="0.5" />
-          <text x="6" y="8.5" fontSize="6.5" fill="#A78BFA" fontFamily="monospace">
+          <rect
+            width="34"
+            height="12"
+            rx="2"
+            fill="#0F2547"
+            stroke="#8B5CF6"
+            strokeWidth="0.5"
+          />
+          <text
+            x="6"
+            y="8.5"
+            fontSize="6.5"
+            fill="#A78BFA"
+            fontFamily="monospace"
+          >
             {t}
           </text>
         </g>
@@ -2053,7 +2345,14 @@ function DocAIArt() {
       {/* docs flowing in */}
       {[10, 30, 50, 70, 90].map((y, i) => (
         <g key={i} transform={`translate(${10 + i * 6},${y})`}>
-          <rect width="32" height="22" rx="2" fill="#14305C" stroke="#8B5CF6" strokeWidth="0.5" />
+          <rect
+            width="32"
+            height="22"
+            rx="2"
+            fill="#14305C"
+            stroke="#8B5CF6"
+            strokeWidth="0.5"
+          />
           {[5, 10, 15].map((ly) => (
             <line
               key={ly}
@@ -2069,8 +2368,18 @@ function DocAIArt() {
         </g>
       ))}
       {/* flow lines */}
-      <path d="M60 60 C 110 60, 130 72, 160 72" stroke="#8B5CF6" strokeWidth="1" fill="none" />
-      <path d="M60 80 C 110 80, 130 78, 160 75" stroke="#A78BFA" strokeWidth="0.8" fill="none" />
+      <path
+        d="M60 60 C 110 60, 130 72, 160 72"
+        stroke="#8B5CF6"
+        strokeWidth="1"
+        fill="none"
+      />
+      <path
+        d="M60 80 C 110 80, 130 78, 160 75"
+        stroke="#A78BFA"
+        strokeWidth="0.8"
+        fill="none"
+      />
       {/* brain */}
       <g transform="translate(150,40)">
         <ellipse
@@ -2096,7 +2405,14 @@ function DocAIArt() {
           "M22,20 Q40,5 58,20",
           "M18,60 Q40,55 62,60",
         ].map((d, i) => (
-          <path key={i} d={d} stroke="#A78BFA" strokeWidth="0.6" fill="none" opacity="0.8" />
+          <path
+            key={i}
+            d={d}
+            stroke="#A78BFA"
+            strokeWidth="0.6"
+            fill="none"
+            opacity="0.8"
+          />
         ))}
         {[
           [15, 30],
@@ -2113,20 +2429,55 @@ function DocAIArt() {
       </g>
       {/* JSON output */}
       <g transform="translate(250,38)">
-        <rect width="60" height="68" rx="3" fill="#0B1A33" stroke="#8B5CF6" strokeWidth="0.6" />
+        <rect
+          width="60"
+          height="68"
+          rx="3"
+          fill="#0B1A33"
+          stroke="#8B5CF6"
+          strokeWidth="0.6"
+        />
         <text x="6" y="13" fontSize="7" fontFamily="monospace" fill="#A78BFA">
           {"{"}
         </text>
-        <text x="10" y="24" fontSize="6" fontFamily="monospace" fill="#fff" opacity="0.7">
+        <text
+          x="10"
+          y="24"
+          fontSize="6"
+          fontFamily="monospace"
+          fill="#fff"
+          opacity="0.7"
+        >
           "id":"TCLU…"
         </text>
-        <text x="10" y="34" fontSize="6" fontFamily="monospace" fill="#fff" opacity="0.7">
+        <text
+          x="10"
+          y="34"
+          fontSize="6"
+          fontFamily="monospace"
+          fill="#fff"
+          opacity="0.7"
+        >
           "cargo":"…"
         </text>
-        <text x="10" y="44" fontSize="6" fontFamily="monospace" fill="#fff" opacity="0.7">
+        <text
+          x="10"
+          y="44"
+          fontSize="6"
+          fontFamily="monospace"
+          fill="#fff"
+          opacity="0.7"
+        >
           "weight":…
         </text>
-        <text x="10" y="54" fontSize="6" fontFamily="monospace" fill="#fff" opacity="0.7">
+        <text
+          x="10"
+          y="54"
+          fontSize="6"
+          fontFamily="monospace"
+          fill="#fff"
+          opacity="0.7"
+        >
           "hs":"8517…"
         </text>
         <text x="6" y="64" fontSize="7" fontFamily="monospace" fill="#A78BFA">
@@ -2165,7 +2516,14 @@ function RiskArt() {
         [282, 90, "#67E8F9", 18],
       ].map(([x, y, c, score]: any, i) => (
         <g key={i}>
-          <rect x={x} y={y - 30} width="30" height="14" fill={c} stroke="rgba(0,0,0,0.5)" />
+          <rect
+            x={x}
+            y={y - 30}
+            width="30"
+            height="14"
+            fill={c}
+            stroke="rgba(0,0,0,0.5)"
+          />
           <rect
             x={x}
             y={y - 14}
@@ -2189,7 +2547,14 @@ function RiskArt() {
           {/* risk badge */}
           {score > 60 && (
             <g>
-              <rect x={x - 2} y={y - 44} width="34" height="11" rx="2" fill="#8B5CF6" />
+              <rect
+                x={x - 2}
+                y={y - 44}
+                width="34"
+                height="11"
+                rx="2"
+                fill="#8B5CF6"
+              />
               <text
                 x={x + 15}
                 y={y - 36}
@@ -2215,13 +2580,35 @@ function RiskArt() {
         strokeWidth="0.6"
         strokeDasharray="3 3"
       >
-        <animate attributeName="y1" values="40;110;40" dur="3.6s" repeatCount="indefinite" />
-        <animate attributeName="y2" values="40;110;40" dur="3.6s" repeatCount="indefinite" />
+        <animate
+          attributeName="y1"
+          values="40;110;40"
+          dur="3.6s"
+          repeatCount="indefinite"
+        />
+        <animate
+          attributeName="y2"
+          values="40;110;40"
+          dur="3.6s"
+          repeatCount="indefinite"
+        />
       </line>
       <rect x="0" y="0" width="320" height="2" fill="#A78BFA">
-        <animate attributeName="y" values="40;110;40" dur="3.6s" repeatCount="indefinite" />
+        <animate
+          attributeName="y"
+          values="40;110;40"
+          dur="3.6s"
+          repeatCount="indefinite"
+        />
       </rect>
-      <line x1="0" y1="120" x2="320" y2="120" stroke="rgba(255,122,0,0.4)" strokeDasharray="2 4" />
+      <line
+        x1="0"
+        y1="120"
+        x2="320"
+        y2="120"
+        stroke="rgba(255,122,0,0.4)"
+        strokeDasharray="2 4"
+      />
     </svg>
   );
 }
@@ -2249,7 +2636,14 @@ function CustomsArt() {
       </g>
       {/* decision engine */}
       <g transform="translate(110,28)">
-        <rect width="120" height="78" rx="6" fill="#0B1A33" stroke="#8B5CF6" strokeWidth="0.6" />
+        <rect
+          width="120"
+          height="78"
+          rx="6"
+          fill="#0B1A33"
+          stroke="#8B5CF6"
+          strokeWidth="0.6"
+        />
         <text x="8" y="14" fontSize="8" fontFamily="monospace" fill="#A78BFA">
           RULE ENGINE
         </text>
@@ -2260,11 +2654,32 @@ function CustomsArt() {
           ["EU CE MARK", "#22c55e", "PASS"],
         ].map((r, i) => (
           <g key={i} transform={`translate(8,${22 + i * 13})`}>
-            <rect width="104" height="10" rx="1.5" fill="#0F2547" stroke="rgba(255,255,255,0.08)" />
-            <text x="4" y="7.5" fontSize="6.5" fontFamily="monospace" fill="#fff" opacity="0.7">
+            <rect
+              width="104"
+              height="10"
+              rx="1.5"
+              fill="#0F2547"
+              stroke="rgba(255,255,255,0.08)"
+            />
+            <text
+              x="4"
+              y="7.5"
+              fontSize="6.5"
+              fontFamily="monospace"
+              fill="#fff"
+              opacity="0.7"
+            >
               {r[0]}
             </text>
-            <rect x="70" y="2" width="30" height="6" rx="1" fill={r[1] as string} opacity="0.85" />
+            <rect
+              x="70"
+              y="2"
+              width="30"
+              height="6"
+              rx="1"
+              fill={r[1] as string}
+              opacity="0.85"
+            />
             <text
               x="85"
               y="6.8"
@@ -2302,15 +2717,35 @@ function CustomsArt() {
         >
           REVIEW
         </text>
-        <text x="22" y="28" textAnchor="middle" fontSize="6" fontFamily="monospace" fill="#0F2547">
+        <text
+          x="22"
+          y="28"
+          textAnchor="middle"
+          fontSize="6"
+          fontFamily="monospace"
+          fill="#0F2547"
+        >
           76%
         </text>
       </g>
       {/* flow */}
-      <path d="M60 70 L110 70" stroke="#8B5CF6" strokeWidth="1" fill="none" markerEnd="url(#arr)" />
+      <path
+        d="M60 70 L110 70"
+        stroke="#8B5CF6"
+        strokeWidth="1"
+        fill="none"
+        markerEnd="url(#arr)"
+      />
       <path d="M230 70 L246 74" stroke="#8B5CF6" strokeWidth="1" fill="none" />
       <defs>
-        <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <marker
+          id="arr"
+          markerWidth="6"
+          markerHeight="6"
+          refX="5"
+          refY="3"
+          orient="auto"
+        >
           <path d="M0,0 L6,3 L0,6 Z" fill="#8B5CF6" />
         </marker>
       </defs>
@@ -2324,8 +2759,22 @@ function OpsArt() {
       <rect width="320" height="144" fill="#0F2547" />
       {/* crane */}
       <g transform="translate(20,12)">
-        <line x1="40" y1="120" x2="40" y2="20" stroke="#8B5CF6" strokeWidth="2.5" />
-        <line x1="40" y1="20" x2="160" y2="20" stroke="#A78BFA" strokeWidth="2.5" />
+        <line
+          x1="40"
+          y1="120"
+          x2="40"
+          y2="20"
+          stroke="#8B5CF6"
+          strokeWidth="2.5"
+        />
+        <line
+          x1="40"
+          y1="20"
+          x2="160"
+          y2="20"
+          stroke="#A78BFA"
+          strokeWidth="2.5"
+        />
         <line
           x1="40"
           y1="20"
@@ -2334,8 +2783,22 @@ function OpsArt() {
           stroke="rgba(255,122,0,0.4)"
           strokeDasharray="3 3"
         />
-        <line x1="110" y1="20" x2="110" y2="60" stroke="#67E8F9" strokeWidth="1.2" />
-        <rect x="100" y="60" width="22" height="14" fill="url(#crCont)" stroke="rgba(0,0,0,0.4)" />
+        <line
+          x1="110"
+          y1="20"
+          x2="110"
+          y2="60"
+          stroke="#67E8F9"
+          strokeWidth="1.2"
+        />
+        <rect
+          x="100"
+          y="60"
+          width="22"
+          height="14"
+          fill="url(#crCont)"
+          stroke="rgba(0,0,0,0.4)"
+        />
         <defs>
           <linearGradient id="crCont" x1="0" x2="0" y1="0" y2="1">
             <stop offset="0%" stopColor="#8B5CF6" />
@@ -2348,7 +2811,14 @@ function OpsArt() {
       <g transform="translate(180,40)">
         {/* route grid */}
         {[0, 25, 50, 75].map((y) => (
-          <line key={y} x1="0" x2="130" y1={y} y2={y} stroke="rgba(255,122,0,0.15)" />
+          <line
+            key={y}
+            x1="0"
+            x2="130"
+            y1={y}
+            y2={y}
+            stroke="rgba(255,122,0,0.15)"
+          />
         ))}
         {/* truck */}
         <g>
@@ -2366,7 +2836,11 @@ function OpsArt() {
           strokeDasharray="4 2"
         />
         <circle r="2.5" fill="#A78BFA">
-          <animateMotion dur="3s" repeatCount="indefinite" path="M20 25 C 50 25, 60 60, 110 60" />
+          <animateMotion
+            dur="3s"
+            repeatCount="indefinite"
+            path="M20 25 C 50 25, 60 60, 110 60"
+          />
         </circle>
         {/* yard slot */}
         <rect
@@ -2387,7 +2861,14 @@ function OpsArt() {
         ["+18%", 230, 130],
       ].map(([t, x, y]: any, i) => (
         <g key={i} transform={`translate(${x},${y})`}>
-          <rect width="42" height="14" rx="2" fill="#0F2547" stroke="#8B5CF6" strokeWidth="0.5" />
+          <rect
+            width="42"
+            height="14"
+            rx="2"
+            fill="#0F2547"
+            stroke="#8B5CF6"
+            strokeWidth="0.5"
+          />
           <text
             x="21"
             y="10"
@@ -2410,8 +2891,22 @@ function EtaArt() {
     <svg viewBox="0 0 320 144" className="h-full w-full">
       <rect width="320" height="144" fill="#0F2547" />
       {/* world arc */}
-      <ellipse cx="160" cy="180" rx="180" ry="80" fill="none" stroke="rgba(255,122,0,0.25)" />
-      <ellipse cx="160" cy="180" rx="140" ry="60" fill="none" stroke="rgba(255,122,0,0.15)" />
+      <ellipse
+        cx="160"
+        cy="180"
+        rx="180"
+        ry="80"
+        fill="none"
+        stroke="rgba(255,122,0,0.25)"
+      />
+      <ellipse
+        cx="160"
+        cy="180"
+        rx="140"
+        ry="60"
+        fill="none"
+        stroke="rgba(255,122,0,0.15)"
+      />
       {/* dot continents */}
       <g fill="rgba(255,122,0,0.55)">
         {[
@@ -2452,15 +2947,33 @@ function EtaArt() {
         strokeDasharray="3 3"
       />
       <circle r="3" fill="#A78BFA">
-        <animateMotion dur="4s" repeatCount="indefinite" path="M40 62 Q 160 10 260 62" />
+        <animateMotion
+          dur="4s"
+          repeatCount="indefinite"
+          path="M40 62 Q 160 10 260 62"
+        />
       </circle>
       {/* eta card */}
       <g transform="translate(94,98)">
-        <rect width="132" height="36" rx="4" fill="#0B1A33" stroke="#8B5CF6" strokeWidth="0.6" />
+        <rect
+          width="132"
+          height="36"
+          rx="4"
+          fill="#0B1A33"
+          stroke="#8B5CF6"
+          strokeWidth="0.6"
+        />
         <text x="8" y="14" fontSize="7" fontFamily="monospace" fill="#A78BFA">
           PREDICTED ARRIVAL
         </text>
-        <text x="8" y="27" fontSize="10" fontFamily="monospace" fill="#fff" fontWeight="700">
+        <text
+          x="8"
+          y="27"
+          fontSize="10"
+          fontFamily="monospace"
+          fill="#fff"
+          fontWeight="700"
+        >
           14 Jun · 09:45
         </text>
         <g transform="translate(86,18)">
@@ -2484,9 +2997,21 @@ function EtaArt() {
 
 function DemoPreview() {
   const screens = [
-    { title: "Command Center", color: "#2563EB", icon: LayoutChip("Risk · KPIs · Live feed") },
-    { title: "Crane Monitoring", color: "#0D9488", icon: LayoutChip("RUL · Sensors · Alerts") },
-    { title: "AI Copilot", color: "#8B5CF6", icon: LayoutChip("RAG · Citations · Agents") },
+    {
+      title: "Command Center",
+      color: "#2563EB",
+      icon: LayoutChip("Risk · KPIs · Live feed"),
+    },
+    {
+      title: "Crane Monitoring",
+      color: "#0D9488",
+      icon: LayoutChip("RUL · Sensors · Alerts"),
+    },
+    {
+      title: "AI Copilot",
+      color: "#8B5CF6",
+      icon: LayoutChip("RAG · Citations · Agents"),
+    },
   ];
   return (
     <section id="demo" className="border-b border-border py-28">
@@ -2507,11 +3032,18 @@ function DemoPreview() {
                 <span className="h-2 w-2 rounded-full bg-[#FF5F57]" />
                 <span className="h-2 w-2 rounded-full bg-[#FEBC2E]" />
                 <span className="h-2 w-2 rounded-full bg-[#28C840]" />
-                <div className="ml-2 text-[10px] font-mono text-muted-foreground">portmind.ai</div>
+                <div className="ml-2 text-[10px] font-mono text-muted-foreground">
+                  portmind.ai
+                </div>
               </div>
               <div className="relative aspect-[4/3] bg-gradient-to-br from-background to-card p-4">
-                <div className="absolute inset-x-0 top-0 h-1" style={{ background: s.color }} />
-                <div className="font-display text-sm font-semibold">{s.title}</div>
+                <div
+                  className="absolute inset-x-0 top-0 h-1"
+                  style={{ background: s.color }}
+                />
+                <div className="font-display text-sm font-semibold">
+                  {s.title}
+                </div>
                 {s.icon}
               </div>
             </motion.div>
@@ -2547,8 +3079,8 @@ function CTASection() {
           Ready to transform port operations?
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-white/60">
-          Deploy PortMind AI in your control room in under 30 days. SOC 2, IEC 62443 and IMO
-          compliant.
+          Deploy PortMind AI in your control room in under 30 days. SOC 2, IEC
+          62443 and IMO compliant.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
@@ -2568,7 +3100,10 @@ function CTASection() {
 
 function Footer() {
   const year = new Date().getFullYear();
-  const cols: { title: string; links: { label: string; href: string; badge?: string }[] }[] = [
+  const cols: {
+    title: string;
+    links: { label: string; href: string; badge?: string }[];
+  }[] = [
     {
       title: "Platform",
       links: [
@@ -2651,8 +3186,8 @@ function Footer() {
               Operational intelligence for modern ports — in your inbox monthly.
             </h3>
             <p className="mt-3 max-w-xl text-sm text-white/60">
-              Field notes from terminal deployments, multi-agent research, AIS analytics, and
-              predictive maintenance benchmarks. No fluff.
+              Field notes from terminal deployments, multi-agent research, AIS
+              analytics, and predictive maintenance benchmarks. No fluff.
             </p>
           </div>
           <form
@@ -2672,7 +3207,8 @@ function Footer() {
               type="submit"
               className="group relative inline-flex h-12 items-center justify-center gap-1.5 overflow-hidden rounded-full px-6 text-sm font-semibold text-white shadow-[0_10px_30px_-10px_rgba(37,99,235,0.8)] transition-transform hover:-translate-y-px"
               style={{
-                backgroundImage: "linear-gradient(120deg, #1B3A6B 0%, #2563EB 55%, #0D9488 110%)",
+                backgroundImage:
+                  "linear-gradient(120deg, #1B3A6B 0%, #2563EB 55%, #0D9488 110%)",
               }}
             >
               <span className="relative z-10">Subscribe</span>
@@ -2688,9 +3224,9 @@ function Footer() {
           <div>
             <Logo />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/60">
-              PortMind AI is the unified operating system for smart ports — combining computer
-              vision, predictive maintenance, multi-agent reasoning, and vessel intelligence in one
-              command center.
+              PortMind AI is the unified operating system for smart ports —
+              combining computer vision, predictive maintenance, multi-agent
+              reasoning, and vessel intelligence in one command center.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-2">
@@ -2708,7 +3244,10 @@ function Footer() {
 
             <div className="mt-6 space-y-1.5 text-xs text-white/55">
               <div>HQ · Rotterdam · Singapore · Dubai</div>
-              <a href="mailto:hello@portmind.ai" className="block hover:text-white">
+              <a
+                href="mailto:hello@portmind.ai"
+                className="block hover:text-white"
+              >
                 hello@portmind.ai
               </a>
               <div>+31 (0)10 800 4221</div>
@@ -2781,7 +3320,12 @@ function Footer() {
                   aria-label={s.label}
                   className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-white/60 transition-colors hover:border-white/30 hover:bg-white/10 hover:text-white"
                 >
-                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden>
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-4 w-4"
+                    fill="currentColor"
+                    aria-hidden
+                  >
                     <path d={s.path} />
                   </svg>
                 </a>
