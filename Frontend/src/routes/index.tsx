@@ -851,14 +851,18 @@ function TrustedBy() {
         <div className="text-center text-xs font-medium uppercase tracking-wider text-muted-foreground">
           Trusted by maritime & logistics leaders worldwide
         </div>
-        <div className="mt-8 overflow-hidden">
-          <div className="flex w-[200%] scroll-marquee items-center gap-12">
-            {[...logos, ...logos].map((l, i) => (
+        <div className="mt-8 flex overflow-hidden">
+          <div className="flex w-max shrink-0 scroll-marquee items-center gap-16 pr-16">
+            {[...logos, ...logos, ...logos].map((l, i) => (
               <div
                 key={i}
-                className="font-display text-2xl font-semibold tracking-tight text-foreground/40 whitespace-nowrap hover:text-foreground/80 transition"
+                className="flex shrink-0 items-center justify-center min-w-[180px] h-16"
               >
-                {l}
+                <img
+                  src={`/${l}.png`}
+                  alt={l}
+                  className="h-12 w-auto max-w-[160px] object-contain transition duration-300 hover:scale-105"
+                />
               </div>
             ))}
           </div>
