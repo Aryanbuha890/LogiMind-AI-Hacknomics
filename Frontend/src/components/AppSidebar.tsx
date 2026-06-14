@@ -11,16 +11,39 @@ import {
   LogOut,
   Search,
   Bell,
+  Brain,
+  Map,
+  Network,
+  FlaskConical,
+  TrendingUp,
+  Briefcase,
+  FileSearch,
+  AlertOctagon,
 } from "lucide-react";
 import { Logo } from "./Logo";
 
 type NavItem = { to: string; label: string; icon: any; exact?: boolean };
-const items: NavItem[] = [
+
+const opsItems: NavItem[] = [
   { to: "/app", label: "Command Center", icon: LayoutGrid, exact: true },
   { to: "/app/containers", label: "Containers", icon: Container },
   { to: "/app/cranes", label: "Cranes", icon: Wrench },
   { to: "/app/vessels", label: "Vessels", icon: Ship },
   { to: "/app/safety", label: "Safety", icon: ShieldAlert },
+];
+
+const aiItems: NavItem[] = [
+  { to: "/app/decision-center", label: "Decision Center", icon: Brain },
+  { to: "/app/digital-twin", label: "Digital Twin", icon: Map },
+  { to: "/app/war-room", label: "War Room", icon: Network },
+  { to: "/app/simulator", label: "Simulator", icon: FlaskConical },
+  { to: "/app/predictions", label: "Predictions", icon: TrendingUp },
+  { to: "/app/executive", label: "Executive", icon: Briefcase },
+  { to: "/app/docs-ai", label: "Docs AI", icon: FileSearch },
+  { to: "/app/emergency", label: "Emergency", icon: AlertOctagon },
+];
+
+const bottomItems: NavItem[] = [
   { to: "/app/copilot", label: "AI Copilot", icon: Sparkles },
   { to: "/app/analytics", label: "Analytics", icon: BarChart3 },
   { to: "/app/settings", label: "Settings", icon: Settings },
@@ -30,6 +53,39 @@ export function AppSidebar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isActive = (to: string, exact?: boolean) =>
     exact ? pathname === to : pathname === to || pathname.startsWith(to + "/");
+
+  const renderItem = (it: NavItem) => {
+    const Icon = it.icon;
+    const active = isActive(it.to, it.exact);
+    return (
+      <Link
+        key={it.to}
+        to={it.to as any}
+        className={`group relative flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm transition-all ${
+          active
+            ? "bg-gradient-to-r from-white/15 via-white/10 to-transparent text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+            : "text-white/70 hover:bg-white/5 hover:text-white"
+        }`}
+      >
+        {active && (
+          <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r-full bg-gradient-to-b from-cyan-300 via-indigo-400 to-violet-500 shadow-[0_0_12px_2px_rgba(99,102,241,0.6)]" />
+        )}
+        <span
+          className={`grid h-7 w-7 place-items-center rounded-md transition ${
+            active
+              ? "bg-white/10 text-cyan-300 ring-1 ring-white/15"
+              : "text-white/55 group-hover:bg-white/5 group-hover:text-white/90"
+          }`}
+        >
+          <Icon className="h-3.5 w-3.5" />
+        </span>
+        <span className="flex-1 truncate">{it.label}</span>
+        {active && (
+          <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_2px_rgba(103,232,249,0.7)]" />
+        )}
+      </Link>
+    );
+  };
 
   return (
     <aside className="relative z-20 hidden lg:flex w-[260px] shrink-0 flex-col text-white/90 overflow-hidden">
@@ -54,42 +110,28 @@ export function AppSidebar() {
         </div>
       </div>
 
-      <nav className="relative flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
+      <nav className="relative flex-1 overflow-y-auto px-3 py-4 space-y-1 scrollbar-thin">
+        {/* Operations Group */}
         <div className="px-2 pb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40">
           Operations
         </div>
-        {items.map((it) => {
-          const Icon = it.icon;
-          const active = isActive(it.to, it.exact);
-          return (
-            <Link
-              key={it.to}
-              to={it.to as any}
-              className={`group relative flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm transition-all ${
-                active
-                  ? "bg-gradient-to-r from-white/15 via-white/10 to-transparent text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
-                  : "text-white/70 hover:bg-white/5 hover:text-white"
-              }`}
-            >
-              {active && (
-                <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r-full bg-gradient-to-b from-cyan-300 via-indigo-400 to-violet-500 shadow-[0_0_12px_2px_rgba(99,102,241,0.6)]" />
-              )}
-              <span
-                className={`grid h-7 w-7 place-items-center rounded-md transition ${
-                  active
-                    ? "bg-white/10 text-cyan-300 ring-1 ring-white/15"
-                    : "text-white/55 group-hover:bg-white/5 group-hover:text-white/90"
-                }`}
-              >
-                <Icon className="h-3.5 w-3.5" />
-              </span>
-              <span className="flex-1">{it.label}</span>
-              {active && (
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_8px_2px_rgba(103,232,249,0.7)]" />
-              )}
-            </Link>
-          );
-        })}
+        {opsItems.map(renderItem)}
+
+        {/* AI Intelligence Group */}
+        <div className="px-2 pt-5 pb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40 flex items-center gap-2">
+          <span className="h-px flex-1 bg-white/10" />
+          AI Intelligence
+          <span className="h-px flex-1 bg-white/10" />
+        </div>
+        {aiItems.map(renderItem)}
+
+        {/* System Group */}
+        <div className="px-2 pt-5 pb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40 flex items-center gap-2">
+          <span className="h-px flex-1 bg-white/10" />
+          System
+          <span className="h-px flex-1 bg-white/10" />
+        </div>
+        {bottomItems.map(renderItem)}
       </nav>
 
       <div className="relative border-t border-white/10 p-3">

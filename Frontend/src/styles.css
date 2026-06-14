@@ -936,3 +936,18 @@
   transform: translateY(-2px);
 }
 
+/* Reset Recharts wrapper, container and SVG outlines and borders */
+.recharts-wrapper,
+.recharts-wrapper *,
+.recharts-surface,
+.recharts-surface *,
+.recharts-responsive-container,
+.recharts-responsive-container * {
+  border: none !important;
+  border-width: 0px !important;
+  border-style: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+

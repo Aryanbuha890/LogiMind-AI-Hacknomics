@@ -1151,15 +1151,11 @@ function JourneySection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 1: Ingest & Perceive */}
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, type: "spring", stiffness: 80, damping: 15 }}
-            className="p-[1px] rounded-3xl bg-gradient-to-br from-cyan-500/40 via-blue-950/20 to-transparent shadow-[0_10px_30px_rgba(56,189,248,0.1)] transition-all duration-300 flex w-full h-[450px] group cursor-default"
+          <div
+            className="p-[1px] rounded-3xl bg-gradient-to-br from-cyan-500/40 via-blue-950/20 to-transparent shadow-[0_10px_30px_rgba(56,189,248,0.1)] flex w-full h-[450px] cursor-default"
           >
             <div className="bg-[#080911]/95 text-white rounded-[23px] p-8 flex flex-col justify-end h-full w-full relative overflow-hidden border border-cyan-500/20">
-              <div className="absolute inset-0 z-0 opacity-30 transition-transform duration-500 group-hover:scale-105">
+              <div className="absolute inset-0 z-0 opacity-30">
                 <img src="/Assess.jpg" alt="Ingest Background" className="w-full h-full object-cover" />
               </div>
               <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/10 via-black/60 to-[#080911] pointer-events-none" />
@@ -1174,18 +1170,14 @@ function JourneySection() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Card 2: Reason & Predict */}
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1, type: "spring", stiffness: 80, damping: 15 }}
-            className="p-[1px] rounded-3xl bg-gradient-to-br from-blue-500/40 via-blue-950/20 to-transparent shadow-[0_10px_30px_rgba(37,99,235,0.1)] transition-all duration-300 flex w-full h-[450px] group cursor-default"
+          <div
+            className="p-[1px] rounded-3xl bg-gradient-to-br from-blue-500/40 via-blue-950/20 to-transparent shadow-[0_10px_30px_rgba(37,99,235,0.1)] flex w-full h-[450px] cursor-default"
           >
             <div className="bg-[#080911]/95 text-white rounded-[23px] p-8 flex flex-col justify-end h-full w-full relative overflow-hidden border border-blue-500/20">
-              <div className="absolute inset-0 z-0 opacity-30 transition-transform duration-500 group-hover:scale-105">
+              <div className="absolute inset-0 z-0 opacity-30">
                 <img src="/Achieve.jpg" alt="Reason Background" className="w-full h-full object-cover" />
               </div>
               <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/10 via-black/60 to-[#080911] pointer-events-none" />
@@ -1200,18 +1192,14 @@ function JourneySection() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Card 3: Orchestrate & Act */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 80, damping: 15 }}
-            className="p-[1px] rounded-3xl bg-gradient-to-br from-cyan-500/40 via-blue-950/20 to-transparent shadow-[0_10px_30px_rgba(56,189,248,0.1)] transition-all duration-300 flex w-full h-[450px] group cursor-default"
+          <div
+            className="p-[1px] rounded-3xl bg-gradient-to-br from-cyan-500/40 via-blue-950/20 to-transparent shadow-[0_10px_30px_rgba(56,189,248,0.1)] flex w-full h-[450px] cursor-default"
           >
             <div className="bg-[#080911]/95 text-white rounded-[23px] p-8 flex flex-col justify-end h-full w-full relative overflow-hidden border border-cyan-500/20">
-              <div className="absolute inset-0 z-0 opacity-30 transition-transform duration-500 group-hover:scale-105">
+              <div className="absolute inset-0 z-0 opacity-30">
                 <img src="/Execute.jpg" alt="Act Background" className="w-full h-full object-cover" />
               </div>
               <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/10 via-black/60 to-[#080911] pointer-events-none" />
@@ -1226,7 +1214,7 @@ function JourneySection() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
@@ -1325,78 +1313,100 @@ function HowItWorks() {
 }
 
 function Ecosystem() {
-  const cards = [
+  const [activeNode, setActiveNode] = useState<string>("marine");
+  const [livePulse, setLivePulse] = useState<number>(84);
+
+  // Periodic metrics update
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLivePulse((p) => {
+        const delta = Math.floor(Math.random() * 5) - 2;
+        return Math.max(75, Math.min(99, p + delta));
+      });
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const nodes = [
     {
-      title: "Terminal Operators",
-      index: "01",
-      icon: Cpu,
-      metrics: [
-        { label: "Yard Turnaround", value: "+32% Efficiency" },
-        { label: "Berth Occupancy", value: "92% Avg Capacity" },
-        { label: "Dwell Times", value: "-25% Congestion" }
-      ]
-    },
-    {
-      title: "Port Authorities",
-      index: "02",
+      id: "marine",
+      name: "Marine Command",
+      desc: "Autonomous vessel berthing corridors, speed advisories, and tide scheduling.",
       icon: Ship,
-      metrics: [
-        { label: "Vessel Queue", value: "2h Avg Waiting" },
-        { label: "Carbon Offset", value: "-14% Emissions" },
-        { label: "Uptime SLA", value: "99.99% Guaranteed" }
-      ]
+      color: "#3B82F6",
+      x: 130,
+      y: 110,
+      agents: ["AIS Corridor Tracker", "Tide Window Optimizer", "Vessel Flow Agent"],
+      metrics: { primary: "Wait queue: 1.2h", secondary: "Occupancy: 92%" },
     },
     {
-      title: "Logistics Partners",
-      index: "03",
-      icon: Map,
-      metrics: [
-        { label: "Gate Dwell Time", value: "14m Avg Dwell" },
-        { label: "Truck Dispatch", value: "100% Synced" },
-        { label: "Slot Match Index", value: "99.1% Accuracy" }
-      ]
+      id: "yard",
+      name: "Yard Allocation",
+      desc: "Dynamic stacking distribution algorithms and reefer block temperature monitoring.",
+      icon: Container,
+      color: "#8B5CF6",
+      x: 90,
+      y: 250,
+      agents: ["Block Allocator Bot", "Yard Density Balancer", "Reefer Guard Agent"],
+      metrics: { primary: "Moves/hr: 34", secondary: "Dwell times: -25%" },
     },
     {
-      title: "HSE Safety Teams",
-      index: "04",
-      icon: ShieldAlert,
-      metrics: [
-        { label: "PPE Compliance", value: "99.2% Detected" },
-        { label: "Active Hazards", value: "0 Open Incidents" },
-        { label: "Fire Watch Mode", value: "Active 24/7" }
-      ]
+      id: "crane",
+      name: "Crane Dispatch",
+      desc: "Predictive duty cycle scheduling and remaining useful life tracking.",
+      icon: Wrench,
+      color: "#10B981",
+      x: 170,
+      y: 390,
+      agents: ["Crane Dispatcher AI", "RUL Predictor Agent", "Hysteresis Alert Agent"],
+      metrics: { primary: "Util Rate: 76%", secondary: "Average Health: 94%" },
     },
     {
-      title: "Customs Officers",
-      index: "05",
+      id: "gate",
+      name: "Gate Clearance",
+      desc: "Automatic inbound lane routing, optical character recognition and queue dispatch.",
+      icon: Compass,
+      color: "#F59E0B",
+      x: 430,
+      y: 390,
+      agents: ["OCR Gate Identifier", "Lane Congestion Router", "Truck Flow Agent"],
+      metrics: { primary: "Wait time: 11m", secondary: "Throughput: +12%" },
+    },
+    {
+      id: "customs",
+      name: "Customs Registry",
+      desc: "Instant customs clearing, document OCR parsing and fraud hazard alerts.",
       icon: Database,
-      metrics: [
-        { label: "Auto-Clearance Rate", value: "94% Handled" },
-        { label: "HS Code Parsing", value: "99.8% Extraction" },
-        { label: "Fraud Alert Log", value: "0 Latency Flag" }
-      ]
+      color: "#EC4899",
+      x: 510,
+      y: 250,
+      agents: ["Manifest Document AI", "HS Code Classifier", "DG Compliance Agent"],
+      metrics: { primary: "Clear Rate: 94%", secondary: "OCR Match: 99.8%" },
     },
     {
-      title: "Maritime Executive",
-      index: "06",
-      icon: Coins,
-      metrics: [
-        { label: "Operational Savings", value: "$4.2M Saved YTD" },
-        { label: "ROI Speed Index", value: "2.4x Multiplier" },
-        { label: "ESG Score", value: "Tier 1 Compliant" }
-      ]
-    }
+      id: "safety",
+      name: "HSE Safety Guard",
+      desc: "Real-time PPE compliance checking, thermal scans and alert sirens control.",
+      icon: ShieldAlert,
+      color: "#EF4444",
+      x: 470,
+      y: 110,
+      agents: ["PPE Safety Vision", "Thermal Incidents Agent", "Lockdown Dispatcher"],
+      metrics: { primary: "Safety: 99.2%", secondary: "Defcon: Nominal" },
+    },
   ];
 
-  // Connection paths in the SVG viewport (0 0 960 700)
-  const paths = [
-    { d: "M 480 350 C 400 350, 320 110, 240 110", dur: "4.2s" }, // Card 1 (Top Left)
-    { d: "M 480 350 L 240 350", dur: "3.6s" }, // Card 2 (Middle Left)
-    { d: "M 480 350 C 400 350, 320 590, 240 590", dur: "4.8s" }, // Card 3 (Bottom Left)
-    { d: "M 480 350 C 560 350, 640 110, 720 110", dur: "4.0s" }, // Card 4 (Top Right)
-    { d: "M 480 350 L 720 350", dur: "3.8s" }, // Card 5 (Middle Right)
-    { d: "M 480 350 C 560 350, 640 590, 720 590", dur: "4.5s" }  // Card 6 (Bottom Right)
+  const connections = [
+    { from: "marine", to: "yard" },
+    { from: "yard", to: "crane" },
+    { from: "crane", to: "gate" },
+    { from: "gate", to: "customs" },
+    { from: "customs", to: "safety" },
+    { from: "safety", to: "marine" },
   ];
+
+  const activeNodeData = nodes.find((n) => n.id === activeNode) || nodes[0];
+  const ActiveIcon = activeNodeData.icon;
 
   return (
     <section id="ecosystem" className="border-t border-white/5 py-28 overflow-hidden bg-[#05060F] relative">
@@ -1409,127 +1419,307 @@ function Ecosystem() {
         }}
       />
       {/* Ambient light glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.12),transparent)] blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.1),transparent)] blur-3xl pointer-events-none" />
 
       <div className="mx-auto max-w-6xl px-6">
-        <SectionHead eyebrow="The Ecosystem" title="One agentic mesh. Every stakeholder aligned." />
+        <SectionHead eyebrow="The Ecosystem" title="The Autonomous Mesh" sub="Unified stakeholder consensus and real-time operational integration." />
 
-        <div className="mt-16 relative">
-          {/* Layout Container */}
-          <div className="eco-layout-container">
-            {/* SVG Connections Layer (Visible on desktop) */}
+        <div className="mt-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Left Column: Interactive Neural Mesh */}
+          <div className="lg:col-span-7 relative flex justify-center bg-card/10 rounded-2xl border border-white/5 p-4 backdrop-blur-md">
             <svg
-              className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block z-0"
-              viewBox="0 0 960 700"
+              className="w-full max-w-[500px] aspect-square pointer-events-auto"
+              viewBox="0 0 600 500"
               fill="none"
             >
-              {paths.map((p, idx) => (
-                <g key={idx}>
-                  {/* Shadow Glow Line */}
-                  <path
-                    d={p.d}
-                    stroke="#38bdf8"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    className="opacity-[0.06]"
-                    style={{ filter: "blur(3px)" }}
-                  />
-                  {/* Core Static Line */}
-                  <path
-                    d={p.d}
-                    stroke="rgba(255, 255, 255, 0.08)"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                  {/* Animated Neon Flowing Dot */}
-                  <circle r="3.5" fill="#38bdf8" style={{ filter: "drop-shadow(0 0 6px #38bdf8)" }}>
-                    <animateMotion dur={p.dur} repeatCount="indefinite" path={p.d} />
-                  </circle>
-                </g>
-              ))}
+              {/* Definitions for glowing filter shadows */}
+              <defs>
+                <filter id="glow-filter" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="8" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
 
-              {/* Atomic Orbits loops around center (480, 350) */}
-              <g transform="rotate(-30 480 350)">
-                <path
-                  d="M 380 350 A 100 40 0 1 0 580 350 A 100 40 0 1 0 380 350"
-                  stroke="rgba(56, 189, 248, 0.25)"
-                  strokeWidth="1.2"
-                  fill="none"
+              {/* Edge connections between nodes */}
+              {connections.map((c, idx) => {
+                const start = nodes.find((n) => n.id === c.from)!;
+                const end = nodes.find((n) => n.id === c.to)!;
+                const isActiveConnection = activeNode === c.from || activeNode === c.to;
+
+                return (
+                  <g key={idx}>
+                    <line
+                      x1={start.x}
+                      y1={start.y}
+                      x2={end.x}
+                      y2={end.y}
+                      stroke={isActiveConnection ? "#38bdf8" : "rgba(255, 255, 255, 0.07)"}
+                      strokeWidth={isActiveConnection ? 2.5 : 1}
+                      className="transition-all duration-300"
+                    />
+                    {isActiveConnection && (
+                      <circle r="3" fill="#38bdf8">
+                        <animateMotion
+                          path={`M ${start.x} ${start.y} L ${end.x} ${end.y}`}
+                          dur="3s"
+                          repeatCount="indefinite"
+                        />
+                      </circle>
+                    )}
+                  </g>
+                );
+              })}
+
+              {/* Central AI Sphere connection lines */}
+              {nodes.map((n, idx) => {
+                const isActiveConnection = activeNode === n.id;
+                return (
+                  <g key={`core-${idx}`}>
+                    <line
+                      x1="300"
+                      y1="250"
+                      x2={n.x}
+                      y2={n.y}
+                      stroke={isActiveConnection ? "#8B5CF6" : "rgba(255, 255, 255, 0.05)"}
+                      strokeWidth={isActiveConnection ? 2 : 1}
+                      strokeDasharray="4 4"
+                      className="transition-all duration-300"
+                    />
+                    {isActiveConnection && (
+                      <circle r="2" fill="#8B5CF6">
+                        <animateMotion
+                          path={`M 300 250 L ${n.x} ${n.y}`}
+                          dur="2s"
+                          repeatCount="indefinite"
+                        />
+                      </circle>
+                    )}
+                  </g>
+                );
+              })}
+
+              {/* Central Core sphere (PM-OS Core) */}
+              <g className="cursor-pointer" onClick={() => setActiveNode("marine")}>
+                <circle
+                  cx="300"
+                  cy="250"
+                  r="35"
+                  fill="url(#core-glow)"
+                  className="animate-pulse"
                 />
-                <circle r="3" fill="#38bdf8" style={{ filter: "drop-shadow(0 0 5px #38bdf8)" }}>
-                  <animateMotion dur="5s" repeatCount="indefinite" path="M 380 350 A 100 40 0 1 0 580 350 A 100 40 0 1 0 380 350" />
-                </circle>
+                <circle
+                  cx="300"
+                  cy="250"
+                  r="22"
+                  fill="#0c1125"
+                  stroke="#8B5CF6"
+                  strokeWidth="2"
+                  style={{ filter: "drop-shadow(0 0 8px rgba(139, 92, 246, 0.5))" }}
+                />
+                <text
+                  x="300"
+                  y="254"
+                  fill="#fff"
+                  fontSize="9"
+                  fontWeight="bold"
+                  textAnchor="middle"
+                  fontFamily="monospace"
+                >
+                  PM-OS
+                </text>
+                {/* Central Radial Gradient */}
+                <defs>
+                  <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
               </g>
 
-              <g transform="rotate(30 480 350)">
-                <path
-                  d="M 380 350 A 100 40 0 1 0 580 350 A 100 40 0 1 0 380 350"
-                  stroke="rgba(56, 189, 248, 0.25)"
-                  strokeWidth="1.2"
-                  fill="none"
-                />
-                <circle r="3" fill="#38bdf8" style={{ filter: "drop-shadow(0 0 5px #38bdf8)" }}>
-                  <animateMotion dur="6s" repeatCount="indefinite" path="M 380 350 A 100 40 0 1 0 580 350 A 100 40 0 1 0 380 350" />
-                </circle>
-              </g>
+              {/* Node Circles */}
+              {nodes.map((n) => {
+                const isActive = activeNode === n.id;
+                const Icon = n.icon;
 
-              <g transform="rotate(90 480 350)">
-                <path
-                  d="M 375 350 A 105 45 0 1 0 585 350 A 105 45 0 1 0 375 350"
-                  stroke="rgba(56, 189, 248, 0.25)"
-                  strokeWidth="1.2"
-                  fill="none"
-                />
-                <circle r="3" fill="#38bdf8" style={{ filter: "drop-shadow(0 0 5px #38bdf8)" }}>
-                  <animateMotion dur="7s" repeatCount="indefinite" path="M 375 350 A 105 45 0 1 0 585 350 A 105 45 0 1 0 375 350" />
-                </circle>
-              </g>
+                return (
+                  <g
+                    key={n.id}
+                    className="cursor-pointer group"
+                    onClick={() => setActiveNode(n.id)}
+                  >
+                    {/* Glowing outer shadow ring */}
+                    {isActive && (
+                      <circle
+                        cx={n.x}
+                        cy={n.y}
+                        r="28"
+                        fill="none"
+                        stroke={n.color}
+                        strokeWidth="1.5"
+                        opacity="0.5"
+                        style={{ filter: "url(#glow-filter)" }}
+                      />
+                    )}
+
+                    {/* Base circle background */}
+                    <circle
+                      cx={n.x}
+                      cy={n.y}
+                      r="20"
+                      fill="#0c1125"
+                      stroke={isActive ? n.color : "rgba(255, 255, 255, 0.15)"}
+                      strokeWidth={isActive ? "2" : "1.5"}
+                      className="transition-all duration-300 group-hover:stroke-white"
+                    />
+
+                    {/* Embedding Lucide Icon inside SVG */}
+                    <foreignObject x={n.x - 10} y={n.y - 10} width="20" height="20">
+                      <div className="flex items-center justify-center h-full w-full pointer-events-none">
+                        <Icon className="h-4 w-4 transition-colors" style={{ color: isActive ? n.color : "rgba(255, 255, 255, 0.6)" }} />
+                      </div>
+                    </foreignObject>
+
+                    {/* Text Label */}
+                    <text
+                      x={n.x}
+                      y={n.y + 35}
+                      textAnchor="middle"
+                      fill={isActive ? "#fff" : "rgba(255,255,255,0.4)"}
+                      fontSize="9.5"
+                      fontWeight={isActive ? "bold" : "normal"}
+                      className="transition-colors duration-300 select-none font-sans"
+                    >
+                      {n.name}
+                    </text>
+                  </g>
+                );
+              })}
             </svg>
+          </div>
 
-            {/* Central AI Core */}
-            <div className="eco-core-wrapper">
-              <div className="eco-core-glow-bg" />
-              <div className="eco-core-sphere">
-                <div className="eco-core-inner-glow" />
-                <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                  <span className="text-[7px] font-bold tracking-[0.2em] text-[#38bdf8] uppercase">
-                    AI CORE
+          {/* Right Column: Node Details Panel */}
+          <div className="lg:col-span-5">
+            <motion.div
+              key={activeNodeData.id}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative rounded-2xl border border-white/10 bg-[#0d142b]/80 p-6 backdrop-blur-md shadow-2xl overflow-hidden"
+            >
+              {/* Decorative top border color line matching the node color */}
+              <div
+                className="absolute top-0 inset-x-0 h-[3px] transition-all duration-300"
+                style={{ backgroundColor: activeNodeData.color }}
+              />
+
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <span
+                    className="grid h-10 w-10 place-items-center rounded-lg"
+                    style={{ backgroundColor: `${activeNodeData.color}18`, color: activeNodeData.color }}
+                  >
+                    <ActiveIcon className="h-5.5 w-5.5" />
                   </span>
-                  <span className="text-xs font-black tracking-tight text-white uppercase mt-0.5 font-mono">
-                    PM-OS
-                  </span>
+                  <div>
+                    <h3 className="text-lg font-bold">{activeNodeData.name}</h3>
+                    <span className="text-[10px] uppercase font-mono tracking-wider text-white/40 block mt-0.5">
+                      Operational Integration Layer
+                    </span>
+                  </div>
+                </div>
+
+                <span className="text-xs bg-white/5 border border-white/10 px-2 py-0.5 rounded font-mono text-white/60">
+                  LIVE
+                </span>
+              </div>
+
+              <p className="mt-4 text-xs md:text-sm text-white/70 leading-relaxed min-h-[50px]">
+                {activeNodeData.desc}
+              </p>
+
+              {/* Dynamic Live Metrics */}
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3">
+                  <div className="text-[9px] uppercase font-mono text-white/40">Primary Signal</div>
+                  <div className="mt-1 font-semibold text-xs text-white/90 font-mono">
+                    {activeNodeData.metrics.primary}
+                  </div>
+                </div>
+                <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3">
+                  <div className="text-[9px] uppercase font-mono text-white/40">Secondary Signal</div>
+                  <div className="mt-1 font-semibold text-xs text-white/90 font-mono">
+                    {activeNodeData.metrics.secondary}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Ecosystem Cards */}
-            {cards.map((c, idx) => {
-              const Icon = c.icon;
-              return (
-                <div key={c.title} className={`eco-glass-card card-${idx + 1}`}>
-                  <div className="eco-card-header">
-                    <div className="eco-card-title-group">
-                      <span className="eco-card-title-icon">
-                        <Icon className="h-4 w-4" />
+              {/* Assigned AI Agents list */}
+              <div className="mt-6 space-y-2.5">
+                <div className="text-[10px] uppercase font-bold tracking-wider text-white/40 font-mono">
+                  Orchestrated AI Agents
+                </div>
+                <div className="grid gap-2 text-xs">
+                  {activeNodeData.agents.map((agent, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center gap-2 rounded-lg bg-[#070b1a] px-3 py-2 border border-white/[0.03]"
+                    >
+                      <span
+                        className="h-1.5 w-1.5 rounded-full"
+                        style={{ backgroundColor: activeNodeData.color }}
+                      />
+                      <span className="text-white/80 font-mono">{agent}</span>
+                      <span className="ml-auto text-[8px] bg-white/5 px-1.5 py-0.5 rounded text-white/40 uppercase font-mono font-semibold">
+                        active
                       </span>
-                      <span className="eco-card-title">{c.title}</span>
                     </div>
-                    <span className="eco-card-index">{c.index}</span>
-                  </div>
+                  ))}
+                </div>
+              </div>
 
-                  <div className="eco-card-divider" />
-
-                  <div className="eco-card-body">
-                    {c.metrics.map((m) => (
-                      <div key={m.label} className="eco-card-metric">
-                        <span className="eco-metric-label">{m.label}</span>
-                        <span className="eco-metric-value">{m.value}</span>
-                      </div>
-                    ))}
+              {/* Edge Load Sparkline visual */}
+              <div className="mt-6 pt-5 border-t border-white/5 flex items-center justify-between gap-4">
+                <div className="flex-1">
+                  <span className="text-[9px] uppercase font-mono text-white/45 block">
+                    Dynamic AI Edge Load
+                  </span>
+                  <div className="flex items-end gap-0.5 h-6 mt-1.5">
+                    {Array.from({ length: 24 }).map((_, i) => {
+                      const h = Math.round(5 + Math.sin(i / 2) * 5 + Math.random() * 8);
+                      return (
+                        <span
+                          key={i}
+                          className="flex-1 rounded-sm bg-white/10"
+                          style={{
+                            height: `${h}px`,
+                            backgroundColor: i === 23 ? activeNodeData.color : "rgba(255,255,255,0.08)",
+                          }}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
-              );
-            })}
+                <div className="text-right">
+                  <span className="text-[10px] font-mono text-white/40">Throughput Index</span>
+                  <div className="font-mono font-bold text-sm text-cyan-300 mt-1">{livePulse}%</div>
+                </div>
+              </div>
+
+              {/* Redirect Action Button */}
+              <div className="mt-6">
+                <Link
+                  to="/app"
+                  className="w-full flex h-10 items-center justify-center gap-1.5 rounded-xl text-xs font-semibold text-white transition hover:brightness-110"
+                  style={{
+                    backgroundImage: `linear-gradient(135deg, ${activeNodeData.color} 0%, #0d162d 150%)`,
+                    boxShadow: `0 4px 15px -4px ${activeNodeData.color}50`,
+                  }}
+                >
+                  Launch Command Console
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
