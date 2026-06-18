@@ -39,10 +39,13 @@ import {
   Briefcase,
   BarChart3,
   Check,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/Logo";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
+import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -477,111 +480,138 @@ function Hero() {
   );
 }
 
-function DashboardSection() {
-  return (
-    <section className="relative overflow-hidden pt-16 pb-16 bg-[#05060F]">
-      <div className="mx-auto max-w-6xl px-6">
-        <FloatingDashboard />
-      </div>
-    </section>
-  );
+interface DashboardMockupCardProps {
+  roleName: string;
+  accentColor: string;
+  accentColorClass: string;
+  accentBgClass: string;
+  successScore: number;
+  successStatus: string;
+  progressMetrics: { label: string; value: string; percentage: number; fromColor: string; toColor: string }[];
+  chartTitle: string;
+  chartValue: string;
+  chartChange: string;
+  chartAreaGradId: string;
+  chartLineGradId: string;
+  chartLinePath: string;
+  chartAreaPath: string;
+  chartTooltipTime: string;
+  chartTooltipValue: string;
+  chartTooltipChange: string;
+  sparklines: { label: string; value: string; change: string; color: string; sparkPoints: number[] }[];
+  liveEvents: { time: string; message: string; color: string; tag: string }[];
+  sidebarItems: { icon: any; label: string; active?: boolean }[];
+  floatingChips: { title: string; subtitle: string; icon: any; gradFrom: string; gradTo: string; xPosClass: string; yPosClass: string }[];
+  copilotStatus: string;
 }
 
-function FloatingDashboard() {
+function DashboardMockupCard({
+  roleName,
+  accentColor,
+  accentColorClass,
+  successScore,
+  successStatus,
+  progressMetrics,
+  chartTitle,
+  chartValue,
+  chartChange,
+  chartAreaGradId,
+  chartLineGradId,
+  chartLinePath,
+  chartAreaPath,
+  chartTooltipTime,
+  chartTooltipValue,
+  chartTooltipChange,
+  sparklines,
+  liveEvents,
+  sidebarItems,
+  floatingChips,
+  copilotStatus,
+}: DashboardMockupCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3, duration: 0.8 }}
-      className="relative mx-auto mt-4 max-w-6xl"
-    >
-      {/* halo */}
-      <div className="absolute -inset-x-16 -inset-y-10 -z-10 rounded-[44px] bg-gradient-to-b from-cyan-500/20 via-blue-500/10 to-transparent blur-3xl" />
-      {/* gradient frame */}
-      <div
-        className="rounded-[20px] p-[1.5px]"
+    <div className="relative mx-auto max-w-5xl w-full">
+      {/* Glow aura */}
+      <div 
+        className="absolute -inset-x-16 -inset-y-10 -z-10 rounded-[44px] blur-3xl opacity-35 animate-pulse"
         style={{
-          background:
-            "linear-gradient(140deg, rgba(255,255,255,0.4), rgba(56,189,248,0.5) 30%, rgba(37,99,235,0.4) 60%, rgba(255,255,255,0.08) 100%)",
+          background: `radial-gradient(circle, ${accentColor}33 0%, transparent 70%)`
+        }}
+      />
+
+      {/* Outer gradient bordered window */}
+      <div
+        className="rounded-[20px] p-[1px]"
+        style={{
+          background: `linear-gradient(140deg, rgba(255,255,255,0.2) 0%, ${accentColor}40 30%, rgba(255,255,255,0.05) 100%)`,
         }}
       >
-        <div className="overflow-hidden rounded-[18px] bg-[#0A0E1F]/95 backdrop-blur-2xl shadow-[0_60px_120px_-30px_rgba(0,0,0,0.8)]">
-          {/* title bar */}
-          <div className="flex items-center gap-2 border-b border-white/5 bg-gradient-to-b from-[#0B1024] to-[#070A17] px-4 py-2.5">
-            <span className="h-3 w-3 rounded-full bg-[#FF5F57] shadow-[inset_0_-1px_0_rgba(0,0,0,0.3)]" />
-            <span className="h-3 w-3 rounded-full bg-[#FEBC2E] shadow-[inset_0_-1px_0_rgba(0,0,0,0.3)]" />
-            <span className="h-3 w-3 rounded-full bg-[#28C840] shadow-[inset_0_-1px_0_rgba(0,0,0,0.3)]" />
-            <div className="ml-3 hidden items-center gap-1 text-[10px] font-mono text-white/35 lg:flex">
-              <span className="text-white/55">portmind</span>
-              <span className="text-white/25">/</span>
-              <span className="text-white/55">command</span>
-              <span className="text-white/25">/</span>
-              <span className="text-white/80">overview</span>
+        <div 
+          className="overflow-hidden rounded-[19px] bg-[#070913]/95 backdrop-blur-2xl"
+          style={{
+            boxShadow: `0 45px 100px -25px rgba(0,0,0,0.95), 0 0 50px -10px ${accentColor}55`
+          }}
+        >
+          {/* Top window browser bar */}
+          <div className="flex items-center gap-2 border-b border-white/5 bg-gradient-to-b from-[#090b16] to-[#05060f] px-4 py-2.5">
+            <div className="flex items-center gap-1.5 w-[20%]">
+              <span className="h-3 w-3 rounded-full bg-[#FF5F57] shadow-[inset_0_-1px_0_rgba(0,0,0,0.3)]" />
+              <span className="h-3 w-3 rounded-full bg-[#FEBC2E] shadow-[inset_0_-1px_0_rgba(0,0,0,0.3)]" />
+              <span className="h-3 w-3 rounded-full bg-[#28C840] shadow-[inset_0_-1px_0_rgba(0,0,0,0.3)]" />
             </div>
-            <div className="mx-auto flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] font-mono text-white/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+
+            <div className="mx-auto flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-mono text-white/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/50" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              portmind.ai/command
-              <span className="ml-1 text-white/25">·</span>
-              <span className="text-white/40">mundra-port</span>
+              portmind.ai/command?role={roleName}
             </div>
-            <div className="ml-auto flex items-center gap-2 text-[10px] font-mono text-white/40">
-              <span className="hidden items-center gap-1 rounded-md border border-white/10 bg-white/[0.03] px-1.5 py-0.5 md:inline-flex">
-                <span>⌘</span>
-                <span>K</span>
-              </span>
+
+            <div className="ml-auto flex items-center gap-2 text-[10px] font-mono text-white/40 w-[20%] justify-end">
               <span className="hidden items-center gap-1 md:inline-flex">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-red-500" />
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
                 LIVE
               </span>
-              <div className="grid h-6 w-6 place-items-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 text-[9px] font-bold text-white shadow-[0_0_0_2px_rgba(255,255,255,0.06)]">
-                PM
-              </div>
             </div>
           </div>
 
-          {/* body */}
+          {/* Main workspace frame */}
           <div className="grid grid-cols-12 gap-px bg-white/5">
-            {/* sidebar */}
-            <aside className="col-span-2 hidden flex-col gap-1 bg-[#0A0E1F] p-3 lg:flex">
-              {[
-                { i: Cpu, l: "Overview", a: true },
-                { i: Container, l: "Containers" },
-                { i: Ship, l: "Vessels" },
-                { i: Wrench, l: "Cranes" },
-                { i: ShieldAlert, l: "Safety" },
-                { i: Brain, l: "Copilot" },
-                { i: Activity, l: "Analytics" },
-              ].map((it, i) => {
-                const Ic = it.i;
+            {/* Sidebar */}
+            <aside className="col-span-2 hidden flex-col gap-1.5 bg-[#05060F] p-3 lg:flex">
+              {sidebarItems.map((it, i) => {
+                const Ic = it.icon;
                 return (
                   <div
                     key={i}
-                    className={`flex items-center gap-2 rounded-md px-2 py-1.5 text-[11px] ${it.a ? "bg-white/10 text-white" : "text-white/50"}`}
+                    className={`flex items-center gap-2 rounded-md px-2.5 py-2 text-[11px] font-medium transition-colors cursor-pointer ${
+                      it.active
+                        ? "bg-white/10 text-white"
+                        : "text-white/45 hover:text-white/80 hover:bg-white/5"
+                    }`}
                   >
-                    <Ic className="h-3.5 w-3.5" />
-                    {it.l}
+                    <Ic className="h-3.5 w-3.5" style={{ color: it.active ? accentColor : "currentColor" }} />
+                    {it.label}
                   </div>
                 );
               })}
             </aside>
 
-            {/* main grid */}
-            <div className="col-span-12 grid grid-cols-12 gap-3 bg-[#0A0E1F] p-4 lg:col-span-10">
-              {/* Risk Score */}
-              <div className="col-span-12 rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 sm:col-span-4">
-                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-white/40">
-                  <span>Risk Score</span>
-                  <span className="text-emerald-300">Healthy</span>
+            {/* Content panel */}
+            <div className="col-span-12 grid grid-cols-12 gap-3 bg-[#070913] p-4 lg:col-span-10">
+              {/* Success Score Gauge */}
+              <div className="col-span-12 rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 sm:col-span-4 flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-white/45">
+                  <span>Risk Status</span>
+                  <span style={{ color: accentColor }}>{successStatus}</span>
                 </div>
+
                 <div className="mt-3 flex items-center gap-4">
-                  <div className="relative h-20 w-20">
+                  <div className="relative h-20 w-20 shrink-0">
                     <svg viewBox="0 0 36 36" className="h-20 w-20 -rotate-90">
                       <defs>
-                        <linearGradient id="risk-g" x1="0" x2="1" y1="0" y2="1">
-                          <stop offset="0%" stopColor="#34D399" />
+                        <linearGradient id={`score-grad-${roleName}`} x1="0" x2="1" y1="0" y2="1">
+                          <stop offset="0%" stopColor={accentColor} />
                           <stop offset="100%" stopColor="#22D3EE" />
                         </linearGradient>
                       </defs>
@@ -598,257 +628,269 @@ function FloatingDashboard() {
                         cy="18"
                         r="15.5"
                         fill="none"
-                        stroke="url(#risk-g)"
+                        stroke={`url(#score-grad-${roleName})`}
                         strokeWidth="3"
                         strokeLinecap="round"
                         strokeDasharray="97"
                         initial={{ strokeDashoffset: 97 }}
-                        animate={{ strokeDashoffset: 97 - 97 * 0.82 }}
+                        animate={{ strokeDashoffset: 97 - (97 * successScore) / 100 }}
                         transition={{ duration: 1.6, delay: 0.6 }}
                       />
                     </svg>
                     <div className="absolute inset-0 grid place-items-center">
                       <div className="text-center">
-                        <div className="font-display text-xl font-semibold text-white">
-                          82
-                        </div>
-                        <div className="text-[8px] font-mono uppercase text-white/40">
-                          /100
-                        </div>
+                        <div className="font-display text-xl font-bold text-white">{successScore}</div>
+                        <div className="text-[8px] font-mono uppercase text-white/40">/100</div>
                       </div>
                     </div>
                   </div>
                   <div className="flex-1 space-y-1.5">
-                    <div className="flex items-center justify-between text-[10px] text-white/60">
-                      <span>Operations</span>
-                      <span className="font-mono text-emerald-300">96</span>
-                    </div>
-                    <div className="h-1 overflow-hidden rounded-full bg-white/5">
-                      <div className="h-full w-[96%] rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400" />
-                    </div>
-                    <div className="flex items-center justify-between text-[10px] text-white/60">
-                      <span>Safety</span>
-                      <span className="font-mono text-cyan-300">74</span>
-                    </div>
-                    <div className="h-1 overflow-hidden rounded-full bg-white/5">
-                      <div className="h-full w-[74%] rounded-full bg-gradient-to-r from-cyan-400 to-violet-400" />
-                    </div>
-                    <div className="flex items-center justify-between text-[10px] text-white/60">
-                      <span>Assets</span>
-                      <span className="font-mono text-blue-300">88</span>
-                    </div>
-                    <div className="h-1 overflow-hidden rounded-full bg-white/5">
-                      <div className="h-full w-[88%] rounded-full bg-gradient-to-r from-blue-400 to-violet-400" />
-                    </div>
+                    {progressMetrics.map((pm, i) => (
+                      <div key={i} className="space-y-0.5">
+                        <div className="flex items-center justify-between text-[10px] text-white/60">
+                          <span>{pm.label}</span>
+                          <span className="font-mono" style={{ color: pm.toColor }}>{pm.value}</span>
+                        </div>
+                        <div className="h-1 overflow-hidden rounded-full bg-white/5">
+                          <div
+                            className="h-full rounded-full"
+                            style={{
+                              width: `${pm.percentage}%`,
+                              background: `linear-gradient(to right, ${pm.fromColor}, ${pm.toColor})`,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              {/* Throughput chart */}
-              <div className="col-span-12 rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 sm:col-span-8">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-[10px] font-mono uppercase tracking-widest text-white/40">
-                      Container Throughput · 24h
-                    </div>
-                    <div className="mt-1 font-display text-2xl font-semibold text-white">
-                      12,408{" "}
-                      <span className="text-xs font-medium text-emerald-300">
-                        ↑ 8.4%
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-0.5 text-[10px] font-mono text-white/50">
-                    <span className="rounded-full bg-white/10 px-2 py-0.5 text-white">
-                      24h
-                    </span>
-                    <span className="px-2 py-0.5">7d</span>
-                    <span className="px-2 py-0.5">30d</span>
-                  </div>
-                </div>
-                <div className="relative mt-3">
-                  <svg
-                    viewBox="0 0 400 120"
-                    preserveAspectRatio="none"
-                    className="h-32 w-full"
-                  >
-                    <defs>
-                      <linearGradient id="ar1" x1="0" x2="0" y1="0" y2="1">
-                        <stop
-                          offset="0%"
-                          stopColor="#2563EB"
-                          stopOpacity="0.55"
-                        />
-                        <stop
-                          offset="100%"
-                          stopColor="#0D9488"
-                          stopOpacity="0"
-                        />
-                      </linearGradient>
-                      <linearGradient id="line1" x1="0" x2="1" y1="0" y2="0">
-                        <stop offset="0%" stopColor="#22D3EE" />
-                        <stop offset="100%" stopColor="#0D9488" />
-                      </linearGradient>
-                      <filter
-                        id="glow1"
-                        x="-20%"
-                        y="-20%"
-                        width="140%"
-                        height="140%"
-                      >
-                        <feGaussianBlur stdDeviation="2.5" result="b" />
-                        <feMerge>
-                          <feMergeNode in="b" />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
-                    </defs>
-                    {/* grid */}
-                    {[20, 50, 80].map((yVal) => (
-                      <line
-                        key={yVal}
-                        x1="0"
-                        x2="400"
-                        y1={yVal}
-                        y2={yVal}
-                        stroke="rgba(255,255,255,0.05)"
-                        strokeDasharray="2 4"
-                      />
-                    ))}
-                    {/* y ticks */}
-                    {[
-                      { y: 20, l: "15k" },
-                      { y: 50, l: "10k" },
-                      { y: 80, l: "5k" },
-                    ].map((t) => (
-                      <text
-                        key={t.y}
-                        x="4"
-                        y={t.y - 2}
-                        fill="rgba(255,255,255,0.25)"
-                        fontSize="7"
-                        fontFamily="ui-monospace,monospace"
-                      >
-                        {t.l}
-                      </text>
-                    ))}
-                    <motion.path
-                      d="M0,80 C30,72 50,60 80,58 C110,56 130,30 170,35 C210,40 230,70 270,62 C310,55 340,22 400,28 L400,110 L0,110 Z"
-                      fill="url(#ar1)"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 1.2, delay: 0.4 }}
-                    />
-                    <motion.path
-                      d="M0,80 C30,72 50,60 80,58 C110,56 130,30 170,35 C210,40 230,70 270,62 C310,55 340,22 400,28"
-                      fill="none"
-                      stroke="url(#line1)"
-                      strokeWidth="2"
-                      filter="url(#glow1)"
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ duration: 1.6 }}
-                    />
-                    <line
-                      x1="270"
-                      x2="270"
-                      y1="0"
-                      y2="110"
-                      stroke="rgba(34,211,238,0.35)"
-                      strokeDasharray="2 3"
-                    />
-                    <circle
-                      cx="270"
-                      cy="62"
-                      r="5"
-                      fill="#22D3EE"
-                      stroke="#0A0E1F"
-                      strokeWidth="2.5"
-                    />
-                    <circle
-                      cx="270"
-                      cy="62"
-                      r="9"
-                      fill="none"
-                      stroke="rgba(34,211,238,0.35)"
-                    />
-                    {/* x ticks */}
-                    {["00:00", "06:00", "12:00", "18:00", "24:00"].map(
-                      (l, idx) => (
-                        <text
-                          key={l}
-                          x={idx * 100}
-                          y="118"
-                          fill="rgba(255,255,255,0.3)"
-                          fontSize="7"
-                          fontFamily="ui-monospace,monospace"
-                          textAnchor={
-                            idx === 0 ? "start" : idx === 4 ? "end" : "middle"
-                          }
-                        >
-                          {l}
-                        </text>
-                      ),
-                    )}
-                  </svg>
-                  <div
-                    className="pointer-events-none absolute"
-                    style={{ left: "calc(67.5% - 56px)", top: "8%" }}
-                  >
-                    <div className="rounded-lg border border-white/10 bg-[#0B1024]/90 px-2.5 py-1.5 text-[10px] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] backdrop-blur-xl">
-                      <div className="font-mono text-white/40">18:00</div>
-                      <div className="font-display text-sm font-semibold text-white">
-                        11,842
+              {/* Dynamic Velocity Chart or Custom Layout based on Role */}
+              <div className="col-span-12 sm:col-span-8">
+                {roleName === "vessels" && (
+                  <div className="rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                    <div>
+                      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-3">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">
+                          Live Vessel Traffic Queue
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-2 py-0.5 text-[9px] font-mono text-cyan-300">
+                          <span className="h-1.5 w-1.5 bg-cyan-400 rounded-full animate-pulse" />
+                          8 arriving today
+                        </span>
                       </div>
-                      <div className="text-[9px] text-emerald-300">
-                        +6.2% vs avg
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse text-[11px]">
+                          <thead>
+                            <tr className="border-b border-white/5 text-white/45">
+                              <th className="pb-2 font-medium">VESSEL</th>
+                              <th className="pb-2 font-medium">BERTH</th>
+                              <th className="pb-2 font-medium">ETA TIMELINE</th>
+                              <th className="pb-2 font-medium">STATUS</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-white/5 text-white/80">
+                            {[
+                              { name: "MV-Atlas", berth: "Berth 3", eta: "15:22 (On Time)", status: "Berthed", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20" },
+                              { name: "CMA CGM Orion", berth: "Berth 1", eta: "16:45 (On Time)", status: "Approaching", color: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20" },
+                              { name: "MSC Geneva", berth: "Berth 5", eta: "18:10 (Delayed)", status: "Speed Adjusted", color: "text-amber-400 bg-amber-500/10 border-amber-500/20" },
+                            ].map((ship, idx) => (
+                              <tr key={idx} className="hover:bg-white/[0.02]">
+                                <td className="py-3.5 font-semibold flex items-center gap-2 text-white">
+                                  <Ship className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
+                                  {ship.name}
+                                </td>
+                                <td className="py-3.5 text-white/70">{ship.berth}</td>
+                                <td className="py-3.5 text-white/60 font-mono">{ship.eta}</td>
+                                <td className="py-3.5">
+                                  <span className={`px-2 py-0.5 rounded-full text-[9px] font-medium border ${ship.color}`}>
+                                    {ship.status}
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
+
+                {roleName === "yard" && (
+                  <div className="rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                    <div>
+                      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-3">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">
+                          Yard Block Capacity Grid
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 text-[9px] font-mono text-emerald-300">
+                          <span className="h-1.5 w-1.5 bg-emerald-400 rounded-full animate-pulse" />
+                          6 blocks active
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-3 gap-3.5 mt-2">
+                        {[
+                          { block: "Yard A", fill: 72, color: "#10B981" },
+                          { block: "Yard B", fill: 91, color: "#EF4444" },
+                          { block: "Yard C", fill: 45, color: "#3B82F6" },
+                          { block: "Yard D", fill: 88, color: "#F59E0B" },
+                          { block: "Yard E", fill: 34, color: "#10B981" },
+                          { block: "Yard F", fill: 67, color: "#3B82F6" },
+                        ].map((item, idx) => (
+                          <div key={idx} className="rounded-lg border border-white/5 bg-[#05060F] p-3 flex flex-col justify-between hover:border-emerald-500/20 transition">
+                            <div className="flex items-center justify-between">
+                              <span className="text-[11px] font-semibold text-white/95">{item.block}</span>
+                              <span className="text-[9.5px] font-mono text-white/40">{item.fill}%</span>
+                            </div>
+                            <div className="mt-4 h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                              <div className="h-full rounded-full" style={{ width: `${item.fill}%`, backgroundColor: item.color }} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {roleName === "executive" && (
+                  <div className="rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-[10px] font-mono uppercase tracking-widest text-white/40">
+                          {chartTitle}
+                        </div>
+                        <div className="mt-1 font-display text-2xl font-semibold text-white">
+                          {chartValue} <span className="text-xs font-medium text-emerald-300">{chartChange}</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-0.5 text-[10px] font-mono text-white/50">
+                        <span className="rounded-full bg-white/10 px-2 py-0.5 text-white">24h</span>
+                        <span className="px-2 py-0.5">7d</span>
+                        <span className="px-2 py-0.5">30d</span>
+                      </div>
+                    </div>
+
+                    <div className="relative mt-3">
+                      <svg viewBox="0 0 400 120" preserveAspectRatio="none" className="h-32 w-full">
+                        <defs>
+                          <linearGradient id={chartAreaGradId} x1="0" x2="0" y1="0" y2="1">
+                            <stop offset="0%" stopColor={accentColor} stopOpacity="0.55" />
+                            <stop offset="100%" stopColor={accentColor} stopOpacity="0" />
+                          </linearGradient>
+                          <linearGradient id={chartLineGradId} x1="0" x2="1" y1="0" y2="0">
+                            <stop offset="0%" stopColor={accentColor} />
+                            <stop offset="100%" stopColor="#22D3EE" />
+                          </linearGradient>
+                          <filter id={`glow-${roleName}`} x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="2.5" result="b" />
+                            <feMerge>
+                              <feMergeNode in="b" />
+                              <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                          </filter>
+                        </defs>
+                        {/* grid markers */}
+                        {[20, 50, 80].map((yVal) => (
+                          <line
+                            key={yVal}
+                            x1="0"
+                            x2="400"
+                            y1={yVal}
+                            y2={yVal}
+                            stroke="rgba(255,255,255,0.05)"
+                            strokeDasharray="2 4"
+                          />
+                        ))}
+                        {/* y ticks */}
+                        {[
+                          { y: 20, l: "15k" },
+                          { y: 50, l: "10k" },
+                          { y: 80, l: "5k" },
+                        ].map((t) => (
+                          <text
+                            key={t.y}
+                            x="4"
+                            y={t.y - 2}
+                            fill="rgba(255,255,255,0.25)"
+                            fontSize="7"
+                            fontFamily="ui-monospace,monospace"
+                          >
+                            {t.l}
+                          </text>
+                        ))}
+                        <motion.path
+                          d={chartAreaPath}
+                          fill={`url(#${chartAreaGradId})`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 1.2, delay: 0.4 }}
+                        />
+                        <motion.path
+                          d={chartLinePath}
+                          fill="none"
+                          stroke={`url(#${chartLineGradId})`}
+                          strokeWidth="2"
+                          filter={`url(#glow-${roleName})`}
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: 1 }}
+                          transition={{ duration: 1.6 }}
+                        />
+                        {/* crosshair pointer */}
+                        <line
+                          x1="270"
+                          x2="270"
+                          y1="0"
+                          y2="110"
+                          stroke={`${accentColor}55`}
+                          strokeDasharray="2 3"
+                        />
+                        <circle
+                          cx="270"
+                          cy="62"
+                          r="5"
+                          fill={accentColor}
+                          stroke="#0A0E1F"
+                          strokeWidth="2.5"
+                        />
+                        <circle cx="270" cy="62" r="9" fill="none" stroke={`${accentColor}55`} />
+                        {/* labels */}
+                        {["00:00", "06:00", "12:00", "18:00", "24:00"].map((lbl, idx) => (
+                          <text
+                            key={lbl}
+                            x={idx * 100}
+                            y="118"
+                            fill="rgba(255,255,255,0.3)"
+                            fontSize="7"
+                            fontFamily="ui-monospace,monospace"
+                            textAnchor={idx === 0 ? "start" : idx === 4 ? "end" : "middle"}
+                          >
+                            {lbl}
+                          </text>
+                        ))}
+                      </svg>
+                      {/* floating tooltip card */}
+                      <div
+                        className="pointer-events-none absolute"
+                        style={{ left: "calc(67.5% - 56px)", top: "8%" }}
+                      >
+                        <div className="rounded-lg border border-white/10 bg-[#0B1024]/90 px-2.5 py-1.5 text-[10px] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+                          <div className="font-mono text-white/40">{chartTooltipTime}</div>
+                          <div className="font-display text-sm font-semibold text-white">{chartTooltipValue}</div>
+                          <div className="text-[9px]" style={{ color: accentColor }}>{chartTooltipChange}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {/* KPI tiles */}
-              {[
-                {
-                  l: "Active Vessels",
-                  v: "217",
-                  t: Ship,
-                  c: "#60A5FA",
-                  d: "+12",
-                  spark: [6, 8, 7, 10, 9, 12, 11, 14],
-                },
-                {
-                  l: "Containers Today",
-                  v: "12,408",
-                  t: Container,
-                  c: "#38bdf8",
-                  d: "+8.4%",
-                  spark: [4, 6, 5, 8, 7, 9, 11, 13],
-                },
-                {
-                  l: "Safety Alerts",
-                  v: "3",
-                  t: ShieldAlert,
-                  c: "#67E8F9",
-                  d: "-2",
-                  spark: [9, 8, 10, 7, 6, 5, 4, 3],
-                },
-                {
-                  l: "Crane Health",
-                  v: "94%",
-                  t: Wrench,
-                  c: "#34D399",
-                  d: "stable",
-                  spark: [10, 11, 10, 12, 11, 12, 11, 12],
-                },
-              ].map((k, i) => {
-                const Icon = k.t;
-                const max = Math.max(...k.spark);
-                const pts = k.spark
+              {/* Sparkline cards */}
+              {sparklines.map((k, i) => {
+                const max = Math.max(...k.sparkPoints);
+                const pts = k.sparkPoints
                   .map(
-                    (v, idx) =>
-                      `${(idx / (k.spark.length - 1)) * 100},${30 - (v / max) * 24}`,
+                    (val, idx) => `${(idx / (k.sparkPoints.length - 1)) * 100},${30 - (val / (max || 1)) * 24}`,
                   )
                   .join(" ");
                 return (
@@ -857,27 +899,17 @@ function FloatingDashboard() {
                     className="col-span-6 rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.01] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:col-span-3"
                   >
                     <div className="flex items-center justify-between">
-                      <div
-                        className="grid h-7 w-7 place-items-center rounded-md"
-                        style={{
-                          background: `${k.c}22`,
-                          color: k.c,
-                          boxShadow: `inset 0 0 0 1px ${k.c}30`,
-                        }}
-                      >
-                        <Icon className="h-3.5 w-3.5" />
-                      </div>
+                      <span className="text-[9px] font-mono text-white/45 uppercase tracking-wider">
+                        {k.label}
+                      </span>
                       <span
                         className="rounded-full px-1.5 py-0.5 text-[9px] font-mono"
-                        style={{ background: `${k.c}1a`, color: k.c }}
+                        style={{ background: `${k.color}1a`, color: k.color }}
                       >
-                        {k.d}
+                        {k.change}
                       </span>
                     </div>
-                    <div className="mt-2 font-display text-xl font-semibold text-white">
-                      {k.v}
-                    </div>
-                    <div className="text-[10px] text-white/45">{k.l}</div>
+                    <div className="mt-2 font-display text-xl font-semibold text-white">{k.value}</div>
                     <svg
                       viewBox="0 0 100 30"
                       preserveAspectRatio="none"
@@ -886,56 +918,44 @@ function FloatingDashboard() {
                       <polyline
                         points={pts}
                         fill="none"
-                        stroke={k.c}
+                        stroke={k.color}
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         opacity="0.9"
                       />
-                      <polyline
-                        points={`${pts} 100,30 0,30`}
-                        fill={k.c}
-                        opacity="0.12"
-                      />
+                      <polyline points={`${pts} 100,30 0,30`} fill={k.color} opacity="0.12" />
                     </svg>
                   </div>
                 );
               })}
 
-              {/* Live events feed */}
+              {/* Event Stream logs */}
               <div className="col-span-12 rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4">
                 <div className="flex items-center justify-between">
                   <div className="text-[10px] font-mono uppercase tracking-widest text-white/40">
                     Live Event Stream
                   </div>
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-mono text-emerald-300">
-                    <span className="h-1 w-1 animate-pulse rounded-full bg-emerald-400" />
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
                     streaming
                   </span>
                 </div>
+
                 <ul className="mt-3 grid gap-1.5 text-[11px] sm:grid-cols-3">
-                  {[
-                    ["14:32", "No Helmet Detected · Yard B", "#67E8F9", "warn"],
-                    ["14:28", "Crane 4 Vibration Spike", "#EF4444", "alert"],
-                    ["14:15", "Vessel MV-228 Arrived", "#34D399", "ok"],
-                  ].map(([t, msg, c, tag]) => (
+                  {liveEvents.map((evt, idx) => (
                     <li
-                      key={t as string}
+                      key={idx}
                       className="flex items-center gap-2 rounded-md border border-white/5 bg-white/[0.02] px-2 py-1.5"
                     >
-                      <span className="font-mono text-white/40">{t}</span>
-                      <span
-                        className="h-1.5 w-1.5 rounded-full"
-                        style={{ background: c as string }}
-                      />
-                      <span className="flex-1 truncate text-white/80">
-                        {msg}
-                      </span>
+                      <span className="font-mono text-white/40">{evt.time}</span>
+                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: evt.color }} />
+                      <span className="flex-1 truncate text-white/80">{evt.message}</span>
                       <span
                         className="rounded-full px-1.5 py-0.5 text-[9px] font-mono uppercase"
-                        style={{ background: `${c}22`, color: c as string }}
+                        style={{ background: `${evt.color}22`, color: evt.color }}
                       >
-                        {tag}
+                        {evt.tag}
                       </span>
                     </li>
                   ))}
@@ -946,60 +966,230 @@ function FloatingDashboard() {
         </div>
       </div>
 
-      {/* floating chips */}
-      <motion.div
-        initial={{ opacity: 0, x: -20, y: 10 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ delay: 0.9 }}
-        className="absolute -left-6 top-24 hidden items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2.5 text-xs text-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur-2xl lg:flex"
-      >
-        <div className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400">
-          <Eye className="h-3.5 w-3.5 text-white" />
-        </div>
-        <div>
-          <div className="font-semibold">YOLOv11 · 62 FPS</div>
-          <div className="text-[10px] text-white/50">
-            Cam · Berth 04 · running
-          </div>
-        </div>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, x: 20, y: 10 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ delay: 1.1 }}
-        className="absolute -right-6 bottom-20 hidden items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2.5 text-xs text-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur-2xl lg:flex"
-      >
-        <div className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500">
-          <Cpu className="h-3.5 w-3.5 text-white" />
-        </div>
-        <div>
-          <div className="font-semibold">Crane-4 · 12d to service</div>
-          <div className="text-[10px] text-white/50">XGBoost · 96.2% conf.</div>
-        </div>
-      </motion.div>
+      {/* Floating chips */}
+      {floatingChips.map((chip, idx) => {
+        const ChipIcon = chip.icon;
+        return (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 + idx * 0.15 }}
+            className={`absolute z-20 hidden items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2.5 text-xs text-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur-2xl lg:flex ${chip.xPosClass} ${chip.yPosClass}`}
+          >
+            <div className={`grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br ${chip.gradFrom} ${chip.gradTo}`}>
+              <ChipIcon className="h-3.5 w-3.5 text-white" />
+            </div>
+            <div>
+              <div className="font-semibold">{chip.title}</div>
+              <div className="text-[10px] text-white/50">{chip.subtitle}</div>
+            </div>
+          </motion.div>
+        );
+      })}
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ delay: 1.3 }}
         className="absolute -bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-[11px] text-white backdrop-blur-2xl md:inline-flex"
       >
-        <Sparkles className="h-3.5 w-3.5 text-violet-300" />
-        Copilot · "Auto-dispatched safety officer to Yard B"
+        <Sparkles className="h-3.5 w-3.5 text-violet-300 animate-pulse" />
+        {copilotStatus}
       </motion.div>
-    </motion.div>
+    </div>
+  );
+}
+
+const vesselOSProps: DashboardMockupCardProps = {
+  roleName: "vessels",
+  accentColor: "#38bdf8",
+  accentColorClass: "text-[#38bdf8]",
+  accentBgClass: "bg-[#38bdf8]",
+  successScore: 96,
+  successStatus: "Marine Operations: Exceptional",
+  progressMetrics: [
+    { label: "Active Vessels", value: "217", percentage: 88, fromColor: "#38BDF8", toColor: "#0284C7" },
+    { label: "Berth Occupancy", value: "4 / 6 occupied", percentage: 66, fromColor: "#3B82F6", toColor: "#2563EB" },
+    { label: "Pilot Efficiency", value: "98.2%", percentage: 98, fromColor: "#10B981", toColor: "#059669" },
+  ],
+  chartTitle: "Vessel Turnaround Time",
+  chartValue: "42.8 hours",
+  chartChange: "↓ 14.2% faster turnaround",
+  chartAreaGradId: "vessels-area-grad",
+  chartLineGradId: "vessels-line-grad",
+  chartLinePath: "M0,80 C30,72 50,60 80,58 C110,56 130,30 170,35 C210,40 230,70 270,62 C310,55 340,22 400,28",
+  chartAreaPath: "M0,80 C30,72 50,60 80,58 C110,56 130,30 170,35 C210,40 230,70 270,62 C310,55 340,22 400,28 L400,110 L0,110 Z",
+  chartTooltipTime: "Shift B · June 18",
+  chartTooltipValue: "42.8 hours avg",
+  chartTooltipChange: "ETA accuracy at 98.7%",
+  sparklines: [
+    { label: "Vessel Arrivals", value: "48", change: "+8 vessels", color: "#38bdf8", sparkPoints: [32, 35, 30, 42, 38, 44, 45, 48] },
+    { label: "Pilot Bookings", value: "24", change: "100%", color: "#3B82F6", sparkPoints: [18, 20, 19, 22, 21, 23, 24, 24] },
+    { label: "Weather Risk", value: "Low", change: "stable", color: "#10B981", sparkPoints: [10, 12, 11, 10, 9, 8, 8, 8] },
+    { label: "Tug Availability", value: "12/12", change: "active", color: "#F59E0B", sparkPoints: [12, 12, 11, 12, 12, 12, 12, 12] },
+  ],
+  liveEvents: [
+    { time: "15:22", message: "MV-Atlas Docked at Berth 3 · ETA met", color: "#38bdf8", tag: "docked" },
+    { time: "15:10", message: "Vessel speed restricted: Channel 2", color: "#F59E0B", tag: "caution" },
+    { time: "14:45", message: "Pilot boat assigned to CMA CGM Orion", color: "#10B981", tag: "assigned" },
+  ],
+  sidebarItems: [
+    { icon: Ship, label: "Vessel Command", active: true },
+    { icon: MapPin, label: "Berth Planner" },
+    { icon: CloudSun, label: "Marine Weather" },
+    { icon: Users, label: "Pilot & Crew Scheduling" },
+  ],
+  floatingChips: [
+    { title: "MV-Atlas Berthed", subtitle: "Berth 3 · unloading", icon: Ship, gradFrom: "from-sky-500", gradTo: "to-blue-600", xPosClass: "-left-6", yPosClass: "top-24" },
+    { title: "Channel Speed: 8 kn", subtitle: "Traffic control restrictions", icon: Compass, gradFrom: "from-blue-500", gradTo: "to-indigo-600", xPosClass: "-right-6", yPosClass: "bottom-20" },
+  ],
+  copilotStatus: 'Copilot: "Optimized arrival window for MV-Atlas, saving 0.8 tons fuel."',
+};
+
+const yardOSProps: DashboardMockupCardProps = {
+  roleName: "yard",
+  accentColor: "#10B981",
+  accentColorClass: "text-[#10B981]",
+  accentBgClass: "bg-[#10B981]",
+  successScore: 92,
+  successStatus: "Yard Efficiency: Hyper",
+  progressMetrics: [
+    { label: "Yard Capacity", value: "66% active", percentage: 66, fromColor: "#34D399", toColor: "#10B981" },
+    { label: "Gate Queue", value: "3 trucks avg", percentage: 88, fromColor: "#3B82F6", toColor: "#60A5FA" },
+    { label: "Crane Move Rate", value: "28 moves/hr", percentage: 92, fromColor: "#A78BFA", toColor: "#8B5CF6" },
+  ],
+  chartTitle: "TEU Throughput",
+  chartValue: "12,408 TEU",
+  chartChange: "↑ 8.4% vs last week",
+  chartAreaGradId: "yard-area-grad",
+  chartLineGradId: "yard-line-grad",
+  chartLinePath: "M0,95 C40,93 80,90 120,85 C160,78 200,68 240,54 C280,36 320,18 400,2",
+  chartAreaPath: "M0,95 C40,93 80,90 120,85 C160,78 200,68 240,54 C280,36 320,18 400,2 L400,110 L0,110 Z",
+  chartTooltipTime: "Daily total",
+  chartTooltipValue: "12,408 TEU",
+  chartTooltipChange: "98.7% document accuracy",
+  sparklines: [
+    { label: "Active Cranes", value: "8 / 10", change: "stable", color: "#10B981", sparkPoints: [7, 8, 8, 8, 8, 7, 8, 8] },
+    { label: "Gate Queue Time", value: "4.2 min", change: "-12 min wait", color: "#EF4444", sparkPoints: [16, 15, 12, 10, 8, 6, 5, 4.2] },
+    { label: "PPE Compliance", value: "99.8%", change: "+1.2% score", color: "#0EA5E9", sparkPoints: [98.5, 98.6, 99.0, 99.2, 99.4, 99.6, 99.8, 99.8] },
+    { label: "Reefer Monitoring", value: "142 monitored", change: "active", color: "#8B5CF6", sparkPoints: [130, 132, 135, 138, 140, 142, 142, 142] },
+  ],
+  liveEvents: [
+    { time: "15:15", message: "PPE safety violation resolved: Cam YB-03", color: "#10B981", tag: "resolved" },
+    { time: "15:02", message: "Crane C-2 assigned to Berth 5 (discharge MV-Horizon)", color: "#3B82F6", tag: "assigned" },
+    { time: "14:55", message: "Gate Lane 3 opened: automatic OCR check active", color: "#8B5CF6", tag: "gate" },
+  ],
+  sidebarItems: [
+    { icon: Container, label: "Yard Operations", active: true },
+    { icon: Wrench, label: "Crane Grid" },
+    { icon: MapPin, label: "Gate Monitor" },
+    { icon: Users, label: "Safety & PPE Detection" },
+  ],
+  floatingChips: [
+    { title: "Lane 3 Open", subtitle: "Truck queue minimized", icon: MapPin, gradFrom: "from-emerald-500", gradTo: "to-emerald-600", xPosClass: "-left-6", yPosClass: "top-24" },
+    { title: "PPE Cam Active", subtitle: "Real-time safety guard", icon: Users, gradFrom: "from-teal-500", gradTo: "to-cyan-600", xPosClass: "-right-6", yPosClass: "bottom-20" },
+  ],
+  copilotStatus: 'Copilot: "Auto-dispatched safety officer to Yard B for PPE compliance."',
+};
+
+const executiveOSProps: DashboardMockupCardProps = {
+  roleName: "executive",
+  accentColor: "#8B5CF6",
+  accentColorClass: "text-[#8B5CF6]",
+  accentBgClass: "bg-[#8B5CF6]",
+  successScore: 94,
+  successStatus: "Operational Savings: Hyper",
+  progressMetrics: [
+    { label: "Cost Savings YTD", value: "$4.2M", percentage: 94, fromColor: "#A78BFA", toColor: "#8B5CF6" },
+    { label: "Vessel Waiting Costs", value: "↓ 23%", percentage: 80, fromColor: "#38BDF8", toColor: "#0EA5E9" },
+    { label: "SLA Compliance", value: "98.7%", percentage: 98, fromColor: "#34D399", toColor: "#10B981" },
+  ],
+  chartTitle: "YTD Dollar Savings",
+  chartValue: "$4.2M savings",
+  chartChange: "↑ 18% vs projection",
+  chartAreaGradId: "exec-area-grad",
+  chartLineGradId: "exec-line-grad",
+  chartLinePath: "M0,85 C40,78 80,74 120,62 C160,50 200,45 240,38 C280,30 320,20 400,10",
+  chartAreaPath: "M0,85 C40,78 80,74 120,62 C160,50 200,45 240,38 C280,30 320,20 400,10 L400,110 L0,110 Z",
+  chartTooltipTime: "Q2 Year-to-Date",
+  chartTooltipValue: "$4.2M saved",
+  chartTooltipChange: "Carbon reduction: 184 tons",
+  sparklines: [
+    { label: "Daily Savings", value: "$14.2k/day", change: "+12.4%", color: "#8B5CF6", sparkPoints: [11.2, 11.5, 12.0, 12.8, 13.0, 13.5, 14.0, 14.2] },
+    { label: "Carbon Offsets", value: "184 tons", change: "vetted", color: "#10B981", sparkPoints: [120, 130, 140, 152, 164, 172, 180, 184] },
+    { label: "SLA Violations", value: "0", change: "-100%", color: "#3B82F6", sparkPoints: [4, 3, 2, 2, 1, 0, 0, 0] },
+    { label: "Partner Ports", value: "14 Live", change: "+3 new", color: "#F59E0B", sparkPoints: [8, 9, 10, 11, 11, 12, 13, 14] },
+  ],
+  liveEvents: [
+    { time: "15:30", message: "Weekly efficiency report compiled for Mundra", color: "#8B5CF6", tag: "report" },
+    { time: "14:40", message: "Acme Logistics SLA certified: 100% uptime", color: "#10B981", tag: "sla" },
+    { time: "14:10", message: "Carbon credits validated: IMO certified", color: "#3B82F6", tag: "imo" },
+  ],
+  sidebarItems: [
+    { icon: Activity, label: "Executive Dashboard", active: true },
+    { icon: Coins, label: "Financial Analytics" },
+    { icon: Trophy, label: "SLA Tracker" },
+    { icon: ShieldAlert, label: "Carbon & Compliance" },
+  ],
+  floatingChips: [
+    { title: "$4.2M Saved YTD", subtitle: "18% over target", icon: Trophy, gradFrom: "from-purple-500", gradTo: "to-indigo-500", xPosClass: "-left-6", yPosClass: "top-24" },
+    { title: "SLA: 98.7%", subtitle: "Industry-leading efficiency", icon: UserCheck, gradFrom: "from-emerald-500", gradTo: "to-teal-600", xPosClass: "-right-6", yPosClass: "bottom-20" },
+  ],
+  copilotStatus: 'Copilot: "Generated weekly performance report, SLA compliance is at 98.7%."',
+};
+
+function DashboardSection() {
+  return (
+    <section className="relative overflow-hidden py-24 bg-[#05060F] border-b border-white/5">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="mb-16 text-center max-w-2xl mx-auto">
+          <span className="text-xs font-bold uppercase tracking-[0.25em] text-cyan-400">Command Center</span>
+          <h2 className="mt-3 font-display text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+            One platform. <span className="text-white/50">Custom operating systems.</span>
+          </h2>
+          <p className="mt-4 text-xs sm:text-sm text-neutral-400 leading-relaxed">
+            Scroll down to see the custom operating systems for Vessels, Yards, and Executives stack seamlessly.
+          </p>
+        </div>
+
+        <ScrollStack 
+          useWindowScroll={true} 
+          itemDistance={120} 
+          baseScale={0.86} 
+          itemScale={0.03}
+          itemStackDistance={35}
+          rotationAmount={0}
+          blurAmount={1.5}
+          stackPosition="12%"
+        >
+          <ScrollStackItem>
+            <DashboardMockupCard {...vesselOSProps} />
+          </ScrollStackItem>
+          <ScrollStackItem>
+            <DashboardMockupCard {...yardOSProps} />
+          </ScrollStackItem>
+          <ScrollStackItem>
+            <DashboardMockupCard {...executiveOSProps} />
+          </ScrollStackItem>
+        </ScrollStack>
+      </div>
+    </section>
   );
 }
 
 function Trust() {
   const logoItems = [
-    { src: "/DP World.png", alt: "DP World", h: "h-8" },
-    { src: "/Maersk.png", alt: "Maersk", h: "h-8" },
-    { src: "/MSC.png", alt: "MSC", h: "h-8" },
-    { src: "/Adani Ports.png", alt: "Adani Ports", h: "h-8" },
-    { src: "/PSA.png", alt: "PSA", h: "h-6" },
-    { src: "/JNPT.png", alt: "JNPT", h: "h-8" },
-    { src: "/CMA CGM.png", alt: "CMA CGM", h: "h-8" },
-    { src: "/Evergreen.png", alt: "Evergreen", h: "h-8" },
+    { src: "/DP World.png", alt: "DP World", h: "h-14" },
+    { src: "/Maersk.png", alt: "Maersk", h: "h-14" },
+    { src: "/MSC.png", alt: "MSC", h: "h-14" },
+    { src: "/Adani Ports.png", alt: "Adani Ports", h: "h-14" },
+    { src: "/PSA.png", alt: "PSA", h: "h-10" },
+    { src: "/JNPT.png", alt: "JNPT", h: "h-14" },
+    { src: "/CMA CGM.png", alt: "CMA CGM", h: "h-14" },
+    { src: "/Evergreen.png", alt: "Evergreen", h: "h-14" },
   ];
 
   const scrollLogos = [...logoItems, ...logoItems, ...logoItems];
@@ -1030,7 +1220,7 @@ function Trust() {
       >
         <div className="flex w-max gap-16 animate-logo-scroll cursor-pointer">
           {scrollLogos.map((logo, idx) => (
-            <div key={idx} className="flex items-center justify-center min-w-[140px] h-10">
+            <div key={idx} className="flex items-center justify-center min-w-[200px] h-18">
               <img
                 src={logo.src}
                 alt={logo.alt}
@@ -1058,88 +1248,128 @@ function Trust() {
 }
 
 function JourneySection() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const journeyCards = [
+    {
+      badge: "STAGE 01",
+      title: "Ingest & Perceive",
+      subtitle: "Capture raw video feeds, ship AIS telemetries, crane sensors, and terminal weather statistics into a secure, low-latency data fabric.",
+      price: "Real-time Telemetry Ingest",
+      img: "/1.jpg",
+    },
+    {
+      badge: "STAGE 02",
+      title: "Reason & Predict",
+      subtitle: "Execute YOLOv11 vision logs to extract container numbers, flag structural damages, estimate crane Remaining Useful Life, and forecast gate bottlenecks.",
+      price: "Vision Reasoning Engine",
+      img: "/2.jpg",
+    },
+    {
+      badge: "STAGE 03",
+      title: "Orchestrate & Act",
+      subtitle: "Deploy LangGraph multi-agent runtimes to auto-dispatch safety crews, optimize yard crane movements, clear customs manifests, and guide container trucks.",
+      price: "Closed-Loop Agent Runtimes",
+      img: "/3.jpg",
+    },
+    {
+      badge: "STAGE 04",
+      title: "Predictive Safety",
+      subtitle: "Run ML anomaly detection classifiers to forecast crane machine failure states and schedule proactive maintenance before breakdowns.",
+      price: "Predictive Health & Safety",
+      img: "/4.jpg",
+    },
+    {
+      badge: "STAGE 05",
+      title: "Autonomy Integration",
+      subtitle: "Sync yard slots, terminal berth positions, gate entry lanes, and trucks into a single self-optimizing digital ecosystem.",
+      price: "Full Closed-Loop Autonomy",
+      img: "/5.jpg",
+    },
+  ];
+
+  const scroll = (direction: "left" | "right") => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const scrollAmount = 360; // Card width + gap
+    container.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <section className="relative py-24 overflow-hidden bg-[#05060F]">
+    <section className="relative py-24 bg-[#05060F] overflow-hidden">
       {/* subtle glowing background effects */}
       <div className="pointer-events-none absolute top-1/2 left-1/4 h-[350px] w-[350px] -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.08),transparent)] blur-3xl" />
       <div className="pointer-events-none absolute top-1/2 right-1/4 h-[350px] w-[350px] -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(37,99,235,0.06),transparent)] blur-3xl" />
 
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mx-auto max-w-3xl text-center mb-16">
-          <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-5xl">
-            Start your journey with PortMind AI
-          </h2>
-          <p className="mt-4 text-white/60 text-base sm:text-lg">
-            A unified operating system engineered to scale port capacity, eliminate terminal bottlenecks, and protect site personnel.
-          </p>
+      <div className="mx-auto max-w-6xl px-6 relative z-10">
+        {/* Section heading with Navigation Arrows */}
+        <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="max-w-3xl">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#38bdf8]">System Phases</span>
+            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white sm:text-5xl">
+              Start your journey with PortMind AI
+            </h2>
+          </div>
+          {/* Navigation Arrows */}
+          <div className="flex gap-3">
+            <button
+              onClick={() => scroll("left")}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white hover:bg-white/[0.08] hover:border-[#38bdf8]/30 transition-all duration-300 active:scale-95 cursor-pointer shadow-md"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="h-5 w-5 text-white/80" />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white hover:bg-white/[0.08] hover:border-[#38bdf8]/30 transition-all duration-300 active:scale-95 cursor-pointer shadow-md"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="h-5 w-5 text-white/80" />
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Card 1: Ingest & Perceive */}
-          <div
-            className="p-[1px] rounded-3xl bg-gradient-to-br from-cyan-500/40 via-blue-950/20 to-transparent shadow-[0_10px_30px_rgba(56,189,248,0.1)] flex w-full h-[450px] cursor-default"
-          >
-            <div className="bg-[#080911]/95 text-white rounded-[23px] p-8 flex flex-col justify-end h-full w-full relative overflow-hidden border border-cyan-500/20">
-              <div className="absolute inset-0 z-0 opacity-30">
-                <img src="/Assess.jpg" alt="Ingest Background" className="w-full h-full object-cover" />
-              </div>
-              <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/10 via-black/60 to-[#080911] pointer-events-none" />
-
-              <div className="relative z-10 flex flex-col h-full justify-end items-center text-center pb-2">
-                <h3 className="text-xl font-bold font-mono text-cyan-400">
-                  Ingest & Perceive
+        {/* Horizontal scroll snap shelf */}
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0 scroll-smooth"
+        >
+          {journeyCards.map((card, idx) => (
+            <motion.div
+              key={card.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.6, delay: idx * 0.08, type: "spring", stiffness: 80, damping: 15 }}
+              className="flex-shrink-0 w-[285px] sm:w-[320px] md:w-[340px] snap-start rounded-[24px] border border-white/10 bg-[#0c0d16] overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_rgba(56,189,248,0.2)] hover:border-[#38bdf8]/30 cursor-default flex flex-col h-[450px] shadow-2xl"
+            >
+              {/* Card text content */}
+              <div className="px-6 pt-6 pb-2">
+                {card.badge && (
+                  <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-[#38bdf8] mb-1.5">
+                    {card.badge}
+                  </span>
+                )}
+                <h3 className="text-xl font-bold tracking-[0.08em] leading-tight text-white font-mono uppercase">
+                  {card.title}
                 </h3>
-                <div className="border-t border-cyan-500/20 my-4 w-1/3 mx-auto" />
-                <p className="text-xs text-white/70 leading-relaxed max-w-[90%] mx-auto">
-                  Capture raw video feeds, ship AIS telemetries, crane sensors, and terminal weather statistics into a secure, low-latency data fabric.
+                <p className="text-[12.5px] mt-1.5 leading-snug text-white/60 min-h-[38px]">
+                  {card.subtitle}
                 </p>
               </div>
-            </div>
-          </div>
 
-          {/* Card 2: Reason & Predict */}
-          <div
-            className="p-[1px] rounded-3xl bg-gradient-to-br from-blue-500/40 via-blue-950/20 to-transparent shadow-[0_10px_30px_rgba(37,99,235,0.1)] flex w-full h-[450px] cursor-default"
-          >
-            <div className="bg-[#080911]/95 text-white rounded-[23px] p-8 flex flex-col justify-end h-full w-full relative overflow-hidden border border-blue-500/20">
-              <div className="absolute inset-0 z-0 opacity-30">
-                <img src="/Achieve.jpg" alt="Reason Background" className="w-full h-full object-cover" />
+              {/* Card product image */}
+              <div className="flex-1 flex items-center justify-center px-4 pb-5 mt-2 relative overflow-hidden bg-transparent">
+                <img
+                  src={card.img}
+                  alt={card.title}
+                  className="w-full h-full object-cover object-center rounded-2xl border border-white/5 shadow-sm"
+                />
               </div>
-              <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/10 via-black/60 to-[#080911] pointer-events-none" />
-
-              <div className="relative z-10 flex flex-col h-full justify-end items-center text-center pb-2">
-                <h3 className="text-xl font-bold font-mono text-blue-400">
-                  Reason & Predict
-                </h3>
-                <div className="border-t border-blue-500/20 my-4 w-1/3 mx-auto" />
-                <p className="text-xs text-white/70 leading-relaxed max-w-[90%] mx-auto">
-                  Execute YOLOv11 vision logs to extract container numbers, flag structural damages, estimate crane Remaining Useful Life, and forecast gate bottlenecks.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: Orchestrate & Act */}
-          <div
-            className="p-[1px] rounded-3xl bg-gradient-to-br from-cyan-500/40 via-blue-950/20 to-transparent shadow-[0_10px_30px_rgba(56,189,248,0.1)] flex w-full h-[450px] cursor-default"
-          >
-            <div className="bg-[#080911]/95 text-white rounded-[23px] p-8 flex flex-col justify-end h-full w-full relative overflow-hidden border border-cyan-500/20">
-              <div className="absolute inset-0 z-0 opacity-30">
-                <img src="/Execute.jpg" alt="Act Background" className="w-full h-full object-cover" />
-              </div>
-              <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/10 via-black/60 to-[#080911] pointer-events-none" />
-
-              <div className="relative z-10 flex flex-col h-full justify-end items-center text-center pb-2">
-                <h3 className="text-xl font-bold font-mono text-cyan-400">
-                  Orchestrate & Act
-                </h3>
-                <div className="border-t border-cyan-500/20 my-4 w-1/3 mx-auto" />
-                <p className="text-xs text-white/70 leading-relaxed max-w-[90%] mx-auto">
-                  Deploy LangGraph multi-agent runtimes to auto-dispatch safety crews, optimize yard crane movements, clear customs manifests, and guide container trucks.
-                </p>
-              </div>
-            </div>
-          </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -3689,13 +3919,13 @@ function Footer() {
       </div>
 
       {/* Giant Watermark Layer */}
-      <div className="relative w-full pointer-events-none select-none z-0 h-[18vw] min-h-[140px] flex items-end justify-center mt-2 pb-6 md:pb-10">
+      <div className="relative w-full pointer-events-none select-none z-0 h-[18vw] min-h-[140px] flex items-end justify-center mt-2 pb-0">
         {/* Vibrant cyan-blue background gradient */}
         <div className="absolute inset-x-0 bottom-0 h-[120%] bg-gradient-to-t from-[#2563EB]/25 via-[#1E3A8A]/5 to-transparent pointer-events-none" />
         {/* Radial spotlight centered at the bottom to give that intense bright glow */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[85%] h-[160px] rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.45)_0%,rgba(37,99,235,0.18)_40%,transparent_70%)] blur-2xl pointer-events-none" />
 
-        <h1 className="relative z-10 text-[9.2vw] font-black leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white/25 via-white/5 to-transparent select-none uppercase font-sans whitespace-nowrap">
+        <h1 className="relative z-10 text-[9.2vw] font-black leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white/25 via-white/5 to-transparent select-none uppercase font-sans whitespace-nowrap translate-y-[12%]">
           PortMind AI
         </h1>
       </div>
