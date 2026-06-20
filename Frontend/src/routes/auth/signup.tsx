@@ -8,8 +8,8 @@ import { Logo } from "@/components/Logo";
 export const Route = createFileRoute("/auth/signup")({
   head: () => ({
     meta: [
-      { title: "Sign Up — PortMind AI" },
-      { name: "description", content: "Create your Port Command Center account." },
+      { title: "Sign Up — LogiMind AI" },
+      { name: "description", content: "Create your LogiMind AI Command Center account." },
     ],
   }),
   component: SignupPage,
@@ -99,13 +99,13 @@ function SignupPage() {
         <div className="space-y-4 my-auto z-10 max-w-md">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-sky-500/20 bg-sky-500/5 text-sky-300 text-xs font-medium tracking-wide">
             <Ship className="h-3.5 w-3.5 text-sky-400" />
-            <span>AI Port Operating System</span>
+            <span>AI Port & Rail Operating System</span>
           </div>
           <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
-            Build your autonomous port command center.
+            Build your autonomous logistics command center.
           </h2>
           <p className="text-slate-400/90 text-sm leading-relaxed">
-            Join leading terminal operators tracking vessel fleets, optimizing yard stack density, and executing closed-loop autonomous dispatch routes.
+            Join leading terminal and rail operators tracking vessel fleets, monitoring railway wagon telemetry, optimizing stack density, and executing closed-loop autonomous dispatch routes.
           </p>
         </div>
 

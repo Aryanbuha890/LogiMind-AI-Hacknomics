@@ -41,6 +41,7 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
+  Train,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/Logo";
@@ -50,19 +51,19 @@ import ScrollStack, { ScrollStackItem } from "@/components/ui/ScrollStack";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "PortMind AI — Autonomous Intelligence for Modern Ports" },
+      { title: "LogiMind AI — Autonomous Intelligence for Modern Ports & Rails" },
       {
         name: "description",
         content:
-          "Unified AI command center combining computer vision, predictive maintenance, multi-agent AI, vessel intelligence and operational analytics.",
+          "Unified AI command center combining computer vision, railway wagon telemetry, predictive maintenance, multi-agent AI, vessel intelligence and operational analytics.",
       },
       {
         property: "og:title",
-        content: "PortMind AI — Autonomous Intelligence for Modern Ports",
+        content: "LogiMind AI — Autonomous Intelligence for Modern Ports & Rails",
       },
       {
         property: "og:description",
-        content: "The operating system for smart ports.",
+        content: "The operating system for smart ports and rail terminals.",
       },
     ],
   }),
@@ -322,7 +323,7 @@ function Hero() {
                   "linear-gradient(120deg, #ffffff 0%, #C7D2FE 35%, #60A5FA 65%, #22D3EE 100%)",
               }}
             >
-              for Modern Ports.
+              for Modern Ports & Rails.
             </span>
           </motion.h1>
 
@@ -333,7 +334,7 @@ function Hero() {
             transition={{ delay: 0.12 }}
             className="mx-auto mt-6 max-w-2xl text-base text-white/65 sm:text-lg"
           >
-            PortMind AI combines Computer Vision, Predictive Maintenance, Multi-Agent AI, Vessel Intelligence, Weather Monitoring and Operational Analytics into one unified command center.
+            LogiMind AI combines Computer Vision, Railway Yard Analytics, Predictive Maintenance, Multi-Agent AI, Vessel Intelligence, Weather Monitoring and Operational Analytics into one unified command center.
           </motion.p>
 
           {/* Action buttons */}
@@ -565,7 +566,7 @@ function DashboardMockupCard({
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/50" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              portmind.ai/command?role={roleName}
+              logimind.ai/command?role={roleName}
             </div>
 
             <div className="ml-auto flex items-center gap-2 text-[10px] font-mono text-white/40 w-[20%] justify-end">
@@ -749,6 +750,55 @@ function DashboardMockupCard({
                             </div>
                           </div>
                         ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {roleName === "rails" && (
+                  <div className="rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                    <div>
+                      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-3">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">
+                          Live Wagon Telemetry & OCR Scan Log
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-2 py-0.5 text-[9px] font-mono text-amber-300">
+                          <span className="h-1.5 w-1.5 bg-amber-400 rounded-full animate-pulse" />
+                          Train T-104 active scan
+                        </span>
+                      </div>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse text-[11px]">
+                          <thead>
+                            <tr className="border-b border-white/5 text-white/45">
+                              <th className="pb-2 font-medium">WAGON NO.</th>
+                              <th className="pb-2 font-medium">CAM UNIT</th>
+                              <th className="pb-2 font-medium">OCR VALUE (CONF)</th>
+                              <th className="pb-2 font-medium">DEFECTS STATUS</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-white/5 text-white/80">
+                            {[
+                              { name: "CR-8812", unit: "Track 2 · Cam 01", ocr: "CR8812 (98.7%)", status: "Cleared", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20" },
+                              { name: "IND-9271", unit: "Track 2 · Cam 02", ocr: "IND9271 (99.1%)", status: "Axle Anomaly Alert", color: "text-red-400 bg-red-500/10 border-red-500/20" },
+                              { name: "ER-4402", unit: "Track 1 · Cam 03", ocr: "ER4402 (97.4%)", status: "Under Review", color: "text-amber-400 bg-amber-500/10 border-amber-500/20" },
+                            ].map((wagon, idx) => (
+                              <tr key={idx} className="hover:bg-white/[0.02]">
+                                <td className="py-3.5 font-semibold flex items-center gap-2 text-white">
+                                  <Train className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+                                  {wagon.name}
+                                </td>
+                                <td className="py-3.5 text-white/70">{wagon.unit}</td>
+                                <td className="py-3.5 text-white/60 font-mono">{wagon.ocr}</td>
+                                <td className="py-3.5">
+                                  <span className={`px-2 py-0.5 rounded-full text-[9px] font-medium border ${wagon.color}`}>
+                                    {wagon.status}
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
@@ -1142,6 +1192,52 @@ const executiveOSProps: DashboardMockupCardProps = {
   copilotStatus: 'Copilot: "Generated weekly performance report, SLA compliance is at 98.7%."',
 };
 
+const railOSProps: DashboardMockupCardProps = {
+  roleName: "rails",
+  accentColor: "#f59e0b",
+  accentColorClass: "text-[#f59e0b]",
+  accentBgClass: "bg-[#f59e0b]",
+  successScore: 97,
+  successStatus: "Rail Yard Operations: Excellent",
+  progressMetrics: [
+    { label: "Wagon Scanning Rate", value: "98.7% OCR", percentage: 98, fromColor: "#FBBF24", toColor: "#F59E0B" },
+    { label: "Active Camera Feeds", value: "3 / 3 active", percentage: 100, fromColor: "#10B981", toColor: "#059669" },
+    { label: "Alert Response Time", value: "1.2 mins avg", percentage: 94, fromColor: "#38BDF8", toColor: "#2563EB" },
+  ],
+  chartTitle: "Wagon Processing Dwell Time",
+  chartValue: "18.4 mins/train",
+  chartChange: "↓ 21.5% dwell time reduction",
+  chartAreaGradId: "rail-area-grad",
+  chartLineGradId: "rail-line-grad",
+  chartLinePath: "M0,90 C40,78 80,82 120,62 C160,42 200,50 240,32 C280,18 320,38 400,14",
+  chartAreaPath: "M0,90 C40,78 80,82 120,62 C160,42 200,50 240,32 C280,18 320,38 400,14 L400,110 L0,110 Z",
+  chartTooltipTime: "Daily summary",
+  chartTooltipValue: "18.4 mins avg",
+  chartTooltipChange: "Zero-DCE Low-light Enhancements: Active",
+  sparklines: [
+    { label: "Scanned Wagons", value: "142", change: "+14 wagons", color: "#F59E0B", sparkPoints: [110, 115, 120, 128, 130, 135, 140, 142] },
+    { label: "Axle Alerts", value: "2", change: "resolved", color: "#EF4444", sparkPoints: [4, 3, 3, 2, 2, 2, 2, 2] },
+    { label: "Spring Failures", value: "0", change: "-100%", color: "#10B981", sparkPoints: [1, 0, 0, 0, 0, 0, 0, 0] },
+    { label: "Train Transits", value: "8 / day", change: "+2 transits", color: "#8B5CF6", sparkPoints: [5, 6, 6, 7, 7, 8, 8, 8] },
+  ],
+  liveEvents: [
+    { time: "15:20", message: "Wagon ID plate CR-8812 scanned · OCR: 98.7%", color: "#F59E0B", tag: "ocr" },
+    { time: "15:02", message: "Structural defect (axle anomaly) flagged: Cam W-02", color: "#EF4444", tag: "defect" },
+    { time: "14:40", message: "YOLOv11 OCR detection score verified - Train T-104", color: "#10B981", tag: "active" },
+  ],
+  sidebarItems: [
+    { icon: Train, label: "Wagon Command", active: true },
+    { icon: ShieldAlert, label: "Defect Analyzer" },
+    { icon: Eye, label: "Visual Search" },
+    { icon: Database, label: "OCR Records" },
+  ],
+  floatingChips: [
+    { title: "Wagon ID: CR-8812", subtitle: "Defects: None · OCR Ok", icon: Train, gradFrom: "from-amber-500", gradTo: "to-orange-600", xPosClass: "-left-6", yPosClass: "top-24" },
+    { title: "Axle Anomaly: W-02", subtitle: "Alert dispatched", icon: ShieldAlert, gradFrom: "from-red-500", gradTo: "to-rose-600", xPosClass: "-right-6", yPosClass: "bottom-20" },
+  ],
+  copilotStatus: 'Copilot: "Axle fracture alert sent to maintenance yard for wagon CR-8812."',
+};
+
 function DashboardSection() {
   return (
     <section className="relative overflow-hidden py-24 bg-[#05060F] border-b border-white/5">
@@ -1152,7 +1248,7 @@ function DashboardSection() {
             One platform. <span className="text-white/50">Custom operating systems.</span>
           </h2>
           <p className="mt-4 text-xs sm:text-sm text-neutral-400 leading-relaxed">
-            Scroll down to see the custom operating systems for Vessels, Yards, and Executives stack seamlessly.
+            Scroll down to see the custom operating systems for Vessels, Yards, and Rails stack seamlessly.
           </p>
         </div>
 
@@ -1173,7 +1269,7 @@ function DashboardSection() {
             <DashboardMockupCard {...yardOSProps} />
           </ScrollStackItem>
           <ScrollStackItem>
-            <DashboardMockupCard {...executiveOSProps} />
+            <DashboardMockupCard {...railOSProps} />
           </ScrollStackItem>
         </ScrollStack>
       </div>
@@ -1310,7 +1406,7 @@ function JourneySection() {
           <div className="max-w-4xl">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#38bdf8]">System Phases</span>
             <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white sm:text-5xl sm:whitespace-nowrap">
-              Start your journey with PortMind AI
+              Start your journey with LogiMind AI
             </h2>
           </div>
           {/* Navigation Arrows */}
@@ -1659,7 +1755,7 @@ function Ecosystem() {
         <SectionHead 
           eyebrow="The Ecosystem" 
           title="One agentic mesh. Every stakeholder aligned." 
-          sub="PortMind AI connects marine, terminal, customs, safety, and logistical systems into a single self-arbitrating digital ecosystem." 
+          sub="LogiMind AI connects marine, terminal, customs, safety, rail siding, and logistical systems into a single self-arbitrating digital ecosystem." 
         />
 
         <div className="mt-16 relative min-h-[720px] lg:min-h-[700px] flex items-center justify-center">
@@ -2047,13 +2143,13 @@ function AgentsOSSection() {
             AI Operating System · v3.0
           </div>
           <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight text-white md:text-6xl leading-[1.04]">
-            PortMind AI{" "}
+            LogiMind AI{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-100 to-blue-400">
               Operating System.
             </span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-white/65 md:text-lg">
-            From vessel arrival to customs clearance, PortMind orchestrates a fleet of specialized AI agents that ingest, reason, predict, and act across every port operation — in real time.
+            From vessel arrival to railway wagon dispatch, LogiMind orchestrates a fleet of specialized AI agents that ingest, reason, predict, and act across every port and rail yard operation — in real time.
           </p>
         </div>
 
@@ -2112,7 +2208,7 @@ function AgentsOSSection() {
                   07 · CORE
                 </div>
                 <div className="mt-1 text-lg font-semibold text-white">
-                  PortMind Agent Orchestrator
+                  LogiMind Agent Orchestrator
                 </div>
                 <div className="text-[12px] text-white/55">
                   Multi-agent reasoning · shared memory · LangGraph runtime
@@ -2484,7 +2580,7 @@ function OrchestratorHub({ agents }: { agents: { n: string; a: number }[] }) {
           fontFamily="monospace"
           fontWeight="700"
         >
-          PORTMIND
+          LOGIMIND
         </text>
         <text
           x="200"
@@ -2541,7 +2637,7 @@ function ExecutiveDashboard() {
           <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
           <span className="ml-3 font-mono text-[10px] text-white/40">
-            portmind / command / executive.dashboard
+            logimind / command / executive.dashboard
           </span>
         </div>
         <div className="font-mono text-[10px] text-cyan-300/80">
@@ -3501,6 +3597,11 @@ function DemoPreview() {
       icon: LayoutChip("RUL · Sensors · Alerts"),
     },
     {
+      title: "Wagon Telemetry",
+      color: "#F59E0B",
+      icon: LayoutChip("Wagon IDs · Defects · OCR"),
+    },
+    {
       title: "AI Copilot",
       color: "#8B5CF6",
       icon: LayoutChip("RAG · Citations · Agents"),
@@ -3508,9 +3609,9 @@ function DemoPreview() {
   ];
   return (
     <section id="demo" className="border-t border-white/5 py-28 bg-[#05060F]">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6">
         <SectionHead eyebrow="The product" title="Built for operators, not analysts." />
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {screens.map((s, i) => (
             <motion.div
               key={s.title}
@@ -3525,7 +3626,7 @@ function DemoPreview() {
                 <span className="h-2 w-2 rounded-full bg-[#FEBC2E]" />
                 <span className="h-2 w-2 rounded-full bg-[#28C840]" />
                 <div className="ml-2 text-[10px] font-mono text-white/40">
-                  portmind.ai
+                  logimind.ai
                 </div>
               </div>
               <div className="relative aspect-[4/3] bg-gradient-to-br from-[#0B1A33] to-[#0A0E1F] p-4">
@@ -3565,7 +3666,7 @@ function Features() {
   const items = [
     {
       t: "Inference Ingestion",
-      d: "Deep multi-source telemetry parsing of camera feeds, vessel location data, and weather streams in real time.",
+      d: "Deep multi-source telemetry parsing of camera feeds, rail wagon logs, vessel location data, and weather streams in real time.",
       i: Database,
       accent: "#2563eb",
       accentGlow: "rgba(37,99,235,0.3)",
@@ -3608,9 +3709,9 @@ function Features() {
       accentGlow: "rgba(239,68,68,0.3)",
     },
     {
-      t: "Customs Compliance AI",
-      d: "Extract BOL manifests, query HS codes, and flag fraud risk.",
-      i: Database,
+      t: "Rail Yard Telemetry",
+      d: "Deploy YOLOv11 OCR and Zero-DCE low-light ML models to audit railway wagon ID plates, detect structural axle fractures, and track incoming trains.",
+      i: Train,
       accent: "#d946ef",
       accentGlow: "rgba(217,70,239,0.3)",
     },
@@ -3681,12 +3782,12 @@ export function FAQ() {
 
   const faqData = [
     {
-      question: "What is PortMind AI?",
-      answer: "PortMind AI is a unified port operating system designed to scale port capacity, eliminate terminal bottlenecks, and protect site personnel. We integrate real-time computer vision, agentic AI scheduling runtimes, and predictive maintenance tools into a single digital twin command center."
+      question: "What is LogiMind AI?",
+      answer: "LogiMind AI is a unified port and rail operating system designed to scale port terminal capacity, eliminate logistics bottlenecks, and protect site personnel. We integrate real-time computer vision, railway wagon telemetry, agentic AI scheduling runtimes, and predictive maintenance tools into a single digital twin command center."
     },
     {
       question: "How does the YOLOv11 Computer Vision work?",
-      answer: "Our neural perception models ingest live security and operational cameras across the port terminal to automatically read container ISO codes, detect container damage, identify truck gate license plates, and flag PPE safety compliance violations in real-time."
+      answer: "Our neural perception models ingest live security and operational cameras across the port and rail terminals to automatically read container ISO codes, track train wagon numbers, detect container or wagon damage, identify truck gate license plates, and flag PPE safety compliance violations in real-time."
     },
     {
       question: "What is the LangGraph Multi-Agent system?",
@@ -3697,8 +3798,8 @@ export function FAQ() {
       answer: "By monitoring crane structural stress and engine telemetry, our ML classifiers calculate the Remaining Useful Life (RUL) of quay and yard machinery, forecasting potential breakdown schedules weeks in advance so maintenance can be scheduled without interrupting terminal throughput."
     },
     {
-      question: "Is PortMind AI compatible with existing terminal operating systems (TOS)?",
-      answer: "Yes. PortMind AI is built as a modular integration layer. We connect directly with standard terminal databases, AIS radio streams, GPS telemetry, and existing TOS providers like Navis N4, Sparcs, or custom legacy systems."
+      question: "Is LogiMind AI compatible with existing terminal operating systems (TOS)?",
+      answer: "Yes. LogiMind AI is built as a modular integration layer. We connect directly with standard terminal databases, AIS radio streams, GPS telemetry, railway yard networks, and existing TOS providers like Navis N4, Sparcs, or custom legacy systems."
     }
   ];
 
@@ -3719,7 +3820,7 @@ export function FAQ() {
         <p className="mt-4 text-neutral-400 text-sm sm:text-base">
           Haven't found what you're looking for?{" "}
           <a
-            href="mailto:support@portmind.ai"
+            href="mailto:support@logimind.ai"
             className="text-[#38bdf8] hover:text-sky-300 transition-colors font-medium underline underline-offset-4 decoration-sky-500/30"
           >
             Contact us.
@@ -3807,7 +3908,7 @@ function Footer() {
     {
       title: "Company",
       links: [
-        { label: "About PortMind", href: "#" },
+        { label: "About LogiMind", href: "#" },
         { label: "Careers", href: "#", badge: "Hiring" },
         { label: "Newsroom logs", href: "#" },
         { label: "Port Partners", href: "#" },
@@ -3830,13 +3931,13 @@ function Footer() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-white/60">
               <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
-              The Berth Report
+              The LogiMind Report
             </div>
             <h3 className="mt-4 font-display text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl">
-              Operational intelligence for modern ports — in your inbox monthly.
+              Operational intelligence for ports & rail yards — in your inbox monthly.
             </h3>
             <p className="mt-3 max-w-xl text-sm text-white/60">
-              Field notes from terminal deployments, multi-agent RAG studies, crane forecasting, and predictive maintenance benchmarks. No spam.
+              Field notes from terminal and rail yard deployments, multi-agent RAG studies, crane forecasting, wagon telemetry, and predictive maintenance benchmarks. No spam.
             </p>
           </div>
           <form
@@ -3848,7 +3949,7 @@ function Footer() {
               <input
                 type="email"
                 required
-                placeholder="you@portoperator.com"
+                placeholder="you@logisticsoperator.com"
                 className="h-12 w-full rounded-full border border-white/10 bg-[#0A0E1F]/90 px-5 text-sm text-white placeholder:text-white/40 outline-none focus:border-white/30 focus:bg-white/[0.06]"
               />
             </label>
@@ -3871,10 +3972,10 @@ function Footer() {
           <div className="col-span-12 md:col-span-5 flex flex-col gap-4">
             <Logo />
             <p className="text-sm leading-relaxed text-white/60 mt-1 max-w-md">
-              PortMind AI is the unified operating system for smart ports — combining computer vision, predictive maintenance, multi-agent reasoning, and vessel intelligence in one secure command center.
+              LogiMind AI is the unified operating system for smart ports and rail yards — combining computer vision, predictive maintenance, multi-agent reasoning, rail wagon telemetry, and vessel intelligence in one secure command center.
             </p>
             <div className="text-[13px] text-white/40 font-medium">
-              PortMind AI B.V.
+              LogiMind AI B.V.
             </div>
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white/70">
@@ -3905,8 +4006,8 @@ function Footer() {
                   <span className="grid h-8 w-8 place-items-center rounded-lg bg-white/[0.03] border border-white/5 text-white/70">
                     <Mail className="h-4 w-4" />
                   </span>
-                  <a href="mailto:hello@portmind.ai" className="text-white/80 hover:text-cyan-400 transition-colors">
-                    hello@portmind.ai
+                  <a href="mailto:hello@logimind.ai" className="text-white/80 hover:text-cyan-400 transition-colors">
+                    hello@logimind.ai
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
@@ -3982,7 +4083,7 @@ function Footer() {
           <a href="#" onClick={(e) => e.preventDefault()} className="hover:text-white transition-colors whitespace-nowrap">Manage Cookies</a>
         </div>
         <div className="whitespace-nowrap">
-          © {year} PortMind AI B.V. All rights reserved.
+          © {year} LogiMind AI B.V. All rights reserved.
         </div>
       </div>
 
@@ -3994,7 +4095,7 @@ function Footer() {
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[85%] h-[160px] rounded-full bg-[radial-gradient(circle,rgba(34,211,238,0.45)_0%,rgba(37,99,235,0.18)_40%,transparent_70%)] blur-2xl pointer-events-none" />
 
         <h1 className="relative z-10 text-[9.2vw] font-black leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white/25 via-white/5 to-transparent select-none uppercase font-sans whitespace-nowrap translate-y-[12%]">
-          PortMind AI
+          LogiMind AI
         </h1>
       </div>
     </footer>

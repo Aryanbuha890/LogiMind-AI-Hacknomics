@@ -45,7 +45,7 @@ function CopilotPage() {
   const [msgs, setMsgs] = useState<Msg[]>([
     {
       role: "ai",
-      text: "Hello, Arjun. I'm your PortMind Copilot. I can reason across operations, safety, equipment, vessels and the full knowledge base. What would you like to explore?",
+      text: "Hello, Arjun. I'm your LogiMind Copilot. I can reason across operations, safety, equipment, vessels, rail yards, and the full knowledge base. What would you like to explore?",
     },
   ]);
   const [input, setInput] = useState("");

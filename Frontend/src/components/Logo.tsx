@@ -26,7 +26,7 @@ export function Logo({
         </svg>
       </span>
       <span className="font-display text-[17px] font-semibold tracking-tight text-white whitespace-nowrap">
-        PortMind{" "}
+        LogiMind{" "}
         <span className="bg-gradient-to-r from-violet-300 to-cyan-300 bg-clip-text text-transparent">
           AI
         </span>

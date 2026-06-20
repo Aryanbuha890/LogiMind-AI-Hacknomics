@@ -76,20 +76,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       meta: [
         { charSet: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { title: "PortMind AI — Autonomous Intelligence for Modern Ports" },
+        { title: "LogiMind AI — Autonomous Intelligence for Modern Ports & Rail Terminals" },
         {
           name: "description",
           content:
-            "PortMind AI is the unified command center combining computer vision, predictive maintenance, multi-agent AI, vessel intelligence and operational analytics for modern ports.",
+            "LogiMind AI is the unified command center combining computer vision, predictive maintenance, multi-agent AI, vessel intelligence, rail telemetry and operational analytics for modern ports and intermodal railway yards.",
         },
-        { name: "author", content: "PortMind AI" },
+        { name: "author", content: "LogiMind AI" },
         {
           property: "og:title",
-          content: "PortMind AI — Autonomous Intelligence for Modern Ports",
+          content: "LogiMind AI — Autonomous Intelligence for Modern Ports & Rail Terminals",
         },
         {
           property: "og:description",
-          content: "The operating system for smart ports.",
+          content: "The operating system for smart ports and rail terminals.",
         },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },

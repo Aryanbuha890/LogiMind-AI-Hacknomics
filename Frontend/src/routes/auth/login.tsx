@@ -9,8 +9,8 @@ import { Logo } from "@/components/Logo";
 export const Route = createFileRoute("/auth/login")({
   head: () => ({
     meta: [
-      { title: "Sign In — PortMind AI" },
-      { name: "description", content: "Access your Port Command Center." },
+      { title: "Sign In — LogiMind AI" },
+      { name: "description", content: "Access your LogiMind AI Command Center." },
     ],
   }),
   component: LoginPage,
@@ -100,13 +100,13 @@ function LoginPage() {
         <div className="space-y-4 my-auto z-10 max-w-md">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-sky-500/20 bg-sky-500/5 text-sky-300 text-xs font-medium tracking-wide">
             <Ship className="h-3.5 w-3.5 text-sky-400" />
-            <span>AI Port Operating System</span>
+            <span>AI Port & Rail Operating System</span>
           </div>
           <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
-            Review, assess, and execute across every terminal operations phase.
+            Review, assess, and execute across marine berths and rail yards.
           </h2>
           <p className="text-slate-400/90 text-sm leading-relaxed">
-            PortMind AI combines computer vision telemetry, LangGraph multi-agent reasoning, and predictive maintenance scheduling.
+            LogiMind AI combines computer vision telemetry, LangGraph multi-agent reasoning, and predictive maintenance scheduling.
           </p>
         </div>
 
@@ -213,7 +213,7 @@ function LoginPage() {
 
           {/* Footer Link */}
           <div className="text-center text-xs text-slate-400 pt-2">
-            New to PortMind?{" "}
+            New to LogiMind?{" "}
             <Link to="/auth/signup" className="text-sky-400 hover:text-sky-300 font-semibold transition duration-200">
               Create account
             </Link>
