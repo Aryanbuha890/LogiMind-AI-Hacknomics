@@ -8,11 +8,11 @@ import {
   Sparkles,
   BarChart3,
   LogOut,
-  Search,
   Bell,
   FlaskConical,
   TrendingUp,
   FileSearch,
+  Train,
 } from "lucide-react";
 import { Logo } from "./Logo";
 
@@ -24,6 +24,7 @@ const opsItems: NavItem[] = [
   { to: "/app/cranes", label: "Cranes", icon: Wrench },
   { to: "/app/vessels", label: "Vessels", icon: Ship },
   { to: "/app/safety", label: "Safety", icon: ShieldAlert },
+  { to: "/app/wagons", label: "Wagon AI", icon: Train },
 ];
 
 const aiItems: NavItem[] = [
@@ -89,13 +90,6 @@ export function AppSidebar() {
 
       <div className="relative px-5 pt-5 pb-4 border-b border-white/10">
         <Logo />
-        <div className="mt-4 group flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-2.5 py-2 text-xs text-white/60 backdrop-blur-md transition hover:border-white/20 hover:bg-white/10">
-          <Search className="h-3.5 w-3.5" />
-          <span>Search…</span>
-          <kbd className="ml-auto rounded border border-white/10 bg-white/10 px-1.5 py-0.5 font-mono text-[10px]">
-            ⌘K
-          </kbd>
-        </div>
       </div>
 
       <nav className="relative flex-1 overflow-y-auto px-3 py-4 space-y-1 scrollbar-thin">
