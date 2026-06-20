@@ -122,7 +122,7 @@ function VesselsPage() {
         <Panel
           title="Operational Map"
           subtitle="AIS telemetry · Berth zones · Risk overlays"
-          className={isMaximized ? "col-span-12 transition-all duration-300" : "col-span-12 xl:col-span-8 transition-all duration-300"}
+          className={isMaximized ? "fixed inset-0 z-[50] bg-background/95 backdrop-blur-lg p-6 flex flex-col !col-span-12 !m-0 !rounded-none" : "col-span-12 xl:col-span-8 transition-all duration-300"}
           right={
             <div className="flex items-center gap-3">
               {isLive && (
@@ -161,7 +161,7 @@ function VesselsPage() {
             </div>
           }
         >
-          <div className={`relative w-full overflow-hidden rounded-lg border border-border transition-all duration-300 ${isMaximized ? "h-[650px]" : "h-[500px]"}`}>
+          <div className={`relative w-full overflow-hidden rounded-lg border border-border transition-all duration-300 ${isMaximized ? "h-[calc(100vh-140px)] flex-1" : "h-[500px]"}`}>
             <ClientOnly fallback={<MapPlaceholder />}>
               <MapComponent
                 center={isLive ? [20.0, 0.0] : [22.72, 69.71]}
@@ -180,9 +180,9 @@ function VesselsPage() {
         <Panel
           title="Vessel Details"
           subtitle={`${sel.id} · ${sel.name}`}
-          className={isMaximized ? "col-span-12 transition-all duration-300" : "col-span-12 xl:col-span-4 transition-all duration-300"}
+          className={isMaximized ? "col-span-12 h-fit transition-all duration-300" : "col-span-12 xl:col-span-4 h-fit transition-all duration-300"}
         >
-          <div className={`rounded-lg border border-border bg-background p-4 h-full flex flex-col justify-between ${isMaximized ? "min-h-[250px]" : "min-h-[500px]"}`}>
+          <div className="rounded-lg border border-border bg-background p-4 flex flex-col gap-4">
             <div>
               <div className="flex items-start justify-between">
                 <div>
@@ -219,22 +219,6 @@ function VesselsPage() {
                     <div className="font-bold text-foreground mt-0.5">{v}</div>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            <div className="mt-4 rounded-md bg-muted/50 border border-border p-3.5 text-[11px]">
-              <div className="font-semibold flex items-center gap-1.5 text-cyan-600 dark:text-cyan-400">
-                <Anchor className="h-3.5 w-3.5" />
-                AI Prediction Engine
-              </div>
-              <div className="mt-1.5 text-muted-foreground leading-relaxed">
-                {sel.status === "Berthed" ? (
-                  "Vessel is berthed. Discharge operations optimal. Weather and tidal conditions stable for remaining discharge window."
-                ) : sel.status === "Berthing" ? (
-                  "Optimal berthing corridor established. Approach speed of 4.2 knots matches target fender impact threshold."
-                ) : (
-                  "Berthing window predicted at T+2.5h. Tidal corridor optimal, wind shears below limits. Recommend approach heading 218°."
-                )}
               </div>
             </div>
           </div>

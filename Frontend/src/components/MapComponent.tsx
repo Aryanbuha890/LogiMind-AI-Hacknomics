@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { MapContainer, TileLayer, Marker, Popup, Circle, Polyline } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Circle, Polyline, useMap } from "react-leaflet";
 import L from "leaflet";
 import "./Map.css";
 
@@ -153,6 +153,53 @@ function AnimatedMarker({ position, icon, children, onClick }: AnimatedMarkerPro
 }
 
 /* ===================================================
+   3.5 MAP VIEW CONTROLLER (center, zoom, selectedVessel)
+=================================================== */
+function MapController({
+  center,
+  zoom,
+  vessels,
+  selectedVesselId
+}: {
+  center: [number, number];
+  zoom: number;
+  vessels: Vessel[];
+  selectedVesselId: string | null;
+}) {
+  const map = useMap();
+  const prevCenterRef = useRef<[number, number]>(center);
+  const prevZoomRef = useRef<number>(zoom);
+  const prevSelectedIdRef = useRef<string | null>(selectedVesselId);
+
+  useEffect(() => {
+    const centerChanged = prevCenterRef.current[0] !== center[0] || prevCenterRef.current[1] !== center[1];
+    const zoomChanged = prevZoomRef.current !== zoom;
+
+    if (centerChanged || zoomChanged) {
+      map.setView(center, zoom);
+      prevCenterRef.current = center;
+      prevZoomRef.current = zoom;
+    }
+  }, [center, zoom, map]);
+
+  useEffect(() => {
+    if (selectedVesselId && selectedVesselId !== prevSelectedIdRef.current) {
+      const selectedVessel = vessels.find(v => v.id === selectedVesselId);
+      if (selectedVessel) {
+        const lat = Number(selectedVessel.last_position_lat);
+        const lon = Number(selectedVessel.last_position_lon);
+        if (!isNaN(lat) && !isNaN(lon) && lat !== 0 && lon !== 0) {
+          map.setView([lat, lon], Math.max(map.getZoom(), 8)); // Zoom in to center on the selected vessel
+        }
+      }
+      prevSelectedIdRef.current = selectedVesselId;
+    }
+  }, [selectedVesselId, vessels, map]);
+
+  return null;
+}
+
+/* ===================================================
    4. MAIN MAP COMPONENT
 =================================================== */
 export default function MapComponent({ 
@@ -214,7 +261,7 @@ export default function MapComponent({
         <div className="w-px h-3.5 bg-white/20" />
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 bg-amber-500 rounded-full shadow-[0_0_8px_#f59e0b]" />
-          <span>{riskCount} Risks Monitored</span>
+          <span>{riskCount} Risks</span>
         </div>
       </div>
 
@@ -297,8 +344,14 @@ export default function MapComponent({
         style={{ height: "100%", width: "100%", background: "#090f1d" }} 
         zoomControl={false}
       >
+        <MapController 
+          center={center} 
+          zoom={zoom} 
+          vessels={vessels}
+          selectedVesselId={selectedVesselId}
+        />
         <TileLayer 
-          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png" 
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" 
           attribution='&copy; <a href="https://carto.com/">CARTO</a>' 
         />
 
@@ -390,20 +443,7 @@ export default function MapComponent({
                           </div>
                       </div>
 
-                      <div className="flex gap-2">
-                        <button 
-                          onClick={() => handleAction("Target Lock")} 
-                          className="flex-1 py-1 bg-cyan-950 hover:bg-cyan-900 text-cyan-400 border border-cyan-800/30 rounded cursor-pointer text-[10px] font-bold transition duration-150"
-                        >
-                          Lock
-                        </button>
-                        <button 
-                          onClick={() => handleAction("Send Advisory")} 
-                          className="flex-1 py-1 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700/30 rounded cursor-pointer text-[10px] transition duration-150"
-                        >
-                          Advisory
-                        </button>
-                      </div>
+
                     </div>
                   </Popup>
                 </AnimatedMarker>
