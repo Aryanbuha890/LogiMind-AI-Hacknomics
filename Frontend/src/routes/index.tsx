@@ -1197,12 +1197,12 @@ const railOSProps: DashboardMockupCardProps = {
   accentColor: "#f59e0b",
   accentColorClass: "text-[#f59e0b]",
   accentBgClass: "bg-[#f59e0b]",
-  successScore: 97,
-  successStatus: "Rail Yard Operations: Excellent",
+  successScore: 99,
+  successStatus: "Wagon Blur-Recovery: Active",
   progressMetrics: [
-    { label: "Wagon Scanning Rate", value: "98.7% OCR", percentage: 98, fromColor: "#FBBF24", toColor: "#F59E0B" },
-    { label: "Active Camera Feeds", value: "3 / 3 active", percentage: 100, fromColor: "#10B981", toColor: "#059669" },
-    { label: "Alert Response Time", value: "1.2 mins avg", percentage: 94, fromColor: "#38BDF8", toColor: "#2563EB" },
+    { label: "Wagon Scanning Rate", value: "99.4% OCR", percentage: 99, fromColor: "#FBBF24", toColor: "#F59E0B" },
+    { label: "Edge Latency (Jetson)", value: "12 ms / feed", percentage: 96, fromColor: "#10B981", toColor: "#059669" },
+    { label: "Velocity Capacity", value: "80 km/h", percentage: 80, fromColor: "#38BDF8", toColor: "#2563EB" },
   ],
   chartTitle: "Wagon Processing Dwell Time",
   chartValue: "18.4 mins/train",
@@ -1213,7 +1213,7 @@ const railOSProps: DashboardMockupCardProps = {
   chartAreaPath: "M0,90 C40,78 80,82 120,62 C160,42 200,50 240,32 C280,18 320,38 400,14 L400,110 L0,110 Z",
   chartTooltipTime: "Daily summary",
   chartTooltipValue: "18.4 mins avg",
-  chartTooltipChange: "Zero-DCE Low-light Enhancements: Active",
+  chartTooltipChange: "GAN Deblur & Low-light Recovery: Active",
   sparklines: [
     { label: "Scanned Wagons", value: "142", change: "+14 wagons", color: "#F59E0B", sparkPoints: [110, 115, 120, 128, 130, 135, 140, 142] },
     { label: "Axle Alerts", value: "2", change: "resolved", color: "#EF4444", sparkPoints: [4, 3, 3, 2, 2, 2, 2, 2] },
@@ -1221,9 +1221,9 @@ const railOSProps: DashboardMockupCardProps = {
     { label: "Train Transits", value: "8 / day", change: "+2 transits", color: "#8B5CF6", sparkPoints: [5, 6, 6, 7, 7, 8, 8, 8] },
   ],
   liveEvents: [
-    { time: "15:20", message: "Wagon ID plate CR-8812 scanned · OCR: 98.7%", color: "#F59E0B", tag: "ocr" },
-    { time: "15:02", message: "Structural defect (axle anomaly) flagged: Cam W-02", color: "#EF4444", tag: "defect" },
-    { time: "14:40", message: "YOLOv11 OCR detection score verified - Train T-104", color: "#10B981", tag: "active" },
+    { time: "15:20", message: "Wagon ID plate CR-8812 scanned · OCR: 99.4% (deblurred)", color: "#F59E0B", tag: "ocr" },
+    { time: "15:02", message: "Structural defect (door anomaly) flagged: Cam W-02", color: "#EF4444", tag: "defect" },
+    { time: "14:40", message: "YOLOv8 + custom model inference verified - Train T-104", color: "#10B981", tag: "active" },
   ],
   sidebarItems: [
     { icon: Train, label: "Wagon Command", active: true },
@@ -1232,10 +1232,10 @@ const railOSProps: DashboardMockupCardProps = {
     { icon: Database, label: "OCR Records" },
   ],
   floatingChips: [
-    { title: "Wagon ID: CR-8812", subtitle: "Defects: None · OCR Ok", icon: Train, gradFrom: "from-amber-500", gradTo: "to-orange-600", xPosClass: "-left-6", yPosClass: "top-24" },
-    { title: "Axle Anomaly: W-02", subtitle: "Alert dispatched", icon: ShieldAlert, gradFrom: "from-red-500", gradTo: "to-rose-600", xPosClass: "-right-6", yPosClass: "bottom-20" },
+    { title: "Wagon ID: CR-8812", subtitle: "Defects: None · OCR 99.4%", icon: Train, gradFrom: "from-amber-500", gradTo: "to-orange-600", xPosClass: "-left-6", yPosClass: "top-24" },
+    { title: "12ms Edge Deblur", subtitle: "Restoration pipeline active", icon: ShieldAlert, gradFrom: "from-red-500", gradTo: "to-rose-600", xPosClass: "-right-6", yPosClass: "bottom-20" },
   ],
-  copilotStatus: 'Copilot: "Axle fracture alert sent to maintenance yard for wagon CR-8812."',
+  copilotStatus: 'Copilot: "Jetson AGX deblur model active on Cam 01. High-speed blur recovery at 3.4x gain."',
 };
 
 function DashboardSection() {
@@ -1321,6 +1321,8 @@ function Trust() {
               <img
                 src={logo.src}
                 alt={logo.alt}
+                loading="lazy"
+                decoding="async"
                 className={`${logo.h} object-contain opacity-90 hover:opacity-100 transition-all duration-300`}
               />
             </div>
@@ -1462,6 +1464,8 @@ function JourneySection() {
                 <img
                   src={card.img}
                   alt={card.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center rounded-2xl border border-white/5 shadow-sm"
                 />
               </div>
@@ -3710,7 +3714,7 @@ function Features() {
     },
     {
       t: "Rail Yard Telemetry",
-      d: "Deploy YOLOv11 OCR and Zero-DCE low-light ML models to audit railway wagon ID plates, detect structural axle fractures, and track incoming trains.",
+      d: "Deploy custom deblurring GANs, YOLOv8/v11, and Zero-DCE low-light models on NVIDIA Jetson AGX. Restore high-speed wagon feeds at 80 km/h, extract IDs with 99.4% accuracy, and detect 18 defect categories with 12ms latency.",
       i: Train,
       accent: "#d946ef",
       accentGlow: "rgba(217,70,239,0.3)",
