@@ -42,139 +42,87 @@ function SafetyPage() {
       />
       <div className="p-6 space-y-6">
         <div className="grid grid-cols-12 gap-4">
+          {/* Feed 1: PPE Detection */}
           <Panel
-            title="Primary Feed · Yard B"
-            className="col-span-12 xl:col-span-8"
+            title="PPE Compliance Feed · CAM-01"
+            className="col-span-12 xl:col-span-6"
             right={
-              <span className="rounded bg-[color:var(--color-destructive)]/10 px-2 py-0.5 text-[11px] font-semibold text-[color:var(--color-destructive)]">
-                VIOLATION
+              <span className="rounded bg-red-500/10 px-2 py-0.5 text-[11px] font-semibold text-red-500 flex items-center gap-1.5 animate-pulse">
+                <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                VIOLATION FLAG
               </span>
             }
           >
-            <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-border bg-gradient-to-br from-[#0B1A33] to-[#1B3A6B]">
-              <div className="absolute inset-0 bg-grid-sm opacity-15" />
-              {/* fake person boxes */}
-              {[
-                {
-                  x: 18,
-                  y: 30,
-                  w: 14,
-                  h: 36,
-                  ok: true,
-                  label: "Worker · PPE OK",
-                },
-                {
-                  x: 44,
-                  y: 38,
-                  w: 12,
-                  h: 32,
-                  ok: false,
-                  label: "No Helmet · 0.94",
-                },
-                {
-                  x: 68,
-                  y: 28,
-                  w: 13,
-                  h: 38,
-                  ok: true,
-                  label: "Worker · PPE OK",
-                },
-              ].map((b, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.1 + i * 0.1 }}
-                  className="absolute rounded border-2"
-                  style={{
-                    left: `${b.x}%`,
-                    top: `${b.y}%`,
-                    width: `${b.w}%`,
-                    height: `${b.h}%`,
-                    borderColor: b.ok ? "#10B981" : "#DC2626",
-                  }}
-                >
-                  <span className="absolute -top-5 left-0 rounded bg-black/70 px-1.5 py-0.5 text-[9px] font-mono text-white whitespace-nowrap">
-                    {b.label}
-                  </span>
-                </motion.div>
-              ))}
+            <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-border bg-black">
+              <video
+                src="/PPE VIDEO.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+              
+              {/* Red AI detection box overlaying the worker's head/body */}
+              <div 
+                className="absolute border-2 border-red-500 rounded animate-pulse"
+                style={{
+                  left: "31%",
+                  top: "32%",
+                  width: "21%",
+                  height: "52%",
+                  boxShadow: "0 0 12px rgba(239, 68, 68, 0.7)"
+                }}
+              >
+                <span className="absolute -top-5.5 left-0 rounded bg-red-600 px-1.5 py-0.5 text-[9px] font-mono font-bold text-white whitespace-nowrap uppercase tracking-wider animate-bounce">
+                  No Helmet · 94%
+                </span>
+              </div>
+
               <div className="absolute top-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-white">
                 CAM-01 · YARD-B-EAST
               </div>
-              <div className="absolute top-2 right-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-[color:var(--color-destructive)]">
-                ● REC · 14:32:18
+              <div className="absolute top-2 right-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-red-400 font-bold animate-pulse">
+                ● REC · VIOLATION
               </div>
               <div className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-white">
-                YOLOv11 · 58 FPS
+                YOLOv11 · 58 FPS · Edge Active
               </div>
             </div>
           </Panel>
 
+          {/* Feed 2: Thermal Incident Detection */}
           <Panel
-            title="Emergency Actions"
-            subtitle="One-tap response workflows"
-            className="col-span-12 xl:col-span-4"
+            title="Thermal Fire Incident Feed · CAM-14"
+            className="col-span-12 xl:col-span-6"
+            right={
+              <span className="rounded bg-amber-500/10 px-2 py-0.5 text-[11px] font-semibold text-amber-500 flex items-center gap-1.5 animate-pulse">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
+                ACTIVE MONITOR
+              </span>
+            }
           >
-            <div className="grid grid-cols-2 gap-2">
-              {[
-                { l: "Fire", icon: Flame, c: "#DC2626" },
-                { l: "Medical", icon: Heart, c: "#0D9488" },
-                { l: "Chemical Leak", icon: Beaker, c: "#D97706" },
-                { l: "Security Lockdown", icon: Lock, c: "#1B3A6B" },
-              ].map((a) => {
-                const Icon = a.icon;
-                return (
-                  <button
-                    key={a.l}
-                    onClick={() => setModal(a.l)}
-                    className="rounded-lg border border-border bg-background p-4 text-left transition hover:border-[color:var(--color-secondary)]/40 hover:shadow-md"
-                  >
-                    <Icon className="h-5 w-5" style={{ color: a.c }} />
-                    <div className="mt-2 text-sm font-semibold">{a.l}</div>
-                    <div className="text-[10px] text-muted-foreground">
-                      Trigger response
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-            <div className="mt-4 rounded-md bg-muted/60 p-3 text-[11px] text-muted-foreground">
-              All emergency actions auto-dispatch trained personnel, notify
-              command, and create an immutable audit trail.
+            <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-border bg-black">
+              <video
+                src="/FIRE VIDEO.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute top-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-white">
+                CAM-14 · BUNKER-ZONE
+              </div>
+              <div className="absolute top-2 right-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-amber-500">
+                ● REC · LIVE
+              </div>
+              <div className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-white">
+                YOLOv8-Thermal · 45 FPS · Active
+              </div>
             </div>
           </Panel>
         </div>
-
-        <Panel
-          title="Camera Grid"
-          subtitle="14 active streams · 3 with active alerts"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
-            {cameras.map((c) => (
-              <div
-                key={c.id}
-                className={`rounded-lg border bg-background p-2.5 ${c.alert ? "border-[color:var(--color-destructive)]/40" : "border-border"}`}
-              >
-                <div className="relative aspect-video overflow-hidden rounded bg-gradient-to-br from-[#0B1A33] to-[#1B3A6B]">
-                  <div className="absolute inset-0 bg-grid-sm opacity-20" />
-                  <Camera className="absolute inset-0 m-auto h-6 w-6 text-white/30" />
-                  <div className="absolute top-1 left-1 rounded bg-black/60 px-1 py-0.5 text-[9px] font-mono text-white">
-                    {c.id}
-                  </div>
-                  {c.alert && (
-                    <div className="absolute bottom-1 right-1 rounded bg-[color:var(--color-destructive)] px-1 py-0.5 text-[9px] font-bold text-white animate-pulse">
-                      {c.alert}
-                    </div>
-                  )}
-                </div>
-                <div className="mt-2 truncate text-xs font-medium">
-                  {c.name}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Panel>
 
         <div className="grid grid-cols-12 gap-4">
           <Panel
@@ -206,6 +154,42 @@ function SafetyPage() {
             </ResponsiveContainer>
           </Panel>
 
+          <Panel
+            title="Emergency Actions"
+            subtitle="One-tap response workflows"
+            className="col-span-12 xl:col-span-4"
+          >
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { l: "Fire", icon: Flame, c: "#DC2626" },
+                { l: "Medical", icon: Heart, c: "#0D9488" },
+                { l: "Chemical Leak", icon: Beaker, c: "#D97706" },
+                { l: "Security Lockdown", icon: Lock, c: "#1B3A6B" },
+              ].map((a) => {
+                const Icon = a.icon;
+                return (
+                  <button
+                    key={a.l}
+                    onClick={() => setModal(a.l)}
+                    className="rounded-lg border border-border bg-background p-4 text-left transition hover:border-[color:var(--color-secondary)]/40 hover:shadow-md cursor-pointer"
+                  >
+                    <Icon className="h-5 w-5" style={{ color: a.c }} />
+                    <div className="mt-2 text-sm font-semibold">{a.l}</div>
+                    <div className="text-[10px] text-muted-foreground">
+                      Trigger response
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-4 rounded-md bg-muted/60 p-3 text-[11px] text-muted-foreground">
+              All emergency actions auto-dispatch trained personnel, notify
+              command, and create an immutable audit trail.
+            </div>
+          </Panel>
+        </div>
+
+        <div className="grid grid-cols-12 gap-4">
           <Panel
             title="Violation Categories"
             className="col-span-12 xl:col-span-4"
@@ -239,6 +223,38 @@ function SafetyPage() {
               (↓ 38% YoY)
             </div>
           </Panel>
+
+          <div className="col-span-12 xl:col-span-8">
+            <Panel
+              title="Camera Grid"
+              subtitle="14 active streams · 3 with active alerts"
+            >
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {cameras.map((c) => (
+                  <div
+                    key={c.id}
+                    className={`rounded-lg border bg-background p-2.5 ${c.alert ? "border-[color:var(--color-destructive)]/40" : "border-border"}`}
+                  >
+                    <div className="relative aspect-video overflow-hidden rounded bg-gradient-to-br from-[#0B1A33] to-[#1B3A6B]">
+                      <div className="absolute inset-0 bg-grid-sm opacity-20" />
+                      <Camera className="absolute inset-0 m-auto h-6 w-6 text-white/30" />
+                      <div className="absolute top-1 left-1 rounded bg-black/60 px-1 py-0.5 text-[9px] font-mono text-white">
+                        {c.id}
+                      </div>
+                      {c.alert && (
+                        <div className="absolute bottom-1 right-1 rounded bg-[color:var(--color-destructive)] px-1 py-0.5 text-[9px] font-bold text-white animate-pulse">
+                          {c.alert}
+                        </div>
+                      )}
+                    </div>
+                    <div className="mt-2 truncate text-xs font-medium">
+                      {c.name}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Panel>
+          </div>
         </div>
       </div>
 

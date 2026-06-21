@@ -93,7 +93,7 @@ function LoginPage() {
 
         {/* Brand Header */}
         <div className="flex items-center gap-2.5 z-10">
-          <Logo to="/" />
+          <Logo to="/" size="xl" />
         </div>
 
         {/* Mid Heading & Copy */}
@@ -120,6 +120,10 @@ function LoginPage() {
       {/* Form Section (Left on Login) */}
       <section className="flex-1 flex flex-col justify-center items-center py-4 px-4 md:px-8 z-10 overflow-hidden h-full">
         <div className="w-full max-w-[360px] sm:max-w-[380px] space-y-5 sm:space-y-6">
+
+          <div className="flex justify-center md:hidden">
+            <Logo to="/" size="xl" />
+          </div>
           
           {/* Header */}
           <div className="space-y-1.5 text-center md:text-left">

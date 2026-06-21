@@ -89,7 +89,7 @@ export function AppSidebar() {
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,transparent_30%,transparent_70%,rgba(255,255,255,0.04)_100%)]" />
 
       <div className="relative px-5 pt-5 pb-4 border-b border-white/10">
-        <Logo />
+        <Logo size="md" showName />
       </div>
 
       <nav className="relative flex-1 overflow-y-auto px-3 py-4 space-y-1 scrollbar-thin">

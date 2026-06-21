@@ -66,6 +66,7 @@ export const Route = createFileRoute("/")({
         content: "The operating system for smart ports and rail terminals.",
       },
     ],
+    links: [{ rel: "preconnect", href: "https://images.unsplash.com" }],
   }),
   component: Landing,
 });
@@ -159,7 +160,7 @@ function Nav() {
         />
         {/* Logo */}
         <div className="relative flex items-center">
-          <Logo />
+          <Logo size="sm" />
         </div>
         {/* Navigation Links */}
         <nav className="relative hidden md:flex items-center gap-0.5 text-sm">
@@ -1501,66 +1502,104 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
+      cat: "INGEST",
       t: "Multi-Source Ingest",
       d: "Continuous data ingestion from port CCTV, AIS signals, manifests, and weather feeds.",
+      img: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?auto=format&fit=crop&w=640&h=900&q=75",
+      imgSrcSet: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?auto=format&fit=crop&w=400&h=600&q=75 400w, https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?auto=format&fit=crop&w=640&h=900&q=75 640w",
       i: Database,
     },
     {
       n: "02",
+      cat: "PERCEIVE",
       t: "Vision Perception",
       d: "Deep learning models detect container numbers, gauge structures, and verify safety PPE.",
+      img: "https://images.unsplash.com/photo-1529310399831-ed472b81d589?auto=format&fit=crop&w=640&h=900&q=75",
+      imgSrcSet: "https://images.unsplash.com/photo-1529310399831-ed472b81d589?auto=format&fit=crop&w=400&h=600&q=75 400w, https://images.unsplash.com/photo-1529310399831-ed472b81d589?auto=format&fit=crop&w=640&h=900&q=75 640w",
       i: Eye,
     },
     {
       n: "03",
+      cat: "REASON",
       t: "Agentic Reasoning",
       d: "LangGraph-powered AI agents plan yard movements, verify manifests, and trigger warning sirens.",
+      img: "https://images.unsplash.com/photo-1742459785723-667110cf8326?auto=format&fit=crop&w=640&h=900&q=75",
+      imgSrcSet: "https://images.unsplash.com/photo-1742459785723-667110cf8326?auto=format&fit=crop&w=400&h=600&q=75 400w, https://images.unsplash.com/photo-1742459785723-667110cf8326?auto=format&fit=crop&w=640&h=900&q=75 640w",
       i: Brain,
     },
     {
       n: "04",
+      cat: "PREDICT",
       t: "Predictive Safety",
       d: "ML classifiers forecast machine breakdown schedules and alert operations beforehand.",
+      img: "https://images.unsplash.com/photo-1647663013612-d751ba1802f0?auto=format&fit=crop&w=640&h=900&q=75",
+      imgSrcSet: "https://images.unsplash.com/photo-1647663013612-d751ba1802f0?auto=format&fit=crop&w=400&h=600&q=75 400w, https://images.unsplash.com/photo-1647663013612-d751ba1802f0?auto=format&fit=crop&w=640&h=900&q=75 640w",
       i: ShieldAlert,
     },
     {
       n: "05",
+      cat: "ACT",
       t: "Closed-Loop Action",
       d: "Automated routing logs clear gate entry, slots cranes, and optimizes truck turnarounds.",
+      img: "https://images.unsplash.com/photo-1575528941322-c74397246f19?auto=format&fit=crop&w=640&h=900&q=75",
+      imgSrcSet: "https://images.unsplash.com/photo-1575528941322-c74397246f19?auto=format&fit=crop&w=400&h=600&q=75 400w, https://images.unsplash.com/photo-1575528941322-c74397246f19?auto=format&fit=crop&w=640&h=900&q=75 640w",
       i: Cpu,
     },
   ];
   return (
     <section id="how" className="py-28 bg-[#05060F]">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-7xl px-6">
         <SectionHead eyebrow="How it works" title="Five steps to closed-loop port autonomy." />
-        <ol className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-          {steps.map(({ n, t, d, i: Icon }) => (
-            <li key={n} className="premium-white-window-card group">
-              {/* macOS-style window tools bar */}
-              <div className="window-tools">
-                <div className="window-dots">
-                  <span className="window-dot red" />
-                  <span className="window-dot yellow" />
-                  <span className="window-dot green" />
-                </div>
-                <span className="window-step">Step {n}</span>
+        <ol className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          {steps.map(({ n, cat, t, d, img, imgSrcSet }, idx) => (
+            <motion.li
+              key={n}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.5, delay: idx * 0.05, ease: "easeOut" }}
+              className="relative group overflow-hidden rounded-[24px] h-[450px] flex flex-col justify-end p-6 border-2 border-white/10 shadow-2xl transition-[border-color,transform] duration-300 hover:border-cyan-500/60 hover:-translate-y-1"
+            >
+              <div className="absolute inset-0 z-0">
+                <img
+                  src={img}
+                  srcSet={imgSrcSet}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
+                  alt={t}
+                  loading={idx === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  fetchPriority={idx === 0 ? "high" : "auto"}
+                  className="w-full h-full object-cover transform-gpu"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020205] via-[#020205]/60 to-transparent opacity-90" />
               </div>
 
-              {/* Card content body */}
-              <div className="card-body">
-                <div className="card-icon-wrapper">
-                  <Icon className="h-5.5 w-5.5" />
+              {/* Content Container */}
+              <div className="relative z-10 flex flex-col h-full justify-between">
+                {/* Top Row: Center-aligned Stencil Stiled Number */}
+                <div className="flex justify-center w-full mt-2">
+                  <span 
+                    className="text-6xl font-black text-white select-none tracking-widest"
+                    style={{ fontFamily: "'Big Shoulders Stencil Display', sans-serif" }}
+                  >
+                    {parseInt(n)}
+                  </span>
                 </div>
 
-                <h3 className="card-title-white">
-                  {t}
-                </h3>
-                <p className="card-desc-white">
-                  {d}
-                </p>
+                {/* Bottom Row: Text Details with Fixed Height for Perfect Horizontal Alignment */}
+                <div className="text-left mt-auto h-[160px] flex flex-col justify-start">
+                  <div className="text-[10px] font-bold tracking-[0.22em] text-cyan-400 uppercase mb-2">
+                    {cat}
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-white tracking-tight leading-snug group-hover:text-cyan-300 transition-colors duration-300">
+                    {t}
+                  </h3>
+                  <p className="mt-2 text-xs text-white/65 leading-relaxed font-sans line-clamp-4">
+                    {d}
+                  </p>
+                </div>
               </div>
-            </li>
+            </motion.li>
           ))}
         </ol>
       </div>
@@ -3974,7 +4013,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Brand Information */}
           <div className="col-span-12 md:col-span-5 flex flex-col gap-4">
-            <Logo />
+            <Logo size="lg" />
             <p className="text-sm leading-relaxed text-white/60 mt-1 max-w-md">
               LogiMind AI is the unified operating system for smart ports and rail yards — combining computer vision, predictive maintenance, multi-agent reasoning, rail wagon telemetry, and vessel intelligence in one secure command center.
             </p>
