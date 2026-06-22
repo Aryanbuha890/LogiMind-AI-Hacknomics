@@ -317,7 +317,375 @@ function Hero() {
       {/* Aurora radial backdrops */}
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[620px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.45),transparent)] blur-3xl" />
       <div className="pointer-events-none absolute top-40 -left-32 h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgba(37,99,235,0.3),transparent)] blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 right-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgba(13,148,136,0.25),transparent)] blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 right-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgba(13,148,136,0.25),transparent)] blur-3xl" />      <style>{`
+        @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap");
+
+        @keyframes border-spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        .btn-liquid {
+          position: relative;
+          width: 250px;
+          height: 48px;
+          border-radius: 50px;
+          overflow: hidden;
+          padding: 1.5px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 0 15px rgba(6, 182, 212, 0.35);
+          transition: all 0.3s ease;
+          text-decoration: none;
+          cursor: pointer;
+          background: transparent;
+          border: none;
+        }
+
+        .btn-liquid:hover {
+          box-shadow: 0 0 25px rgba(6, 182, 212, 0.7);
+          transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Spinning border glow background */
+        .btn-liquid::before {
+          content: '';
+          position: absolute;
+          width: 380px;
+          height: 380px;
+          background: conic-gradient(
+            from 0deg,
+            transparent 0%,
+            #06b6d4 25%,
+            #3b82f6 50%,
+            #00f2fe 75%,
+            transparent 100%
+          );
+          animation: border-spin 3s linear infinite;
+          z-index: 0;
+        }
+
+        .btn-liquid-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          background: #05060F;
+          border-radius: 48px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1;
+        }
+
+        .liquid {
+          background: linear-gradient(180deg, #06b6d4, #2563eb);
+          width: 100%;
+          height: 26px;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          pointer-events: none;
+          z-index: 1;
+          box-shadow: inset 0 4px 10px rgba(255,255,255,0.25), inset 0 -4px 10px rgba(0,0,0,0.4);
+        }
+
+        .liquid::after {
+          content: '';
+          width: 300px;
+          height: 300px;
+          background: #05060F;
+          z-index: 2;
+          position: absolute;
+          left: -25px;
+          top: -285px;
+          border-radius: 43%;
+          animation: liquid-animate 6s linear infinite;
+        }
+
+        .liquid::before {
+          content: '';
+          width: 310px;
+          height: 310px;
+          background-color: rgba(34, 211, 238, 0.45);
+          z-index: 2;
+          position: absolute;
+          left: -30px;
+          top: -292px;
+          border-radius: 40%;
+          animation: liquid-animate 5s linear infinite;
+        }
+
+        .btn-liquid-txt {
+          position: relative;
+          z-index: 3;
+          font-size: 11px;
+          font-weight: 700;
+          font-family: "Orbitron", sans-serif;
+          letter-spacing: 1.5px;
+          color: #fff;
+          text-transform: uppercase;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        @keyframes liquid-animate {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        .bubble {
+          position: absolute;
+          background: rgba(255, 255, 255, 0.35);
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 2;
+          opacity: 0;
+        }
+        .bubble-1 {
+          width: 6px;
+          height: 6px;
+          left: 30%;
+          bottom: 5px;
+          animation: bubble-rise 3s ease-in-out infinite;
+          animation-delay: 0.2s;
+        }
+        .bubble-2 {
+          width: 4px;
+          height: 4px;
+          left: 50%;
+          bottom: 2px;
+          animation: bubble-rise 2.5s ease-in-out infinite;
+          animation-delay: 1.2s;
+        }
+        .bubble-3 {
+          width: 8px;
+          height: 8px;
+          left: 70%;
+          bottom: 4px;
+          animation: bubble-rise 3.5s ease-in-out infinite;
+          animation-delay: 0.7s;
+        }
+
+        @keyframes bubble-rise {
+          0% {
+            transform: translateY(20px) scale(0.5);
+            opacity: 0;
+          }
+          50% {
+            opacity: 0.6;
+          }
+          100% {
+            transform: translateY(-50px) scale(1.2);
+            opacity: 0;
+          }
+        }
+
+        @keyframes boat-bob {
+          0% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-2.5px) rotate(-3deg);
+          }
+          100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+        }
+
+        .boat-container {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          animation: boat-bob 3s ease-in-out infinite;
+          margin-right: 8px;
+          position: relative;
+          z-index: 10;
+        }
+
+        .btn-space {
+          position: relative;
+          width: 250px;
+          height: 48px;
+          border-radius: 50px;
+          overflow: hidden;
+          padding: 1.5px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+          transition: all 0.3s ease;
+          background: transparent;
+          cursor: pointer;
+          border: none;
+        }
+
+        .btn-space:hover {
+          box-shadow: 0 0 25px rgba(6, 182, 212, 0.55);
+          transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Rotating cosmic border using web theme color palette */
+        .btn-space::before {
+          content: '';
+          position: absolute;
+          width: 380px;
+          height: 380px;
+          background: conic-gradient(
+            from 0deg,
+            transparent 0%,
+            #06b6d4 25%,
+            #3b82f6 50%,
+            #10b981 75%,
+            transparent 100%
+          );
+          animation: border-spin 3.5s linear infinite;
+          z-index: 0;
+        }
+
+        .btn-space-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          background: #05060F;
+          border-radius: 48px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1;
+          transition: background 0.3s ease;
+        }
+
+        .btn-space-strong {
+          z-index: 3;
+          font-family: "Orbitron", sans-serif;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          color: #ffffff;
+          text-shadow: 0 0 4px white;
+          text-transform: uppercase;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        #container-stars {
+          position: absolute;
+          z-index: 1;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          transition: 0.5s;
+          backdrop-filter: blur(1rem);
+          border-radius: 5rem;
+          pointer-events: none;
+          inset: 0;
+        }
+
+        #glow {
+          position: absolute;
+          display: flex;
+          width: 12rem;
+          z-index: 2;
+          pointer-events: none;
+          inset: 0;
+        }
+
+        .circle {
+          position: absolute;
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          filter: blur(25px);
+        }
+
+        .circle:nth-of-type(1) {
+          background: rgba(6, 182, 212, 0.6);
+          animation: orbit 8s linear infinite;
+        }
+
+        .circle:nth-of-type(2) {
+          background: rgba(16, 185, 129, 0.7);
+          animation: orbit 10s linear infinite;
+        }
+
+        @keyframes orbit {
+          from {
+            transform: rotate(0deg) translateX(100px) rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg) translateX(100px) rotate(-360deg);
+          }
+        }
+
+        #stars {
+          position: relative;
+          background: transparent;
+          width: 200rem;
+          height: 200rem;
+        }
+
+        #stars::after {
+          content: "";
+          position: absolute;
+          top: -10rem;
+          left: -100rem;
+          width: 100%;
+          height: 100%;
+          animation: animStarRotate 90s linear infinite;
+        }
+
+        #stars::after {
+          background-image: radial-gradient(#ffffff 1px, transparent 1%);
+          background-size: 50px 50px;
+        }
+
+        #stars::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -50%;
+          width: 170%;
+          height: 500%;
+          animation: animStar 60s linear infinite;
+        }
+
+        #stars::before {
+          background-image: radial-gradient(#ffffff 1px, transparent 1%);
+          background-size: 50px 50px;
+          opacity: 0.5;
+        }
+
+        @keyframes animStar {
+          from {
+            transform: translateY(0);
+          }
+          to {
+            transform: translateY(-135rem);
+          }
+        }
+
+        @keyframes animStarRotate {
+          from {
+            transform: rotate(360deg);
+          }
+          to {
+            transform: rotate(0);
+          }
+        }
+      `}</style>
 
       <div className="relative w-full max-w-6xl px-6 flex flex-col justify-center items-center flex-1">
         <motion.div style={{ y }} className="mx-auto max-w-5xl text-center w-full flex flex-col items-center justify-center">
@@ -333,16 +701,11 @@ function Hero() {
             <br className="hidden sm:inline" />{" "}
             <span
               className="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-cyan-300"
-              style={{
-                backgroundImage:
-                  "linear-gradient(120deg, #ffffff 0%, #C7D2FE 35%, #60A5FA 65%, #22D3EE 100%)",
-              }}
             >
-              for Modern Ports & Rails.
+              For Global Ports & Rail
             </span>
           </motion.h1>
 
-          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -357,21 +720,44 @@ function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.18 }}
-            className="mt-9 flex flex-wrap items-center justify-center gap-3"
+            className="mt-9 flex flex-wrap items-center justify-center gap-6"
           >
-            <Link
-              to="/app"
-              className="group relative inline-flex h-12 items-center gap-2 overflow-hidden rounded-full px-6 text-sm font-semibold text-white shadow-[0_18px_40px_-12px_rgba(37,99,235,0.7)] transition-transform hover:-translate-y-0.5"
-              style={{
-                backgroundImage: "linear-gradient(120deg, #1b3a6b 0%, #2563eb 45%, #0d9488 100%)",
-              }}
-            >
-              <span className="relative z-10">Launch Command Center</span>
-              <ArrowRight className="relative z-10 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+            <Link to="/app" className="btn-liquid">
+              <span className="btn-liquid-inner">
+                <span className="liquid" />
+                <span className="bubble bubble-1" />
+                <span className="bubble bubble-2" />
+                <span className="bubble bubble-3" />
+                <span className="btn-liquid-txt">
+                  <span className="boat-container">
+                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M2 16h20l-2 3.5H4L2 16z" fill="rgba(34, 211, 238, 0.35)" stroke="#22d3ee" />
+                      <rect x="5" y="11" width="3" height="5" fill="#3b82f6" stroke="#3b82f6" />
+                      <rect x="9" y="9" width="4" height="7" fill="#10b981" stroke="#10b981" />
+                      <rect x="14" y="12" width="3" height="4" fill="#a855f7" stroke="#a855f7" />
+                      <path d="M18 12v4h2v-2.5h-2z" fill="#ffffff" />
+                    </svg>
+                  </span>
+                  Launch Console
+                  <ArrowRight className="h-4 w-4 shrink-0 relative z-10" />
+                </span>
+              </span>
             </Link>
-            <button className="inline-flex h-12 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 text-sm font-medium text-white/85 backdrop-blur-xl hover:bg-white/[0.08]">
-              <PlayCircle className="h-4 w-4" /> Watch 90-sec Demo
+            
+            <button type="button" className="btn-space">
+              <span className="btn-space-inner">
+                <span className="btn-space-strong">
+                  <PlayCircle className="h-4 w-4 shrink-0" />
+                  Watch 90-sec Demo
+                </span>
+                <div id="container-stars">
+                  <div id="stars" />
+                </div>
+                <div id="glow">
+                  <div className="circle" />
+                  <div className="circle" />
+                </div>
+              </span>
             </button>
           </motion.div>
 
