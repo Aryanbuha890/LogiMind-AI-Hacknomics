@@ -34,6 +34,7 @@ const cameras = [
 
 function SafetyPage() {
   const [modal, setModal] = useState<string | null>(null);
+  const [currentTime, setCurrentTime] = useState<number>(0);
   return (
     <>
       <AppTopBar
@@ -47,10 +48,17 @@ function SafetyPage() {
             title="PPE Compliance Feed · CAM-01"
             className="col-span-12 xl:col-span-6"
             right={
-              <span className="rounded bg-red-500/10 px-2 py-0.5 text-[11px] font-semibold text-red-500 flex items-center gap-1.5 animate-pulse">
-                <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
-                VIOLATION FLAG
-              </span>
+              currentTime >= 8 && currentTime <= 10 ? (
+                <span className="rounded bg-red-500/10 px-2 py-0.5 text-[11px] font-semibold text-red-500 flex items-center gap-1.5 animate-pulse">
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                  VIOLATION FLAG
+                </span>
+              ) : (
+                <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-[11px] font-semibold text-emerald-500 flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  COMPLIANT
+                </span>
+              )
             }
           >
             <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-border bg-black">
@@ -61,29 +69,32 @@ function SafetyPage() {
                 muted
                 playsInline
                 className="w-full h-full object-cover"
+                onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
               />
               
-              {/* Red AI detection box overlaying the worker's head/body */}
-              <div 
-                className="absolute border-2 border-red-500 rounded animate-pulse"
-                style={{
-                  left: "31%",
-                  top: "32%",
-                  width: "21%",
-                  height: "52%",
-                  boxShadow: "0 0 12px rgba(239, 68, 68, 0.7)"
-                }}
-              >
-                <span className="absolute -top-5.5 left-0 rounded bg-red-600 px-1.5 py-0.5 text-[9px] font-mono font-bold text-white whitespace-nowrap uppercase tracking-wider animate-bounce">
-                  No Helmet · 94%
-                </span>
-              </div>
+              {/* Red AI detection box overlaying the worker's head/body (Only visible between 8s and 10s) */}
+              {currentTime >= 8 && currentTime <= 10 && (
+                <div 
+                  className="absolute border-2 border-red-500 rounded animate-pulse"
+                  style={{
+                    left: "31%",
+                    top: "32%",
+                    width: "21%",
+                    height: "52%",
+                    boxShadow: "0 0 12px rgba(239, 68, 68, 0.7)"
+                  }}
+                >
+                  <span className="absolute -top-5.5 left-0 rounded bg-red-600 px-1.5 py-0.5 text-[9px] font-mono font-bold text-white whitespace-nowrap uppercase tracking-wider animate-bounce">
+                    No Helmet · 94%
+                  </span>
+                </div>
+              )}
 
               <div className="absolute top-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-white">
                 CAM-01 · YARD-B-EAST
               </div>
-              <div className="absolute top-2 right-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-red-400 font-bold animate-pulse">
-                ● REC · VIOLATION
+              <div className={`absolute top-2 right-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono font-bold ${currentTime >= 8 && currentTime <= 10 ? 'text-red-400 animate-pulse' : 'text-emerald-400'}`}>
+                ● REC · {currentTime >= 8 && currentTime <= 10 ? 'VIOLATION' : 'NOMINAL'}
               </div>
               <div className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-white">
                 YOLOv11 · 58 FPS · Edge Active

@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import {
-  Eye, EyeOff, Mail, User, AlertCircle, Ship
+  Eye, EyeOff, Mail, User, AlertCircle, Ship, X
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
 
@@ -27,6 +27,7 @@ function SignupPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [modalType, setModalType] = useState<"terms" | "privacy" | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -230,9 +231,21 @@ function SignupPage() {
               />
               <label htmlFor="agree-terms" className="text-[10.5px] text-slate-400 leading-normal select-none cursor-pointer">
                 I agree to the{" "}
-                <Link to="/auth/login" className="text-sky-400 hover:text-sky-300 transition-colors">Terms</Link>{" "}
+                <button 
+                  type="button"
+                  onClick={() => setModalType("terms")}
+                  className="text-sky-400 hover:text-sky-300 transition-colors focus:outline-none cursor-pointer underline"
+                >
+                  Terms
+                </button>{" "}
                 and{" "}
-                <Link to="/auth/login" className="text-sky-400 hover:text-sky-300 transition-colors">Privacy Policy</Link>.
+                <button 
+                  type="button"
+                  onClick={() => setModalType("privacy")}
+                  className="text-sky-400 hover:text-sky-300 transition-colors focus:outline-none cursor-pointer underline"
+                >
+                  Privacy Policy
+                </button>.
               </label>
             </div>
 
@@ -256,6 +269,82 @@ function SignupPage() {
 
         </div>
       </section>
+
+      {/* Modal Overlay for Terms / Privacy */}
+      {modalType && (
+        <div className="fixed inset-0 z-50 bg-[#05060F]/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div 
+            className="relative w-full max-w-lg rounded-[24px] border border-white/10 bg-gradient-to-br from-[#0c1a30] to-[#05060f] p-6 sm:p-8 shadow-2xl flex flex-col max-h-[80vh] animate-in fade-in zoom-in-95 duration-200"
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between pb-4 border-b border-white/5 shrink-0">
+              <h3 className="text-lg font-bold text-white tracking-tight">
+                {modalType === "terms" ? "Terms of Service" : "Privacy Policy"}
+              </h3>
+              <button 
+                type="button"
+                onClick={() => setModalType(null)}
+                className="h-8 w-8 rounded-full border border-white/5 bg-white/[0.02] text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Modal Scrollable Body */}
+            <div className="flex-1 overflow-y-auto no-scrollbar py-4 space-y-4 text-xs text-slate-300/90 leading-relaxed font-sans pr-1">
+              {modalType === "terms" ? (
+                <>
+                  <p className="font-semibold text-white">Last updated: June 22, 2026</p>
+                  <p>Welcome to LogiMind AI. By creating an account or using our port and rail operating system (the "Platform"), you agree to be bound by these Terms of Service. Please read them carefully.</p>
+                  
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">1. Use of the Platform</h4>
+                  <p>LogiMind AI provides real-time logistics analytics, CCTV PPE detection (including safety helmet enforcement), railway wagon OCR processing, and closed-loop vessel coordinates tracking. You agree to use the Platform only for authorized operational purposes in compliance with local port authority regulations.</p>
+
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">2. User Account & Operator Credentials</h4>
+                  <p>You must maintain the security of your password and credentials. You are responsible for all activities and automated dispatch rules executed under your account. LogiMind AI is not liable for unauthorized access resulting from negligent credential management.</p>
+
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">3. Automated Actions & AI Suggestions</h4>
+                  <p>The Platform provides AI-driven suggestions (via LangGraph agents and vision classifiers) for stack optimization, gate controls, and crew dispatches. Operators retain full responsibility for verifying critical actions before safety overrides or automated executions take place.</p>
+
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">4. Disclaimers & Limitation of Liability</h4>
+                  <p>The Platform and its AI telemetry models are provided "as is" and "as available". We do not guarantee 100% accuracy of OCR or machine breakdown predictions. In no event shall LogiMind AI be liable for port delays, machine downtime, or cargo bottlenecks.</p>
+                </>
+              ) : (
+                <>
+                  <p className="font-semibold text-white">Last updated: June 22, 2026</p>
+                  <p>LogiMind AI respects your privacy and is committed to protecting your terminal data. This Privacy Policy details how we collect, process, and secure operational information within our application.</p>
+                  
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">1. Information We Collect</h4>
+                  <p>We process data necessary to provide autonomous port operations, including: CCTV streams (for safety gear checks), railway telemetries, crane coordinates, vessel ETAs, manifest logs, and user credentials (full name, email, and audit logs).</p>
+
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">2. How We Use Data</h4>
+                  <p>Collected feeds and statistics are processed at the edge to calculate safety compliance rates, route autonomous trucks, coordinate yard cranes, detect incident fires, and improve AI model inferences. We do not sell or monetize your terminal metrics to third parties.</p>
+
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">3. Data Retention & Secure Storage</h4>
+                  <p>Video feeds are analyzed in memory at the edge and are not retained long-term unless flagged for active safety violations. Database logs, wagon telemetry history, and user activity records are securely stored using end-to-end industry encryption standards.</p>
+
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">4. Third-Party Integrations</h4>
+                  <p>Our platform integrates with port operating systems (TOS) via secure APIs. Data exchange is strictly limited to authorized requests required to resolve gate dispatches or crane tasks.</p>
+                </>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="pt-4 border-t border-white/5 flex justify-end shrink-0">
+              <button 
+                type="button"
+                onClick={() => {
+                  if (modalType === "terms") setAgreed(true);
+                  setModalType(null);
+                }}
+                className="px-5 h-9 bg-white text-black font-semibold rounded-full hover:bg-slate-100 transition-colors text-xs cursor-pointer"
+              >
+                {modalType === "terms" ? "I Accept Terms" : "Close"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
