@@ -286,53 +286,42 @@ function Hero() {
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
+  const [wordIdx, setWordIdx] = useState(0);
+  const rotatingWords = [
+    { text: "Ports", gradient: "from-cyan-400 to-blue-500" },
+    { text: "Rail", gradient: "from-emerald-400 to-teal-500" },
+    { text: "Yards", gradient: "from-orange-400 to-amber-500" },
+    { text: "Terminals", gradient: "from-violet-400 to-indigo-500" },
+    { text: "Logistics", gradient: "from-rose-400 to-red-500" }
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIdx((prev) => (prev + 1) % rotatingWords.length);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
+
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    let hls: any;
     const video = videoRef.current;
     if (!video) return;
 
-    const streamUrl = "https://stream.mux.com/BuGGTsiXq1T00WUb8qfURrHkTCbhrkfFLSv4uAOZzdhw.m3u8";
-
-    const handleEnded = () => {
-      video.currentTime = 0;
-      video.play().catch(() => {});
+    const playVideo = () => {
+      video.play().catch((err) => {
+        console.warn("Video autoplay prevented: ", err);
+      });
     };
-    video.addEventListener("ended", handleEnded);
 
-    if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = streamUrl;
+    if (video.readyState >= 3) {
+      playVideo();
     } else {
-      const loadHls = () => {
-        const HlsClass = (window as any).Hls;
-        if (HlsClass && HlsClass.isSupported()) {
-          hls = new HlsClass({
-            maxMaxBufferLength: 10,
-            enableWorker: true,
-            lowLatencyMode: true,
-          });
-          hls.loadSource(streamUrl);
-          hls.attachMedia(video);
-        }
-      };
-
-      if ((window as any).Hls) {
-        loadHls();
-      } else {
-        const script = document.createElement("script");
-        script.src = "https://cdn.jsdelivr.net/npm/hls.js@latest";
-        script.async = true;
-        script.onload = loadHls;
-        document.body.appendChild(script);
-      }
+      video.addEventListener("canplay", playVideo);
     }
 
     return () => {
-      video.removeEventListener("ended", handleEnded);
-      if (hls) {
-        hls.destroy();
-      }
+      video.removeEventListener("canplay", playVideo);
     };
   }, []);
 
@@ -349,18 +338,19 @@ function Hero() {
       <div className="absolute inset-0 z-0 overflow-hidden">
         <video
           ref={videoRef}
-          className="w-full h-full object-cover opacity-85"
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_115655_b4d9cd77-feed-43cd-a198-af78ebdf1f7a.mp4"
+          className="w-full h-full object-cover opacity-100"
           autoPlay
           muted
           loop
           playsInline
         />
         {/* Cinematic overlays for depth and readability */}
-        <div className="absolute inset-0 bg-[#05060F]/30 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#05060F]/20 via-transparent to-[#05060F]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#05060F]/30 via-transparent to-[#05060F]/30" />
-        {/* Atmospheric glow matching the purple/indigo theme of the video */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(139,92,246,0.12),transparent_70%)]" />
+        <div className="absolute inset-0 bg-[#05060F]/10 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#05060F]/5 via-transparent to-[#05060F]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#05060F]/10 via-transparent to-[#05060F]/10" />
+        {/* Atmospheric glow matching the theme of the video */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.08),transparent_70%)]" />
       </div>
 
       {/* Grid + scanline overlays */}
@@ -383,7 +373,8 @@ function Hero() {
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[620px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.45),transparent)] blur-3xl" />
       <div className="pointer-events-none absolute top-40 -left-32 h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgba(37,99,235,0.3),transparent)] blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 right-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgba(13,148,136,0.25),transparent)] blur-3xl" />      <style>{`
-        @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap");
+        @import url("https://api.fontshare.com/v2/css?f[]=trench-slab@500,700,900&f[]=boxing@400&display=swap");
 
         @keyframes border-spin {
           from {
@@ -760,14 +751,28 @@ function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
-            className="mt-6 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[76px] xl:text-[82px] md:leading-[1.05]"
+            className="mt-6 tracking-tight text-white text-3xl sm:text-5xl md:text-6xl lg:text-[78px] xl:text-[90px] 2xl:text-[100px] leading-[1.1] text-center font-black"
+            style={{ fontFamily: "'Trench Slab', serif" }}
           >
-            Autonomous Intelligence
-            <br className="hidden sm:inline" />{" "}
-            <span
-              className="bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-cyan-300"
-            >
-              For Global Ports & Rail
+            <span className="inline-block whitespace-nowrap">Autonomous Intelligence</span>
+            <br />
+            <span className="flex items-center justify-center flex-wrap gap-x-3 sm:gap-x-4">
+              <span className="text-white/90">For Global</span>
+              <span className="relative inline-flex items-center justify-start w-[130px] sm:w-[180px] md:w-[230px] lg:w-[325px] xl:w-[380px] 2xl:w-[430px] h-[38px] sm:h-[54px] md:h-[66px] lg:h-[86px] xl:h-[98px] 2xl:h-[110px] overflow-visible">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={wordIdx}
+                    initial={{ y: 20, opacity: 0, filter: "blur(5px)", rotateX: -60 }}
+                    animate={{ y: 0, opacity: 1, filter: "blur(0px)", rotateX: 0 }}
+                    exit={{ y: -20, opacity: 0, filter: "blur(5px)", rotateX: 60 }}
+                    transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
+                    style={{ transformOrigin: "bottom center" }}
+                    className={`absolute left-0 text-left bg-clip-text text-transparent bg-gradient-to-r ${rotatingWords[wordIdx].gradient} font-black`}
+                  >
+                    {rotatingWords[wordIdx].text}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
             </span>
           </motion.h1>
 
@@ -775,9 +780,17 @@ function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.12 }}
-            className="mx-auto mt-6 max-w-2xl text-base text-white/65 sm:text-lg"
+            className="mx-auto mt-8 max-w-3xl text-sm sm:text-base md:text-lg text-white/60 leading-relaxed text-center font-medium"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            LogiMind AI combines Computer Vision, Railway Yard Analytics, Predictive Maintenance, Multi-Agent AI, Vessel Intelligence, Weather Monitoring and Operational Analytics into one unified command center.
+            <span className="text-white font-semibold">LogiMind AI</span> combines{" "}
+            <span className="text-white font-semibold">Computer Vision</span>,{" "}
+            <span className="text-white font-semibold">Railway Yard Analytics</span>,{" "}
+            <span className="text-white font-semibold">Predictive Maintenance</span>,{" "}
+            <span className="text-white font-semibold">Multi-Agent AI</span>,{" "}
+            <span className="text-white font-semibold">Vessel Intelligence</span>,{" "}
+            <span className="text-white font-semibold">Weather Monitoring</span>, and{" "}
+            <span className="text-white font-semibold">Operational Analytics</span> into one unified command center.
           </motion.p>
 
           {/* Action buttons */}
@@ -808,7 +821,7 @@ function Hero() {
                 </span>
               </span>
             </Link>
-            
+
             <button type="button" className="btn-space">
               <span className="btn-space-inner">
                 <span className="btn-space-strong">
@@ -999,7 +1012,7 @@ function DashboardMockupCard({
   return (
     <div className="relative mx-auto max-w-5xl w-full">
       {/* Glow aura */}
-      <div 
+      <div
         className="absolute -inset-x-16 -inset-y-10 -z-10 rounded-[44px] blur-3xl opacity-35 animate-pulse"
         style={{
           background: `radial-gradient(circle, ${accentColor}33 0%, transparent 70%)`
@@ -1013,7 +1026,7 @@ function DashboardMockupCard({
           background: `linear-gradient(140deg, rgba(255,255,255,0.2) 0%, ${accentColor}40 30%, rgba(255,255,255,0.05) 100%)`,
         }}
       >
-        <div 
+        <div
           className="overflow-hidden rounded-[19px] bg-[#070913]/95 backdrop-blur-2xl"
           style={{
             boxShadow: `0 45px 100px -25px rgba(0,0,0,0.95), 0 0 50px -10px ${accentColor}55`
@@ -1052,11 +1065,10 @@ function DashboardMockupCard({
                 return (
                   <div
                     key={i}
-                    className={`flex items-center gap-2 rounded-md px-2.5 py-2 text-[11px] font-medium transition-colors cursor-pointer ${
-                      it.active
+                    className={`flex items-center gap-2 rounded-md px-2.5 py-2 text-[11px] font-medium transition-colors cursor-pointer ${it.active
                         ? "bg-white/10 text-white"
                         : "text-white/45 hover:text-white/80 hover:bg-white/5"
-                    }`}
+                      }`}
                   >
                     <Ic className="h-3.5 w-3.5" style={{ color: it.active ? accentColor : "currentColor" }} />
                     {it.label}
@@ -1724,10 +1736,10 @@ function DashboardSection() {
           </p>
         </div>
 
-        <ScrollStack 
-          useWindowScroll={true} 
-          itemDistance={120} 
-          baseScale={0.86} 
+        <ScrollStack
+          useWindowScroll={true}
+          itemDistance={120}
+          baseScale={0.86}
           itemScale={0.03}
           itemStackDistance={35}
           rotationAmount={0}
@@ -1779,12 +1791,12 @@ function Trust() {
   const rightLogosScroll = [...rightLogoItems, ...rightLogoItems];
 
   const stats = [
-    { 
-      num: 1.8, 
-      decimals: 1, 
-      prefix: "", 
-      suffix: "M+", 
-      l: "Containers Tracked", 
+    {
+      num: 1.8,
+      decimals: 1,
+      prefix: "",
+      suffix: "M+",
+      l: "Containers Tracked",
       icon: Container,
       color: "text-cyan-400",
       glow: "rgba(6, 182, 212, 0.15)",
@@ -1792,12 +1804,12 @@ function Trust() {
       border: "border-cyan-500/25 group-hover:border-cyan-400/80",
       numGradient: "from-cyan-400 to-blue-500"
     },
-    { 
-      num: 99.2, 
-      decimals: 1, 
-      prefix: "", 
-      suffix: "%", 
-      l: "Safety Compliance", 
+    {
+      num: 99.2,
+      decimals: 1,
+      prefix: "",
+      suffix: "%",
+      l: "Safety Compliance",
       icon: CheckCircle2,
       color: "text-emerald-400",
       glow: "rgba(16, 185, 129, 0.15)",
@@ -1805,12 +1817,12 @@ function Trust() {
       border: "border-emerald-500/25 group-hover:border-emerald-400/80",
       numGradient: "from-emerald-400 to-teal-500"
     },
-    { 
-      num: 217, 
-      decimals: 0, 
-      prefix: "", 
-      suffix: "", 
-      l: "Active Vessels", 
+    {
+      num: 217,
+      decimals: 0,
+      prefix: "",
+      suffix: "",
+      l: "Active Vessels",
       icon: Ship,
       color: "text-cyan-400",
       glow: "rgba(6, 182, 212, 0.15)",
@@ -1818,12 +1830,12 @@ function Trust() {
       border: "border-cyan-500/25 group-hover:border-cyan-400/80",
       numGradient: "from-cyan-400 to-blue-500"
     },
-    { 
-      num: 98.7, 
-      decimals: 1, 
-      prefix: "", 
-      suffix: "%", 
-      l: "AI Accuracy", 
+    {
+      num: 98.7,
+      decimals: 1,
+      prefix: "",
+      suffix: "%",
+      l: "AI Accuracy",
       icon: Brain,
       color: "text-emerald-400",
       glow: "rgba(16, 185, 129, 0.15)",
@@ -1831,12 +1843,12 @@ function Trust() {
       border: "border-emerald-500/25 group-hover:border-emerald-400/80",
       numGradient: "from-emerald-400 to-teal-500"
     },
-    { 
-      num: 14, 
-      decimals: 0, 
-      prefix: "", 
-      suffix: "", 
-      l: "Deployed Ports", 
+    {
+      num: 14,
+      decimals: 0,
+      prefix: "",
+      suffix: "",
+      l: "Deployed Ports",
       icon: MapPin,
       color: "text-cyan-400",
       glow: "rgba(6, 182, 212, 0.15)",
@@ -1844,12 +1856,12 @@ function Trust() {
       border: "border-cyan-500/25 group-hover:border-cyan-400/80",
       numGradient: "from-cyan-400 to-blue-500"
     },
-    { 
-      num: 99.99, 
-      decimals: 2, 
-      prefix: "", 
-      suffix: "%", 
-      l: "System Uptime", 
+    {
+      num: 99.99,
+      decimals: 2,
+      prefix: "",
+      suffix: "%",
+      l: "System Uptime",
       icon: Activity,
       color: "text-emerald-400",
       glow: "rgba(16, 185, 129, 0.15)",
@@ -1945,9 +1957,9 @@ function Trust() {
 
       {/* Centerpiece Logo Carousel Section */}
       <div className="mt-8 relative w-full flex items-center justify-center py-5">
-        
+
         {/* Background center fading overlay to mask logos as they pass behind the center card */}
-        <div 
+        <div
           className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-64 z-10 pointer-events-none"
           style={{
             backgroundImage: "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0) 100%)"
@@ -1962,12 +1974,12 @@ function Trust() {
           }}
         >
           {/* Left Carousel (LTR, scrolls to center) */}
-          <div 
+          <div
             className="absolute left-0 top-0 bottom-0 w-1/2 overflow-hidden flex items-center justify-start"
             style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
           >
             {/* 3D rotated wrapper */}
-            <div 
+            <div
               style={{
                 transform: "rotateY(16deg) translateZ(0)",
                 transformOrigin: "right center",
@@ -1978,7 +1990,7 @@ function Trust() {
                 alignItems: "center"
               }}
             >
-              <div 
+              <div
                 className="flex animate-marquee-ltr"
                 style={{
                   width: "max-content",
@@ -1987,8 +1999,8 @@ function Trust() {
                 }}
               >
                 {leftLogos.map((logo, idx) => (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={idx}
                     className={`flex-shrink-0 animate-float-bob-${(idx % 3) + 1} flex items-center justify-center`}
                     style={{ width: "150px" }}
                   >
@@ -2006,12 +2018,12 @@ function Trust() {
           </div>
 
           {/* Right Carousel (RTL, scrolls to center) */}
-          <div 
+          <div
             className="absolute right-0 top-0 bottom-0 w-1/2 overflow-hidden flex items-center justify-start"
             style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
           >
             {/* 3D rotated wrapper */}
-            <div 
+            <div
               style={{
                 transform: "rotateY(-16deg) translateZ(0)",
                 transformOrigin: "left center",
@@ -2022,7 +2034,7 @@ function Trust() {
                 alignItems: "center"
               }}
             >
-              <div 
+              <div
                 className="flex animate-marquee-rtl"
                 style={{
                   width: "max-content",
@@ -2031,8 +2043,8 @@ function Trust() {
                 }}
               >
                 {rightLogosScroll.map((logo, idx) => (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={idx}
                     className={`flex-shrink-0 animate-float-bob-${(idx % 3) + 1} flex items-center justify-center`}
                     style={{ width: "150px" }}
                   >
@@ -2060,7 +2072,7 @@ function Trust() {
 
           {/* Inner cyber ring 2 (Dashed, Indigo, CCW) */}
           <div className="absolute h-30 w-30 sm:h-38 sm:w-38 rounded-full border border-dashed border-indigo-500/30 animate-cyber-ccw pointer-events-none" />
-          
+
           {/* Crosshair grid overlay */}
           <div className="absolute h-26 w-26 sm:h-32 sm:w-32 rounded-full border border-white/5 flex items-center justify-center animate-pulse pointer-events-none">
             <div className="absolute top-0 bottom-0 w-px bg-cyan-500/10" />
@@ -2071,10 +2083,10 @@ function Trust() {
           <div className="relative group flex items-center justify-center h-24 w-24 sm:h-28 sm:w-28 rounded-full bg-gradient-to-br from-[#0a0f28]/95 to-[#060814]/98 border border-cyan-500/40 shadow-[0_0_35px_rgba(6,182,212,0.25)] hover:shadow-[0_0_50px_rgba(6,182,212,0.5)] hover:border-cyan-400/80 transition-all duration-500 pointer-events-auto cursor-pointer">
             {/* Inner glowing radial sweep */}
             <span className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.25),transparent_70%)] opacity-80 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            
+
             {/* Pulsing ring inside border */}
             <span className="absolute inset-1 rounded-full border border-cyan-400/10 pointer-events-none" />
-            
+
             {/* Glowing logo image */}
             <img
               src="/LogiMind Logo.png"
@@ -2092,12 +2104,12 @@ function Trust() {
           {stats.map((s, idx) => {
             const Icon = s.icon;
             return (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 className="relative group overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-[#0a0f24]/70 to-[#05060f]/90 p-5 text-center transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] cursor-default select-none"
               >
                 {/* Specific colored glow behind the card on hover */}
-                <div 
+                <div
                   className="absolute -inset-10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none blur-xl"
                   style={{
                     background: `radial-gradient(circle, ${s.glow} 0%, transparent 70%)`
@@ -2347,7 +2359,7 @@ function HowItWorks() {
             >
               {/* Inner content container with dark background */}
               <div className="relative w-full h-full rounded-[22.5px] overflow-hidden flex flex-col justify-end p-6 bg-[#05060F]/85">
-                
+
                 <div className="absolute inset-0 z-0">
                   <img
                     src={img}
@@ -2364,7 +2376,7 @@ function HowItWorks() {
                 <div className="relative z-10 flex flex-col h-full justify-between pointer-events-none">
                   {/* Top Row: Center-aligned Stencil Stiled Number */}
                   <div className="flex justify-center w-full mt-2">
-                    <span 
+                    <span
                       className="text-6xl font-black text-white/95 select-none tracking-widest"
                       style={{ fontFamily: "'Big Shoulders Stencil Display', sans-serif" }}
                     >
@@ -2573,26 +2585,26 @@ function Ecosystem() {
         }}
       />
       {/* Ambient light glow */}
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full blur-3xl pointer-events-none transition-all duration-700" 
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full blur-3xl pointer-events-none transition-all duration-700"
         style={{
-          background: activeNodeData 
-            ? `radial-gradient(closest-side, ${activeNodeData.color}15, transparent)` 
+          background: activeNodeData
+            ? `radial-gradient(closest-side, ${activeNodeData.color}15, transparent)`
             : "radial-gradient(closest-side, rgba(56, 189, 248, 0.1), transparent)"
         }}
       />
 
       <div className="mx-auto max-w-6xl px-6">
-        <SectionHead 
-          eyebrow="The Ecosystem" 
-          title="One agentic mesh. Every stakeholder aligned." 
-          sub="LogiMind AI connects marine, terminal, customs, safety, rail siding, and logistical systems into a single self-arbitrating digital ecosystem." 
+        <SectionHead
+          eyebrow="The Ecosystem"
+          title="One agentic mesh. Every stakeholder aligned."
+          sub="LogiMind AI connects marine, terminal, customs, safety, rail siding, and logistical systems into a single self-arbitrating digital ecosystem."
         />
 
         <div className="mt-16 relative min-h-[720px] lg:min-h-[700px] flex items-center justify-center">
           {/* Layout Container */}
           <div className="eco-layout-container w-full relative">
-            
+
             {/* SVG Connections Layer (Visible on desktop) */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block z-0"
@@ -2652,28 +2664,28 @@ function Ecosystem() {
                 fill="none"
               >
                 {/* Outer HUD circles wrapping the loop lines */}
-                <circle 
-                  cx="110" 
-                  cy="110" 
-                  r="82" 
-                  fill="none" 
-                  stroke={themeColor} 
-                  strokeWidth="1" 
-                  strokeDasharray="45 25 15 25" 
-                  className="hud-core-rotate-cw" 
-                  opacity="0.3" 
-                  style={{ filter: `drop-shadow(0 0 2px ${themeColor})` }} 
+                <circle
+                  cx="110"
+                  cy="110"
+                  r="82"
+                  fill="none"
+                  stroke={themeColor}
+                  strokeWidth="1"
+                  strokeDasharray="45 25 15 25"
+                  className="hud-core-rotate-cw"
+                  opacity="0.3"
+                  style={{ filter: `drop-shadow(0 0 2px ${themeColor})` }}
                 />
-                <circle 
-                  cx="110" 
-                  cy="110" 
-                  r="82" 
-                  fill="none" 
-                  stroke={themeColor} 
-                  strokeWidth="1" 
-                  strokeDasharray="6 12" 
-                  className="hud-core-rotate-ccw" 
-                  opacity="0.2" 
+                <circle
+                  cx="110"
+                  cy="110"
+                  r="82"
+                  fill="none"
+                  stroke={themeColor}
+                  strokeWidth="1"
+                  strokeDasharray="6 12"
+                  className="hud-core-rotate-ccw"
+                  opacity="0.2"
                 />
 
                 {/* Two Rotating Loop Lines (Atomic Orbits) spinning in opposite directions */}
@@ -2706,15 +2718,15 @@ function Ecosystem() {
                 </g>
               </svg>
 
-              <div 
-                className="eco-core-glow-bg transition-all duration-500" 
+              <div
+                className="eco-core-glow-bg transition-all duration-500"
                 style={{
-                  background: activeNodeData 
+                  background: activeNodeData
                     ? `radial-gradient(circle, ${activeNodeData.color}33 0%, ${activeNodeData.color}11 50%, transparent 70%)`
                     : "radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(37, 99, 235, 0.12) 50%, transparent 70%)"
                 }}
               />
-              <div 
+              <div
                 className="eco-core-sphere transition-all duration-500 cursor-pointer group"
                 style={{
                   borderColor: activeNodeData ? activeNodeData.color : "rgba(56, 189, 248, 0.4)",
@@ -2741,12 +2753,12 @@ function Ecosystem() {
                 const isActive = activeNode === idx;
 
                 return (
-                  <div 
-                    key={c.title} 
+                  <div
+                    key={c.title}
                     className={`eco-glass-card card-${idx + 1} transition-all duration-300 group cursor-pointer`}
                     style={{
                       borderColor: isActive ? c.color : "rgba(255,255,255,0.08)",
-                      boxShadow: isActive 
+                      boxShadow: isActive
                         ? `0 12px 35px rgba(0, 0, 0, 0.5), 0 0 20px ${c.color}25, 0 1px 0 rgba(255, 255, 255, 0.08) inset`
                         : "0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05) inset",
                       transform: isActive ? "translateY(-4px)" : "none"
@@ -2756,7 +2768,7 @@ function Ecosystem() {
                   >
                     <div className="eco-card-header">
                       <div className="eco-card-title-group">
-                        <span 
+                        <span
                           className="eco-card-title-icon transition-colors"
                           style={{
                             color: isActive ? "#fff" : "rgba(255,255,255,0.7)",
@@ -2983,15 +2995,106 @@ export function FAQ() {
       {/* Glow details */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-sky-500/5 blur-3xl pointer-events-none" />
 
+      {/* Side decorative assets (Canva bg-removed photos) framing the FAQ section */}
+      <div className="absolute inset-0 pointer-events-none hidden md:block overflow-hidden">
+        {/* Left top image (c1.png) */}
+        <motion.div
+          initial={{ opacity: 0, x: -100, rotate: -8 }}
+          whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ type: "spring", stiffness: 45, damping: 15, delay: 0.1 }}
+          className="absolute top-[8%] left-[-40px] lg:left-[2%] xl:left-[6%] w-[130px] lg:w-[180px] xl:w-[230px] z-10"
+        >
+          <motion.div
+            animate={{ y: [0, -12, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="relative group"
+          >
+            <div className="absolute -inset-4 bg-cyan-500/10 rounded-full blur-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <img
+              src="/c1.png"
+              alt="Maritime Terminal Automation"
+              className="w-full h-auto object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)] opacity-70 hover:opacity-95 hover:scale-105 hover:drop-shadow-[0_20px_40px_rgba(6,182,212,0.35)] transition-all duration-500"
+            />
+          </motion.div>
+        </motion.div>
+
+        {/* Left bottom image (c2.png) */}
+        <motion.div
+          initial={{ opacity: 0, x: -100, rotate: 5 }}
+          whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ type: "spring", stiffness: 45, damping: 15, delay: 0.3 }}
+          className="absolute bottom-[8%] left-[-20px] lg:left-[3%] xl:left-[7%] w-[120px] lg:w-[160px] xl:w-[210px] z-10"
+        >
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            className="relative group"
+          >
+            <div className="absolute -inset-4 bg-teal-500/10 rounded-full blur-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <img
+              src="/c2.png"
+              alt="Smart Container Fleet"
+              className="w-full h-auto object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)] opacity-60 hover:opacity-90 hover:scale-105 hover:drop-shadow-[0_20px_40px_rgba(20,184,166,0.3)] transition-all duration-500"
+            />
+          </motion.div>
+        </motion.div>
+
+        {/* Right top image (c3.png) */}
+        <motion.div
+          initial={{ opacity: 0, x: 100, rotate: 8 }}
+          whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ type: "spring", stiffness: 45, damping: 15, delay: 0.2 }}
+          className="absolute top-[16%] right-[-40px] lg:right-[2%] xl:right-[6%] w-[130px] lg:w-[180px] xl:w-[230px] z-10"
+        >
+          <motion.div
+            animate={{ y: [0, -12, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+            className="relative group"
+          >
+            <div className="absolute -inset-4 bg-blue-500/10 rounded-full blur-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <img
+              src="/c3.png"
+              alt="Rail Yard Telemetry"
+              className="w-full h-auto object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)] opacity-70 hover:opacity-95 hover:scale-105 hover:drop-shadow-[0_20px_40px_rgba(59,130,246,0.35)] transition-all duration-500"
+            />
+          </motion.div>
+        </motion.div>
+
+        {/* Right bottom image (c4.png) */}
+        <motion.div
+          initial={{ opacity: 0, x: 100, rotate: -5 }}
+          whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ type: "spring", stiffness: 45, damping: 15, delay: 0.4 }}
+          className="absolute bottom-[10%] right-[-20px] lg:right-[3%] xl:right-[7%] w-[120px] lg:w-[160px] xl:w-[210px] z-10"
+        >
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+            className="relative group"
+          >
+            <div className="absolute -inset-4 bg-indigo-500/10 rounded-full blur-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <img
+              src="/c4.png"
+              alt="Autonomous Freight Logistics"
+              className="w-full h-auto object-contain filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)] opacity-60 hover:opacity-90 hover:scale-105 hover:drop-shadow-[0_20px_40px_rgba(99,102,241,0.3)] transition-all duration-500"
+            />
+          </motion.div>
+        </motion.div>
+      </div>
+
       <div className="mx-auto max-w-4xl px-6 relative z-10 text-center">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-sky-500/20 bg-sky-500/5 text-xs font-semibold uppercase tracking-[0.2em] text-[#38bdf8]">
           FAQ
         </div>
-        
+
         <h2 className="mt-4 font-display text-4xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
           Frequently asked questions
         </h2>
-        
+
         <p className="mt-4 text-neutral-400 text-sm sm:text-base">
           Haven't found what you're looking for?{" "}
           <a
