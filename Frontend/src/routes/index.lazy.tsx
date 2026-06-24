@@ -75,6 +75,7 @@ function Landing() {
       <Trust />
       <JourneySection />
       <HowItWorks />
+      <GarudInspectionSection />
       <Ecosystem />
       <Features />
       <FAQ />
@@ -160,6 +161,7 @@ function Nav() {
         <nav className="relative hidden md:flex items-center gap-0.5 text-sm">
           {[
             { hash: "how", t: "How" },
+            { hash: "wagon", t: "Wagon" },
             { hash: "ecosystem", t: "Ecosystem" },
             { hash: "platform", t: "Modules" },
             { hash: "demo", t: "Demo" },
@@ -217,6 +219,7 @@ function Nav() {
             >
               {[
                 { hash: "how", t: "How" },
+                { hash: "wagon", t: "Wagon" },
                 { hash: "ecosystem", t: "Ecosystem" },
                 { hash: "platform", t: "Modules" },
                 { hash: "demo", t: "Demo" },
@@ -270,10 +273,10 @@ function Hero() {
   const [wordIdx, setWordIdx] = useState(0);
   const rotatingWords = [
     { text: "Ports", gradient: "from-cyan-400 to-blue-500" },
-    { text: "Rail", gradient: "from-emerald-400 to-teal-500" },
-    { text: "Yards", gradient: "from-orange-400 to-amber-500" },
+    { text: "Rail", gradient: "from-emerald-400 to-cyan-500" },
+    { text: "Yards", gradient: "from-blue-400 to-indigo-600" },
     { text: "Terminals", gradient: "from-violet-400 to-indigo-500" },
-    { text: "Logistics", gradient: "from-rose-400 to-red-500" }
+    { text: "Logistics", gradient: "from-cyan-400 to-indigo-500" }
   ];
 
   useEffect(() => {
@@ -732,7 +735,7 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
             className="mt-6 tracking-tight text-white text-3xl sm:text-5xl md:text-6xl lg:text-[78px] xl:text-[90px] 2xl:text-[100px] leading-[1.1] text-center font-black"
-            style={{ fontFamily: "'Trench Slab', serif" }}
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
             <span className="inline-block whitespace-nowrap">Autonomous Intelligence</span>
             <br />
@@ -746,7 +749,11 @@ function Hero() {
                     animate={{ y: 0, opacity: 1, filter: "blur(0px)", rotateX: 0 }}
                     exit={{ y: -20, opacity: 0, filter: "blur(5px)", rotateX: 60 }}
                     transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-                    style={{ transformOrigin: "bottom center" }}
+                    style={{
+                      transformOrigin: "bottom center",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
                     className={`absolute left-0 text-left bg-clip-text text-transparent bg-gradient-to-r ${rotatingWords[wordIdx].gradient} font-black`}
                   >
                     {rotatingWords[wordIdx].text}
@@ -2938,6 +2945,412 @@ function Features() {
               <p className="platform-card-desc">{d}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function GarudInspectionSection() {
+  const items = [
+    {
+      title: "Wagon Number Detection & OCR",
+      file: "/Wagon Number Detection & OCR.mp4",
+      category: "Vision & Text Recognition",
+      description: "Automated detection and OCR reading of wagon numbers with 11-digit Indian Railways format parsing. Uses a specialized localized post-processing model to achieve high confidence even under severe skew, dust, and high speeds.",
+      model: "YOLOv8 + EasyOCR + Custom Checksum Validator",
+      checklist: [
+        "92.3% OCR Extraction Accuracy",
+        "95.7% Character Recognition Rate",
+        "98.1% Checksum Validation (11-Digit)",
+        "High-Speed Processing under 500ms per Wagon",
+        "Adaptive Skew, Rotation & Light Adjustments"
+      ],
+      tag: "GRD-AI-WGN-01",
+      bgRadial: `radial-gradient(at 0% 64%, hsla(190, 93%, 56%, 0.15) 0px, transparent 85%),
+                 radial-gradient(at 41% 94%, hsla(210, 100%, 80%, 0.1) 0px, transparent 85%),
+                 radial-gradient(at 100% 99%, hsla(220, 100%, 57%, 0.15) 0px, transparent 85%)`,
+      accentText: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10",
+      primaryColor: "hsl(190, 92%, 50%)",
+      btnBgGradient: "linear-gradient(0deg, hsl(200, 95%, 45%) 0%, hsl(190, 95%, 65%) 100%)",
+      btnText: "Analyze OCR Stream"
+    },
+    {
+      title: "Night-Time Image Enhancement",
+      file: "/Night-Time Detection.mp4",
+      category: "Low-Light Restoration",
+      description: "Low-light image enhancement powered by Zero-DCE (Deep Curve Estimation). Automatically restores dark, high-noise night video feeds to human-grade visibility, boosting night detection accuracy by over 34% without introducing artifacts.",
+      model: "Zero-DCE (Deep learning curve estimator)",
+      checklist: [
+        "89.4% PSNR Quality Preservation",
+        "Real-Time Inference under 200ms per Frame",
+        "Boosts Night-Time Detection Accuracy by 34.2%",
+        "Adaptive Scene & Illumination Matching",
+        "Minimizes High-ISO Noise Injection"
+      ],
+      tag: "GRD-AI-WGN-02",
+      bgRadial: `radial-gradient(at 0% 64%, hsla(263, 93%, 56%, 0.15) 0px, transparent 85%),
+                 radial-gradient(at 41% 94%, hsla(284, 100%, 84%, 0.1) 0px, transparent 85%),
+                 radial-gradient(at 100% 99%, hsla(306, 100%, 57%, 0.15) 0px, transparent 85%)`,
+      accentText: "text-purple-400 border-purple-500/30 bg-purple-500/10",
+      primaryColor: "hsl(266, 92%, 58%)",
+      btnBgGradient: "linear-gradient(0deg, rgba(94, 58, 238, 1) 0%, rgba(197, 107, 240, 1) 100%)",
+      btnText: "Tune Low-Light Gain"
+    },
+    {
+      title: "Fault & Anomaly Detection",
+      file: "/Fault & Anomaly Detection.mp4",
+      category: "Safety & Quality Audits",
+      description: "Real-time identification of structural defects, mechanical damages, rust levels, and structural anomalies. Flagged defects trigger instant alerts and highlight the region of interest for railway inspectors.",
+      model: "Custom CNN + ResNet Transfer Learning",
+      checklist: [
+        "91.7% Structural Defect Detection Rate",
+        "Low 4.3% False Positive Ratio",
+        "Identifies 12+ Categories of Rolling Damage",
+        "Automated Bounding-Box Visual Alerts",
+        "Configurable Inspection Confidence Thresholds"
+      ],
+      tag: "GRD-AI-WGN-03",
+      bgRadial: `radial-gradient(at 0% 64%, hsla(340, 93%, 56%, 0.15) 0px, transparent 85%),
+                 radial-gradient(at 41% 94%, hsla(20, 100%, 80%, 0.1) 0px, transparent 85%),
+                 radial-gradient(at 100% 99%, hsla(10, 100%, 57%, 0.15) 0px, transparent 85%)`,
+      accentText: "text-rose-400 border-rose-500/30 bg-rose-500/10",
+      primaryColor: "hsl(340, 92%, 50%)",
+      btnBgGradient: "linear-gradient(0deg, hsl(340, 95%, 45%) 0%, hsl(20, 100%, 60%) 100%)",
+      btnText: "Inspect Defects Feed"
+    }
+  ];
+
+  return (
+    <section id="wagon" className="py-28 bg-[#05060F] border-t border-white/5 relative overflow-hidden">
+      {/* Conic Border Animation Styles */}
+      <style>{`
+        .garud-card {
+          position: relative;
+          background-color: hsla(240, 15%, 9%, 0.9);
+          border-radius: 2.5rem;
+          box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.15) inset;
+        }
+
+        .garud-card-border {
+          overflow: hidden;
+          pointer-events: none;
+          position: absolute;
+          z-index: 0;
+          inset: -1.5px;
+          background-image: linear-gradient(
+            0deg,
+            hsl(0, 0%, 25%) -50%,
+            hsl(0, 0%, 10%) 100%
+          );
+          border-radius: 2.5rem;
+          padding: 1.5px;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+        }
+
+        .garud-card-border::before {
+          content: "";
+          pointer-events: none;
+          position: absolute;
+          z-index: 10;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          transform-origin: center center;
+          animation: rotate-border 8s linear infinite;
+        }
+
+        .garud-card-border-0::before {
+          background-image: conic-gradient(
+            from 0deg,
+            transparent 0%,
+            hsl(190, 95%, 60%) 25%,
+            transparent 50%,
+            hsl(190, 95%, 60%) 75%,
+            transparent 100%
+          );
+        }
+
+        .garud-card-border-1::before {
+          background-image: conic-gradient(
+            from 0deg,
+            transparent 0%,
+            hsl(277, 95%, 60%) 25%,
+            transparent 50%,
+            hsl(277, 95%, 60%) 75%,
+            transparent 100%
+          );
+        }
+
+        .garud-card-border-2::before {
+          background-image: conic-gradient(
+            from 0deg,
+            transparent 0%,
+            hsl(345, 95%, 60%) 25%,
+            transparent 50%,
+            hsl(345, 95%, 60%) 75%,
+            transparent 100%
+          );
+        }
+
+        @keyframes rotate-border {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+
+        /* 3D Holographic Layered Cards styles */
+        .card-holo-container {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          perspective: 900px;
+          margin: 10px 0;
+          flex-shrink: 0;
+          max-width: 140px;
+        }
+
+        .card-holo {
+          position: relative;
+          width: 140px;
+          height: 140px;
+          border-radius: 26px;
+          transform-style: preserve-3d;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          pointer-events: none;
+          animation: card-holo-wobble 6.2s ease-in-out infinite;
+        }
+
+        @keyframes card-holo-wobble {
+          0% {
+            transform: rotateX(16deg) rotateY(-18deg);
+          }
+          50% {
+            transform: rotateX(18deg) rotateY(18deg);
+          }
+          100% {
+            transform: rotateX(16deg) rotateY(-18deg);
+          }
+        }
+
+        .card-holo-layer {
+          position: absolute;
+          font-weight: 900;
+          font-size: 108px;
+          letter-spacing: -6px;
+          line-height: 1;
+
+          -webkit-text-stroke: 1px rgba(var(--holo-color-raw), 0.65);
+
+          background: var(--holo-gradient);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+
+          filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.55));
+          opacity: 0.95;
+          transform-style: preserve-3d;
+        }
+
+        .card-holo-layer--back {
+          opacity: 0.18;
+          filter: blur(1px);
+          transform: translateZ(-70px);
+          -webkit-text-stroke: 1px rgba(var(--holo-color-raw), 0.4);
+        }
+        .card-holo-layer--mid {
+          opacity: 0.42;
+          filter: blur(0.4px);
+          transform: translateZ(-34px);
+          -webkit-text-stroke: 1px rgba(var(--holo-color-raw), 0.5);
+        }
+        .card-holo-layer--front {
+          opacity: 0.98;
+          transform: translateZ(0px);
+          -webkit-text-stroke: 1px rgba(var(--holo-color-raw), 0.72);
+        }
+
+        .card-holo::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 26px;
+          background: radial-gradient(
+            circle at 40% 35%,
+            rgba(var(--holo-color-raw), 0.12),
+            rgba(0, 0, 0, 0) 62%
+          );
+          filter: blur(8px);
+          opacity: 0.9;
+          transform: translateZ(-80px);
+        }
+
+        .card-holo::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 26px;
+          border: 1px solid rgba(var(--holo-color-raw), 0.16);
+          background: linear-gradient(
+            120deg,
+            rgba(255, 255, 255, 0.05),
+            rgba(255, 255, 255, 0.01) 45%,
+            rgba(0, 0, 0, 0)
+          );
+          opacity: 0.55;
+          transform: translateZ(-45px);
+        }
+
+        @media (max-width: 600px) {
+          .card-holo {
+            width: 128px;
+            height: 128px;
+            border-radius: 24px;
+          }
+          .card-holo-layer {
+            font-size: 96px;
+            letter-spacing: -5px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .card-holo {
+            animation: none !important;
+          }
+        }
+      `}</style>
+
+      {/* Background aurora gradients */}
+      <div className="pointer-events-none absolute top-1/4 left-1/4 h-[600px] w-[600px] rounded-full bg-[radial-gradient(closest-side,rgba(6,182,212,0.03),transparent)] blur-3xl" />
+      <div className="pointer-events-none absolute bottom-1/4 right-1/4 h-[600px] w-[600px] rounded-full bg-[radial-gradient(closest-side,rgba(99,102,241,0.03),transparent)] blur-3xl" />
+
+      <div className="mx-auto max-w-6xl px-6 relative z-10">
+        <SectionHead
+          eyebrow="WAGON INSPECTION SYSTEM"
+          title="Automated Railway Wagon Analytics with Computer Vision & Deep Learning"
+        />
+
+        <div className="mt-24 space-y-24">
+          {items.map((item, idx) => {
+            const isEven = idx % 2 === 0;
+            return (
+              <div
+                key={idx}
+                className="garud-card relative flex flex-col lg:flex-row gap-10 lg:gap-16 items-center p-8 lg:p-12 overflow-visible text-left shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 hover:scale-[1.005]"
+              >
+                {/* 3D Conic Glowing Border */}
+                <div className={`garud-card-border garud-card-border-${idx}`} />
+
+                {/* Glassy Radial Gradient Content Backdrop */}
+                <div
+                  className="absolute inset-[1px] rounded-[2.45rem] pointer-events-none z-10"
+                  style={{
+                    backgroundImage: `radial-gradient(at 88% 40%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
+                                      radial-gradient(at 49% 30%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
+                                      radial-gradient(at 14% 26%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
+                                      ${item.bgRadial}`
+                  }}
+                />
+
+                {/* Video Component */}
+                <div className={`w-full lg:w-[48%] flex flex-col justify-center relative z-20 ${!isEven ? "lg:order-2" : ""}`}>
+                  <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[#05060f] shadow-[0_20px_45px_rgba(0,0,0,0.6)] flex flex-col">
+                    
+                    {/* Inner video container */}
+                    <div className="relative aspect-video w-full overflow-hidden">
+                      <video
+                        src={item.file}
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                      />
+
+                      {/* Video glare layers */}
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.05] z-10" />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.01] to-transparent opacity-20 mix-blend-overlay z-10" />
+                    </div>
+
+                    {/* HUD console overlay info bar */}
+                    <div className="bg-[#05060f]/95 backdrop-blur-md border-t border-white/10 px-5 py-3 flex items-center justify-between text-[11px] text-white/50 font-mono w-full">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-white/30">STREAM:</span>
+                        <span className="text-white font-bold">{item.tag}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-white/30">ENGINE:</span>
+                        <span className="text-white">{item.model.split(" ")[0]}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content Details */}
+                <div className="w-full lg:w-[48%] flex flex-col md:flex-row gap-8 items-center lg:items-start relative z-20 text-left">
+                  {/* Holographic Index Card */}
+                  <div
+                    className="card-holo-container"
+                    aria-hidden="true"
+                    style={{
+                      "--holo-color-raw": idx === 0 ? "6, 182, 212" : idx === 1 ? "168, 85, 247" : "244, 63, 94",
+                      "--holo-gradient": idx === 0
+                        ? "linear-gradient(90deg, rgba(6, 182, 212, 0.18) 0%, rgba(6, 182, 212, 0.86) 35%, rgba(165, 243, 252, 0.7) 60%, rgba(6, 182, 212, 0.22) 100%)"
+                        : idx === 1
+                        ? "linear-gradient(90deg, rgba(168, 85, 247, 0.18) 0%, rgba(168, 85, 247, 0.86) 35%, rgba(233, 213, 255, 0.7) 60%, rgba(168, 85, 247, 0.22) 100%)"
+                        : "linear-gradient(90deg, rgba(244, 63, 94, 0.18) 0%, rgba(244, 63, 94, 0.86) 35%, rgba(254, 205, 211, 0.7) 60%, rgba(244, 63, 94, 0.22) 100%)",
+                    } as React.CSSProperties}
+                  >
+                    <div className="card-holo">
+                      <div className="card-holo-layer card-holo-layer--back">{idx + 1}</div>
+                      <div className="card-holo-layer card-holo-layer--mid">{idx + 1}</div>
+                      <div className="card-holo-layer card-holo-layer--front">{idx + 1}</div>
+                    </div>
+                  </div>
+
+                  {/* Checklist & Text details */}
+                  <div className="flex-1 space-y-6 text-left w-full">
+                    <div className="space-y-3">
+                      <span className={`text-[10px] uppercase font-mono tracking-[0.18em] font-extrabold ${item.accentText} border px-3 py-1 rounded-full w-fit block`}>
+                        {item.category}
+                      </span>
+                      <h3 className="font-display text-2xl lg:text-3xl font-black text-white tracking-tight leading-tight">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs text-white/40 font-mono tracking-wide">
+                        {item.model}
+                      </p>
+                    </div>
+
+                    <hr className="w-full h-[1px] bg-[#1a1a24] border-none" />
+
+                    {/* Checklist style stats list matching user wrapper */}
+                    <ul className="space-y-3">
+                      {item.checklist.map((text, i) => (
+                        <li key={i} className="flex items-center gap-3">
+                          <span className="flex items-center justify-center w-[1.1rem] h-[1.1rem] rounded-full text-black shrink-0" style={{ backgroundColor: item.primaryColor }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-[0.8rem] h-[0.8rem] text-[#05060F]">
+                              <path fillRule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clipRule="evenodd" />
+                            </svg>
+                          </span>
+                          <span className="text-xs sm:text-sm font-sans font-medium text-white/95">{text}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
