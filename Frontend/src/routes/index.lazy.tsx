@@ -116,6 +116,7 @@ function Landing() {
       <Ecosystem />
       <Features />
       <FAQ />
+      <PricingSection />
       <Footer />
     </div>
   );
@@ -201,6 +202,7 @@ function Nav() {
             { to: "/", hash: "wagon", t: "Wagon" },
             { to: "/", hash: "ecosystem", t: "Ecosystem" },
             { to: "/", hash: "platform", t: "Modules" },
+            { to: "/", hash: "pricing", t: "Pricing" },
             { to: "/contact", hash: undefined, t: "Contact" },
           ].map((i) => (
             <Link
@@ -259,6 +261,7 @@ function Nav() {
                 { to: "/", hash: "wagon", t: "Wagon" },
                 { to: "/", hash: "ecosystem", t: "Ecosystem" },
                 { to: "/", hash: "platform", t: "Modules" },
+                { to: "/", hash: "pricing", t: "Pricing" },
                 { to: "/contact", hash: undefined, t: "Contact" },
               ].map((i) => (
                 <Link
@@ -3601,6 +3604,224 @@ export function FAQ() {
           })}
         </div>
       </motion.div>
+    </section>
+  );
+}
+
+function PricingSection() {
+  const tiers = [
+    {
+      badge: "Starter / Pilot",
+      title: "Developer Pilot",
+      price: "$4,900",
+      period: "/ month",
+      desc: "Perfect for testing automation pipelines in a single yard segment or crane berth.",
+      features: [
+        "Up to 2 active OCR camera streams",
+        "Real-time wagon & container parsing",
+        "Standard analytics dashboard",
+        "Email & Community support",
+        "99.0% SLA uptime guarantee"
+      ],
+      btnText: "Start 14-Day Pilot",
+      accentColor: "#06b6d4", // Cyan
+      badgeBg: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+      featured: false,
+    },
+    {
+      badge: "Autonomous Port",
+      title: "Terminal Pro",
+      price: "$12,500",
+      period: "/ month",
+      desc: "Designed for mid-sized port terminals aiming for full operational autonomy.",
+      features: [
+        "Up to 12 active OCR camera streams",
+        "Real-time deblur restoration pipeline",
+        "LangGraph multi-agent scheduler access",
+        "Predictive maintenance telemetry",
+        "24/7 Phone & Slack support",
+        "99.9% SLA uptime guarantee"
+      ],
+      btnText: "Upgrade to Pro",
+      accentColor: "#a855f7", // Purple
+      badgeBg: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+      featured: true,
+    },
+    {
+      badge: "Enterprise Orchestration",
+      title: "Enterprise Port",
+      price: "Custom",
+      period: "",
+      desc: "Complete digital-twin orchestration for global ports and multi-terminal operations.",
+      features: [
+        "Unlimited camera streams",
+        "Dedicated GPU cluster hosting (edge/cloud)",
+        "Custom OCR parser training support",
+        "On-site installation & integration",
+        "Dedicated TAM (Technical Account Manager)",
+        "99.99% SLA uptime guarantee"
+      ],
+      btnText: "Contact Sales",
+      accentColor: "#f43f5e", // Rose
+      badgeBg: "bg-rose-500/10 text-rose-400 border-rose-500/20",
+      featured: false,
+    }
+  ];
+
+  return (
+    <section id="pricing" className="py-28 bg-[#05060F] border-t border-white/5 relative overflow-hidden">
+      {/* Styles */}
+      <style>{`
+        .price-card {
+          position: relative;
+          background-color: hsla(240, 15%, 9%, 0.85);
+          border-radius: 2.25rem;
+          box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.05) inset;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .price-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0px -16px 24px 0px rgba(255, 255, 255, 0.08) inset;
+        }
+
+        .price-card-border {
+          overflow: hidden;
+          pointer-events: none;
+          position: absolute;
+          z-index: 0;
+          inset: -1.5px;
+          border-radius: 2.25rem;
+          padding: 1.5px;
+          background-image: linear-gradient(
+            0deg,
+            hsl(0, 0%, 20%) -50%,
+            hsl(0, 0%, 10%) 100%
+          );
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          transition: all 0.4s ease;
+        }
+
+        .price-card:hover .price-card-border {
+          background-image: linear-gradient(
+            135deg,
+            var(--price-accent-color) 0%,
+            rgba(255, 255, 255, 0.15) 100%
+          );
+        }
+
+        .price-card-featured .price-card-border {
+          background-image: linear-gradient(
+            135deg,
+            #a855f7 0%,
+            #6366f1 50%,
+            #06b6d4 100%
+          );
+        }
+
+        .price-card-featured::before {
+          content: "";
+          pointer-events: none;
+          position: absolute;
+          z-index: -1;
+          inset: -2px;
+          border-radius: 2.25rem;
+          background: linear-gradient(
+            135deg,
+            #a855f7 0%,
+            #6366f1 50%,
+            #06b6d4 100%
+          );
+          filter: blur(12px);
+          opacity: 0.25;
+          transition: opacity 0.4s ease;
+        }
+
+        .price-card-featured:hover::before {
+          opacity: 0.45;
+          filter: blur(18px);
+        }
+      `}</style>
+
+      {/* Decorative backdrop glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-purple-500/5 blur-3xl pointer-events-none" />
+
+      <div className="mx-auto max-w-6xl px-6 relative z-10">
+        <SectionHead
+          eyebrow="PRICING TIERS"
+          title="Predictable costs. Automated operations."
+          sub="Choose the pricing tier that fits your terminal's scaling volume. Upgrade or pilot autonomies risk-free."
+        />
+
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {tiers.map((t, idx) => (
+            <div
+              key={idx}
+              className={`price-card flex flex-col p-8 lg:p-10 ${t.featured ? "price-card-featured border border-purple-500/20" : ""}`}
+              style={{ "--price-accent-color": t.accentColor } as React.CSSProperties}
+            >
+              {/* Card border element */}
+              <div className="price-card-border" />
+
+              <div className="relative z-10 flex flex-col h-full text-left">
+                {/* Badge tier info */}
+                <span className={`text-[9px] uppercase font-mono tracking-[0.15em] font-extrabold ${t.badgeBg} border px-3 py-1 rounded-full w-fit block`}>
+                  {t.badge}
+                </span>
+
+                {/* Title */}
+                <h3 className="mt-4 font-display text-2xl font-bold text-white tracking-tight leading-none">
+                  {t.title}
+                </h3>
+
+                {/* Price block */}
+                <div className="mt-6 flex items-baseline gap-1 text-white">
+                  <span className="text-4xl lg:text-5xl font-black font-display tracking-tight leading-none">
+                    {t.price}
+                  </span>
+                  {t.period && (
+                    <span className="text-sm font-medium text-white/50">{t.period}</span>
+                  )}
+                </div>
+
+                <p className="mt-4 text-xs lg:text-sm text-white/60 leading-relaxed min-h-[48px]">
+                  {t.desc}
+                </p>
+
+                <hr className="w-full h-[1px] bg-[#1a1a24] border-none my-6" />
+
+                {/* Features Checklist */}
+                <ul className="space-y-4 flex-1 mb-8">
+                  {t.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-3">
+                      <span className="flex items-center justify-center w-5 h-5 rounded-full shrink-0" style={{ backgroundColor: `${t.accentColor}15`, border: `1px solid ${t.accentColor}30` }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-3 h-3" style={{ color: t.accentColor }}>
+                          <path fillRule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clipRule="evenodd" />
+                        </svg>
+                      </span>
+                      <span className="text-xs lg:text-sm font-medium text-white/90">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA Action button */}
+                <Link
+                  to="/app"
+                  className={`w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-wider text-center transition-all duration-300 ${
+                    t.featured
+                      ? "bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 text-white shadow-[0_4px_20px_rgba(99,102,241,0.4)] hover:shadow-[0_8px_30px_rgba(99,102,241,0.6)] hover:-translate-y-0.5"
+                      : "bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:border-white/20 hover:-translate-y-0.5"
+                  }`}
+                >
+                  {t.btnText}
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
