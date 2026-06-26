@@ -25,13 +25,21 @@
 
 <br/>
 
-[🚀 Features](#-key-features--system-modules) · [📸 Screenshots](#-ui-screenshots) · [🏗️ Architecture](#%EF%B8%8F-architecture--working-pipeline) · [⚙️ Setup](#%EF%B8%8F-installation--setup) · [🔌 API](#-api-endpoints)
+[🚀 Features](#-key-features--system-modules) · [📸 Screenshots](#-ui-screenshots--platform-walkthrough) · [🏗️ Architecture](#%EF%B8%8F-architecture--working-pipeline) · [⚙️ Setup](#%EF%B8%8F-installation--setup) · [🔌 API](#-api-endpoints)
 
 <br/>
 
 ---
 
 </div>
+
+> [!IMPORTANT]
+> ### 🔑 Platform Login Credentials (For Evaluators & Testing)
+> To access the full Command Center Dashboard and all operating system modules, use the following credentials on the login screen:
+> - **Email**: `aryanbuha56@gmail.com`
+> - **Password**: `Test123`
+
+<br/>
 
 ## ❓ The Problem Statement
 
@@ -150,51 +158,89 @@ Whether preventing high-risk **PPE violations**, scheduling berth arrivals for m
 
 ---
 
-## 📸 UI Screenshots
+## 📸 UI Screenshots & Platform Walkthrough
 
 <div align="center">
 
-### 1. 🖥️ Command Center & Live Dashboard
+### 1.
+<img src="Frontend/public/D1.jpeg" alt="LogiMind AI - Screenshot 1" width="100%"/>
 
-<img src="Frontend/public/Main Dash.jpeg" alt="LogiMind AI - Command Center Dashboard" width="100%"/>
-
-> *Global Port Risk Score • 217 Active Vessels • 12,408 Containers Today • 94% Crane Health*
-> 
-> *Real-time container throughput charts, risk distribution analysis, and live operational metrics — all in one unified command panel.*
-
-<br/>
+<br/><br/>
 
 ---
 
-### 2. 🧠 AI Copilot (RAG-Powered)
+### 2.
+<img src="Frontend/public/D2.jpeg" alt="LogiMind AI - Screenshot 2" width="100%"/>
 
-<img src="Frontend/public/RAG COPILOT.jpeg" alt="LogiMind AI - RAG Copilot" width="100%"/>
-
-> *Multi-agent reasoning • RAG • Citations*
->
-> *Natural language queries grounded in your port's official documents — SOLAS, MARPOL, IMDG Code. Answers with full citation trails.*
-
-<br/>
+<br/><br/>
 
 ---
 
-### 3. 🔮 What-If Simulator
+### 3.
+<img src="Frontend/public/D3.jpeg" alt="LogiMind AI - Screenshot 3" width="100%"/>
 
-<img src="Frontend/public/What If Simulator.jpeg" alt="LogiMind AI - What-If Simulator" width="100%"/>
-
-> *Typhoon Approach • Peak Cargo Season • Winter Blizzard Outage — preset scenarios*
->
-> *93% simulation confidence using trained Random Forest Regressor models. Adjust weather parameters in real-time and see ML-powered operational forecasts.*
-
-<br/>
+<br/><br/>
 
 ---
 
-### 4. 🚂 Wagon Number Detection & OCR
+### 4.
+<img src="Frontend/public/D4.jpeg" alt="LogiMind AI - Screenshot 4" width="100%"/>
 
-<img src="Frontend/public/Wagon.png" alt="LogiMind AI - Wagon Number Detection" width="100%"/>
+<br/><br/>
 
-> *YOLOv11-powered wagon detection with real-time OCR extraction of 11-digit Indian Railways wagon numbers.*
+---
+
+### 5.
+<img src="Frontend/public/D5.jpeg" alt="LogiMind AI - Screenshot 5" width="100%"/>
+
+<br/><br/>
+
+---
+
+### 6.
+<img src="Frontend/public/D6.jpeg" alt="LogiMind AI - Screenshot 6" width="100%"/>
+
+<br/><br/>
+
+---
+
+### 7.
+<img src="Frontend/public/D7.jpeg" alt="LogiMind AI - Screenshot 7" width="100%"/>
+
+<br/><br/>
+
+---
+
+### 8.
+<img src="Frontend/public/D8.png" alt="LogiMind AI - Screenshot 8" width="100%"/>
+
+<br/><br/>
+
+---
+
+### 9.
+<img src="Frontend/public/D9.jpeg" alt="LogiMind AI - Screenshot 9" width="100%"/>
+
+<br/><br/>
+
+---
+
+### 10.
+<img src="Frontend/public/D10.jpeg" alt="LogiMind AI - Screenshot 10" width="100%"/>
+
+<br/><br/>
+
+---
+
+### 11.
+<img src="Frontend/public/D11.png" alt="LogiMind AI - Screenshot 11" width="100%"/>
+
+<br/><br/>
+
+---
+
+### 12.
+<img src="Frontend/public/D12.png" alt="LogiMind AI - Screenshot 12" width="100%"/>
 
 </div>
 
