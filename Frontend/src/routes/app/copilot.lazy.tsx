@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import {
   Send,
   Sparkles,
@@ -36,13 +37,30 @@ function CopilotPage() {
   const [msgs, setMsgs] = useState<Msg[]>([
     {
       role: "ai",
-      text: "Hello, Arjun. I'm your LogiMind Copilot. I can reason across operations, safety, equipment, vessels, rail yards, and the full knowledge base. What would you like to explore?",
+      text: "Hello. I'm your LogiMind Copilot. I can reason across operations, safety, equipment, vessels, rail yards, and the full knowledge base. What would you like to explore?",
     },
   ]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
   const retryRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) {
+        const fullName = user.user_metadata?.full_name || user.email?.split('@')[0] || "Port User";
+        setMsgs((m) => {
+          if (m.length === 1 && m[0].role === "ai") {
+            return [{
+              ...m[0],
+              text: `Hello, ${fullName}. I'm your LogiMind Copilot. I can reason across operations, safety, equipment, vessels, rail yards, and the full knowledge base. What would you like to explore?`
+            }];
+          }
+          return m;
+        });
+      }
+    });
+  }, []);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });

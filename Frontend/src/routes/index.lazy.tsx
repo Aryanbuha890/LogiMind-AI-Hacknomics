@@ -3614,7 +3614,7 @@ function PricingSection() {
     {
       badge: "Dev Pass",
       title: "Developer Pilot",
-      price: "$4,900",
+      price: "$199",
       period: "Month",
       desc: "Perfect for testing automation pipelines in a single yard segment or crane berth.",
       details: [
@@ -3633,7 +3633,7 @@ function PricingSection() {
     {
       badge: "Pro Pass",
       title: "Terminal Pro",
-      price: "$12,500",
+      price: "$499",
       period: "Month",
       desc: "Designed for mid-sized port terminals aiming for full operational autonomy.",
       details: [
