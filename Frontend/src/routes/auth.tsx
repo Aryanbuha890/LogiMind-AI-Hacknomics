@@ -7,10 +7,10 @@ export const Route = createFileRoute("/auth")({
 export function AuthHeader({ title, sub }: { title: string; sub: string }) {
   return (
     <div className="space-y-1.5 text-center md:text-left mb-6">
-      <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-white">
+      <h1 className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900">
         {title}
       </h1>
-      <p className="text-slate-400 text-xs">
+      <p className="text-slate-600 text-xs">
         {sub}
       </p>
     </div>

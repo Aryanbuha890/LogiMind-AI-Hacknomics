@@ -137,7 +137,7 @@ function CopilotPage() {
                 className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}
               >
                 <div
-                  className={`grid h-8 w-8 shrink-0 place-items-center rounded-md ${m.role === "user" ? "bg-[#0D9488] text-white" : "bg-gradient-to-br from-[#2563EB] to-[#0D9488] text-white"}`}
+                  className={`grid h-8 w-8 shrink-0 place-items-center rounded-md ${m.role === "user" ? "bg-blue-600 text-white" : "bg-gradient-to-br from-[#0F4C81] to-[#0284C7] text-white"}`}
                 >
                   {m.role === "user" ? (
                     <User className="h-4 w-4" />
@@ -146,7 +146,7 @@ function CopilotPage() {
                   )}
                 </div>
                 <div
-                  className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm ${m.role === "user" ? "bg-[#E0F2F1] text-[#1A1A2E] rounded-tr-sm" : "bg-card border border-border rounded-tl-sm"} ${m.isError ? "border-red-500/40" : ""}`}
+                  className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm ${m.role === "user" ? "bg-blue-100 text-blue-900 rounded-tr-sm" : "bg-card border border-border rounded-tl-sm"} ${m.isError ? "border-red-500/40" : ""}`}
                 >
                   {m.role === "user" ? (
                     <div className="whitespace-pre-line leading-relaxed text-[#1A1A2E]">

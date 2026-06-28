@@ -92,7 +92,7 @@ const StatsPanel: React.FC = () => {
                         className={`rounded-xl border border-border bg-card/90 p-5 backdrop-blur-md flex flex-col justify-between hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition duration-300`}
                     >
                         <div className="flex justify-between items-start">
-                            <span className="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
+                            <span className="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-600 font-mono">
                                 {card.label}
                             </span>
                             <span className={`p-1.5 rounded-lg border ${card.bg} ${card.color}`}>
@@ -100,10 +100,10 @@ const StatsPanel: React.FC = () => {
                             </span>
                         </div>
                         <div className="mt-4">
-                            <h4 className="text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight leading-none">
+                            <h4 className="text-2xl font-bold text-slate-800 dark:text-slate-900 tracking-tight leading-none">
                                 {card.value}
                             </h4>
-                            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-mono">{card.desc}</p>
+                            <p className="text-[10px] text-slate-500 dark:text-slate-600 mt-1 font-mono">{card.desc}</p>
                         </div>
                     </motion.div>
                 );

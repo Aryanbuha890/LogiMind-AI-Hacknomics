@@ -169,7 +169,7 @@ function DecisionCenterPage() {
   const selectedDecision = items.find((d) => d.id === selected);
 
   return (
-    <div className="dark flex h-screen flex-col bg-[#070B19] text-white">
+    <div className="dark flex h-screen flex-col bg-white text-slate-900">
       <AppTopBar
         title="AI Decision Center"
         subtitle="Autonomous recommendations · Approval workflows · Impact tracking"
@@ -287,7 +287,7 @@ function DecisionCenterPage() {
               >
                 <div className="flex items-start gap-3">
                   <span
-                    className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-white text-[10px] font-bold"
+                    className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-slate-900 text-[10px] font-bold"
                     style={{ background: sevColors[d.severity] }}
                   >
                     {d.severity[0].toUpperCase()}

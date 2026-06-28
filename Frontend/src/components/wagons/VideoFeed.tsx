@@ -186,9 +186,9 @@ const VideoFeed: React.FC<VideoFeedProps> = ({ streamId }) => {
     };
 
     return (
-        <div className="relative w-full h-full bg-black rounded-lg overflow-hidden border border-white/5">
+        <div className="relative w-full h-full bg-black rounded-lg overflow-hidden border border-slate-200">
             {/* Live Indicator */}
-            <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
+            <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full border border-slate-200">
                 <span className="relative flex h-1.5 w-1.5">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
                     <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-red-500" />
