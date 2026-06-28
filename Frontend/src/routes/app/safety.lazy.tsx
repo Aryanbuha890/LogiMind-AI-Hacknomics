@@ -85,19 +85,19 @@ function SafetyPage() {
                     boxShadow: "0 0 12px rgba(239, 68, 68, 0.7)"
                   }}
                 >
-                  <span className="absolute -top-5.5 left-0 rounded bg-red-600 px-1.5 py-0.5 text-[9px] font-mono font-bold text-white whitespace-nowrap uppercase tracking-wider animate-bounce">
+                  <span className="absolute -top-5.5 left-0 rounded bg-red-600 px-1.5 py-0.5 text-[9px] font-mono font-bold text-slate-900 whitespace-nowrap uppercase tracking-wider animate-bounce">
                     No Helmet · 94%
                   </span>
                 </div>
               )}
 
-              <div className="absolute top-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-white">
+              <div className="absolute top-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-slate-900">
                 CAM-01 · YARD-B-EAST
               </div>
               <div className={`absolute top-2 right-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono font-bold ${currentTime >= 8 && currentTime <= 10 ? 'text-red-400 animate-pulse' : 'text-emerald-400'}`}>
                 ● REC · {currentTime >= 8 && currentTime <= 10 ? 'VIOLATION' : 'NOMINAL'}
               </div>
-              <div className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-white">
+              <div className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-slate-900">
                 YOLOv11 · 58 FPS · Edge Active
               </div>
             </div>
@@ -124,13 +124,13 @@ function SafetyPage() {
                 playsInline
                 className="w-full h-full object-cover"
               />
-              <div className="absolute top-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-white">
+              <div className="absolute top-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-slate-900">
                 CAM-14 · BUNKER-ZONE
               </div>
               <div className="absolute top-2 right-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-amber-500">
                 ● REC · LIVE
               </div>
-              <div className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-white">
+              <div className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-1 text-[10px] font-mono text-slate-900">
                 YOLOv8-Thermal · 45 FPS · Active
               </div>
             </div>
@@ -250,12 +250,12 @@ function SafetyPage() {
                   >
                     <div className="relative aspect-video overflow-hidden rounded bg-gradient-to-br from-[#0B1A33] to-[#1B3A6B]">
                       <div className="absolute inset-0 bg-grid-sm opacity-20" />
-                      <Camera className="absolute inset-0 m-auto h-6 w-6 text-white/30" />
-                      <div className="absolute top-1 left-1 rounded bg-black/60 px-1 py-0.5 text-[9px] font-mono text-white">
+                      <Camera className="absolute inset-0 m-auto h-6 w-6 text-slate-500" />
+                      <div className="absolute top-1 left-1 rounded bg-black/60 px-1 py-0.5 text-[9px] font-mono text-slate-900">
                         {c.id}
                       </div>
                       {c.alert && (
-                        <div className="absolute bottom-1 right-1 rounded bg-[color:var(--color-destructive)] px-1 py-0.5 text-[9px] font-bold text-white animate-pulse">
+                        <div className="absolute bottom-1 right-1 rounded bg-[color:var(--color-destructive)] px-1 py-0.5 text-[9px] font-bold text-slate-900 animate-pulse">
                           {c.alert}
                         </div>
                       )}
@@ -301,7 +301,7 @@ function SafetyPage() {
               </button>
               <button
                 onClick={() => setModal(null)}
-                className="rounded-md bg-[color:var(--color-destructive)] px-3 py-1.5 text-sm font-semibold text-white hover:bg-[color:var(--color-destructive)]/90"
+                className="rounded-md bg-[color:var(--color-destructive)] px-3 py-1.5 text-sm font-semibold text-slate-900 hover:bg-[color:var(--color-destructive)]/90"
               >
                 Confirm & Dispatch
               </button>

@@ -139,12 +139,12 @@ const AISearch: React.FC = () => {
                 <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 max-h-[450px]">
                     {messages.length === 0 && (
                         <div className="h-full flex flex-col items-center justify-center text-slate-500 space-y-6 pt-10">
-                            <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-2xl flex items-center justify-center border border-border">
+                            <div className="w-16 h-16 bg-slate-100 dark:bg-white rounded-2xl flex items-center justify-center border border-border">
                                 <Layout className="w-8 h-8 text-cyan-500 dark:text-cyan-400 opacity-80 animate-pulse" />
                             </div>
                             <div className="text-center space-y-1 px-4">
-                                <h3 className="text-base font-semibold text-slate-800 dark:text-slate-100 font-mono">RailMind Data Intelligence AI</h3>
-                                <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">Ask questions about inspection logs, OCR readings, or structural anomalies.</p>
+                                <h3 className="text-base font-semibold text-slate-800 dark:text-slate-900 font-mono">RailMind Data Intelligence AI</h3>
+                                <p className="text-xs text-slate-500 dark:text-slate-600 max-w-sm mx-auto">Ask questions about inspection logs, OCR readings, or structural anomalies.</p>
                             </div>
 
                             <div className="grid grid-cols-1 gap-2 w-full max-w-md px-4">
@@ -156,10 +156,10 @@ const AISearch: React.FC = () => {
                                     <button
                                         key={i}
                                         onClick={() => setQuery(suggestion)}
-                                        className="p-3 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-750 hover:border-cyan-500/20 rounded-xl text-left text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center justify-between"
+                                        className="p-3 bg-slate-50 dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-white border border-slate-200 dark:border-slate-750 hover:border-cyan-500/20 rounded-xl text-left text-xs font-mono text-slate-700 dark:text-slate-700 hover:text-slate-900 dark:hover:text-white transition-all flex items-center justify-between"
                                     >
                                         <span>{suggestion}</span>
-                                        <Send className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 hover:text-cyan-500" />
+                                        <Send className="w-3.5 h-3.5 text-slate-600 dark:text-slate-500 hover:text-cyan-500" />
                                     </button>
                                 ))}
                             </div>
@@ -171,7 +171,7 @@ const AISearch: React.FC = () => {
                             <div className={`max-w-[85%] space-y-2.5 p-4 rounded-xl shadow-md ${
                                 msg.role === 'user'
                                     ? 'bg-gradient-to-br from-[#1b3a6b] to-[#2563eb] text-white rounded-tr-sm'
-                                    : 'bg-slate-105 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-850 dark:text-slate-200 rounded-tl-sm'
+                                    : 'bg-slate-105 dark:bg-white/80 border border-slate-200 dark:border-slate-200 text-slate-850 dark:text-slate-800 rounded-tl-sm'
                             }`}>
                                 <div className="text-xs font-mono leading-relaxed whitespace-pre-wrap">{msg.content}</div>
 
@@ -187,9 +187,9 @@ const AISearch: React.FC = () => {
 
                     {isLoading && (
                         <div className="flex justify-start">
-                            <div className="bg-slate-100 dark:bg-slate-800/60 rounded-xl rounded-tl-sm px-4 py-3 flex items-center gap-2.5 border border-border">
+                            <div className="bg-slate-100 dark:bg-white/60 rounded-xl rounded-tl-sm px-4 py-3 flex items-center gap-2.5 border border-border">
                                 <Loader2 className="w-4 h-4 animate-spin text-cyan-500 dark:text-cyan-400" />
-                                <span className="text-xs font-mono text-slate-500 dark:text-slate-400">Analyzing schema & scanning logs...</span>
+                                <span className="text-xs font-mono text-slate-500 dark:text-slate-600">Analyzing schema & scanning logs...</span>
                             </div>
                         </div>
                     )}
@@ -197,7 +197,7 @@ const AISearch: React.FC = () => {
                 </div>
 
                 {/* Chat Input form */}
-                <div className="p-4 bg-slate-50 dark:bg-slate-900 border-t border-border">
+                <div className="p-4 bg-slate-50 dark:bg-white border-t border-border">
                     <form onSubmit={handleSearch} className="relative flex gap-2">
                         <input
                             ref={inputRef}
@@ -205,7 +205,7 @@ const AISearch: React.FC = () => {
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                             placeholder="Ask AI Assistant (e.g., show defects)..."
-                            className="w-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl pl-4 pr-12 py-3 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 font-mono transition-all"
+                            className="w-full bg-white dark:bg-slate-50 border border-slate-200 dark:border-slate-200 rounded-xl pl-4 pr-12 py-3 text-xs text-slate-800 dark:text-slate-800 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 font-mono transition-all"
                         />
                         <button
                             type="submit"
@@ -219,18 +219,18 @@ const AISearch: React.FC = () => {
             </div>
 
             {/* RIGHT PANEL: Visual Context (40%) */}
-            <div className="flex-[2] bg-slate-50/50 dark:bg-slate-900/10 flex flex-col h-[200px] xl:h-auto">
-                <div className="p-3 border-b border-border bg-slate-100/50 dark:bg-slate-900/40 flex items-center justify-between">
+            <div className="flex-[2] bg-slate-50/50 dark:bg-slate-100 flex flex-col h-[200px] xl:h-auto">
+                <div className="p-3 border-b border-border bg-slate-100/50 dark:bg-white/40 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <ImageIcon className="w-3.5 h-3.5 text-cyan-500 dark:text-cyan-400" />
-                        <h3 className="text-[10px] font-bold text-slate-800 dark:text-slate-200 uppercase font-mono tracking-wider">Visual Context</h3>
+                        <h3 className="text-[10px] font-bold text-slate-800 dark:text-slate-800 uppercase font-mono tracking-wider">Visual Context</h3>
                     </div>
-                    <span className="text-[9px] text-slate-500 dark:text-slate-400 px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded border border-border font-mono">{allImages.length} Images</span>
+                    <span className="text-[9px] text-slate-500 dark:text-slate-600 px-2 py-0.5 bg-slate-100 dark:bg-white rounded border border-border font-mono">{allImages.length} Images</span>
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-4 bg-card space-y-4">
                     {allImages.length === 0 ? (
-                        <div className="h-full flex flex-col items-center justify-center text-slate-400 dark:text-slate-550 text-center p-6 space-y-2">
+                        <div className="h-full flex flex-col items-center justify-center text-slate-600 dark:text-slate-550 text-center p-6 space-y-2">
                             <ImageIcon className="w-8 h-8 opacity-20" />
                             <p className="text-[10px] font-mono max-w-[180px]">Visual telemetry referenced in chats will append here.</p>
                         </div>
@@ -241,14 +241,14 @@ const AISearch: React.FC = () => {
                                     <div
                                         key={idx}
                                         onClick={() => setSelectedImage(img)}
-                                        className="group cursor-pointer relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-[#0B1A33]/30 hover:border-cyan-500/40 transition-colors"
+                                        className="group cursor-pointer relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-200 bg-slate-100/50 dark:bg-slate-50/30 hover:border-cyan-500/40 transition-colors"
                                     >
                                         <div className="aspect-video w-full bg-slate-100 dark:bg-black/60 flex items-center justify-center">
                                             <div className="absolute inset-0 bg-grid-sm opacity-10 pointer-events-none" />
                                             <span className="text-[9px] font-mono text-cyan-600 dark:text-cyan-400 font-semibold">{img}</span>
                                         </div>
                                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                            <ZoomIn className="w-4 h-4 text-white" />
+                                            <ZoomIn className="w-4 h-4 text-slate-900" />
                                         </div>
                                     </div>
                                 );
@@ -266,13 +266,13 @@ const AISearch: React.FC = () => {
                 >
                     <button
                         onClick={() => setSelectedImage(null)}
-                        className="absolute top-4 right-4 p-1.5 bg-white/10 hover:bg-white/20 rounded-full text-white transition"
+                        className="absolute top-4 right-4 p-1.5 bg-slate-100 hover:bg-slate-200 rounded-full text-slate-900 transition"
                     >
                         <X className="w-5 h-5" />
                     </button>
-                    <div className="w-full max-w-sm aspect-video border border-border rounded-xl bg-white dark:bg-[#050A1A] flex flex-col items-center justify-center p-6 text-center space-y-3">
+                    <div className="w-full max-w-sm aspect-video border border-border rounded-xl bg-white dark:bg-white flex flex-col items-center justify-center p-6 text-center space-y-3">
                         <div className="text-cyan-600 dark:text-cyan-400 font-mono font-bold text-xs uppercase tracking-widest">{selectedImage}</div>
-                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Simulated structural analysis frame highlighting crop segments and bounding dimensions.</p>
+                        <p className="text-[10px] text-slate-500 dark:text-slate-600 font-mono">Simulated structural analysis frame highlighting crop segments and bounding dimensions.</p>
                         <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-transparent rounded-full" />
                     </div>
                 </div>
@@ -290,7 +290,7 @@ const TechnicalDetailsToggle: React.FC<{ sql?: string; results?: any[]; isUser: 
             <button
                 onClick={() => setShowDetails(!showDetails)}
                 className={`flex items-center gap-1 text-[9px] font-bold font-mono uppercase transition-colors ${
-                    isUser ? 'text-white/70 hover:text-white' : 'text-slate-500 hover:text-cyan-600 dark:hover:text-cyan-400'
+                    isUser ? 'text-slate-700 hover:text-white' : 'text-slate-500 hover:text-cyan-600 dark:hover:text-cyan-400'
                 }`}
             >
                 {showDetails ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
@@ -298,7 +298,7 @@ const TechnicalDetailsToggle: React.FC<{ sql?: string; results?: any[]; isUser: 
             </button>
 
             {showDetails && (
-                <div className="space-y-2 font-mono text-[9px] text-slate-500 dark:text-slate-400 animate-in fade-in duration-200">
+                <div className="space-y-2 font-mono text-[9px] text-slate-500 dark:text-slate-600 animate-in fade-in duration-200">
                     {sql && (
                         <div className="bg-slate-100/80 dark:bg-black/40 rounded border border-border p-2">
                             <div className="flex items-center gap-1 mb-1 text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-wider">

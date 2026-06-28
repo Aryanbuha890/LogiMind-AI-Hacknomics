@@ -199,8 +199,8 @@ function WagonsPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-mono tracking-wider transition-all cursor-pointer ${
                   active
-                    ? "bg-slate-800 text-white border border-slate-700 dark:bg-slate-200 dark:text-slate-900 shadow-sm"
-                    : "text-slate-650 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-muted/80"
+                    ? "bg-white text-slate-900 border border-slate-200 dark:bg-slate-200 dark:text-slate-900 shadow-sm"
+                    : "text-slate-650 dark:text-slate-600 hover:text-slate-900 dark:hover:text-slate-900 hover:bg-muted/80"
                 }`}
               >
                 <TabIcon className="w-3.5 h-3.5" />
@@ -220,12 +220,12 @@ function WagonsPage() {
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#1b3a6b] to-[#2563eb] flex items-center justify-center shadow-sm">
-                      <Activity className="w-5 h-5 text-white" />
+                      <Activity className="w-5 h-5 text-slate-900" />
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-500 dark:text-slate-400 mb-0.5 font-mono uppercase tracking-wider">System Status</div>
-                      <div className="text-lg font-bold text-slate-800 dark:text-slate-100 leading-snug">Fully Operational</div>
-                      <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">All feeds active • AI inference at 99.4% precision</div>
+                      <div className="text-[10px] text-slate-500 dark:text-slate-600 mb-0.5 font-mono uppercase tracking-wider">System Status</div>
+                      <div className="text-lg font-bold text-slate-800 dark:text-slate-900 leading-snug">Fully Operational</div>
+                      <div className="text-xs text-slate-500 dark:text-slate-600 mt-1">All feeds active • AI inference at 99.4% precision</div>
                     </div>
                   </div>
                   <div className="relative flex h-2.5 w-2.5 mt-1">
@@ -242,8 +242,8 @@ function WagonsPage() {
                   <div className="text-[10px] font-mono uppercase tracking-wider">Processing</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold font-mono text-slate-800 dark:text-slate-100">24/7</div>
-                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">Continuous Operation</div>
+                  <div className="text-2xl font-bold font-mono text-slate-800 dark:text-slate-900">24/7</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-600 font-mono mt-0.5">Continuous Operation</div>
                 </div>
               </div>
 
@@ -253,8 +253,8 @@ function WagonsPage() {
                   <div className="text-[10px] font-mono uppercase tracking-wider">Streams</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold font-mono text-slate-800 dark:text-slate-100">3/3</div>
-                  <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">Active Cameras</div>
+                  <div className="text-2xl font-bold font-mono text-slate-800 dark:text-slate-900">3/3</div>
+                  <div className="text-[10px] text-slate-500 dark:text-slate-600 font-mono mt-0.5">Active Cameras</div>
                 </div>
               </div>
             </div>
@@ -299,7 +299,7 @@ function WagonsPage() {
                 <div className="h-[280px]">
                   <VideoFeed streamId={2} />
                 </div>
-                <div className="mt-4 pt-4 border-t border-white/5">
+                <div className="mt-4 pt-4 border-t border-slate-200">
                   <WagonDetails streamId={2} />
                 </div>
               </Panel>
@@ -312,7 +312,7 @@ function WagonsPage() {
                 <div className="h-[280px]">
                   <VideoFeed streamId={3} />
                 </div>
-                <div className="mt-4 pt-4 border-t border-white/5">
+                <div className="mt-4 pt-4 border-t border-slate-200">
                   <WagonDetails streamId={3} />
                 </div>
               </Panel>
@@ -325,12 +325,12 @@ function WagonsPage() {
             {/* Refresh controls */}
             <div className="flex justify-between items-center bg-card border border-border rounded-xl p-4 backdrop-blur-sm">
               <div className="flex flex-col gap-0.5">
-                <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">Telemetry Status</span>
+                <span className="text-xs text-slate-500 dark:text-slate-600 font-mono">Telemetry Status</span>
                 <span className="text-xs font-bold font-mono text-emerald-600 dark:text-emerald-400">OPERATIONAL // SYNCED</span>
               </div>
               <div className="flex items-center gap-4 text-xs font-mono">
                 {lastUpdated && (
-                  <span className="text-slate-500 dark:text-slate-400">Last Synced: {lastUpdated.toLocaleTimeString()}</span>
+                  <span className="text-slate-500 dark:text-slate-600">Last Synced: {lastUpdated.toLocaleTimeString()}</span>
                 )}
                 <button
                   onClick={() => fetchAnalytics(true)}
@@ -361,25 +361,25 @@ function WagonsPage() {
                           <Icon className="h-4 w-4" />
                         </span>
                         <div className="text-right">
-                          <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase block font-mono mb-0.5">{metric.desc}</span>
-                          <span className="text-3xl font-bold text-slate-800 dark:text-slate-100 font-mono tracking-tight">{metric.current}</span>
+                          <span className="text-[10px] text-slate-500 dark:text-slate-600 uppercase block font-mono mb-0.5">{metric.desc}</span>
+                          <span className="text-3xl font-bold text-slate-800 dark:text-slate-900 font-mono tracking-tight">{metric.current}</span>
                         </div>
                       </div>
-                      <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-200">{metric.title}</h4>
+                      <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-800">{metric.title}</h4>
                     </div>
 
                     <div className="mt-4 pt-4 border-t border-border/80 grid grid-cols-3 gap-2 text-center text-[10px] font-mono">
                       <div>
-                        <div className="text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[8px] mb-0.5">Last Week</div>
-                        <div className="font-bold text-slate-850 dark:text-slate-200">{metric.weekly}</div>
+                        <div className="text-slate-500 dark:text-slate-600 uppercase tracking-wider text-[8px] mb-0.5">Last Week</div>
+                        <div className="font-bold text-slate-850 dark:text-slate-800">{metric.weekly}</div>
                       </div>
                       <div>
-                        <div className="text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[8px] mb-0.5">This Month</div>
-                        <div className="font-bold text-slate-850 dark:text-slate-200">{metric.currentMonth}</div>
+                        <div className="text-slate-500 dark:text-slate-600 uppercase tracking-wider text-[8px] mb-0.5">This Month</div>
+                        <div className="font-bold text-slate-850 dark:text-slate-800">{metric.currentMonth}</div>
                       </div>
                       <div>
-                        <div className="text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[8px] mb-0.5">Last Month</div>
-                        <div className="font-bold text-slate-850 dark:text-slate-200">{metric.lastMonth}</div>
+                        <div className="text-slate-500 dark:text-slate-600 uppercase tracking-wider text-[8px] mb-0.5">Last Month</div>
+                        <div className="font-bold text-slate-850 dark:text-slate-800">{metric.lastMonth}</div>
                       </div>
                     </div>
                   </motion.div>
@@ -435,7 +435,7 @@ function WagonsPage() {
                     <div className="absolute inset-3 bg-card rounded-full flex items-center justify-center">
                       <div className="text-center">
                         <div className="text-3xl font-bold text-violet-600 dark:text-violet-400 font-mono">{nightDefectPercentage}%</div>
-                        <div className="text-[10px] text-slate-500 dark:text-slate-400 font-mono uppercase tracking-wider">Night Defects</div>
+                        <div className="text-[10px] text-slate-500 dark:text-slate-600 font-mono uppercase tracking-wider">Night Defects</div>
                       </div>
                     </div>
                   </div>

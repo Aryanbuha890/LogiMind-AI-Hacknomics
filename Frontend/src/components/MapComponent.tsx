@@ -241,7 +241,7 @@ export default function MapComponent({
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full min-h-[400px] w-full bg-[#0a1128] text-slate-400 font-mono text-sm">
+      <div className="flex items-center justify-center h-full min-h-[400px] w-full bg-white text-slate-600 font-mono text-sm">
         <div className="flex flex-col items-center gap-3">
           <span className="h-6 w-6 animate-spin rounded-full border-2 border-slate-500 border-t-cyan-500" />
           <span>Synchronizing AIS stream...</span>
@@ -254,7 +254,7 @@ export default function MapComponent({
     <div className="relative w-full h-full min-h-[400px] rounded-lg overflow-hidden border border-border bg-background font-sans">
       
       {/* 1. GLASS STATUS BAR */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[1000] bg-slate-900/80 hover:bg-slate-900/90 text-white backdrop-blur-md px-5 py-2 rounded-full flex gap-5 items-center shadow-lg text-xs font-semibold border border-white/10 transition duration-150">
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[1000] bg-white/80 hover:bg-white/90 text-slate-900 backdrop-blur-md px-5 py-2 rounded-full flex gap-5 items-center shadow-lg text-xs font-semibold border border-slate-200 transition duration-150">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full shadow-[0_0_8px_#10b981] animate-pulse" />
           <span>{activeCount} Active</span>
@@ -333,7 +333,7 @@ export default function MapComponent({
 
       {/* TOAST FEEDBACK */}
       {toastMsg && (
-        <div className="absolute top-18 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-4 py-2 rounded-full shadow-lg z-[10000] font-semibold text-xs animate-fade-in border border-emerald-500/25">
+        <div className="absolute top-18 left-1/2 -translate-x-1/2 bg-emerald-600 text-slate-900 px-4 py-2 rounded-full shadow-lg z-[10000] font-semibold text-xs animate-fade-in border border-emerald-500/25">
           {toastMsg}
         </div>
       )}
@@ -369,7 +369,7 @@ export default function MapComponent({
                 <Popup className="custom-popup">
                   <div className="text-center font-sans">
                     <strong className="text-amber-400">⚠️ {risk.risk_type} ZONE</strong>
-                    <p className="text-xs text-slate-300 mt-1">{risk.description}</p>
+                    <p className="text-xs text-slate-700 mt-1">{risk.description}</p>
                     <span className="text-[9px] text-slate-500">Radius: {risk.radius_km} km</span>
                   </div>
                 </Popup>
@@ -413,10 +413,10 @@ export default function MapComponent({
                   {/* POPUP */}
                   <Popup className="custom-popup" maxWidth={300}>
                     <div className="w-[240px]">
-                      <div className="flex justify-between items-start mb-2 pb-2 border-b border-slate-800">
+                      <div className="flex justify-between items-start mb-2 pb-2 border-b border-slate-200">
                           <div>
                             <h3 className="m-0 text-sm font-bold text-cyan-400">{v.name || "UNNAMED VESSEL"}</h3>
-                            <span className="text-[10px] text-slate-400 font-medium">MMSI: {v.id} {v.flag ? `· ${v.flag}` : ''}</span>
+                            <span className="text-[10px] text-slate-600 font-medium">MMSI: {v.id} {v.flag ? `· ${v.flag}` : ''}</span>
                           </div>
                           {isHighRisk && (
                             <span className="text-[9px] bg-red-950 text-red-400 px-1.5 py-0.5 rounded border border-red-500/20 font-bold">
@@ -425,22 +425,22 @@ export default function MapComponent({
                           )}
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-300 mb-3">
-                          <div className="bg-slate-900/60 p-1.5 rounded">
+                      <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-700 mb-3">
+                          <div className="bg-white/60 p-1.5 rounded">
                             <span className="text-slate-500 block text-[9px] uppercase">Type</span>
-                            <span className="font-semibold text-slate-200">{v.type}</span>
+                            <span className="font-semibold text-slate-800">{v.type}</span>
                           </div>
-                          <div className="bg-slate-900/60 p-1.5 rounded">
+                          <div className="bg-white/60 p-1.5 rounded">
                             <span className="text-slate-500 block text-[9px] uppercase">Speed</span>
-                            <span className="font-semibold text-slate-200">{displaySpeed} kn</span>
+                            <span className="font-semibold text-slate-800">{displaySpeed} kn</span>
                           </div>
-                          <div className="bg-slate-900/60 p-1.5 rounded">
+                          <div className="bg-white/60 p-1.5 rounded">
                             <span className="text-slate-500 block text-[9px] uppercase">Heading</span>
-                            <span className="font-semibold text-slate-200">{heading}°</span>
+                            <span className="font-semibold text-slate-800">{heading}°</span>
                           </div>
-                          <div className="bg-slate-900/60 p-1.5 rounded">
+                          <div className="bg-white/60 p-1.5 rounded">
                             <span className="text-slate-500 block text-[9px] uppercase">ETA</span>
-                            <span className="font-semibold text-slate-200">{v.eta || "N/A"}</span>
+                            <span className="font-semibold text-slate-800">{v.eta || "N/A"}</span>
                           </div>
                       </div>
 

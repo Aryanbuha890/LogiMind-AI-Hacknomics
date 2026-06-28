@@ -36,7 +36,7 @@ export function ContactUs() {
   ];
 
   return (
-    <section id="contact-us" className="py-24 bg-[#05060F] relative overflow-hidden flex flex-col items-center">
+    <section id="contact-us" className="py-24 bg-slate-50 dark:bg-[#020205] relative overflow-hidden flex flex-col items-center">
       {/* Background ambient lighting/glows matching LogiMind theme */}
       <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.06),transparent)] blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 right-1/4 h-[400px] w-[400px] rounded-full bg-[radial-gradient(closest-side,rgba(99,102,241,0.04),transparent)] blur-3xl" />
@@ -48,7 +48,7 @@ export function ContactUs() {
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.02] border border-white/10 text-xs font-semibold uppercase tracking-wider text-cyan-400 mb-6"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-50 dark:bg-[#020205] border border-slate-200 dark:border-white/10 text-xs font-semibold uppercase tracking-wider text-cyan-400 mb-6"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
           Get in Touch
@@ -60,7 +60,7 @@ export function ContactUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="font-display text-4xl sm:text-5xl font-black tracking-tight text-center text-white leading-tight uppercase"
+          className="font-display text-4xl sm:text-5xl font-black tracking-tight text-center text-slate-900 dark:text-white leading-tight uppercase"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
           Let's Build <br />
@@ -75,7 +75,7 @@ export function ContactUs() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15 }}
-          className="mt-4 text-white/50 text-sm text-center max-w-md leading-relaxed"
+          className="mt-4 text-slate-500 dark:text-slate-400 text-sm text-center max-w-md leading-relaxed"
         >
           Have a question or want to collaborate? We reply within 24 hours.
         </motion.p>
@@ -86,7 +86,7 @@ export function ContactUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-12 w-full rounded-[24px] border border-white/10 bg-[#080A16]/60 backdrop-blur-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden"
+          className="mt-12 w-full rounded-[24px] border border-slate-200 dark:border-white/10 bg-white/60 dark:bg-[#060814]/60 backdrop-blur-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden"
         >
           {/* Subtle inner box shadow/glow */}
           <div className="absolute inset-0 rounded-[24px] bg-gradient-to-tr from-transparent via-white/[0.01] to-white/[0.03] pointer-events-none" />
@@ -100,34 +100,34 @@ export function ContactUs() {
               className="relative z-10 space-y-6"
             >
               <div>
-                <h3 className="text-lg font-bold text-white tracking-tight">Send a Message</h3>
-                <p className="text-xs text-white/50 mt-0.5">Every message is read and replied to personally.</p>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">Send a Message</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Every message is read and replied to personally.</p>
               </div>
 
               {/* Form Input fields */}
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="text-[10px] text-white/40 uppercase tracking-widest font-mono font-bold mb-2 block">Name *</label>
+                  <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono font-bold mb-2 block">Name *</label>
                   <input
                     required
                     type="text"
                     placeholder="John Doe"
-                    className="h-12 w-full rounded-xl border border-white/10 bg-[#0A0D1F]/90 px-4 text-sm text-white placeholder:text-white/20 outline-none focus:border-cyan-500/40 transition duration-300"
+                    className="h-12 w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#060814]/90 px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:border-cyan-500/40 transition duration-300"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-white/40 uppercase tracking-widest font-mono font-bold mb-2 block">Email *</label>
+                  <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono font-bold mb-2 block">Email *</label>
                   <input
                     required
                     type="email"
                     placeholder="john@example.com"
-                    className="h-12 w-full rounded-xl border border-white/10 bg-[#0A0D1F]/90 px-4 text-sm text-white placeholder:text-white/20 outline-none focus:border-cyan-500/40 transition duration-300"
+                    className="h-12 w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#060814]/90 px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:border-cyan-500/40 transition duration-300"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-[10px] text-white/40 uppercase tracking-widest font-mono font-bold mb-2 block">Department *</label>
+                <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono font-bold mb-2 block">Department *</label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {[
                     { id: "sales", label: "Sales" },
@@ -141,7 +141,7 @@ export function ContactUs() {
                       className={`h-10 rounded-lg text-xs font-semibold border transition cursor-pointer ${
                         department === d.id
                           ? "bg-cyan-500/10 border-cyan-500/40 text-cyan-300"
-                          : "bg-[#0A0E1F]/60 border-white/10 text-white/60 hover:border-white/20 hover:text-white"
+                          : "bg-white/60 dark:bg-[#060814]/60 border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:border-slate-200 hover:text-white"
                       }`}
                     >
                       {d.label}
@@ -151,29 +151,29 @@ export function ContactUs() {
               </div>
 
               <div>
-                <label className="text-[10px] text-white/40 uppercase tracking-widest font-mono font-bold mb-2 block">Subject *</label>
+                <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono font-bold mb-2 block">Subject *</label>
                 <input
                   required
                   type="text"
                   placeholder="What's this about?"
-                  className="h-12 w-full rounded-xl border border-white/10 bg-[#0A0D1F]/90 px-4 text-sm text-white placeholder:text-white/20 outline-none focus:border-cyan-500/40 transition duration-300"
+                  className="h-12 w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#060814]/90 px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:border-cyan-500/40 transition duration-300"
                 />
               </div>
 
               <div>
-                <label className="text-[10px] text-white/40 uppercase tracking-widest font-mono font-bold mb-2 block">Message *</label>
+                <label className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono font-bold mb-2 block">Message *</label>
                 <textarea
                   required
                   rows={4}
                   placeholder="Tell us what's on your mind..."
-                  className="w-full rounded-xl border border-white/10 bg-[#0A0D1F]/90 px-4 py-3 text-sm text-white placeholder:text-white/20 outline-none focus:border-cyan-500/40 transition duration-300 resize-none"
+                  className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#060814]/90 px-4 py-3 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:border-cyan-500/40 transition duration-300 resize-none"
                 />
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                className="group relative w-full h-12 rounded-xl text-sm font-semibold text-white overflow-hidden transition hover:-translate-y-px cursor-pointer"
+                className="group relative w-full h-12 rounded-xl text-sm font-semibold text-slate-900 dark:text-white overflow-hidden transition hover:-translate-y-px cursor-pointer"
                 style={{
                   backgroundImage: "linear-gradient(120deg, #1B3A6B 0%, #2563EB 55%, #0D9488 110%)",
                   boxShadow: "0 10px 30px -8px rgba(37, 99, 235, 0.5)",
@@ -187,8 +187,8 @@ export function ContactUs() {
               </button>
 
               {/* Connect with us divider */}
-              <div className="pt-6 border-t border-white/5 flex flex-col items-center">
-                <span className="text-[9px] uppercase tracking-[0.25em] text-white/30 font-mono font-bold mb-4">Connect with us</span>
+              <div className="pt-6 border-t border-slate-200 dark:border-white/10 flex flex-col items-center">
+                <span className="text-[9px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400 font-mono font-bold mb-4">Connect with us</span>
                 
                 {/* Social media icons grid */}
                 <div className="flex items-center gap-3">
@@ -200,7 +200,7 @@ export function ContactUs() {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/[0.02] text-white/50 hover:text-white hover:border-cyan-500/35 hover:bg-cyan-500/10 transition-all duration-300"
+                        className="grid h-10 w-10 place-items-center rounded-full border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#020205] text-slate-500 dark:text-slate-400 hover:text-white hover:border-cyan-500/35 hover:bg-cyan-500/10 transition-all duration-300"
                         aria-label={social.label}
                       >
                         <Icon />
@@ -219,8 +219,8 @@ export function ContactUs() {
               <div className="mx-auto h-16 w-16 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-4 animate-pulse">
                 <Check className="h-7 w-7" />
               </div>
-              <h3 className="text-2xl font-bold text-white tracking-tight">Message Dispatched</h3>
-              <p className="mt-2 text-xs text-white/60">Thank you for reaching out. We will connect with you shortly.</p>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Message Dispatched</h3>
+              <p className="mt-2 text-xs text-slate-600 dark:text-slate-400">Thank you for reaching out. We will connect with you shortly.</p>
             </motion.div>
           )}
         </motion.div>
@@ -233,14 +233,14 @@ export function ContactUs() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-4 rounded-2xl border border-white/8 bg-[#080A16]/40 backdrop-blur-xl p-5"
+            className="flex items-center gap-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-white/40 dark:bg-[#060814]/40 backdrop-blur-xl p-5"
           >
             <div className="h-10 w-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
               <Mail className="h-4.5 w-4.5" />
             </div>
             <div>
-              <h4 className="text-[10px] text-white/40 uppercase tracking-widest font-mono font-bold">Email</h4>
-              <div className="text-xs font-semibold text-white/80 mt-0.5">hello@logimind.ai</div>
+              <h4 className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono font-bold">Email</h4>
+              <div className="text-xs font-semibold text-slate-700 dark:text-slate-300 mt-0.5">hello@logimind.ai</div>
             </div>
           </motion.div>
 
@@ -249,14 +249,14 @@ export function ContactUs() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-4 rounded-2xl border border-white/8 bg-[#080A16]/40 backdrop-blur-xl p-5"
+            className="flex items-center gap-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-white/40 dark:bg-[#060814]/40 backdrop-blur-xl p-5"
           >
             <div className="h-10 w-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
               <MapPin className="h-4.5 w-4.5" />
             </div>
             <div>
-              <h4 className="text-[10px] text-white/40 uppercase tracking-widest font-mono font-bold">Location</h4>
-              <div className="text-xs font-semibold text-white/80 mt-0.5">Rotterdam · Singapore · Dubai</div>
+              <h4 className="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono font-bold">Location</h4>
+              <div className="text-xs font-semibold text-slate-700 dark:text-slate-300 mt-0.5">Rotterdam · Singapore · Dubai</div>
             </div>
           </motion.div>
 

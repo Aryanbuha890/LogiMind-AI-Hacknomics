@@ -51,7 +51,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-[#05060F] pt-16 pb-0 overflow-hidden text-white/70 relative border-t border-white/5">
+    <footer className="bg-slate-50 dark:bg-[#020205] pt-16 pb-0 overflow-hidden text-slate-700 dark:text-slate-300 relative border-t border-slate-200 dark:border-white/10">
       {/* glow + grid backdrop */}
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.05]" />
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.18),transparent)]" />
@@ -60,16 +60,16 @@ export function Footer() {
       <div className="mx-auto max-w-[1380px] px-6 md:px-10 relative z-10">
 
         {/* Newsletter subscription box */}
-        <div className="grid gap-10 rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:p-10 backdrop-blur-xl mb-16">
+        <div className="grid gap-10 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 p-6 sm:p-8 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:p-10 backdrop-blur-xl mb-16">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-white/60">
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-slate-600 dark:text-slate-400">
               <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
               The LogiMind Report
             </div>
-            <h3 className="mt-4 font-display text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl">
+            <h3 className="mt-4 font-display text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-3xl">
               Operational intelligence for ports & rail yards — in your inbox monthly.
             </h3>
-            <p className="mt-3 max-w-xl text-sm text-white/60">
+            <p className="mt-3 max-w-xl text-sm text-slate-600 dark:text-slate-400">
               Field notes from terminal and rail yard deployments, multi-agent RAG studies, crane forecasting, wagon telemetry, and predictive maintenance benchmarks. No spam.
             </p>
           </div>
@@ -83,12 +83,12 @@ export function Footer() {
                 type="email"
                 required
                 placeholder="you@logisticsoperator.com"
-                className="h-12 w-full rounded-full border border-white/10 bg-[#0A0E1F]/90 px-5 text-sm text-white placeholder:text-white/40 outline-none focus:border-white/30 focus:bg-white/[0.06]"
+                className="h-12 w-full rounded-full border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#060814]/90 px-5 text-sm text-slate-900 dark:text-white placeholder:text-slate-500 outline-none focus:border-slate-200 focus:bg-white"
               />
             </label>
             <button
               type="submit"
-              className="group relative inline-flex h-12 items-center justify-center gap-1.5 overflow-hidden rounded-full px-6 text-sm font-semibold text-white shadow-[0_10px_30px_-10px_rgba(37,99,235,0.8)] transition-transform hover:-translate-y-px cursor-pointer"
+              className="group relative inline-flex h-12 items-center justify-center gap-1.5 overflow-hidden rounded-full px-6 text-sm font-semibold text-slate-900 dark:text-white shadow-[0_10px_30px_-10px_rgba(37,99,235,0.8)] transition-transform hover:-translate-y-px cursor-pointer"
               style={{
                 backgroundImage: "linear-gradient(120deg, #1B3A6B 0%, #2563EB 55%, #0D9488 110%)",
               }}
@@ -104,21 +104,21 @@ export function Footer() {
           {/* Brand Information */}
           <div className="col-span-12 md:col-span-5 flex flex-col gap-4">
             <Logo size="lg" />
-            <p className="text-sm leading-relaxed text-white/60 mt-1 max-w-md">
+            <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400 mt-1 max-w-md">
               LogiMind AI is the unified operating system for smart ports and rail yards — combining computer vision, predictive maintenance, multi-agent reasoning, rail wagon telemetry, and vessel intelligence in one secure command center.
             </p>
-            <div className="text-[13px] text-white/40 font-medium">
+            <div className="text-[13px] text-slate-500 dark:text-slate-400 font-medium">
               LogiMind AI B.V.
             </div>
             <div className="mt-2 flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white/70">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                 SOC 2 Type II
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white/70">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-300">
                 ISO 27001
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white/70">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 px-2.5 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-300">
                 IMO Compliant
               </span>
             </div>
@@ -127,27 +127,27 @@ export function Footer() {
           {/* Contact Us */}
           <div className="col-span-12 sm:col-span-6 md:col-span-4 flex flex-col gap-5">
             <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/40 mb-4">Contact Us</h3>
+              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-4">Contact Us</h3>
               <ul className="flex flex-col gap-3.5 text-[13.5px]">
                 <li className="flex items-center gap-3">
-                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-white/[0.03] border border-white/5 text-white/70">
+                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">
                     <MapPin className="h-4 w-4" />
                   </span>
-                  <span className="text-white/80">Rotterdam · Singapore · Dubai</span>
+                  <span className="text-slate-700 dark:text-slate-300">Rotterdam · Singapore · Dubai</span>
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-white/[0.03] border border-white/5 text-white/70">
+                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">
                     <Mail className="h-4 w-4" />
                   </span>
-                  <a href="mailto:hello@logimind.ai" className="text-white/80 hover:text-cyan-400 transition-colors">
+                  <a href="mailto:hello@logimind.ai" className="text-slate-700 dark:text-slate-300 hover:text-cyan-400 transition-colors">
                     hello@logimind.ai
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-white/[0.03] border border-white/5 text-white/70">
+                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300">
                     <Phone className="h-4 w-4" />
                   </span>
-                  <a href="tel:+310108004221" className="text-white/80 hover:text-cyan-400 transition-colors">
+                  <a href="tel:+310108004221" className="text-slate-700 dark:text-slate-300 hover:text-cyan-400 transition-colors">
                     +31 (0)10 800 4221
                   </a>
                 </li>
@@ -156,13 +156,13 @@ export function Footer() {
 
             {/* Social Links */}
             <div className="mt-2">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/40 mb-3.5">Connect</h3>
+              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3.5">Connect</h3>
               <div className="flex items-center gap-3">
                 <a
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.02] text-white/60 hover:text-cyan-400 hover:border-cyan-500/50 hover:bg-cyan-500/5 transition-all duration-300"
+                  className="grid h-9 w-9 place-items-center rounded-full border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#020205] text-slate-600 dark:text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 hover:bg-cyan-500/5 transition-all duration-300"
                 >
                   <Linkedin className="h-4 w-4" />
                 </a>
@@ -170,7 +170,7 @@ export function Footer() {
                   href="https://github.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.02] text-white/60 hover:text-white hover:border-white/50 hover:bg-white/5 transition-all duration-300"
+                  className="grid h-9 w-9 place-items-center rounded-full border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#020205] text-slate-600 dark:text-slate-400 hover:text-white hover:border-slate-2000 hover:bg-slate-100 transition-all duration-300"
                 >
                   <GitHubIcon className="h-4.5 w-4.5" />
                 </a>
@@ -180,7 +180,7 @@ export function Footer() {
 
           {/* Sitemap Links */}
           <div className="col-span-12 sm:col-span-6 md:col-span-3">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-white/40 mb-4">Site Map</h3>
+            <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-4">Site Map</h3>
             <ul className="grid gap-2.5 text-[13.5px]">
               {[
                 { to: "/", label: "Home" },
@@ -193,7 +193,7 @@ export function Footer() {
                   <Link
                     to={link.to}
                     {...(link.hash ? { hash: link.hash } : {})}
-                    className="text-white/75 hover:text-white hover:underline transition decoration-white/20 underline-offset-4"
+                    className="text-slate-700 dark:text-slate-300 hover:text-white hover:underline transition decoration-white/20 underline-offset-4"
                   >
                     {link.label}
                   </Link>
@@ -207,7 +207,7 @@ export function Footer() {
       </div>
 
       {/* Bottom Legal / Copyright strip */}
-      <div className="mx-auto max-w-[1380px] px-6 md:px-10 mt-16 pt-8 border-t border-dashed border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-white/40 relative z-10">
+      <div className="mx-auto max-w-[1380px] px-6 md:px-10 mt-16 pt-8 border-t border-dashed border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-500 dark:text-slate-400 relative z-10">
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-6 gap-y-2.5">
           <Link to="/privacy-policy" className="hover:text-white transition-colors whitespace-nowrap">Privacy Policy</Link>
           <Link to="/terms-and-conditions" className="hover:text-white transition-colors whitespace-nowrap">Terms of Service</Link>
