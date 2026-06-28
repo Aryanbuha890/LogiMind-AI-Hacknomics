@@ -77,6 +77,6 @@ class ResponseGenerator:
         return {
             "answer": answer,
             "source": "Groq",
-            "confidence": "Low",
-            "sources": []
+            "confidence": "Medium",
+            "sources": ["General Maritime Knowledge (Groq)"]
         }

@@ -2,7 +2,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import { AppTopBar } from "@/components/AppSidebar";
 import { Panel, ChartTip } from "./index";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Bar,
   BarChart,
@@ -24,17 +24,44 @@ const trend = Array.from({ length: 14 }, (_, i) => ({
 }));
 
 const cameras = [
-  { id: "CAM-01", name: "Yard B · East", alert: "No Helmet", count: 1 },
-  { id: "CAM-02", name: "Gate 3", alert: null, count: 0 },
-  { id: "CAM-05", name: "Pier 2", alert: null, count: 0 },
-  { id: "CAM-08", name: "Warehouse A", alert: "Unauthorized", count: 1 },
-  { id: "CAM-11", name: "Crane 4", alert: null, count: 0 },
-  { id: "CAM-14", name: "Bunker Zone", alert: null, count: 0 },
+  { id: "CAM-01", name: "Yard B · East", alert: "Container Ship Detected", count: 1 },
+  { id: "CAM-02", name: "Gate 3", alert: "Ship Detected", count: 1 },
+  { id: "CAM-03", name: "Pier 2", alert: "Worker Detected", count: 1 },
 ];
 
 function SafetyPage() {
   const [modal, setModal] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState<number>(0);
+
+  const [isUploading, setIsUploading] = useState(false);
+  const [processedVideoUrl, setProcessedVideoUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    
+    event.target.value = '';
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("http://localhost:8005/api/upload_inspect", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.video_url) {
+        setProcessedVideoUrl(data.video_url);
+      }
+    } catch (error) {
+      console.error("Upload failed", error);
+    } finally {
+      setIsUploading(false);
+    }
+  };
   return (
     <>
       <AppTopBar
@@ -42,6 +69,33 @@ function SafetyPage() {
         subtitle="Real-time monitoring · PPE · Fire · Intrusion · Incident response"
       />
       <div className="p-6 space-y-6">
+        <div className="flex justify-end items-center">
+          <input 
+            type="file" 
+            accept="video/*" 
+            className="hidden" 
+            ref={fileInputRef} 
+            onChange={handleUpload} 
+          />
+          <button 
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isUploading}
+            className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition-colors cursor-pointer disabled:opacity-50 shadow-md"
+          >
+            {isUploading ? (
+               <>
+                 <span className="animate-spin rounded-full h-4 w-4 border-2 border-white/20 border-t-white"></span>
+                 Processing AI Models...
+               </>
+            ) : (
+               <>
+                 <Camera className="w-4 h-4" />
+                 Upload & Inspect Video
+               </>
+            )}
+          </button>
+        </div>
+
         <div className="grid grid-cols-12 gap-4">
           {/* Feed 1: PPE Detection */}
           <Panel
@@ -240,7 +294,7 @@ function SafetyPage() {
           <div className="col-span-12 xl:col-span-8">
             <Panel
               title="Camera Grid"
-              subtitle="14 active streams · 3 with active alerts"
+              subtitle="3 active streams · 3 with active alerts"
             >
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {cameras.map((c) => (
@@ -252,6 +306,40 @@ function SafetyPage() {
                       <div className="absolute inset-0 bg-grid-sm opacity-20" />
                       <Camera className="absolute inset-0 m-auto h-6 w-6 text-slate-500" />
                       <div className="absolute top-1 left-1 rounded bg-black/60 px-1 py-0.5 text-[9px] font-mono text-slate-900">
+                      {c.id === "CAM-01" ? (
+                        <video 
+                          src="/ship.mp4" 
+                          autoPlay 
+                          loop 
+                          muted 
+                          playsInline 
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      ) : c.id === "CAM-02" ? (
+                        <video 
+                          src="/ship2.mp4" 
+                          autoPlay 
+                          loop 
+                          muted 
+                          playsInline 
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      ) : c.id === "CAM-03" ? (
+                        <video 
+                          src="/cam03.mp4" 
+                          autoPlay 
+                          loop 
+                          muted 
+                          playsInline 
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      ) : (
+                        <>
+                          <div className="absolute inset-0 bg-grid-sm opacity-20" />
+                          <Camera className="absolute inset-0 m-auto h-6 w-6 text-white/30" />
+                        </>
+                      )}
+                      <div className="absolute top-1 left-1 rounded bg-black/60 px-1 py-0.5 text-[9px] font-mono text-white">
                         {c.id}
                       </div>
                       {c.alert && (
@@ -307,6 +395,35 @@ function SafetyPage() {
               </button>
             </div>
           </motion.div>
+        </div>
+      )}
+
+      {/* Video Modal Overlay */}
+      {processedVideoUrl && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-card border border-border rounded-xl shadow-2xl w-full max-w-4xl overflow-hidden">
+            <div className="p-4 border-b border-border flex justify-between items-center bg-muted/30">
+              <h3 className="font-bold text-lg font-mono flex items-center gap-2">
+                <Camera className="w-5 h-5 text-indigo-500" />
+                Multi-Model AI Inspection Results
+              </h3>
+              <button 
+                onClick={() => setProcessedVideoUrl(null)}
+                className="text-muted-foreground hover:text-foreground p-1 rounded-md hover:bg-muted/80 transition-colors cursor-pointer font-bold"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="relative aspect-video bg-black">
+              <video 
+                src={processedVideoUrl} 
+                autoPlay 
+                controls 
+                loop 
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </div>
         </div>
       )}
     </>

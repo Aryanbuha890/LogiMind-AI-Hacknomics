@@ -20,11 +20,7 @@ class GroqFallbackService:
             "You are a helpful maritime safety assistant. The user asked a question "
             "that could not be answered using the provided document knowledge base. "
             "Please answer the question based on your general knowledge of maritime "
-            "safety, regulations (like SOLAS, MARPOL), and best practices.\n\n"
-            "Format your output EXACTLY as follows:\n"
-            "**Answer:** <your comprehensive answer>\n"
-            "**Sources:** General Maritime Knowledge (Groq)\n"
-            "**Confidence:** Medium"
+            "safety, regulations (like SOLAS, MARPOL), and best practices."
         )
         log.info("GroqFallbackService initialised.")
 
