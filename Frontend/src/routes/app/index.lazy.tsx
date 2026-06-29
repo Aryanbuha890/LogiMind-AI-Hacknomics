@@ -546,7 +546,7 @@ function Kpi({
       </div>
 
       {/* Subtext and mini sparkline trend graph to utilize empty space */}
-      <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-200 flex items-center justify-between gap-1">
+      <div className="mt-3 pt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-1">
         <span className="text-[9px] text-muted-foreground/75 truncate w-[60%]">
           {subtext}
         </span>

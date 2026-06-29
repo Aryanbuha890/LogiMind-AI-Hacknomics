@@ -89,7 +89,7 @@ function DigitalTwinPage() {
   }, []);
 
   return (
-    <div className="dark flex h-screen flex-col bg-white text-slate-900">
+    <div className="dark flex h-screen flex-col bg-[#070B19] text-white">
       <AppTopBar
         title="Digital Twin"
         subtitle="Live interactive port map · Real-time entity tracking"
@@ -261,14 +261,14 @@ function DigitalTwinPage() {
 
               {/* Compass */}
               <g transform="translate(770, 430)">
-                <circle r="14" fill="#1a1f2e" stroke="#e2e8f0" strokeWidth="1" />
+                <circle r="14" fill="#1a1f2e" stroke="#334155" strokeWidth="1" />
                 <text textAnchor="middle" y="-3" fill="#38bdf8" fontSize="8" fontWeight="700">N</text>
                 <text textAnchor="middle" y="9" fill="#64748b" fontSize="6">S</text>
               </g>
 
               {/* Legend */}
               <g transform="translate(320, 290)">
-                <rect width="300" height="140" rx="8" fill="#0f172a" stroke="#cbd5e1" strokeWidth="1" opacity="0.95" />
+                <rect width="300" height="140" rx="8" fill="#0f172a" stroke="#1e293b" strokeWidth="1" opacity="0.95" />
                 <text x="12" y="20" fill="#94a3b8" fontSize="8" fontWeight="700" letterSpacing="0.1em">LEGEND</text>
                 {Object.entries(statusColor).map(([key, val], i) => (
                   <g key={key} transform={`translate(${12 + (i % 2) * 140}, ${36 + Math.floor(i / 2) * 20})`}>

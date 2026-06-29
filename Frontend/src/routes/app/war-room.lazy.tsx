@@ -257,7 +257,7 @@ function WarRoomPage() {
   };
 
   return (
-    <div className="dark flex h-screen flex-col bg-white text-slate-900">
+    <div className="dark flex h-screen flex-col bg-[#070B19] text-white">
       <AppTopBar
         title="Multi-Agent War Room"
         subtitle="Orchestrating autonomous agents · Dynamic consensus protocols · Conflict resolution"
@@ -283,7 +283,7 @@ function WarRoomPage() {
             </button>
             <button
               onClick={triggerReset}
-              className="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-slate-100 hover:bg-slate-100 transition text-slate-700 hover:text-white"
+              className="grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition text-white/70 hover:text-white"
             >
               <RefreshCw className="h-4 w-4" />
             </button>
@@ -297,7 +297,7 @@ function WarRoomPage() {
           title="Multi-Agent Collaboration DAG"
           subtitle="Real-time consensus negotiation flows and message token passes"
         >
-          <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 py-6 px-12 rounded-xl border border-slate-200 bg-slate-50 overflow-hidden">
+          <div className="relative flex flex-col md:flex-row items-center justify-between gap-6 py-6 px-12 rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
             {/* Animated network grid background */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]" />
 
@@ -314,7 +314,7 @@ function WarRoomPage() {
                             ? "0 0 15px 2px rgba(59, 130, 246, 0.3)"
                             : "0 0 10px 0px rgba(16, 185, 129, 0.2)",
                     }}
-                    className="relative flex h-20 w-20 flex-col items-center justify-center rounded-2xl border bg-white/90 z-10 transition-colors"
+                    className="relative flex h-20 w-20 flex-col items-center justify-center rounded-2xl border bg-[#0d162d]/90 z-10 transition-colors"
                     style={{
                       borderColor:
                         agt.status === "alert"
@@ -325,7 +325,7 @@ function WarRoomPage() {
                     }}
                   >
                     <Icon className="h-7 w-7" style={{ color: agt.color }} />
-                    <span className="mt-1 text-[9px] font-mono text-slate-500">{agt.id}</span>
+                    <span className="mt-1 text-[9px] font-mono text-white/50">{agt.id}</span>
 
                     {/* Dynamic pulsing indicator */}
                     <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
@@ -352,7 +352,7 @@ function WarRoomPage() {
 
                   <div className="mt-3 text-center">
                     <div className="text-xs font-semibold">{agt.name}</div>
-                    <div className="text-[10px] text-slate-500 capitalize">{agt.role} Agent</div>
+                    <div className="text-[10px] text-white/40 capitalize">{agt.role} Agent</div>
                   </div>
 
                   {/* Connecting Arrows with pulses */}
@@ -379,31 +379,31 @@ function WarRoomPage() {
               title="Agent-to-Agent Consensus Feed"
               subtitle="Pulsing network traffic data streams showing collaborative negotiation logs"
               right={
-                <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-mono text-slate-500">
+                <div className="flex items-center gap-2 rounded-full border border-white/5 bg-white/[0.02] px-2.5 py-1 text-[10px] font-mono text-white/50">
                   <Activity className="h-3.5 w-3.5 text-cyan-400 animate-pulse" />
                   <span>Mesh Active</span>
                 </div>
               }
             >
-              <div ref={logContainerRef} className="h-[350px] overflow-y-auto space-y-3 rounded-lg border border-slate-200 bg-white/90 p-4 scrollbar-thin">
+              <div ref={logContainerRef} className="h-[350px] overflow-y-auto space-y-3 rounded-lg border border-white/5 bg-[#0a1124]/90 p-4 scrollbar-thin">
                 <AnimatePresence initial={false}>
                   {logs.map((m) => (
                     <motion.div
                       key={m.id}
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="flex items-start gap-3 rounded-lg border border-white/[0.04] bg-transparent p-3 transition hover:bg-slate-100"
+                      className="flex items-start gap-3 rounded-lg border border-white/[0.04] bg-white/[0.01] p-3 transition hover:bg-white/[0.03]"
                     >
-                      <div className="grid h-8 w-8 shrink-0 place-items-center rounded bg-slate-100 font-mono text-[9px] text-slate-600">
+                      <div className="grid h-8 w-8 shrink-0 place-items-center rounded bg-white/5 font-mono text-[9px] text-white/60">
                         {m.timestamp.slice(3)}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center flex-wrap gap-x-2 text-xs">
                           <span className="font-semibold text-cyan-400">{m.sender}</span>
-                          <span className="text-slate-500">➔</span>
+                          <span className="text-white/40">➔</span>
                           <span className="font-semibold text-indigo-400">{m.receiver}</span>
                         </div>
-                        <p className="mt-1 text-sm text-slate-700 leading-relaxed font-mono">
+                        <p className="mt-1 text-sm text-white/80 leading-relaxed font-mono">
                           {m.message}
                         </p>
                       </div>
@@ -435,7 +435,7 @@ function WarRoomPage() {
                   return (
                     <div
                       key={agt.id}
-                      className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white/70 p-3"
+                      className="flex items-center gap-3 rounded-xl border border-white/5 bg-[#0a1124]/70 p-3"
                     >
                       <div
                         className="grid h-9 w-9 place-items-center rounded-lg"
@@ -446,10 +446,10 @@ function WarRoomPage() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-semibold truncate">{agt.name}</span>
-                          <span className="text-[10px] font-mono text-slate-500">{agt.health}% HP</span>
+                          <span className="text-[10px] font-mono text-white/50">{agt.health}% HP</span>
                         </div>
                         {/* HP bar */}
-                        <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-slate-100">
+                        <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-white/10">
                           <div
                             className="h-full rounded-full"
                             style={{
@@ -463,7 +463,7 @@ function WarRoomPage() {
                             }}
                           />
                         </div>
-                        <div className="mt-1 text-[10px] text-slate-500 truncate">{agt.task}</div>
+                        <div className="mt-1 text-[10px] text-white/40 truncate">{agt.task}</div>
                       </div>
                     </div>
                   );
@@ -496,8 +496,8 @@ function WarRoomPage() {
                       </span>
                     </div>
 
-                    <div className="text-[11px] leading-relaxed text-slate-600">
-                      <div className="font-mono text-slate-500 mb-0.5">Issue:</div>
+                    <div className="text-[11px] leading-relaxed text-white/60">
+                      <div className="font-mono text-white/40 mb-0.5">Issue:</div>
                       {c.issue}
                     </div>
 

@@ -190,7 +190,7 @@ function DocsAiPage() {
   };
 
   return (
-    <div className="flex h-screen flex-col bg-slate-50 text-slate-900 overflow-hidden">
+    <div className="dark flex h-screen flex-col bg-[#070B19] text-white overflow-hidden">
       <AppTopBar
         title="Smart Documentation AI"
         subtitle="Automatic Bill of Lading parsing · Dangerous goods verification · Customs OCR automation"
@@ -214,8 +214,8 @@ function DocsAiPage() {
                   dragActive
                     ? "border-cyan-400 bg-cyan-400/[0.03]"
                     : fileUploaded
-                      ? "border-indigo-500/50 bg-slate-1000"
-                      : "border-slate-200 hover:border-slate-200 bg-transparent cursor-pointer"
+                      ? "border-indigo-500/50 bg-[#0d162d]/50"
+                      : "border-white/10 hover:border-white/20 bg-white/[0.01] cursor-pointer"
                 }`}
               >
                 <input
@@ -228,18 +228,18 @@ function DocsAiPage() {
                 
                 <UploadCloud
                   className={`h-12 w-12 mb-3 transition ${
-                    fileUploaded ? "text-indigo-400" : "text-slate-400"
+                    fileUploaded ? "text-indigo-400" : "text-white/20"
                   }`}
                 />
                 {fileUploaded ? (
                   <div>
-                    <h4 className="text-sm font-semibold text-slate-700">{fileName}</h4>
-                    <p className="mt-1 text-xs text-slate-500">File loaded and parsed locally.</p>
+                    <h4 className="text-sm font-semibold text-white/80">{fileName}</h4>
+                    <p className="mt-1 text-xs text-white/40">File loaded and parsed locally.</p>
                   </div>
                 ) : (
                   <div>
-                    <h4 className="text-sm font-semibold text-slate-700">Drag manifest file here</h4>
-                    <p className="mt-1 text-xs text-slate-500">Or click to select from local storage</p>
+                    <h4 className="text-sm font-semibold text-white/70">Drag manifest file here</h4>
+                    <p className="mt-1 text-xs text-white/40">Or click to select from local storage</p>
                   </div>
                 )}
 
@@ -276,16 +276,16 @@ function DocsAiPage() {
                       }}
                       className={`cursor-pointer rounded-xl border p-3.5 transition ${
                         selectedTemplate === t.id
-                          ? "border-cyan-500 bg-white"
-                          : "border-slate-200 bg-white/45 hover:border-slate-200"
+                          ? "border-cyan-500 bg-[#0f1730]"
+                          : "border-white/5 bg-[#0e162d]/45 hover:border-white/15"
                       }`}
                     >
                       <div className="flex items-start justify-between">
                         <div>
                           <h4 className="text-xs font-semibold">{t.name}</h4>
-                          <p className="mt-0.5 text-[10px] text-slate-500">{t.description}</p>
+                          <p className="mt-0.5 text-[10px] text-white/40">{t.description}</p>
                         </div>
-                        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-500">
+                        <span className="rounded-full bg-white/5 px-2 py-0.5 text-[9px] text-white/50">
                           {t.category}
                         </span>
                       </div>
@@ -305,11 +305,11 @@ function DocsAiPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-white/90 h-[500px]"
+                  className="flex flex-col items-center justify-center rounded-xl border border-white/5 bg-[#0a1124]/90 h-[500px]"
                 >
                   <Sparkles className="h-10 w-10 text-cyan-400 animate-pulse mb-3" />
-                  <div className="text-xs font-semibold text-slate-700">Parsing manifest entries via local DPD-NEE NLP Model...</div>
-                  <div className="mt-2 h-1 w-32 overflow-hidden rounded-full bg-slate-100">
+                  <div className="text-xs font-semibold text-white/80">Parsing manifest entries via local DPD-NEE NLP Model...</div>
+                  <div className="mt-2 h-1 w-32 overflow-hidden rounded-full bg-white/10">
                     <motion.div
                       animate={{ left: ["-100%", "100%"] }}
                       transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
@@ -337,25 +337,25 @@ function DocsAiPage() {
                             className={`rounded-xl border p-3 flex items-start justify-between gap-3 ${
                               isFlagged
                                 ? "border-amber-500/30 bg-amber-500/[0.02]"
-                                : "border-slate-200 bg-transparent"
+                                : "border-white/5 bg-white/[0.01]"
                             }`}
                           >
                             <div className="min-w-0 flex-1">
-                              <span className="text-[9px] text-slate-500 font-mono block uppercase">
+                              <span className="text-[9px] text-white/40 font-mono block uppercase">
                                 {field.key}
                               </span>
                               <span className="text-xs font-semibold text-white/85 block mt-0.5">
                                 {field.value}
                               </span>
                               {field.source && (
-                                <span className="text-[7.5px] font-mono text-slate-400 block mt-0.5 uppercase">
+                                <span className="text-[7.5px] font-mono text-white/20 block mt-0.5 uppercase">
                                   Rule match: {field.source}
                                 </span>
                               )}
                             </div>
 
                             <div className="text-right">
-                              <span className="text-[10px] font-mono text-slate-500 block">
+                              <span className="text-[10px] font-mono text-white/40 block">
                                 Conf: {field.confidence}%
                               </span>
                               {isFlagged ? (
@@ -380,22 +380,22 @@ function DocsAiPage() {
                       onClick={() => {
                         toast.success("Manifest approved and sent to customs clearance.");
                       }}
-                      className="flex-1 flex h-10 items-center justify-center gap-1.5 rounded-xl bg-emerald-600 font-semibold text-slate-900 hover:bg-emerald-500 transition text-xs cursor-pointer"
+                      className="flex-1 flex h-10 items-center justify-center gap-1.5 rounded-xl bg-emerald-600 font-semibold text-white hover:bg-emerald-500 transition text-xs cursor-pointer"
                     >
                       <CheckCircle className="h-4 w-4" /> Approve Manifest
                     </button>
                     <button
                       onClick={handleExport}
-                      className="flex-1 flex h-10 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-900 hover:bg-slate-100 transition text-xs cursor-pointer"
+                      className="flex-1 flex h-10 items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 text-white hover:bg-white/10 transition text-xs cursor-pointer"
                     >
                       <Download className="h-4 w-4" /> Export Report
                     </button>
                   </div>
                 </motion.div>
               ) : (
-                <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-200 bg-transparent p-6 text-center text-slate-500 h-[500px]">
-                  <FileText className="h-12 w-12 text-slate-400 mb-3" />
-                  <h4 className="text-sm font-semibold text-slate-700">Extraction Stream Idle</h4>
+                <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-white/[0.01] p-6 text-center text-white/40 h-[500px]">
+                  <FileText className="h-12 w-12 text-white/20 mb-3" />
+                  <h4 className="text-sm font-semibold text-white/70">Extraction Stream Idle</h4>
                   <p className="mt-1 text-xs max-w-xs leading-relaxed">
                     Upload a cargo manifest PDF or select a template sample to begin extraction.
                   </p>

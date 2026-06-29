@@ -79,7 +79,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="relative h-screen w-full bg-slate-50 text-slate-900 flex p-3 sm:p-4 md:p-6 lg:p-8 justify-center items-stretch overflow-hidden box-border md:flex-row-reverse">
+    <div className="relative h-screen w-full bg-[#05060F] text-white flex p-3 sm:p-4 md:p-6 lg:p-8 justify-center items-stretch overflow-hidden box-border md:flex-row-reverse">
       
       {/* Global CSS to hide the browser scrollbar track */}
       <style>{`
@@ -123,10 +123,10 @@ function LoginPage() {
             <Ship className="h-3.5 w-3.5 text-sky-400" />
             <span>AI Port & Rail Operating System</span>
           </div>
-          <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-slate-900 leading-[1.15]">
+          <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
             Review, assess, and execute across marine berths and rail yards.
           </h2>
-          <p className="text-slate-600/90 text-sm leading-relaxed">
+          <p className="text-slate-400/90 text-sm leading-relaxed">
             LogiMind AI combines computer vision telemetry, LangGraph multi-agent reasoning, and predictive maintenance scheduling.
           </p>
         </div>
@@ -148,10 +148,10 @@ function LoginPage() {
           
           {/* Header */}
           <div className="space-y-1.5 text-center md:text-left">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-slate-900">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-white">
               Sign in to your account
             </h1>
-            <p className="text-slate-600 text-xs">
+            <p className="text-slate-400 text-xs">
               Welcome back! Please enter your details below.
             </p>
           </div>
@@ -167,7 +167,7 @@ function LoginPage() {
 
             {/* Email Input */}
             <div className="space-y-1.5">
-              <label className="text-[10px] font-semibold text-slate-600 uppercase tracking-widest">Email</label>
+              <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Email</label>
               <div className="relative">
                 <input
                   type="email"
@@ -175,7 +175,7 @@ function LoginPage() {
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full text-xs text-slate-900 bg-slate-50 border border-white/[0.08] hover:border-slate-200 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
+                  className="w-full text-xs text-white bg-white/[0.02] border border-white/[0.08] hover:border-white/15 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
                 />
                 <Mail className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-slate-500 pointer-events-none" />
               </div>
@@ -184,7 +184,7 @@ function LoginPage() {
             {/* Password Input */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-[10px] font-semibold text-slate-600 uppercase tracking-widest">Password</label>
+                <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Password</label>
                 <button
                   type="button"
                   onClick={() => setForgotOpen(true)}
@@ -200,7 +200,7 @@ function LoginPage() {
                   placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full text-xs text-slate-900 bg-slate-50 border border-white/[0.08] hover:border-slate-200 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
+                  className="w-full text-xs text-white bg-white/[0.02] border border-white/[0.08] hover:border-white/15 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
                 />
                 <button
                   type="button"
@@ -219,9 +219,9 @@ function LoginPage() {
                 id="remember-me"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="h-3.5 w-3.5 rounded border-slate-200 bg-slate-50 text-sky-600 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-sky-600"
+                className="h-3.5 w-3.5 rounded border-white/10 bg-white/[0.02] text-sky-600 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-sky-600"
               />
-              <label htmlFor="remember-me" className="text-xs text-slate-600 select-none cursor-pointer">
+              <label htmlFor="remember-me" className="text-xs text-slate-400 select-none cursor-pointer">
                 Remember me on this device
               </label>
             </div>
@@ -237,7 +237,7 @@ function LoginPage() {
           </form>
 
           {/* Footer Link */}
-          <div className="text-center text-xs text-slate-600 pt-2">
+          <div className="text-center text-xs text-slate-400 pt-2">
             New to LogiMind?{" "}
             <Link to="/auth/signup" className="text-sky-400 hover:text-sky-300 font-semibold transition duration-200">
               Create account
@@ -284,8 +284,8 @@ function LoginPage() {
               />
 
               <div className="relative p-7">
-                <h3 className="text-lg font-bold text-slate-900 mb-1.5">Reset Password</h3>
-                <p className="text-[12px] text-slate-500 mb-5 leading-relaxed">
+                <h3 className="text-lg font-bold text-white mb-1.5">Reset Password</h3>
+                <p className="text-[12px] text-white/40 mb-5 leading-relaxed">
                   Enter your email and we'll send you a recovery link.
                 </p>
                 <form onSubmit={handleForgotSubmit} className="space-y-4">
@@ -300,14 +300,14 @@ function LoginPage() {
                       required
                       value={forgotEmail}
                       onChange={(e) => setForgotEmail(e.target.value)}
-                      className="w-full text-[13px] text-slate-900 bg-slate-100 border border-white/[0.06] rounded-2xl px-4 pt-6 pb-2.5 focus:border-sky-500/40 focus:outline-none focus:shadow-[0_0_0_4px_rgba(56,189,248,0.08)] transition-all duration-300"
+                      className="w-full text-[13px] text-white bg-white/[0.03] border border-white/[0.06] rounded-2xl px-4 pt-6 pb-2.5 focus:border-sky-500/40 focus:outline-none focus:shadow-[0_0_0_4px_rgba(56,189,248,0.08)] transition-all duration-300"
                     />
                   </div>
                   <div className="flex gap-3 justify-end pt-1">
                     <button
                       type="button"
                       onClick={() => setForgotOpen(false)}
-                      className="px-5 py-2.5 border border-white/[0.06] hover:bg-slate-100 text-slate-900 text-xs font-semibold rounded-xl cursor-default transition"
+                      className="px-5 py-2.5 border border-white/[0.06] hover:bg-white/5 text-white text-xs font-semibold rounded-xl cursor-default transition"
                     >
                       Cancel
                     </button>
@@ -315,7 +315,7 @@ function LoginPage() {
                       type="submit"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="px-5 py-2.5 text-slate-900 text-xs font-semibold rounded-xl cursor-default transition"
+                      className="px-5 py-2.5 text-white text-xs font-semibold rounded-xl cursor-default transition"
                       style={{
                         backgroundImage: "linear-gradient(135deg, #1b3a6b, #2563eb, #0d9488)",
                         boxShadow: "0 4px 16px rgba(37,99,235,0.3)",

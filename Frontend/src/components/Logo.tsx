@@ -33,7 +33,7 @@ export function Logo({
           decoding="async"
           className="h-10 w-10 shrink-0 object-contain object-top"
         />
-        <span className="font-display text-[15px] font-semibold tracking-tight text-slate-900 whitespace-nowrap">
+        <span className="font-display text-[15px] font-semibold tracking-tight text-white whitespace-nowrap">
           LogiMind <span className="text-red-500">AI</span>
         </span>
       </Link>

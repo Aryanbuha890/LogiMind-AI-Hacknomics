@@ -62,8 +62,8 @@ function MapPlaceholder() {
           fill="rgba(37,99,235,0.4)"
         />
       </svg>
-      <div className="absolute inset-0 flex items-center justify-center bg-slate-50/20 backdrop-blur-[2px]">
-        <div className="flex flex-col items-center gap-2 text-slate-600 font-mono text-xs">
+      <div className="absolute inset-0 flex items-center justify-center bg-slate-950/20 backdrop-blur-[2px]">
+        <div className="flex flex-col items-center gap-2 text-slate-400 font-mono text-xs">
           <span className="h-4 w-4 animate-spin rounded-full border border-slate-600 border-t-cyan-500" />
           <span>Mounting spatial grid...</span>
         </div>
@@ -247,7 +247,7 @@ function VesselsPage() {
                   onClick={() => setStatusFilter(s)}
                   className={`rounded-md border px-3 py-1 text-xs font-semibold cursor-pointer transition ${
                     statusFilter === s
-                      ? "bg-white text-slate-900 border-slate-200 dark:bg-slate-200 dark:text-slate-900"
+                      ? "bg-slate-800 text-white border-slate-700 dark:bg-slate-200 dark:text-slate-900"
                       : "bg-background text-muted-foreground border-border hover:bg-muted hover:text-foreground"
                   }`}
                 >

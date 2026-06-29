@@ -430,7 +430,7 @@ function SimulatorPage() {
       if (line.trim().startsWith("- ")) {
         const cleanLine = line.trim().substring(2);
         return (
-          <li key={`li-${idx}`} className="text-slate-700 ml-4 list-disc mb-2 pl-1 leading-relaxed text-xs">
+          <li key={`li-${idx}`} className="text-white/80 ml-4 list-disc mb-2 pl-1 leading-relaxed text-xs">
             {parseInlineText(cleanLine)}
           </li>
         );
@@ -441,7 +441,7 @@ function SimulatorPage() {
       if (olMatch) {
         const cleanLine = olMatch[2];
         return (
-          <li key={`ol-${idx}`} className="text-slate-700 ml-4 list-decimal mb-2 pl-1 leading-relaxed text-xs">
+          <li key={`ol-${idx}`} className="text-white/80 ml-4 list-decimal mb-2 pl-1 leading-relaxed text-xs">
             {parseInlineText(cleanLine)}
           </li>
         );
@@ -510,7 +510,7 @@ function SimulatorPage() {
       }
 
       parts.push(
-        <strong key={`bold-${baseKey}-${startIndex}`} className="font-bold text-slate-900">
+        <strong key={`bold-${baseKey}-${startIndex}`} className="font-bold text-white">
           {content}
         </strong>
       );
@@ -526,7 +526,7 @@ function SimulatorPage() {
   };
 
   return (
-    <div className="dark flex h-screen flex-col bg-white text-slate-900">
+    <div className="dark flex h-screen flex-col bg-[#070B19] text-white">
       {/* Global CSS Overrides for slider thumbs */}
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -585,21 +585,21 @@ function SimulatorPage() {
                 key={t.name}
                 onClick={() => applyTemplate(t)}
                 className={`group relative cursor-pointer overflow-hidden rounded-xl border transition-all duration-300 ${isSelected
-                  ? "border-indigo-500 bg-white shadow-[0_0_20px_rgba(99,102,241,0.15)] scale-[1.01]"
-                  : "border-slate-200 bg-white/40 hover:border-slate-200 hover:bg-white/60 hover:shadow-[0_8px_25px_-10px_rgba(0,0,0,0.5)]"
+                  ? "border-indigo-500 bg-[#0f1733] shadow-[0_0_20px_rgba(99,102,241,0.15)] scale-[1.01]"
+                  : "border-white/5 bg-[#0e162d]/40 hover:border-white/20 hover:bg-[#0e162d]/60 hover:shadow-[0_8px_25px_-10px_rgba(0,0,0,0.5)]"
                   }`}
                 style={{
                   boxShadow: isSelected ? `0 0 25px ${t.color}25, inset 0 1px 0 rgba(255,255,255,0.05)` : ""
                 }}
               >
                 {/* macOS style header */}
-                <div className="flex items-center justify-between px-3 py-2 bg-slate-50 border-b border-slate-200">
+                <div className="flex items-center justify-between px-3 py-2 bg-white/[0.02] border-b border-white/5">
                   <div className="flex gap-1.5">
                     <span className="w-2 h-2 rounded-full" style={{ backgroundColor: isSelected ? t.color : '#ff605c', opacity: isSelected ? 1 : 0.4 }} />
                     <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#ffbd44', opacity: 0.4 }} />
                     <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#00ca4e', opacity: 0.4 }} />
                   </div>
-                  <span className="text-[9px] font-mono tracking-widest text-slate-500 uppercase font-bold">PRESET</span>
+                  <span className="text-[9px] font-mono tracking-widest text-white/30 uppercase font-bold">PRESET</span>
                 </div>
 
                 <div className="p-4.5 flex items-center gap-4">
@@ -614,13 +614,13 @@ function SimulatorPage() {
                     <Icon className="h-6 w-6" />
                   </span>
                   <div>
-                    <h4 className="text-sm font-bold tracking-tight text-slate-900 flex items-center gap-1.5">
+                    <h4 className="text-sm font-bold tracking-tight text-white flex items-center gap-1.5">
                       {t.name}
                       {isSelected && (
                         <span className="w-1.5 h-1.5 rounded-full animate-ping" style={{ backgroundColor: t.color }} />
                       )}
                     </h4>
-                    <p className="text-xs text-slate-500 leading-relaxed mt-0.5">{t.desc}</p>
+                    <p className="text-xs text-white/50 leading-relaxed mt-0.5">{t.desc}</p>
                   </div>
                 </div>
               </div>
@@ -629,7 +629,7 @@ function SimulatorPage() {
         </div>
 
         {/* Global Weather Synchronizer */}
-        <div className="relative overflow-hidden rounded-xl border border-white/[0.06] bg-white/40 p-4.5 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_8px_30px_rgba(0,0,0,0.3)]">
+        <div className="relative overflow-hidden rounded-xl border border-white/[0.06] bg-[#0e162d]/40 p-4.5 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),0_8px_30px_rgba(0,0,0,0.3)]">
           {/* Subtle neon glowing light background overlay */}
           <div className="absolute right-0 top-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -642,7 +642,7 @@ function SimulatorPage() {
               <Sparkles className="h-3.5 w-3.5 animate-pulse text-cyan-400" />
               <span>Telemetry Synchronization Engine (OpenWeather Integration)</span>
             </div>
-            <span className="text-[10px] text-slate-500 font-mono">STATUS: READY_TO_SYNC</span>
+            <span className="text-[10px] text-white/40 font-mono">STATUS: READY_TO_SYNC</span>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -651,7 +651,7 @@ function SimulatorPage() {
                 key={city}
                 disabled={isFetchingWeather || isRunning}
                 onClick={() => syncWeather(city)}
-                className="group relative flex items-center gap-2 overflow-hidden rounded-xl border border-white/[0.05] bg-slate-50 px-4 py-2.5 text-xs font-semibold text-slate-700 transition-all duration-300 hover:bg-white/[0.07] hover:border-cyan-500/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] active:scale-95 disabled:opacity-40 disabled:pointer-events-none cursor-pointer"
+                className="group relative flex items-center gap-2 overflow-hidden rounded-xl border border-white/[0.05] bg-white/[0.02] px-4 py-2.5 text-xs font-semibold text-white/80 transition-all duration-300 hover:bg-white/[0.07] hover:border-cyan-500/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] active:scale-95 disabled:opacity-40 disabled:pointer-events-none cursor-pointer"
               >
                 <div className="absolute -left-16 top-0 h-full w-12 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 transition-all duration-1000 group-hover:left-full" />
                 <Anchor className="h-3.5 w-3.5 text-cyan-400 transition-transform duration-300 group-hover:rotate-12" />
@@ -671,7 +671,7 @@ function SimulatorPage() {
               right={
                 <button
                   onClick={handleReset}
-                  className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 hover:text-white transition cursor-pointer"
+                  className="flex items-center gap-1.5 text-[11px] font-semibold text-white/55 hover:text-white transition cursor-pointer"
                 >
                   <RefreshCw className="h-3 w-3" /> Reset default
                 </button>
@@ -681,7 +681,7 @@ function SimulatorPage() {
                 {/* Wind speed */}
                 <div className="space-y-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-slate-700 flex items-center gap-1.5">
+                    <span className="font-bold text-white/80 flex items-center gap-1.5">
                       <CloudLightning className="h-3.5 w-3.5 text-amber-400" />
                       Wind Speed
                     </span>
@@ -707,7 +707,7 @@ function SimulatorPage() {
                     }}
                     className="w-full text-amber-400 accent-amber-400 h-1.5 rounded-lg appearance-none cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                  <div className="flex justify-between text-[10px] text-white/30 font-mono">
                     <span>Calm (0 m/s)</span>
                     <span>Emergency (35 m/s)</span>
                   </div>
@@ -716,7 +716,7 @@ function SimulatorPage() {
                 {/* Visibility */}
                 <div className="space-y-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-slate-700 flex items-center gap-1.5">
+                    <span className="font-bold text-white/80 flex items-center gap-1.5">
                       <Eye className="h-3.5 w-3.5 text-cyan-400" />
                       Visibility
                     </span>
@@ -742,7 +742,7 @@ function SimulatorPage() {
                     }}
                     className="w-full text-cyan-400 accent-cyan-400 h-1.5 rounded-lg appearance-none cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                  <div className="flex justify-between text-[10px] text-white/30 font-mono">
                     <span>Dense Fog (100m)</span>
                     <span>Clear (10000m)</span>
                   </div>
@@ -751,7 +751,7 @@ function SimulatorPage() {
                 {/* Precipitation */}
                 <div className="space-y-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-slate-700 flex items-center gap-1.5">
+                    <span className="font-bold text-white/80 flex items-center gap-1.5">
                       <CloudRain className="h-3.5 w-3.5 text-blue-400" />
                       Precipitation (Rain/Snow)
                     </span>
@@ -777,7 +777,7 @@ function SimulatorPage() {
                     }}
                     className="w-full text-blue-400 accent-blue-400 h-1.5 rounded-lg appearance-none cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                  <div className="flex justify-between text-[10px] text-white/30 font-mono">
                     <span>No Rain (0)</span>
                     <span>Heavy Downpour (20)</span>
                   </div>
@@ -786,7 +786,7 @@ function SimulatorPage() {
                 {/* Temperature */}
                 <div className="space-y-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-slate-700 flex items-center gap-1.5">
+                    <span className="font-bold text-white/80 flex items-center gap-1.5">
                       <Thermometer className="h-3.5 w-3.5 text-orange-400" />
                       Temperature
                     </span>
@@ -812,7 +812,7 @@ function SimulatorPage() {
                     }}
                     className="w-full text-orange-400 accent-orange-400 h-1.5 rounded-lg appearance-none cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                  <div className="flex justify-between text-[10px] text-white/30 font-mono">
                     <span>Sub-zero (-10°C)</span>
                     <span>Extreme Heat (45°C)</span>
                   </div>
@@ -829,7 +829,7 @@ function SimulatorPage() {
                 {/* Active Inbound Vessels */}
                 <div className="space-y-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-slate-700 flex items-center gap-1.5">
+                    <span className="font-bold text-white/80 flex items-center gap-1.5">
                       <Anchor className="h-3.5 w-3.5 text-violet-400" />
                       Active Inbound Vessels
                     </span>
@@ -855,7 +855,7 @@ function SimulatorPage() {
                     }}
                     className="w-full text-violet-400 accent-violet-400 h-1.5 rounded-lg appearance-none cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                  <div className="flex justify-between text-[10px] text-white/30 font-mono">
                     <span>Low Queue (5)</span>
                     <span>Congested (50)</span>
                   </div>
@@ -864,7 +864,7 @@ function SimulatorPage() {
                 {/* Yard Occupancy */}
                 <div className="space-y-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-slate-700 flex items-center gap-1.5">
+                    <span className="font-bold text-white/80 flex items-center gap-1.5">
                       <Layers className="h-3.5 w-3.5 text-emerald-400" />
                       Yard Occupancy Rate
                     </span>
@@ -890,7 +890,7 @@ function SimulatorPage() {
                     }}
                     className="w-full text-emerald-400 accent-emerald-400 h-1.5 rounded-lg appearance-none cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                  <div className="flex justify-between text-[10px] text-white/30 font-mono">
                     <span>Sparse (20%)</span>
                     <span>Saturated (100%)</span>
                   </div>
@@ -899,7 +899,7 @@ function SimulatorPage() {
                 {/* Active Berths */}
                 <div className="space-y-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-slate-700 flex items-center gap-1.5">
+                    <span className="font-bold text-white/80 flex items-center gap-1.5">
                       <Sliders className="h-3.5 w-3.5 text-indigo-400" />
                       Allocated Berths
                     </span>
@@ -925,7 +925,7 @@ function SimulatorPage() {
                     }}
                     className="w-full text-indigo-400 accent-indigo-400 h-1.5 rounded-lg appearance-none cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                  <div className="flex justify-between text-[10px] text-white/30 font-mono">
                     <span>Minimal (1)</span>
                     <span>Max Capacity (8)</span>
                   </div>
@@ -934,7 +934,7 @@ function SimulatorPage() {
                 {/* Simulation Days */}
                 <div className="space-y-2.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-bold text-slate-700 flex items-center gap-1.5">
+                    <span className="font-bold text-white/80 flex items-center gap-1.5">
                       <Calendar className="h-3.5 w-3.5 text-rose-400" />
                       Simulation Window
                     </span>
@@ -960,7 +960,7 @@ function SimulatorPage() {
                     }}
                     className="w-full text-rose-400 accent-rose-400 h-1.5 rounded-lg appearance-none cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-500 font-mono">
+                  <div className="flex justify-between text-[10px] text-white/30 font-mono">
                     <span>1 Day Run</span>
                     <span>14 Days Run</span>
                   </div>
@@ -976,7 +976,7 @@ function SimulatorPage() {
                   <Play className="h-4.5 w-4.5 fill-white transition-transform duration-300 group-hover:scale-105" />
                   {isRunning ? (
                     <span className="flex items-center gap-1.5">
-                      <RefreshCw className="h-4 w-4 animate-spin text-slate-900" />
+                      <RefreshCw className="h-4 w-4 animate-spin text-white" />
                       <span>Solving SimPy Queues & ML models...</span>
                     </span>
                   ) : (
@@ -987,13 +987,13 @@ function SimulatorPage() {
                 {/* Dynamic simulation progress indicator */}
                 {isRunning && (
                   <div className="space-y-1.5">
-                    <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
                       <motion.div
                         className="h-full bg-gradient-to-r from-cyan-400 to-indigo-500"
                         style={{ width: `${progress}%` }}
                       />
                     </div>
-                    <div className="text-right text-[10px] font-mono text-slate-500">
+                    <div className="text-right text-[10px] font-mono text-white/50">
                       Solving Random Forests & SimPy Queues: {progress}%
                     </div>
                   </div>
@@ -1015,17 +1015,17 @@ function SimulatorPage() {
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Predict Confidence */}
-                    <div className="relative overflow-hidden rounded-xl border border-white/[0.06] bg-slate-1000 p-4.5 flex items-center justify-between shadow-lg backdrop-blur-md">
+                    <div className="relative overflow-hidden rounded-xl border border-white/[0.06] bg-[#0e162d]/50 p-4.5 flex items-center justify-between shadow-lg backdrop-blur-md">
                       <div className="absolute right-0 top-0 w-24 h-24 bg-indigo-500/5 rounded-full blur-2xl pointer-events-none" />
                       <div>
-                        <div className="text-[10px] text-slate-500 uppercase tracking-wider font-bold font-mono">
+                        <div className="text-[10px] text-white/40 uppercase tracking-wider font-bold font-mono">
                           Simulation Confidence
                         </div>
                         <div className="mt-1.5 font-display text-3xl font-extrabold text-indigo-400 flex items-baseline gap-1">
                           {confidenceScore}
                           <span className="text-xs text-indigo-400/50 font-normal">%</span>
                         </div>
-                        <p className="text-[9px] text-slate-500 mt-1 max-w-[180px]">Based on parameter variance matrices & R² errors.</p>
+                        <p className="text-[9px] text-white/40 mt-1 max-w-[180px]">Based on parameter variance matrices & R² errors.</p>
                       </div>
 
                       {/* SVG Gauge */}
@@ -1066,14 +1066,14 @@ function SimulatorPage() {
                     </div>
 
                     {/* Bottlenecks detected */}
-                    <div className="relative overflow-hidden rounded-xl border border-white/[0.06] bg-slate-1000 p-4.5 flex items-center justify-between shadow-lg backdrop-blur-md">
+                    <div className="relative overflow-hidden rounded-xl border border-white/[0.06] bg-[#0e162d]/50 p-4.5 flex items-center justify-between shadow-lg backdrop-blur-md">
                       {simResults.bottleneck_status !== "Normal Traffic Operations" ? (
                         <div className="absolute right-0 top-0 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
                       ) : (
                         <div className="absolute right-0 top-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
                       )}
                       <div>
-                        <div className="text-[10px] text-slate-500 uppercase tracking-wider font-bold font-mono">
+                        <div className="text-[10px] text-white/40 uppercase tracking-wider font-bold font-mono">
                           Bottleneck Severity
                         </div>
                         <div className={`mt-1.5 font-display text-2xl font-extrabold flex items-center gap-1.5 ${simResults.bottleneck_status !== "Normal Traffic Operations" ? "text-amber-500" : "text-emerald-400"
@@ -1090,7 +1090,7 @@ function SimulatorPage() {
                             </>
                           )}
                         </div>
-                        <p className="text-[9px] text-slate-500 mt-1 max-w-[180px]">
+                        <p className="text-[9px] text-white/40 mt-1 max-w-[180px]">
                           {simResults.bottleneck_status !== "Normal Traffic Operations"
                             ? "Active capacity constraints detected."
                             : "Fluid operational queues in the channel."}
@@ -1108,28 +1108,28 @@ function SimulatorPage() {
                   >
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {/* Crane Efficiency */}
-                      <div className="relative overflow-hidden rounded-xl border border-white/[0.05] bg-transparent p-4.5 flex flex-col justify-between shadow-md min-h-[125px]">
+                      <div className="relative overflow-hidden rounded-xl border border-white/[0.05] bg-white/[0.01] p-4.5 flex flex-col justify-between shadow-md min-h-[125px]">
                         {windSpeed > 22.0 && (
                           <div className="absolute inset-0 bg-red-950/80 border border-red-500/20 backdrop-blur-sm flex flex-col items-center justify-center text-center p-3 z-10">
                             <AlertOctagon className="h-6 w-6 text-red-500 animate-bounce mb-1" />
                             <span className="text-[10px] font-bold text-red-400 uppercase tracking-widest font-mono">SAFETY LOCKOUT ACTIVE</span>
-                            <span className="text-[9px] text-slate-600 mt-0.5">Wind exceeds crane operation limits (&gt;22m/s)</span>
+                            <span className="text-[9px] text-white/60 mt-0.5">Wind exceeds crane operation limits (&gt;22m/s)</span>
                           </div>
                         )}
                         <div>
-                          <div className="text-slate-500 text-[10px] uppercase tracking-wider font-bold font-mono flex items-center gap-1.5 mb-2">
+                          <div className="text-white/40 text-[10px] uppercase tracking-wider font-bold font-mono flex items-center gap-1.5 mb-2">
                             <Sliders className="h-3.5 w-3.5 text-cyan-400" />
                             Quay Crane Efficiency
                           </div>
                           <div className="flex items-baseline gap-1 mt-1">
                             <span className="text-3xl font-extrabold text-cyan-400">{simResults.crane_efficiency_teu_hour}</span>
-                            <span className="text-xs text-slate-500 font-medium">TEUs/hour</span>
+                            <span className="text-xs text-white/40 font-medium">TEUs/hour</span>
                           </div>
                         </div>
 
                         {/* Progress Meter */}
                         <div className="mt-4.5 space-y-1">
-                          <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
+                          <div className="h-2 w-full rounded-full bg-white/5 overflow-hidden">
                             <motion.div
                               className="h-full bg-gradient-to-r from-cyan-500 to-blue-500"
                               initial={{ width: 0 }}
@@ -1137,7 +1137,7 @@ function SimulatorPage() {
                               transition={{ duration: 1 }}
                             />
                           </div>
-                          <div className="flex justify-between text-[9px] text-slate-500 font-mono">
+                          <div className="flex justify-between text-[9px] text-white/30 font-mono">
                             <span>0 TEU (Lockout)</span>
                             <span>Target Max (30 TEU)</span>
                           </div>
@@ -1145,9 +1145,9 @@ function SimulatorPage() {
                       </div>
 
                       {/* Rail Dispatch Delay */}
-                      <div className="relative overflow-hidden rounded-xl border border-white/[0.05] bg-transparent p-4.5 flex flex-col justify-between shadow-md min-h-[125px]">
+                      <div className="relative overflow-hidden rounded-xl border border-white/[0.05] bg-white/[0.01] p-4.5 flex flex-col justify-between shadow-md min-h-[125px]">
                         <div>
-                          <div className="text-slate-500 text-[10px] uppercase tracking-wider font-bold font-mono flex items-center gap-1.5 mb-2">
+                          <div className="text-white/40 text-[10px] uppercase tracking-wider font-bold font-mono flex items-center gap-1.5 mb-2">
                             <Layers className="h-3.5 w-3.5 text-emerald-400" />
                             Rail Dispatch Delay
                           </div>
@@ -1155,13 +1155,13 @@ function SimulatorPage() {
                             <span className={`text-3xl font-extrabold ${simResults.rail_delay_mins > 20 ? 'text-amber-400' : 'text-emerald-400'}`}>
                               {simResults.rail_delay_mins}
                             </span>
-                            <span className="text-xs text-slate-500 font-medium">minutes</span>
+                            <span className="text-xs text-white/40 font-medium">minutes</span>
                           </div>
                         </div>
 
                         {/* Progress Meter */}
                         <div className="mt-4.5 space-y-1">
-                          <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
+                          <div className="h-2 w-full rounded-full bg-white/5 overflow-hidden">
                             <motion.div
                               className={`h-full bg-gradient-to-r ${simResults.rail_delay_mins > 20 ? 'from-amber-500 to-orange-500' : 'from-emerald-500 to-teal-500'}`}
                               initial={{ width: 0 }}
@@ -1169,7 +1169,7 @@ function SimulatorPage() {
                               transition={{ duration: 1 }}
                             />
                           </div>
-                          <div className="flex justify-between text-[9px] text-slate-500 font-mono">
+                          <div className="flex justify-between text-[9px] text-white/30 font-mono">
                             <span>0 mins (Optimal)</span>
                             <span>Critical Load (60 mins)</span>
                           </div>
@@ -1185,49 +1185,49 @@ function SimulatorPage() {
                   >
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                       {/* Completed ships */}
-                      <div className="group relative overflow-hidden rounded-xl border border-white/[0.05] bg-transparent p-4.5 transition-all duration-300 hover:bg-slate-100 hover:border-indigo-500/20">
+                      <div className="group relative overflow-hidden rounded-xl border border-white/[0.05] bg-white/[0.01] p-4.5 transition-all duration-300 hover:bg-white/[0.03] hover:border-indigo-500/20">
                         <div className="absolute right-2.5 top-2.5 bg-indigo-500/5 group-hover:bg-indigo-500/10 p-1.5 rounded-lg text-indigo-400 transition-colors">
                           <Ship className="h-4 w-4" />
                         </div>
-                        <div className="text-slate-500 text-[10px] uppercase tracking-wider font-bold font-mono">Completed Ships</div>
+                        <div className="text-white/45 text-[10px] uppercase tracking-wider font-bold font-mono">Completed Ships</div>
                         <div className="mt-2 text-2xl font-black text-indigo-400 font-display">{simResults.simulated_ships_completed}</div>
-                        <div className="text-[9px] text-slate-500 mt-1">Vessels cleared berthing queue</div>
+                        <div className="text-[9px] text-white/30 mt-1">Vessels cleared berthing queue</div>
                       </div>
 
                       {/* Avg wait */}
-                      <div className="group relative overflow-hidden rounded-xl border border-white/[0.05] bg-transparent p-4.5 transition-all duration-300 hover:bg-slate-100 hover:border-cyan-500/20">
+                      <div className="group relative overflow-hidden rounded-xl border border-white/[0.05] bg-white/[0.01] p-4.5 transition-all duration-300 hover:bg-white/[0.03] hover:border-cyan-500/20">
                         <div className="absolute right-2.5 top-2.5 bg-cyan-500/5 group-hover:bg-cyan-500/10 p-1.5 rounded-lg text-cyan-400 transition-colors">
                           <Clock className="h-4 w-4" />
                         </div>
-                        <div className="text-slate-500 text-[10px] uppercase tracking-wider font-bold font-mono">Avg Berth Wait</div>
+                        <div className="text-white/45 text-[10px] uppercase tracking-wider font-bold font-mono">Avg Berth Wait</div>
                         <div className="mt-2 text-2xl font-black text-cyan-400 font-display">
-                          {simResults.average_berth_wait_hours} <span className="text-xs font-normal text-slate-500">hrs</span>
+                          {simResults.average_berth_wait_hours} <span className="text-xs font-normal text-white/40">hrs</span>
                         </div>
-                        <div className="text-[9px] text-slate-500 mt-1">Vessel anchorage waiting time</div>
+                        <div className="text-[9px] text-white/30 mt-1">Vessel anchorage waiting time</div>
                       </div>
 
                       {/* Avg turnaround */}
-                      <div className="group relative overflow-hidden rounded-xl border border-white/[0.05] bg-transparent p-4.5 transition-all duration-300 hover:bg-slate-100 hover:border-violet-500/20">
+                      <div className="group relative overflow-hidden rounded-xl border border-white/[0.05] bg-white/[0.01] p-4.5 transition-all duration-300 hover:bg-white/[0.03] hover:border-violet-500/20">
                         <div className="absolute right-2.5 top-2.5 bg-violet-500/5 group-hover:bg-violet-500/10 p-1.5 rounded-lg text-violet-400 transition-colors">
                           <RefreshCw className="h-4 w-4 text-violet-400" />
                         </div>
-                        <div className="text-slate-500 text-[10px] uppercase tracking-wider font-bold font-mono">Avg Turnaround</div>
+                        <div className="text-white/45 text-[10px] uppercase tracking-wider font-bold font-mono">Avg Turnaround</div>
                         <div className="mt-2 text-2xl font-black text-violet-400 font-display">
-                          {simResults.average_turnaround_hours} <span className="text-xs font-normal text-slate-500">hrs</span>
+                          {simResults.average_turnaround_hours} <span className="text-xs font-normal text-white/40">hrs</span>
                         </div>
-                        <div className="text-[9px] text-slate-500 mt-1">Total entry to departure cycle</div>
+                        <div className="text-[9px] text-white/30 mt-1">Total entry to departure cycle</div>
                       </div>
 
                       {/* Total volume */}
-                      <div className="group relative overflow-hidden rounded-xl border border-white/[0.05] bg-transparent p-4.5 transition-all duration-300 hover:bg-slate-100 hover:border-emerald-500/20">
+                      <div className="group relative overflow-hidden rounded-xl border border-white/[0.05] bg-white/[0.01] p-4.5 transition-all duration-300 hover:bg-white/[0.03] hover:border-emerald-500/20">
                         <div className="absolute right-2.5 top-2.5 bg-emerald-500/5 group-hover:bg-emerald-500/10 p-1.5 rounded-lg text-emerald-400 transition-colors">
                           <Layers className="h-4 w-4" />
                         </div>
-                        <div className="text-slate-500 text-[10px] uppercase tracking-wider font-bold font-mono">Total Volume</div>
+                        <div className="text-white/45 text-[10px] uppercase tracking-wider font-bold font-mono">Total Volume</div>
                         <div className="mt-2 text-2xl font-black text-emerald-400 font-display">
-                          {simResults.total_teus_handled.toLocaleString()} <span className="text-xs font-normal text-slate-500">TEU</span>
+                          {simResults.total_teus_handled.toLocaleString()} <span className="text-xs font-normal text-white/40">TEU</span>
                         </div>
-                        <div className="text-[9px] text-slate-500 mt-1">Aggregate cargo volume handled</div>
+                        <div className="text-[9px] text-white/30 mt-1">Aggregate cargo volume handled</div>
                       </div>
                     </div>
                   </Panel>
@@ -1254,7 +1254,7 @@ function SimulatorPage() {
                       </div>
 
                       <div className="p-5.5">
-                        <div className="markdown-report text-xs leading-relaxed font-mono text-slate-700 space-y-4">
+                        <div className="markdown-report text-xs leading-relaxed font-mono text-white/80 space-y-4">
                           {renderCustomMarkdown(generateAIReport(
                             { wind: windSpeed, visibility, precip: precipitation, temp: temperature, vessels, yard: yardOccupancy, berths, days: simDuration },
                             simResults
@@ -1265,9 +1265,9 @@ function SimulatorPage() {
                   </Panel>
                 </motion.div>
               ) : (
-                <div className="flex h-80 flex-col items-center justify-center rounded-xl border border-dashed border-slate-200 bg-transparent p-6 text-center text-slate-500">
-                  <FlaskConical className="h-12 w-12 text-slate-400 mb-3 animate-pulse" />
-                  <h4 className="text-sm font-semibold text-slate-700">Simulation Awaiting Input</h4>
+                <div className="flex h-80 flex-col items-center justify-center rounded-xl border border-dashed border-white/10 bg-white/[0.01] p-6 text-center text-white/40">
+                  <FlaskConical className="h-12 w-12 text-white/20 mb-3 animate-pulse" />
+                  <h4 className="text-sm font-semibold text-white/70">Simulation Awaiting Input</h4>
                   <p className="mt-1 text-xs max-w-sm">
                     Modify the operational parameters on the left or select a template, then trigger the simulator to run.
                   </p>

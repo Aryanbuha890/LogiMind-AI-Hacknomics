@@ -80,7 +80,7 @@ const WagonDetails: React.FC<WagonDetailsProps> = ({ streamId }) => {
         return (
             <div className="space-y-1.5">
                 <span className={`text-[10px] font-mono uppercase tracking-wider ${isEnhanced ? 'text-cyan-600 dark:text-cyan-400 font-bold' : 'text-muted-foreground'}`}>{label}</span>
-                <div className={`relative w-full h-24 rounded-lg overflow-hidden border ${isEnhanced ? 'border-cyan-500/20 bg-slate-50/50' : 'border-border bg-muted/60'} flex items-center justify-center`}>
+                <div className={`relative w-full h-24 rounded-lg overflow-hidden border ${isEnhanced ? 'border-cyan-500/20 bg-[#0B1A33]/50' : 'border-border bg-muted/60'} flex items-center justify-center`}>
                     {/* Simulated tech design graphic */}
                     <div className="absolute inset-0 bg-grid-sm opacity-10 pointer-events-none" />
                     

@@ -113,9 +113,9 @@ const HistoryView: React.FC = () => {
                 <span className={`text-[9px] font-mono uppercase tracking-wider ${titleColor}`}>{label}</span>
                 <div className={`w-full h-32 rounded-lg border ${borderClass} flex flex-col items-center justify-center relative overflow-hidden`}>
                     <div className="absolute inset-0 bg-grid-sm opacity-10 pointer-events-none" />
-                    <span className="text-[10px] font-mono text-slate-500 dark:text-slate-600 tracking-wider mb-2 font-bold">{textVal}</span>
+                    <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 tracking-wider mb-2 font-bold">{textVal}</span>
                     <div className="h-6 px-3 border border-border rounded flex items-center justify-center bg-slate-100 dark:bg-black/40">
-                        <span className="text-[8px] font-mono text-slate-500 dark:text-slate-600">ANALYSIS_CHECK_OK</span>
+                        <span className="text-[8px] font-mono text-slate-500 dark:text-slate-400">ANALYSIS_CHECK_OK</span>
                     </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@ const HistoryView: React.FC = () => {
                             initial={{ opacity: 0, y: 8 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.05 }}
-                            className="bg-card border border-border rounded-xl p-5 hover:border-cyan-500/30 hover:bg-slate-50/5 dark:hover:bg-slate-50/15 backdrop-blur-md transition-all flex items-center justify-between"
+                            className="bg-card border border-border rounded-xl p-5 hover:border-cyan-500/30 hover:bg-[#0B1A33]/5 dark:hover:bg-[#0B1A33]/15 backdrop-blur-md transition-all flex items-center justify-between"
                         >
                             <div className="flex items-center gap-4">
                                 <div className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center text-muted-foreground">
@@ -273,7 +273,7 @@ const HistoryView: React.FC = () => {
                         );
                     })}
                     {wagons.length === 0 && (
-                        <div className="py-20 text-center text-xs font-mono text-slate-500 dark:text-slate-600 bg-muted/10 rounded-xl border border-border">
+                        <div className="py-20 text-center text-xs font-mono text-slate-500 dark:text-slate-400 bg-muted/10 rounded-xl border border-border">
                             No wagon records detected for this inspection.
                         </div>
                     )}

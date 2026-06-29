@@ -8,10 +8,10 @@ export const Route = createFileRoute("/privacy-policy")({
 
 function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-slate-50 text-white selection:bg-blue-500/30">
+    <div className="min-h-screen bg-[#05060F] text-white selection:bg-blue-500/30">
       <div className="mx-auto max-w-4xl px-6 py-12 md:py-20">
         <div className="mb-12 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 text-sm text-slate-600 hover:text-white transition-colors">
+          <Link to="/" className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors">
             <ArrowLeft className="h-4 w-4" />
             Back to Home
           </Link>
@@ -26,15 +26,15 @@ function PrivacyPolicy() {
               </div>
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight">Privacy Policy</h1>
             </div>
-            <p className="text-slate-600">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+            <p className="text-slate-400">Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
           </div>
 
-          <div className="prose prose-invert prose-blue max-w-none text-slate-700">
+          <div className="prose prose-invert prose-blue max-w-none text-slate-300">
             <p>
               At LogiMind AI, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our autonomous intelligence platform for ports and rail terminals.
             </p>
 
-            <h2 className="text-xl font-semibold text-slate-900 mt-8 mb-4 border-b border-slate-200 pb-2">1. Information We Collect</h2>
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4 border-b border-white/10 pb-2">1. Information We Collect</h2>
             <p>
               We may collect information about you in a variety of ways. The information we may collect via the Site includes:
             </p>
@@ -44,7 +44,7 @@ function PrivacyPolicy() {
               <li><strong className="text-white">Operational Data:</strong> Data related to port, vessel, and rail operations uploaded or connected to our platform to utilize our predictive maintenance, telemetry, and AI agent services.</li>
             </ul>
 
-            <h2 className="text-xl font-semibold text-slate-900 mt-8 mb-4 border-b border-slate-200 pb-2">2. Use of Your Information</h2>
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4 border-b border-white/10 pb-2">2. Use of Your Information</h2>
             <p>
               Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you to:
             </p>
@@ -56,7 +56,7 @@ function PrivacyPolicy() {
               <li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the platform.</li>
             </ul>
 
-            <h2 className="text-xl font-semibold text-slate-900 mt-8 mb-4 border-b border-slate-200 pb-2">3. Disclosure of Your Information</h2>
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4 border-b border-white/10 pb-2">3. Disclosure of Your Information</h2>
             <p>
               We may share information we have collected about you in certain situations. Your information may be disclosed as follows:
             </p>
@@ -65,17 +65,17 @@ function PrivacyPolicy() {
               <li><strong className="text-white">Third-Party Service Providers:</strong> We may share your information with third parties that perform services for us or on our behalf, including data analysis, email delivery, hosting services, customer service, and marketing assistance.</li>
             </ul>
 
-            <h2 className="text-xl font-semibold text-slate-900 mt-8 mb-4 border-b border-slate-200 pb-2">4. Data Security</h2>
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4 border-b border-white/10 pb-2">4. Data Security</h2>
             <p>
               We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.
             </p>
 
-            <h2 className="text-xl font-semibold text-slate-900 mt-8 mb-4 border-b border-slate-200 pb-2">5. Contact Us</h2>
+            <h2 className="text-xl font-semibold text-white mt-8 mb-4 border-b border-white/10 pb-2">5. Contact Us</h2>
             <p>
               If you have questions or comments about this Privacy Policy, please contact us at:
             </p>
-            <div className="bg-slate-100 p-4 rounded-xl border border-slate-200 mt-4 inline-block">
-              <p className="font-semibold text-slate-900">LogiMind AI Security Team</p>
+            <div className="bg-white/5 p-4 rounded-xl border border-white/10 mt-4 inline-block">
+              <p className="font-semibold text-white">LogiMind AI Security Team</p>
               <p className="text-blue-400 mt-1">privacy@logimind.ai</p>
             </div>
           </div>

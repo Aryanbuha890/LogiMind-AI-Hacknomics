@@ -156,7 +156,7 @@ const UploadView: React.FC = () => {
 
             {/* Drag & drop upload module */}
             {!file && (
-                <div className="border border-dashed border-border rounded-2xl p-16 text-center hover:border-cyan-500/30 hover:bg-slate-50/5 dark:hover:bg-slate-50/15 transition-all bg-card/90 backdrop-blur-md relative group">
+                <div className="border border-dashed border-border rounded-2xl p-16 text-center hover:border-cyan-500/30 hover:bg-[#0B1A33]/5 dark:hover:bg-[#0B1A33]/15 transition-all bg-card/90 backdrop-blur-md relative group">
                     <input
                         type="file"
                         accept="video/*"
@@ -166,11 +166,11 @@ const UploadView: React.FC = () => {
                         disabled={uploading}
                     />
                     <div className="flex flex-col items-center">
-                        <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-white border border-slate-200 dark:border-slate-200 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
-                            <Upload className="w-7 h-7 text-slate-500 dark:text-slate-600 group-hover:text-cyan-500 transition-colors" />
+                        <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
+                            <Upload className="w-7 h-7 text-slate-500 dark:text-slate-400 group-hover:text-cyan-500 transition-colors" />
                         </div>
-                        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-900 mb-2">Upload Video Files</h3>
-                        <p className="text-sm text-slate-500 dark:text-slate-600 mb-6 max-w-sm">Drag and drop inspection video files (MP4, AVI, MOV) for Zero-DCE and OCR deblur processing</p>
+                        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">Upload Video Files</h3>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 mb-6 max-w-sm">Drag and drop inspection video files (MP4, AVI, MOV) for Zero-DCE and OCR deblur processing</p>
                         <span className="px-5 py-2.5 bg-gradient-to-r from-[#1b3a6b] to-[#2563eb] text-white text-xs font-semibold rounded-lg shadow-lg shadow-indigo-500/10 cursor-pointer">
                             Select File
                         </span>
@@ -186,7 +186,7 @@ const UploadView: React.FC = () => {
 
                         <div className="bg-black/80 rounded-xl overflow-hidden border border-border relative aspect-video flex items-center justify-center">
                             {processing ? (
-                                <div className="absolute inset-0 bg-white flex flex-col items-center justify-center gap-4">
+                                <div className="absolute inset-0 bg-[#050B1A] flex flex-col items-center justify-center gap-4">
                                     {/* Tech simulated processing feed */}
                                     <div className="absolute inset-0 bg-grid-sm opacity-10" />
                                     <div className="relative flex items-center justify-center h-28 w-28">
@@ -206,7 +206,7 @@ const UploadView: React.FC = () => {
                                 <div className="relative w-full h-full flex items-center justify-center">
                                     <video src={processedVideoUrl || previewUrl} className="w-full h-full object-contain" controls />
                                     {processedVideoUrl && (
-                                        <div className="absolute top-3 right-3 bg-emerald-500/90 text-slate-900 text-[9px] font-bold font-mono px-2.5 py-1 rounded shadow-md border border-emerald-450 z-20">
+                                        <div className="absolute top-3 right-3 bg-emerald-500/90 text-white text-[9px] font-bold font-mono px-2.5 py-1 rounded shadow-md border border-emerald-450 z-20">
                                             PROCESSED VIEW
                                         </div>
                                     )}
@@ -247,7 +247,7 @@ const UploadView: React.FC = () => {
                     {/* Detections Side Panel */}
                     <div className="lg:col-span-4 bg-card border border-border rounded-2xl p-5 backdrop-blur-md flex flex-col gap-4">
                         <div className="flex justify-between items-center border-b border-border pb-2.5">
-                            <h3 className="text-xs font-bold text-slate-500 dark:text-slate-600 uppercase font-mono tracking-wider">Detection Logs</h3>
+                            <h3 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase font-mono tracking-wider">Detection Logs</h3>
                             {processing && (
                                 <span className="flex h-1.5 w-1.5 relative">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
@@ -258,7 +258,7 @@ const UploadView: React.FC = () => {
 
                         <div className="flex-1 overflow-y-auto max-h-[360px] space-y-3 pr-1">
                             {wagons.length === 0 ? (
-                                <div className="h-full flex flex-col items-center justify-center text-center p-8 text-slate-600 dark:text-slate-500 space-y-2">
+                                <div className="h-full flex flex-col items-center justify-center text-center p-8 text-slate-400 dark:text-slate-500 space-y-2">
                                     <Film className="w-8 h-8 opacity-20" />
                                     <p className="text-xs font-mono">No active detections. Trigger ML processing to stream live frame extraction.</p>
                                 </div>
@@ -268,12 +268,12 @@ const UploadView: React.FC = () => {
                                         key={wagon.id}
                                         initial={{ opacity: 0, x: 10 }}
                                         animate={{ opacity: 1, x: 0 }}
-                                        className="bg-slate-50/80 dark:bg-white/40 border border-border rounded-xl p-3 hover:border-cyan-500/20 transition-all group"
+                                        className="bg-slate-50/80 dark:bg-slate-800/40 border border-border rounded-xl p-3 hover:border-cyan-500/20 transition-all group"
                                     >
                                         <div className="flex justify-between items-start mb-2">
                                             <div>
                                                 <span className="text-[9px] text-slate-500 dark:text-slate-450 font-mono font-bold block uppercase">Index #{wagon.wagon_index}</span>
-                                                <span className="text-xs font-bold text-slate-850 dark:text-slate-800 font-mono">{wagon.ocr_text || "Reading OCR..."}</span>
+                                                <span className="text-xs font-bold text-slate-850 dark:text-slate-200 font-mono">{wagon.ocr_text || "Reading OCR..."}</span>
                                             </div>
                                             {wagon.anomaly_type ? (
                                                 <span className="bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-450 text-[8px] px-2 py-0.5 rounded font-mono font-bold uppercase tracking-wider animate-pulse">
@@ -292,7 +292,7 @@ const UploadView: React.FC = () => {
                                                 <span className="text-[7.5px] text-slate-500 dark:text-slate-450 uppercase font-mono block">Original</span>
                                                 <div className="aspect-[4/3] bg-black/5 dark:bg-black/20 rounded border border-border flex items-center justify-center relative overflow-hidden">
                                                     <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-[#0B1A33]/5" />
-                                                    <span className="text-[8px] font-mono text-slate-600 dark:text-slate-550">RAW</span>
+                                                    <span className="text-[8px] font-mono text-slate-400 dark:text-slate-550">RAW</span>
                                                 </div>
                                             </div>
                                             <div className="space-y-1">

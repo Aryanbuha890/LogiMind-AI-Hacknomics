@@ -92,7 +92,7 @@ function CranesPage() {
                 } ${risk ? "shadow-[0_0_0_1px_rgba(220,38,38,0.25)]" : ""}`}
               >
                 {risk && (
-                  <span className="absolute -top-2 -right-2 rounded-full bg-[color:var(--color-destructive)] px-2 py-0.5 text-[10px] font-bold text-slate-900">
+                  <span className="absolute -top-2 -right-2 rounded-full bg-[color:var(--color-destructive)] px-2 py-0.5 text-[10px] font-bold text-white">
                     AT RISK
                   </span>
                 )}

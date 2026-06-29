@@ -311,7 +311,7 @@ function PredictionsPage() {
   };
 
   return (
-    <div className="dark flex h-screen flex-col bg-white text-slate-900 overflow-hidden">
+    <div className="dark flex h-screen flex-col bg-[#070B19] text-white overflow-hidden">
       <AppTopBar
         title="Delay Prediction Engine"
         subtitle="Vessel ETA neural forecast · Cascading delay waterfall analysis · Accuracy auditing"
@@ -332,7 +332,7 @@ function PredictionsPage() {
                 <span>AI Live Inference Active</span>
                 <span className="rounded bg-indigo-500/10 border border-indigo-500/20 px-1.5 py-0.5 text-[8.5px] font-mono text-indigo-300">XGBoost & RF Regressors</span>
               </div>
-              <p className="text-[10px] text-slate-500 mt-0.5">Continuous schedule forecasting and cascade delays recalculating dynamically.</p>
+              <p className="text-[10px] text-white/40 mt-0.5">Continuous schedule forecasting and cascade delays recalculating dynamically.</p>
             </div>
           </div>
           <div className="flex items-center gap-3.5 self-end md:self-auto">
@@ -340,8 +340,8 @@ function PredictionsPage() {
               onClick={() => setIsAutoSyncEnabled(!isAutoSyncEnabled)}
               className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold transition cursor-pointer ${
                 isAutoSyncEnabled 
-                  ? "bg-emerald-50 text-emerald-400 border-emerald-500/20 hover:bg-emerald-100" 
-                  : "bg-slate-100 text-slate-500 border-slate-200 hover:bg-slate-100"
+                  ? "bg-[#0f2a24] text-emerald-400 border-emerald-500/20 hover:bg-[#153a30]" 
+                  : "bg-white/5 text-white/40 border-white/10 hover:bg-white/10"
               }`}
             >
               <span className={`h-2 w-2 rounded-full ${isAutoSyncEnabled ? 'bg-emerald-400 animate-pulse' : 'bg-white/20'}`} />
@@ -349,7 +349,7 @@ function PredictionsPage() {
             </button>
 
             {isAutoSyncEnabled && (
-              <span className="text-[10px] font-mono text-slate-500 flex items-center gap-1.5">
+              <span className="text-[10px] font-mono text-white/40 flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5 text-cyan-400" />
                 Sync in: <span className="text-cyan-400 font-bold w-4 text-center">{secondsToNextRefresh}s</span>
               </span>
@@ -359,7 +359,7 @@ function PredictionsPage() {
                 fetchPredictions(false);
                 setSecondsToNextRefresh(15);
               }}
-              className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-700 hover:text-white hover:bg-slate-100 transition cursor-pointer font-semibold"
+              className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-[#0a1124] px-3 py-1.5 text-xs text-white/80 hover:text-white hover:bg-white/5 transition cursor-pointer font-semibold"
             >
               <RefreshCw className="h-3.5 w-3.5" />
               Force Recalculate
@@ -368,10 +368,10 @@ function PredictionsPage() {
         </div>
 
         {/* TOP STATUS BAR: Live Telemetry Feeds */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 bg-white/60 border border-white/[0.06] rounded-xl p-3 shadow-md">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 bg-[#0d162d]/60 border border-white/[0.06] rounded-xl p-3 shadow-md">
           {/* Active Port City */}
-          <div className="flex flex-col justify-center px-3 py-1 border-r border-slate-200 last:border-none">
-            <span className="text-[8px] text-slate-500 font-mono uppercase tracking-wider">ACTIVE PORT</span>
+          <div className="flex flex-col justify-center px-3 py-1 border-r border-white/5 last:border-none">
+            <span className="text-[8px] text-white/40 font-mono uppercase tracking-wider">ACTIVE PORT</span>
             <span className="text-xs font-bold text-cyan-400 mt-0.5 truncate uppercase flex items-center gap-1">
               <Anchor className="h-3 w-3" />
               {city}
@@ -379,8 +379,8 @@ function PredictionsPage() {
           </div>
 
           {/* Wind Speed */}
-          <div className="flex flex-col justify-center px-3 py-1 border-r border-slate-200 last:border-none">
-            <span className="text-[8px] text-slate-500 font-mono uppercase tracking-wider">WIND SPEED</span>
+          <div className="flex flex-col justify-center px-3 py-1 border-r border-white/5 last:border-none">
+            <span className="text-[8px] text-white/40 font-mono uppercase tracking-wider">WIND SPEED</span>
             <div className="flex items-center gap-1.5 mt-0.5">
               <span className="text-xs font-mono font-bold text-white/90">{windSpeed} m/s</span>
               <span className={`px-1.5 py-0.2 rounded text-[7px] font-bold font-mono tracking-wider ${sensorStatus("Wind", windSpeed).color}`}>
@@ -390,8 +390,8 @@ function PredictionsPage() {
           </div>
 
           {/* Visibility */}
-          <div className="flex flex-col justify-center px-3 py-1 border-r border-slate-200 last:border-none">
-            <span className="text-[8px] text-slate-500 font-mono uppercase tracking-wider">VISIBILITY</span>
+          <div className="flex flex-col justify-center px-3 py-1 border-r border-white/5 last:border-none">
+            <span className="text-[8px] text-white/40 font-mono uppercase tracking-wider">VISIBILITY</span>
             <div className="flex items-center gap-1.5 mt-0.5">
               <span className="text-xs font-mono font-bold text-white/90">{visibility.toLocaleString()} m</span>
               <span className={`px-1.5 py-0.2 rounded text-[7px] font-bold font-mono tracking-wider ${sensorStatus("Visibility", visibility).color}`}>
@@ -401,8 +401,8 @@ function PredictionsPage() {
           </div>
 
           {/* Precipitation */}
-          <div className="flex flex-col justify-center px-3 py-1 border-r border-slate-200 last:border-none">
-            <span className="text-[8px] text-slate-500 font-mono uppercase tracking-wider">RAIN/SNOW</span>
+          <div className="flex flex-col justify-center px-3 py-1 border-r border-white/5 last:border-none">
+            <span className="text-[8px] text-white/40 font-mono uppercase tracking-wider">RAIN/SNOW</span>
             <div className="flex items-center gap-1.5 mt-0.5">
               <span className="text-xs font-mono font-bold text-white/90">{precipitation} mm/h</span>
               <span className={`px-1.5 py-0.2 rounded text-[7px] font-bold font-mono tracking-wider ${sensorStatus("Precipitation", precipitation).color}`}>
@@ -412,14 +412,14 @@ function PredictionsPage() {
           </div>
 
           {/* Temperature */}
-          <div className="flex flex-col justify-center px-3 py-1 border-r border-slate-200 last:border-none">
-            <span className="text-[8px] text-slate-500 font-mono uppercase tracking-wider">TEMPERATURE</span>
+          <div className="flex flex-col justify-center px-3 py-1 border-r border-white/5 last:border-none">
+            <span className="text-[8px] text-white/40 font-mono uppercase tracking-wider">TEMPERATURE</span>
             <span className="text-xs font-mono font-bold text-white/90 mt-0.5">{temperature}°C</span>
           </div>
 
           {/* Vessel Queue */}
-          <div className="flex flex-col justify-center px-3 py-1 border-r border-slate-200 last:border-none">
-            <span className="text-[8px] text-slate-500 font-mono uppercase tracking-wider">VESSEL QUEUE</span>
+          <div className="flex flex-col justify-center px-3 py-1 border-r border-white/5 last:border-none">
+            <span className="text-[8px] text-white/40 font-mono uppercase tracking-wider">VESSEL QUEUE</span>
             <div className="flex items-center gap-1.5 mt-0.5">
               <span className="text-xs font-mono font-bold text-white/90">{vesselQueue} ships</span>
               <span className={`px-1.5 py-0.2 rounded text-[7px] font-bold font-mono tracking-wider ${sensorStatus("Vessel Queue", vesselQueue).color}`}>
@@ -429,8 +429,8 @@ function PredictionsPage() {
           </div>
 
           {/* Yard Occupancy */}
-          <div className="flex flex-col justify-center px-3 py-1 border-r border-slate-200 last:border-none">
-            <span className="text-[8px] text-slate-500 font-mono uppercase tracking-wider">YARD FILL</span>
+          <div className="flex flex-col justify-center px-3 py-1 border-r border-white/5 last:border-none">
+            <span className="text-[8px] text-white/40 font-mono uppercase tracking-wider">YARD FILL</span>
             <div className="flex items-center gap-1.5 mt-0.5">
               <span className="text-xs font-mono font-bold text-white/90">{yardOccupancy}%</span>
               <span className={`px-1.5 py-0.2 rounded text-[7px] font-bold font-mono tracking-wider ${sensorStatus("Yard Occupancy", yardOccupancy).color}`}>
@@ -453,52 +453,52 @@ function PredictionsPage() {
 
         {/* Top KPI Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="relative overflow-hidden rounded-xl border border-slate-200 bg-white/90 p-5 shadow-lg">
+          <div className="relative overflow-hidden rounded-xl border border-white/5 bg-[#0d162d]/90 p-5 shadow-lg">
             <div className="absolute right-3 top-3 text-emerald-400 opacity-20"><Percent className="h-10 w-10" /></div>
-            <div className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">
+            <div className="text-[10px] text-white/40 uppercase tracking-wider font-semibold">
               ML Model ETA Accuracy
             </div>
             <div className="mt-2 font-display text-3xl font-bold text-emerald-400">{kpis.model_accuracy}%</div>
-            <div className="text-[10px] text-slate-500 mt-1">Average validation test R² score</div>
+            <div className="text-[10px] text-white/50 mt-1">Average validation test R² score</div>
           </div>
 
-          <div className="relative overflow-hidden rounded-xl border border-slate-200 bg-white/90 p-5 shadow-lg">
+          <div className="relative overflow-hidden rounded-xl border border-white/5 bg-[#0d162d]/90 p-5 shadow-lg">
             <div className="absolute right-3 top-3 text-red-500 opacity-20"><BadgeAlert className="h-10 w-10" /></div>
-            <div className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">
+            <div className="text-[10px] text-white/40 uppercase tracking-wider font-semibold">
               Active Delay Warnings
             </div>
             <div className="mt-2 font-display text-3xl font-bold text-red-500">{kpis.delay_warnings} Vessels</div>
-            <div className="text-[10px] text-slate-500 mt-1">Predicted delay exceeds 30 minutes</div>
+            <div className="text-[10px] text-white/50 mt-1">Predicted delay exceeds 30 minutes</div>
           </div>
 
-          <div className="relative overflow-hidden rounded-xl border border-slate-200 bg-white/90 p-5 shadow-lg">
+          <div className="relative overflow-hidden rounded-xl border border-white/5 bg-[#0d162d]/90 p-5 shadow-lg">
             <div className="absolute right-3 top-3 text-cyan-400 opacity-20"><TrendingUp className="h-10 w-10" /></div>
-            <div className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">
+            <div className="text-[10px] text-white/40 uppercase tracking-wider font-semibold">
               Mitigated Cost Impact
             </div>
             <div className="mt-2 font-display text-3xl font-bold text-cyan-400">
               ${kpis.cost_impact_usd.toLocaleString()}
             </div>
-            <div className="text-[10px] text-slate-500 mt-1">Dynamic yard pre-positioning savings</div>
+            <div className="text-[10px] text-white/50 mt-1">Dynamic yard pre-positioning savings</div>
           </div>
         </div>
 
         {/* Live Operational Speeds Bar */}
-        <div className="grid grid-cols-3 gap-3.5 border border-slate-200 bg-slate-1000 rounded-xl p-3.5 shadow-md animate-pulse-subtle">
-          <div className="text-center p-2.5 rounded-lg bg-white">
-            <div className="text-[9px] text-slate-500 uppercase">Crane Efficiency</div>
+        <div className="grid grid-cols-3 gap-3.5 border border-white/5 bg-[#0a1124]/50 rounded-xl p-3.5 shadow-md animate-pulse-subtle">
+          <div className="text-center p-2.5 rounded-lg bg-[#0e162d]">
+            <div className="text-[9px] text-white/40 uppercase">Crane Efficiency</div>
             <div className="text-lg font-bold text-amber-400 mt-0.5 font-display">
               {loading ? "..." : `${predictions.crane_efficiency_teu_hour.toFixed(1)} TEU/hr`}
             </div>
           </div>
-          <div className="text-center p-2.5 rounded-lg bg-white">
-            <div className="text-[9px] text-slate-500 uppercase">Vessel Turnaround</div>
+          <div className="text-center p-2.5 rounded-lg bg-[#0e162d]">
+            <div className="text-[9px] text-white/40 uppercase">Vessel Turnaround</div>
             <div className="text-lg font-bold text-cyan-400 mt-0.5 font-display">
               {loading ? "..." : `${predictions.vessel_turnaround_hours.toFixed(1)} hrs`}
             </div>
           </div>
-          <div className="text-center p-2.5 rounded-lg bg-white">
-            <div className="text-[9px] text-slate-500 uppercase">Rail Dispatch Delay</div>
+          <div className="text-center p-2.5 rounded-lg bg-[#0e162d]">
+            <div className="text-[9px] text-white/40 uppercase">Rail Dispatch Delay</div>
             <div className="text-lg font-bold text-purple-400 mt-0.5 font-display">
               {loading ? "..." : `${predictions.rail_dispatch_delay_mins.toFixed(0)} min`}
             </div>
@@ -517,13 +517,13 @@ function PredictionsPage() {
               <div className="space-y-3 max-h-[580px] overflow-y-auto pr-1">
                 {loading ? (
                   [1, 2, 3, 4].map((n) => (
-                    <div key={n} className="animate-pulse rounded-xl border border-slate-200 bg-white/90 p-4 space-y-2">
-                      <div className="h-4 bg-slate-100 rounded w-1/3"></div>
-                      <div className="h-3 bg-slate-100 rounded w-1/2"></div>
+                    <div key={n} className="animate-pulse rounded-xl border border-white/5 bg-[#0a1124]/90 p-4 space-y-2">
+                      <div className="h-4 bg-white/10 rounded w-1/3"></div>
+                      <div className="h-3 bg-white/5 rounded w-1/2"></div>
                     </div>
                   ))
                 ) : vessels.length === 0 ? (
-                  <div className="text-center py-10 text-slate-500 text-xs">
+                  <div className="text-center py-10 text-white/30 text-xs">
                     No vessels calculated.
                   </div>
                 ) : (
@@ -538,8 +538,8 @@ function PredictionsPage() {
                         onClick={() => setSelectedVessel(v.id)}
                         className={`cursor-pointer rounded-xl border p-4 transition duration-200 hover:shadow-lg ${
                           isSelected
-                            ? "border-cyan-500/50 bg-white/80 shadow-[0_0_15px_rgba(6,182,212,0.1)]"
-                            : "border-slate-200 bg-white/90 hover:border-slate-200"
+                            ? "border-cyan-500/50 bg-[#0f1a38]/80 shadow-[0_0_15px_rgba(6,182,212,0.1)]"
+                            : "border-white/5 bg-[#0a1124]/90 hover:border-white/15"
                         }`}
                       >
                         <div className="flex items-start justify-between gap-3">
@@ -557,13 +557,13 @@ function PredictionsPage() {
                             </span>
                             <div>
                               <div className="flex items-center gap-1.5 flex-wrap">
-                                <h4 className="text-xs font-bold text-slate-900">{v.name}</h4>
-                                <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[8.5px] text-slate-500 font-medium">
+                                <h4 className="text-xs font-bold text-white">{v.name}</h4>
+                                <span className="rounded bg-white/5 px-1.5 py-0.5 text-[8.5px] text-white/50 font-medium">
                                   {v.route}
                                 </span>
                               </div>
-                              <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[10.5px] text-slate-500 font-mono">
-                                <span>Sched: <span className="text-slate-600">{v.scheduled_eta}</span></span>
+                              <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[10.5px] text-white/40 font-mono">
+                                <span>Sched: <span className="text-white/60">{v.scheduled_eta}</span></span>
                                 <span>Neural: <span className="text-cyan-300 font-bold">{v.predicted_eta}</span></span>
                               </div>
                             </div>
@@ -585,7 +585,7 @@ function PredictionsPage() {
                                   ? `${v.delay_minutes.toFixed(0)} min`
                                   : "ON-TIME"}
                             </span>
-                            <div className="mt-1 text-[9px] text-slate-500 font-mono">
+                            <div className="mt-1 text-[9px] text-white/35 font-mono">
                               {v.confidence}% Conf
                             </div>
                           </div>
@@ -605,24 +605,24 @@ function PredictionsPage() {
               subtitle="Timeline ripple effects calculated from operational parameters"
             >
               <div className="space-y-5">
-                <div className="rounded-lg border-l-4 border-amber-500 bg-slate-50 p-3 text-xs leading-relaxed text-slate-700 font-mono">
-                  <div className="text-[10px] text-slate-500 mb-1">Causal Attribution:</div>
+                <div className="rounded-lg border-l-4 border-amber-500 bg-white/[0.02] p-3 text-xs leading-relaxed text-white/75 font-mono">
+                  <div className="text-[10px] text-white/40 mb-1">Causal Attribution:</div>
                   {loading ? "Calculating..." : currentVessel.causal_factor}
                 </div>
 
                 <div className="space-y-3.5">
-                  <div className="text-[9px] uppercase tracking-wider text-slate-500 font-bold">
+                  <div className="text-[9px] uppercase tracking-wider text-white/40 font-bold">
                     Cascading Delay Waterfall (min)
                   </div>
                   {cascadeData.map((item) => (
                     <div key={item.name} className="space-y-1.5">
                       <div className="flex justify-between text-[11px] font-mono">
-                        <span className="text-slate-600">{item.name}</span>
+                        <span className="text-white/60">{item.name}</span>
                         <span className="font-bold" style={{ color: item.color }}>
                           {loading ? "..." : `${item.val} min`}
                         </span>
                       </div>
-                      <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
+                      <div className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
                         <div
                           className="h-full rounded-full transition-all duration-500"
                           style={{
@@ -635,8 +635,8 @@ function PredictionsPage() {
                   ))}
                 </div>
 
-                <div className="rounded-xl border border-slate-200 bg-white p-4 text-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)]">
-                  <div className="text-[9px] text-slate-500 uppercase font-semibold">Total Cascading Delay</div>
+                <div className="rounded-xl border border-white/5 bg-[#0b1223] p-4 text-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.03)]">
+                  <div className="text-[9px] text-white/40 uppercase font-semibold">Total Cascading Delay</div>
                   <div className="text-2xl font-bold text-red-400 font-display mt-0.5">
                     {loading ? "..." : `${cascadeData.reduce((acc, c) => acc + c.val, 0)} minutes`}
                   </div>
@@ -653,7 +653,7 @@ function PredictionsPage() {
               title="AI Operational Intelligence Dossier"
               subtitle="Generative real-time cascade reasoning & mitigation analysis"
             >
-              <div className="relative overflow-hidden rounded-xl border border-indigo-500/20 bg-white p-4.5 font-mono text-xs leading-relaxed min-h-[220px] max-h-[340px] overflow-y-auto shadow-[inset_0_0_20px_rgba(99,102,241,0.05)]">
+              <div className="relative overflow-hidden rounded-xl border border-indigo-500/20 bg-[#060b18] p-4.5 font-mono text-xs leading-relaxed min-h-[220px] max-h-[340px] overflow-y-auto shadow-[inset_0_0_20px_rgba(99,102,241,0.05)]">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.005] to-transparent pointer-events-none opacity-50 bg-[length:100%_4px]" />
                 
                 <div className="flex items-center justify-between border-b border-indigo-500/20 pb-2.5 mb-3.5">
@@ -663,14 +663,14 @@ function PredictionsPage() {
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping" />
-                    <span className="text-[8.5px] text-slate-500 uppercase font-semibold">Gemini-2.0-Flash // SECURE</span>
+                    <span className="text-[8.5px] text-white/45 uppercase font-semibold">Gemini-2.0-Flash // SECURE</span>
                   </div>
                 </div>
 
                 {loading ? (
                   <div className="flex flex-col items-center justify-center py-10 space-y-3.5">
                     <RefreshCw className="h-6 w-6 text-indigo-400 animate-spin" />
-                    <span className="text-[10px] text-slate-500 tracking-wider font-semibold">GENERATING AI INTELLIGENCE...</span>
+                    <span className="text-[10px] text-white/40 tracking-wider font-semibold">GENERATING AI INTELLIGENCE...</span>
                   </div>
                 ) : aiReport ? (
                   <div className="prose prose-sm dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 max-w-none text-white/85 font-mono text-[11px] space-y-4">
@@ -679,7 +679,7 @@ function PredictionsPage() {
                     </ReactMarkdown>
                   </div>
                 ) : (
-                  <div className="text-slate-500 text-center py-10">
+                  <div className="text-white/30 text-center py-10">
                     No report generated. Trigger predictions to load.
                   </div>
                 )}
@@ -738,20 +738,20 @@ function PredictionsPage() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-[420px] bg-slate-50 border-l border-slate-200 shadow-2xl p-6 flex flex-col"
+              className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-[420px] bg-[#090f22] border-l border-white/10 shadow-2xl p-6 flex flex-col"
             >
               {/* Header */}
-              <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-5">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                  <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
                     <Settings2 className="h-4 w-4 text-cyan-400" />
                     Inference Overrides
                   </h3>
-                  <p className="text-[10px] text-slate-500 mt-0.5">Tweak variables to feed the neural forecast</p>
+                  <p className="text-[10px] text-white/40 mt-0.5">Tweak variables to feed the neural forecast</p>
                 </div>
                 <button
                   onClick={() => setShowOverrides(false)}
-                  className="rounded-lg p-1.5 text-slate-500 hover:text-white hover:bg-slate-100 transition font-bold"
+                  className="rounded-lg p-1.5 text-white/50 hover:text-white hover:bg-white/5 transition font-bold"
                 >
                   ✕
                 </button>
@@ -761,13 +761,13 @@ function PredictionsPage() {
               <div className="flex-1 overflow-y-auto pr-1 space-y-6">
                 
                 {/* Section 1: Weather Telemetry Syncer */}
-                <div className="space-y-3 rounded-xl border border-slate-200 bg-transparent p-4">
+                <div className="space-y-3 rounded-xl border border-white/5 bg-white/[0.01] p-4">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
                       <Sparkles className="h-3.5 w-3.5" />
                       Live Weather Sync
                     </span>
-                    <span className="text-[8px] font-mono text-slate-500">OPENWEATHER_API</span>
+                    <span className="text-[8px] font-mono text-white/30">OPENWEATHER_API</span>
                   </div>
                   <div className="flex gap-2">
                     <input
@@ -775,12 +775,12 @@ function PredictionsPage() {
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                       placeholder="Enter port city..."
-                      className="bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 placeholder-white/30 focus:outline-none focus:border-cyan-500 flex-1"
+                      className="bg-[#070b19] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-cyan-500 flex-1"
                     />
                     <button
                       disabled={weatherLoading || loading}
                       onClick={syncWeather}
-                      className="bg-cyan-600 hover:bg-cyan-500 text-slate-900 rounded-lg px-4 py-1.5 text-xs font-semibold flex items-center gap-1.5 transition disabled:opacity-40 cursor-pointer"
+                      className="bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg px-4 py-1.5 text-xs font-semibold flex items-center gap-1.5 transition disabled:opacity-40 cursor-pointer"
                     >
                       {weatherLoading ? <RefreshCw className="h-3 w-3 animate-spin" /> : <Anchor className="h-3.5 w-3.5" />}
                       <span>Sync</span>
@@ -793,7 +793,7 @@ function PredictionsPage() {
                   {/* Wind Speed Slider */}
                   <div className="space-y-1.5">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-700 flex items-center gap-1.5 font-medium">
+                      <span className="text-white/70 flex items-center gap-1.5 font-medium">
                         <CloudLightning className="h-3.5 w-3.5 text-amber-400" />
                         Wind Speed
                       </span>
@@ -806,9 +806,9 @@ function PredictionsPage() {
                       step="0.5"
                       value={windSpeed}
                       onChange={(e) => setWindSpeed(Number(e.target.value))}
-                      className="w-full accent-amber-400 bg-slate-100 h-1.5 rounded-lg appearance-none cursor-pointer"
+                      className="w-full accent-amber-400 bg-white/10 h-1.5 rounded-lg appearance-none cursor-pointer"
                     />
-                    <div className="flex justify-between text-[9px] text-slate-500 font-mono">
+                    <div className="flex justify-between text-[9px] text-white/35 font-mono">
                       <span>Calm (0)</span>
                       <span>Storm Lockout (22+)</span>
                     </div>
@@ -817,7 +817,7 @@ function PredictionsPage() {
                   {/* Visibility Slider */}
                   <div className="space-y-1.5">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-700 flex items-center gap-1.5 font-medium">
+                      <span className="text-white/70 flex items-center gap-1.5 font-medium">
                         <Eye className="h-3.5 w-3.5 text-cyan-400" />
                         Visibility
                       </span>
@@ -830,9 +830,9 @@ function PredictionsPage() {
                       step="100"
                       value={visibility}
                       onChange={(e) => setVisibility(Number(e.target.value))}
-                      className="w-full accent-cyan-400 bg-slate-100 h-1.5 rounded-lg appearance-none cursor-pointer"
+                      className="w-full accent-cyan-400 bg-white/10 h-1.5 rounded-lg appearance-none cursor-pointer"
                     />
-                    <div className="flex justify-between text-[9px] text-slate-500 font-mono">
+                    <div className="flex justify-between text-[9px] text-white/35 font-mono">
                       <span>Fog (100)</span>
                       <span>Clear (10000)</span>
                     </div>
@@ -841,7 +841,7 @@ function PredictionsPage() {
                   {/* Precipitation Slider */}
                   <div className="space-y-1.5">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-700 flex items-center gap-1.5 font-medium">
+                      <span className="text-white/70 flex items-center gap-1.5 font-medium">
                         <CloudRain className="h-3.5 w-3.5 text-blue-400" />
                         Precipitation
                       </span>
@@ -854,14 +854,14 @@ function PredictionsPage() {
                       step="0.2"
                       value={precipitation}
                       onChange={(e) => setPrecipitation(Number(e.target.value))}
-                      className="w-full accent-blue-400 bg-slate-100 h-1.5 rounded-lg appearance-none cursor-pointer"
+                      className="w-full accent-blue-400 bg-white/10 h-1.5 rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
 
                   {/* Temperature Slider */}
                   <div className="space-y-1.5">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-700 flex items-center gap-1.5 font-medium">
+                      <span className="text-white/70 flex items-center gap-1.5 font-medium">
                         <Thermometer className="h-3.5 w-3.5 text-red-400" />
                         Temperature
                       </span>
@@ -874,14 +874,14 @@ function PredictionsPage() {
                       step="1"
                       value={temperature}
                       onChange={(e) => setTemperature(Number(e.target.value))}
-                      className="w-full accent-red-400 bg-slate-100 h-1.5 rounded-lg appearance-none cursor-pointer"
+                      className="w-full accent-red-400 bg-white/10 h-1.5 rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
 
                   {/* Vessel Queue Slider */}
-                  <div className="space-y-1.5 border-t border-slate-200 pt-4">
+                  <div className="space-y-1.5 border-t border-white/5 pt-4">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-700 flex items-center gap-1.5 font-medium">
+                      <span className="text-white/70 flex items-center gap-1.5 font-medium">
                         <Compass className="h-3.5 w-3.5 text-indigo-400" />
                         Vessel Queue
                       </span>
@@ -894,14 +894,14 @@ function PredictionsPage() {
                       step="1"
                       value={vesselQueue}
                       onChange={(e) => setVesselQueue(Number(e.target.value))}
-                      className="w-full accent-indigo-400 bg-slate-100 h-1.5 rounded-lg appearance-none cursor-pointer"
+                      className="w-full accent-indigo-400 bg-white/10 h-1.5 rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
 
                   {/* Yard Occupancy Slider */}
                   <div className="space-y-1.5">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-slate-700 flex items-center gap-1.5 font-medium">
+                      <span className="text-white/70 flex items-center gap-1.5 font-medium">
                         <Database className="h-3.5 w-3.5 text-purple-400" />
                         Yard Occupancy
                       </span>
@@ -914,13 +914,13 @@ function PredictionsPage() {
                       step="1"
                       value={yardOccupancy}
                       onChange={(e) => setYardOccupancy(Number(e.target.value))}
-                      className="w-full accent-purple-400 bg-slate-100 h-1.5 rounded-lg appearance-none cursor-pointer"
+                      className="w-full accent-purple-400 bg-white/10 h-1.5 rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
 
                   {/* Holiday Toggle */}
-                  <div className="flex items-center justify-between border-t border-slate-200 pt-4 text-xs">
-                    <span className="text-slate-700 font-medium">Holiday Operations Mode</span>
+                  <div className="flex items-center justify-between border-t border-white/5 pt-4 text-xs">
+                    <span className="text-white/70 font-medium">Holiday Operations Mode</span>
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input
                         type="checkbox"
@@ -928,7 +928,7 @@ function PredictionsPage() {
                         onChange={(e) => setIsHoliday(e.target.checked ? 1 : 0)}
                         className="sr-only peer"
                       />
-                      <div className="w-9 h-5 bg-slate-100 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-600"></div>
+                      <div className="w-9 h-5 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-600"></div>
                     </label>
                   </div>
                 </div>
@@ -936,10 +936,10 @@ function PredictionsPage() {
               </div>
 
               {/* Actions Footer */}
-              <div className="border-t border-slate-200 pt-4 mt-4 flex gap-3">
+              <div className="border-t border-white/10 pt-4 mt-4 flex gap-3">
                 <button
                   onClick={handleReset}
-                  className="flex-1 bg-slate-100 hover:bg-slate-100 text-slate-900 rounded-lg py-2.5 text-xs font-semibold border border-slate-200 transition cursor-pointer"
+                  className="flex-1 bg-white/5 hover:bg-white/10 text-white rounded-lg py-2.5 text-xs font-semibold border border-white/10 transition cursor-pointer"
                 >
                   Reset Default
                 </button>

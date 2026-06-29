@@ -107,7 +107,7 @@ function Landing() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020205] text-slate-900 dark:text-white antialiased overflow-x-clip">
+    <div className="min-h-screen bg-[#05060F] text-white antialiased overflow-x-clip">
       <Nav />
       <Hero />
       <DashboardSection />
@@ -125,22 +125,7 @@ function Landing() {
   );
 }
 
-
 function Nav() {
-  const [theme, setTheme] = useState(
-    typeof window !== 'undefined' && document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-  );
-
-  const toggleTheme = () => {
-    if (theme === 'light') {
-      document.documentElement.classList.add('dark');
-      setTheme('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      setTheme('light');
-    }
-  };
-
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -173,9 +158,9 @@ function Nav() {
         transition={{ type: "spring", stiffness: 240, damping: 28 }}
         style={{
           backgroundImage:
-            "var(--nav-bg)",
+            "linear-gradient(135deg, rgba(15,23,42,0.72) 0%, rgba(30,27,75,0.62) 45%, rgba(15,23,42,0.72) 100%)",
         }}
-        className="relative mx-auto flex items-center gap-3 sm:gap-6 rounded-full border border-slate-200 dark:border-white/10 backdrop-blur-2xl shadow-[0_20px_60px_-20px_rgba(2,6,23,0.65),inset_0_1px_0_0_rgba(255,255,255,0.18),inset_0_-1px_0_0_rgba(255,255,255,0.04)]"
+        className="relative mx-auto flex items-center gap-3 sm:gap-6 rounded-full border border-white/15 backdrop-blur-2xl shadow-[0_20px_60px_-20px_rgba(2,6,23,0.65),inset_0_1px_0_0_rgba(255,255,255,0.18),inset_0_-1px_0_0_rgba(255,255,255,0.04)]"
       >
         {/* Top gloss reflection sheen */}
         <span
@@ -226,7 +211,7 @@ function Nav() {
               key={i.t}
               to={i.to}
               hash={i.hash}
-              className="relative rounded-full px-3.5 py-1.5 text-[13.5px] font-medium text-slate-700 dark:text-slate-300 transition-colors hover:text-blue-700 hover:bg-blue-50"
+              className="relative rounded-full px-3.5 py-1.5 text-[13.5px] font-medium text-white/70 transition-colors hover:text-white hover:bg-white/10"
             >
               {i.t}
             </Link>
@@ -234,22 +219,9 @@ function Nav() {
         </nav>
         {/* Call to Actions */}
         <div className="relative ml-auto flex items-center gap-1.5">
-          
-          <button
-            onClick={toggleTheme}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-[#060814] text-slate-700 dark:text-slate-300 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-500/20 transition cursor-pointer group shadow-sm mr-1"
-            aria-label="Toggle Theme"
-            title="Toggle Theme"
-          >
-            {theme === "light" ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-moon transition-all group-hover:-rotate-12"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sun transition-all group-hover:rotate-45"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-            )}
-          </button>
           <Link
             to="/auth/login"
-            className="hidden md:inline-flex h-9 items-center rounded-full px-3.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-700 hover:bg-blue-50"
+            className="hidden md:inline-flex h-9 items-center rounded-full px-3.5 text-sm font-medium text-white/75 hover:text-white hover:bg-white/10"
           >
             Sign in
           </Link>
@@ -269,7 +241,7 @@ function Nav() {
           {/* Hamburger Menu Toggle on Mobile */}
           <button
             onClick={() => setMenuOpen((o) => !o)}
-            className="flex md:hidden h-9 w-9 items-center justify-center rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-[#060814] text-slate-700 dark:text-slate-300 hover:text-blue-700 hover:bg-blue-50 transition cursor-pointer"
+            className="flex md:hidden h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 hover:text-white hover:bg-white/10 transition cursor-pointer"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="h-4.5 w-4.5" /> : <Menu className="h-4.5 w-4.5" />}
@@ -284,7 +256,7 @@ function Nav() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 mt-3 p-6 rounded-3xl border border-slate-200 dark:border-white/10 backdrop-blur-3xl bg-slate-50/95 dark:bg-[#020205]/95 shadow-2xl flex flex-col gap-4 md:hidden z-50"
+              className="absolute top-full left-0 right-0 mt-3 p-6 rounded-3xl border border-white/10 backdrop-blur-3xl bg-[#07091a]/95 shadow-2xl flex flex-col gap-4 md:hidden z-50"
             >
               {[
                 { to: "/", hash: "how", t: "How" },
@@ -298,7 +270,7 @@ function Nav() {
                   to={i.to}
                   hash={i.hash}
                   onClick={() => setMenuOpen(false)}
-                  className="text-base font-semibold text-slate-700 dark:text-slate-300 hover:text-white transition py-2 border-b border-slate-200 dark:border-white/10 last:border-b-0"
+                  className="text-base font-semibold text-white/70 hover:text-white transition py-2 border-b border-white/5 last:border-b-0"
                 >
                   {i.t}
                 </Link>
@@ -307,14 +279,14 @@ function Nav() {
                 <Link
                   to="/auth/login"
                   onClick={() => setMenuOpen(false)}
-                  className="flex h-10 items-center justify-center rounded-full border border-slate-200 dark:border-white/10 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-white"
+                  className="flex h-10 items-center justify-center rounded-full border border-white/10 text-sm font-semibold text-white/70 hover:text-white"
                 >
                   Sign in
                 </Link>
                 <Link
                   to="/auth/login"
                   onClick={() => setMenuOpen(false)}
-                  className="flex h-10 items-center justify-center gap-1.5 rounded-full px-5 text-sm font-semibold text-slate-900 dark:text-white"
+                  className="flex h-10 items-center justify-center gap-1.5 rounded-full px-5 text-sm font-semibold text-white"
                   style={{
                     backgroundImage: "linear-gradient(120deg, #1b3a6b 0%, #2563eb 50%, #0d9488 110%)",
                   }}
@@ -381,7 +353,7 @@ function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden text-slate-900 dark:text-white pt-24 pb-12"
+      className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden text-white pt-24 pb-12"
       style={{
         background:
           "radial-gradient(1200px 600px at 50% 10%, rgba(37,99,235,0.32), transparent 60%), radial-gradient(900px 500px at 80% 0%, rgba(13,148,136,0.22), transparent 60%), radial-gradient(700px 400px at 10% 20%, rgba(139,92,246,0.15), transparent 60%), linear-gradient(180deg, #05060F 0%, #07091A 60%, #05060F 100%)",
@@ -400,7 +372,7 @@ function Hero() {
           playsInline
         />
         {/* Cinematic overlays for depth and readability */}
-        <div className="absolute inset-0 bg-slate-50/10 dark:bg-[#020205]/10 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-[#05060F]/10 mix-blend-multiply" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#05060F]/5 via-transparent to-[#05060F]" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#05060F]/10 via-transparent to-[#05060F]/10" />
         {/* Atmospheric glow matching the theme of the video */}
@@ -412,7 +384,7 @@ function Hero() {
         className="absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px)",
+            "linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       />
@@ -427,30 +399,6 @@ function Hero() {
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[620px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.45),transparent)] blur-3xl" />
       <div className="pointer-events-none absolute top-40 -left-32 h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgba(37,99,235,0.3),transparent)] blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 right-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgba(13,148,136,0.25),transparent)] blur-3xl" />      <style>{`
-        :root {
-          --nav-bg: linear-gradient(135deg, rgba(255,255,255,0.72) 0%, rgba(248,250,252,0.62) 45%, rgba(255,255,255,0.72) 100%);
-        }
-        .dark {
-          --nav-bg: linear-gradient(135deg, rgba(2,2,5,0.72) 0%, rgba(2,2,5,0.62) 45%, rgba(2,2,5,0.72) 100%);
-        }
-
-        :root {
-          --garud-card-bg: hsla(240, 15%, 98%, 0.9);
-          --garud-card-shadow: 0px -16px 24px 0px rgba(0, 0, 0, 0.05) inset;
-          --garud-radial-bg: var(--garud-radial-bg);
-          --eco-inactive-text: #475569;
-          --eco-inactive-bg: #F8FAFC;
-          --eco-inactive-border: #E2E8F0;
-        }
-        .dark {
-          --garud-card-bg: hsla(240, 15%, 9%, 0.9);
-          --garud-card-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.15) inset;
-          --garud-radial-bg: hsla(240, 15%, 9%, 1);
-          --eco-inactive-text: rgba(255,255,255,0.7);
-          --eco-inactive-bg: rgba(255, 255, 255, 0.05);
-          --eco-inactive-border: rgba(255, 255, 255, 0.1);
-        }
-
 
         @keyframes border-spin {
           from {
@@ -827,7 +775,7 @@ function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05 }}
-            className="mt-6 tracking-tight text-slate-900 dark:text-white text-3xl sm:text-5xl md:text-6xl lg:text-[78px] xl:text-[90px] 2xl:text-[100px] leading-[1.1] text-center font-black"
+            className="mt-6 tracking-tight text-white text-3xl sm:text-5xl md:text-6xl lg:text-[78px] xl:text-[90px] 2xl:text-[100px] leading-[1.1] text-center font-black"
             style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
             <span className="inline-block whitespace-nowrap">Autonomous Intelligence</span>
@@ -860,7 +808,7 @@ function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.12 }}
-            className="mx-auto mt-8 max-w-3xl text-sm sm:text-base md:text-lg text-slate-600 dark:text-slate-400 leading-relaxed text-center font-medium"
+            className="mx-auto mt-8 max-w-3xl text-sm sm:text-base md:text-lg text-white/60 leading-relaxed text-center font-medium"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
             <span className="text-white font-semibold">LogiMind AI</span> combines{" "}
@@ -927,7 +875,7 @@ function Hero() {
             className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-5xl px-4"
           >
             {/* System Pulse Widget */}
-            <div className="group relative overflow-hidden rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#020205] p-4 flex items-center justify-between backdrop-blur-2xl transition-all duration-300 hover:border-emerald-500/30 hover:bg-slate-100 hover:shadow-[0_15px_30px_-10px_rgba(16,185,129,0.15)] hover:-translate-y-0.5 select-none cursor-pointer">
+            <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-4 flex items-center justify-between backdrop-blur-2xl transition-all duration-300 hover:border-emerald-500/30 hover:bg-white/[0.04] hover:shadow-[0_15px_30px_-10px_rgba(16,185,129,0.15)] hover:-translate-y-0.5 select-none cursor-pointer">
               <div className="flex items-center gap-3">
                 <div className="relative flex items-center justify-center h-9 w-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
                   <span className="absolute flex h-2.5 w-2.5">
@@ -936,8 +884,8 @@ function Hero() {
                   </span>
                 </div>
                 <div className="text-left">
-                  <div className="text-[9px] font-mono font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase">TELEMETRY // PM-OS</div>
-                  <div className="text-xs font-semibold font-mono text-slate-700 dark:text-slate-300 tracking-wide mt-0.5 uppercase">SYSTEM PULSE: ACTIVE</div>
+                  <div className="text-[9px] font-mono font-bold tracking-wider text-slate-500 uppercase">TELEMETRY // PM-OS</div>
+                  <div className="text-xs font-semibold font-mono text-white/80 tracking-wide mt-0.5 uppercase">SYSTEM PULSE: ACTIVE</div>
                 </div>
               </div>
 
@@ -957,14 +905,14 @@ function Hero() {
             </div>
 
             {/* AI Agent Mesh Widget */}
-            <div className="group relative overflow-hidden rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#020205] p-4 flex items-center justify-between backdrop-blur-2xl transition-all duration-300 hover:border-cyan-500/30 hover:bg-slate-100 hover:shadow-[0_15px_30px_-10px_rgba(6,182,212,0.15)] hover:-translate-y-0.5 select-none cursor-pointer">
+            <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-4 flex items-center justify-between backdrop-blur-2xl transition-all duration-300 hover:border-cyan-500/30 hover:bg-white/[0.04] hover:shadow-[0_15px_30px_-10px_rgba(6,182,212,0.15)] hover:-translate-y-0.5 select-none cursor-pointer">
               <div className="flex items-center gap-3">
                 <div className="h-9 w-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform duration-300">
                   <Bot className="h-5 w-5 animate-pulse" />
                 </div>
                 <div className="text-left">
-                  <div className="text-[9px] font-mono font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase">AGENT MESH</div>
-                  <div className="text-xs font-semibold font-mono text-slate-700 dark:text-slate-300 tracking-wide mt-0.5 uppercase">9 AGENTS ONLINE</div>
+                  <div className="text-[9px] font-mono font-bold tracking-wider text-slate-500 uppercase">AGENT MESH</div>
+                  <div className="text-xs font-semibold font-mono text-white/80 tracking-wide mt-0.5 uppercase">9 AGENTS ONLINE</div>
                 </div>
               </div>
 
@@ -984,14 +932,14 @@ function Hero() {
             </div>
 
             {/* AI Accuracy Widget */}
-            <div className="group relative overflow-hidden rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#020205] p-4 flex items-center justify-between backdrop-blur-2xl transition-all duration-300 hover:border-amber-500/30 hover:bg-slate-100 hover:shadow-[0_15px_30px_-10px_rgba(245,158,11,0.15)] hover:-translate-y-0.5 select-none cursor-pointer">
+            <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-4 flex items-center justify-between backdrop-blur-2xl transition-all duration-300 hover:border-amber-500/30 hover:bg-white/[0.04] hover:shadow-[0_15px_30px_-10px_rgba(245,158,11,0.15)] hover:-translate-y-0.5 select-none cursor-pointer">
               <div className="flex items-center gap-3">
                 <div className="h-9 w-9 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:rotate-12 transition-transform duration-300">
                   <Trophy className="h-5 w-5" />
                 </div>
                 <div className="text-left">
-                  <div className="text-[9px] font-mono font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase">ACCURACY RATING</div>
-                  <div className="text-xs font-semibold font-mono text-slate-700 dark:text-slate-300 tracking-wide mt-0.5 uppercase">98.7% AI ACCURACY</div>
+                  <div className="text-[9px] font-mono font-bold tracking-wider text-slate-500 uppercase">ACCURACY RATING</div>
+                  <div className="text-xs font-semibold font-mono text-white/80 tracking-wide mt-0.5 uppercase">98.7% AI ACCURACY</div>
                 </div>
               </div>
 
@@ -1017,14 +965,14 @@ function Hero() {
             </div>
 
             {/* Savings Widget */}
-            <div className="group relative overflow-hidden rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#020205] p-4 flex items-center justify-between backdrop-blur-2xl transition-all duration-300 hover:border-violet-500/30 hover:bg-slate-100 hover:shadow-[0_15px_30px_-10px_rgba(139,92,246,0.15)] hover:-translate-y-0.5 select-none cursor-pointer">
+            <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-4 flex items-center justify-between backdrop-blur-2xl transition-all duration-300 hover:border-violet-500/30 hover:bg-white/[0.04] hover:shadow-[0_15px_30px_-10px_rgba(139,92,246,0.15)] hover:-translate-y-0.5 select-none cursor-pointer">
               <div className="flex items-center gap-3">
                 <div className="h-9 w-9 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400 group-hover:translate-y-[-2px] transition-transform duration-300">
                   <Coins className="h-5 w-5" />
                 </div>
                 <div className="text-left">
-                  <div className="text-[9px] font-mono font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase">OPERATIONAL ROI</div>
-                  <div className="text-xs font-semibold font-mono text-slate-700 dark:text-slate-300 tracking-wide mt-0.5 uppercase">$4.2M SAVED YTD</div>
+                  <div className="text-[9px] font-mono font-bold tracking-wider text-slate-500 uppercase">OPERATIONAL ROI</div>
+                  <div className="text-xs font-semibold font-mono text-white/80 tracking-wide mt-0.5 uppercase">$4.2M SAVED YTD</div>
                 </div>
               </div>
 
@@ -1107,20 +1055,20 @@ function DashboardMockupCard({
         }}
       >
         <div
-          className="overflow-hidden rounded-[19px] bg-slate-50/95 dark:bg-[#020205]/95 backdrop-blur-2xl"
+          className="overflow-hidden rounded-[19px] bg-[#070913]/95 backdrop-blur-2xl"
           style={{
             boxShadow: `0 45px 100px -25px rgba(0,0,0,0.95), 0 0 50px -10px ${accentColor}55`
           }}
         >
           {/* Top window browser bar */}
-          <div className="flex items-center gap-2 border-b border-slate-200 dark:border-white/10 bg-gradient-to-b from-[#090b16] to-[#05060f] px-4 py-2.5">
+          <div className="flex items-center gap-2 border-b border-white/5 bg-gradient-to-b from-[#090b16] to-[#05060f] px-4 py-2.5">
             <div className="flex items-center gap-1.5 w-[20%]">
               <span className="h-3 w-3 rounded-full bg-[#FF5F57] shadow-[inset_0_-1px_0_rgba(0,0,0,0.3)]" />
               <span className="h-3 w-3 rounded-full bg-[#FEBC2E] shadow-[inset_0_-1px_0_rgba(0,0,0,0.3)]" />
               <span className="h-3 w-3 rounded-full bg-[#28C840] shadow-[inset_0_-1px_0_rgba(0,0,0,0.3)]" />
             </div>
 
-            <div className="mx-auto flex items-center gap-2 rounded-md border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 px-3 py-1 text-[11px] font-mono text-slate-500 dark:text-slate-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+            <div className="mx-auto flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] font-mono text-white/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/50" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
@@ -1128,7 +1076,7 @@ function DashboardMockupCard({
               logimind.ai/command?role={roleName}
             </div>
 
-            <div className="ml-auto flex items-center gap-2 text-[10px] font-mono text-slate-500 dark:text-slate-400 w-[20%] justify-end">
+            <div className="ml-auto flex items-center gap-2 text-[10px] font-mono text-white/40 w-[20%] justify-end">
               <span className="hidden items-center gap-1 md:inline-flex">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
                 LIVE
@@ -1137,17 +1085,17 @@ function DashboardMockupCard({
           </div>
 
           {/* Main workspace frame */}
-          <div className="grid grid-cols-12 gap-px bg-slate-100 dark:bg-white/5">
+          <div className="grid grid-cols-12 gap-px bg-white/5">
             {/* Sidebar */}
-            <aside className="col-span-2 hidden flex-col gap-1.5 bg-slate-50 dark:bg-[#020205] p-3 lg:flex">
+            <aside className="col-span-2 hidden flex-col gap-1.5 bg-[#05060F] p-3 lg:flex">
               {sidebarItems.map((it, i) => {
                 const Ic = it.icon;
                 return (
                   <div
                     key={i}
                     className={`flex items-center gap-2 rounded-md px-2.5 py-2 text-[11px] font-medium transition-colors cursor-pointer ${it.active
-                        ? "bg-slate-100 dark:bg-white/5 text-slate-900 dark:text-white"
-                        : "text-slate-500 dark:text-slate-400 hover:text-slate-700 hover:bg-slate-100"
+                        ? "bg-white/10 text-white"
+                        : "text-white/45 hover:text-white/80 hover:bg-white/5"
                       }`}
                   >
                     <Ic className="h-3.5 w-3.5" style={{ color: it.active ? accentColor : "currentColor" }} />
@@ -1158,10 +1106,10 @@ function DashboardMockupCard({
             </aside>
 
             {/* Content panel */}
-            <div className="col-span-12 grid grid-cols-12 gap-3 bg-slate-50 dark:bg-[#020205] p-4 lg:col-span-10">
+            <div className="col-span-12 grid grid-cols-12 gap-3 bg-[#070913] p-4 lg:col-span-10">
               {/* Success Score Gauge */}
-              <div className="col-span-12 rounded-xl border border-slate-200 dark:border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 sm:col-span-4 flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
-                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400">
+              <div className="col-span-12 rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 sm:col-span-4 flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-white/45">
                   <span>Risk Status</span>
                   <span style={{ color: accentColor }}>{successStatus}</span>
                 </div>
@@ -1199,19 +1147,19 @@ function DashboardMockupCard({
                     </svg>
                     <div className="absolute inset-0 grid place-items-center">
                       <div className="text-center">
-                        <div className="font-display text-xl font-bold text-slate-900 dark:text-white">{successScore}</div>
-                        <div className="text-[8px] font-mono uppercase text-slate-500 dark:text-slate-400">/100</div>
+                        <div className="font-display text-xl font-bold text-white">{successScore}</div>
+                        <div className="text-[8px] font-mono uppercase text-white/40">/100</div>
                       </div>
                     </div>
                   </div>
                   <div className="flex-1 space-y-1.5">
                     {progressMetrics.map((pm, i) => (
                       <div key={i} className="space-y-0.5">
-                        <div className="flex items-center justify-between text-[10px] text-slate-600 dark:text-slate-400">
+                        <div className="flex items-center justify-between text-[10px] text-white/60">
                           <span>{pm.label}</span>
                           <span className="font-mono" style={{ color: pm.toColor }}>{pm.value}</span>
                         </div>
-                        <div className="h-1 overflow-hidden rounded-full bg-slate-100 dark:bg-white/5">
+                        <div className="h-1 overflow-hidden rounded-full bg-white/5">
                           <div
                             className="h-full rounded-full"
                             style={{
@@ -1229,10 +1177,10 @@ function DashboardMockupCard({
               {/* Dynamic Velocity Chart or Custom Layout based on Role */}
               <div className="col-span-12 sm:col-span-8">
                 {roleName === "vessels" && (
-                  <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                  <div className="rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                     <div>
-                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-2.5 mb-3">
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-3">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">
                           Live Vessel Traffic Queue
                         </span>
                         <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-2 py-0.5 text-[9px] font-mono text-cyan-300">
@@ -1243,26 +1191,26 @@ function DashboardMockupCard({
                       <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse text-[11px]">
                           <thead>
-                            <tr className="border-b border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400">
+                            <tr className="border-b border-white/5 text-white/45">
                               <th className="pb-2 font-medium">VESSEL</th>
                               <th className="pb-2 font-medium">BERTH</th>
                               <th className="pb-2 font-medium">ETA TIMELINE</th>
                               <th className="pb-2 font-medium">STATUS</th>
                             </tr>
                           </thead>
-                          <tbody className="divide-y divide-white/5 text-slate-700 dark:text-slate-300">
+                          <tbody className="divide-y divide-white/5 text-white/80">
                             {[
                               { name: "MV-Atlas", berth: "Berth 3", eta: "15:22 (On Time)", status: "Berthed", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20" },
                               { name: "CMA CGM Orion", berth: "Berth 1", eta: "16:45 (On Time)", status: "Approaching", color: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20" },
                               { name: "MSC Geneva", berth: "Berth 5", eta: "18:10 (Delayed)", status: "Speed Adjusted", color: "text-amber-400 bg-amber-500/10 border-amber-500/20" },
                             ].map((ship, idx) => (
-                              <tr key={idx} className="hover:bg-slate-50">
-                                <td className="py-3.5 font-semibold flex items-center gap-2 text-slate-900 dark:text-white">
+                              <tr key={idx} className="hover:bg-white/[0.02]">
+                                <td className="py-3.5 font-semibold flex items-center gap-2 text-white">
                                   <Ship className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
                                   {ship.name}
                                 </td>
-                                <td className="py-3.5 text-slate-700 dark:text-slate-300">{ship.berth}</td>
-                                <td className="py-3.5 text-slate-600 dark:text-slate-400 font-mono">{ship.eta}</td>
+                                <td className="py-3.5 text-white/70">{ship.berth}</td>
+                                <td className="py-3.5 text-white/60 font-mono">{ship.eta}</td>
                                 <td className="py-3.5">
                                   <span className={`px-2 py-0.5 rounded-full text-[9px] font-medium border ${ship.color}`}>
                                     {ship.status}
@@ -1278,10 +1226,10 @@ function DashboardMockupCard({
                 )}
 
                 {roleName === "yard" && (
-                  <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                  <div className="rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                     <div>
-                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-2.5 mb-3">
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-3">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">
                           Yard Block Capacity Grid
                         </span>
                         <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 text-[9px] font-mono text-emerald-300">
@@ -1298,12 +1246,12 @@ function DashboardMockupCard({
                           { block: "Yard E", fill: 34, color: "#10B981" },
                           { block: "Yard F", fill: 67, color: "#3B82F6" },
                         ].map((item, idx) => (
-                          <div key={idx} className="rounded-lg border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#020205] p-3 flex flex-col justify-between hover:border-emerald-500/20 transition">
+                          <div key={idx} className="rounded-lg border border-white/5 bg-[#05060F] p-3 flex flex-col justify-between hover:border-emerald-500/20 transition">
                             <div className="flex items-center justify-between">
                               <span className="text-[11px] font-semibold text-white/95">{item.block}</span>
-                              <span className="text-[9.5px] font-mono text-slate-500 dark:text-slate-400">{item.fill}%</span>
+                              <span className="text-[9.5px] font-mono text-white/40">{item.fill}%</span>
                             </div>
-                            <div className="mt-4 h-1.5 w-full bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden">
+                            <div className="mt-4 h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                               <div className="h-full rounded-full" style={{ width: `${item.fill}%`, backgroundColor: item.color }} />
                             </div>
                           </div>
@@ -1314,10 +1262,10 @@ function DashboardMockupCard({
                 )}
 
                 {roleName === "rails" && (
-                  <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                  <div className="rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                     <div>
-                      <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-2.5 mb-3">
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                      <div className="flex items-center justify-between border-b border-white/5 pb-2.5 mb-3">
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-white/40">
                           Live Wagon Telemetry & OCR Scan Log
                         </span>
                         <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-2 py-0.5 text-[9px] font-mono text-amber-300">
@@ -1328,26 +1276,26 @@ function DashboardMockupCard({
                       <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse text-[11px]">
                           <thead>
-                            <tr className="border-b border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400">
+                            <tr className="border-b border-white/5 text-white/45">
                               <th className="pb-2 font-medium">WAGON NO.</th>
                               <th className="pb-2 font-medium">CAM UNIT</th>
                               <th className="pb-2 font-medium">OCR VALUE (CONF)</th>
                               <th className="pb-2 font-medium">DEFECTS STATUS</th>
                             </tr>
                           </thead>
-                          <tbody className="divide-y divide-white/5 text-slate-700 dark:text-slate-300">
+                          <tbody className="divide-y divide-white/5 text-white/80">
                             {[
                               { name: "CR-8812", unit: "Track 2 · Cam 01", ocr: "CR8812 (98.7%)", status: "Cleared", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20" },
                               { name: "IND-9271", unit: "Track 2 · Cam 02", ocr: "IND9271 (99.1%)", status: "Axle Anomaly Alert", color: "text-red-400 bg-red-500/10 border-red-500/20" },
                               { name: "ER-4402", unit: "Track 1 · Cam 03", ocr: "ER4402 (97.4%)", status: "Under Review", color: "text-amber-400 bg-amber-500/10 border-amber-500/20" },
                             ].map((wagon, idx) => (
-                              <tr key={idx} className="hover:bg-slate-50">
-                                <td className="py-3.5 font-semibold flex items-center gap-2 text-slate-900 dark:text-white">
+                              <tr key={idx} className="hover:bg-white/[0.02]">
+                                <td className="py-3.5 font-semibold flex items-center gap-2 text-white">
                                   <Train className="h-3.5 w-3.5 text-amber-400 shrink-0" />
                                   {wagon.name}
                                 </td>
-                                <td className="py-3.5 text-slate-700 dark:text-slate-300">{wagon.unit}</td>
-                                <td className="py-3.5 text-slate-600 dark:text-slate-400 font-mono">{wagon.ocr}</td>
+                                <td className="py-3.5 text-white/70">{wagon.unit}</td>
+                                <td className="py-3.5 text-white/60 font-mono">{wagon.ocr}</td>
                                 <td className="py-3.5">
                                   <span className={`px-2 py-0.5 rounded-full text-[9px] font-medium border ${wagon.color}`}>
                                     {wagon.status}
@@ -1363,18 +1311,18 @@ function DashboardMockupCard({
                 )}
 
                 {roleName === "executive" && (
-                  <div className="rounded-xl border border-slate-200 dark:border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
+                  <div className="rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4 h-full shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="text-[10px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                        <div className="text-[10px] font-mono uppercase tracking-widest text-white/40">
                           {chartTitle}
                         </div>
-                        <div className="mt-1 font-display text-2xl font-semibold text-slate-900 dark:text-white">
+                        <div className="mt-1 font-display text-2xl font-semibold text-white">
                           {chartValue} <span className="text-xs font-medium text-emerald-300">{chartChange}</span>
                         </div>
                       </div>
-                      <div className="flex items-center gap-1 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 p-0.5 text-[10px] font-mono text-slate-500 dark:text-slate-400">
-                        <span className="rounded-full bg-slate-100 dark:bg-white/5 px-2 py-0.5 text-slate-900 dark:text-white">24h</span>
+                      <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] p-0.5 text-[10px] font-mono text-white/50">
+                        <span className="rounded-full bg-white/10 px-2 py-0.5 text-white">24h</span>
                         <span className="px-2 py-0.5">7d</span>
                         <span className="px-2 py-0.5">30d</span>
                       </div>
@@ -1483,9 +1431,9 @@ function DashboardMockupCard({
                         className="pointer-events-none absolute"
                         style={{ left: "calc(67.5% - 56px)", top: "8%" }}
                       >
-                        <div className="rounded-lg border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#060814]/90 px-2.5 py-1.5 text-[10px] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] backdrop-blur-xl">
-                          <div className="font-mono text-slate-500 dark:text-slate-400">{chartTooltipTime}</div>
-                          <div className="font-display text-sm font-semibold text-slate-900 dark:text-white">{chartTooltipValue}</div>
+                        <div className="rounded-lg border border-white/10 bg-[#0B1024]/90 px-2.5 py-1.5 text-[10px] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+                          <div className="font-mono text-white/40">{chartTooltipTime}</div>
+                          <div className="font-display text-sm font-semibold text-white">{chartTooltipValue}</div>
                           <div className="text-[9px]" style={{ color: accentColor }}>{chartTooltipChange}</div>
                         </div>
                       </div>
@@ -1505,10 +1453,10 @@ function DashboardMockupCard({
                 return (
                   <div
                     key={i}
-                    className="col-span-6 rounded-xl border border-slate-200 dark:border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.01] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:col-span-3"
+                    className="col-span-6 rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.01] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:col-span-3"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-[9px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                      <span className="text-[9px] font-mono text-white/45 uppercase tracking-wider">
                         {k.label}
                       </span>
                       <span
@@ -1518,7 +1466,7 @@ function DashboardMockupCard({
                         {k.change}
                       </span>
                     </div>
-                    <div className="mt-2 font-display text-xl font-semibold text-slate-900 dark:text-white">{k.value}</div>
+                    <div className="mt-2 font-display text-xl font-semibold text-white">{k.value}</div>
                     <svg
                       viewBox="0 0 100 30"
                       preserveAspectRatio="none"
@@ -1540,9 +1488,9 @@ function DashboardMockupCard({
               })}
 
               {/* Event Stream logs */}
-              <div className="col-span-12 rounded-xl border border-slate-200 dark:border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4">
+              <div className="col-span-12 rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4">
                 <div className="flex items-center justify-between">
-                  <div className="text-[10px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                  <div className="text-[10px] font-mono uppercase tracking-widest text-white/40">
                     Live Event Stream
                   </div>
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-mono text-emerald-300">
@@ -1555,11 +1503,11 @@ function DashboardMockupCard({
                   {liveEvents.map((evt, idx) => (
                     <li
                       key={idx}
-                      className="flex items-center gap-2 rounded-md border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#020205] px-2 py-1.5"
+                      className="flex items-center gap-2 rounded-md border border-white/5 bg-white/[0.02] px-2 py-1.5"
                     >
-                      <span className="font-mono text-slate-500 dark:text-slate-400">{evt.time}</span>
+                      <span className="font-mono text-white/40">{evt.time}</span>
                       <span className="h-1.5 w-1.5 rounded-full" style={{ background: evt.color }} />
-                      <span className="flex-1 truncate text-slate-700 dark:text-slate-300">{evt.message}</span>
+                      <span className="flex-1 truncate text-white/80">{evt.message}</span>
                       <span
                         className="rounded-full px-1.5 py-0.5 text-[9px] font-mono uppercase"
                         style={{ background: `${evt.color}22`, color: evt.color }}
@@ -1585,14 +1533,14 @@ function DashboardMockupCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 + idx * 0.15 }}
-            className={`absolute z-20 hidden items-center gap-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#060814] px-3 py-2.5 text-xs text-slate-900 dark:text-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur-2xl lg:flex ${chip.xPosClass} ${chip.yPosClass}`}
+            className={`absolute z-20 hidden items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.06] px-3 py-2.5 text-xs text-white shadow-[0_20px_50px_-20px_rgba(0,0,0,0.8)] backdrop-blur-2xl lg:flex ${chip.xPosClass} ${chip.yPosClass}`}
           >
             <div className={`grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br ${chip.gradFrom} ${chip.gradTo}`}>
-              <ChipIcon className="h-3.5 w-3.5 text-slate-900 dark:text-white" />
+              <ChipIcon className="h-3.5 w-3.5 text-white" />
             </div>
             <div>
               <div className="font-semibold">{chip.title}</div>
-              <div className="text-[10px] text-slate-500 dark:text-slate-400">{chip.subtitle}</div>
+              <div className="text-[10px] text-white/50">{chip.subtitle}</div>
             </div>
           </motion.div>
         );
@@ -1603,7 +1551,7 @@ function DashboardMockupCard({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 1.3 }}
-        className="absolute -bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-[#060814] px-3 py-1.5 text-[11px] text-slate-900 dark:text-white backdrop-blur-2xl md:inline-flex"
+        className="absolute -bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-[11px] text-white backdrop-blur-2xl md:inline-flex"
       >
         <Sparkles className="h-3.5 w-3.5 text-violet-300 animate-pulse" />
         {copilotStatus}
@@ -1798,7 +1746,7 @@ const railOSProps: DashboardMockupCardProps = {
 
 function DashboardSection() {
   return (
-    <section className="relative overflow-hidden py-24 bg-slate-50 dark:bg-[#020205] border-b border-slate-200 dark:border-white/10">
+    <section className="relative overflow-hidden py-24 bg-[#05060F] border-b border-white/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -1814,8 +1762,8 @@ function DashboardSection() {
             </span>
             Command Center
           </span>
-          <h2 className="mt-3 font-display text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
-            One platform. <span className="text-slate-500 dark:text-slate-400">Custom operating systems.</span>
+          <h2 className="mt-3 font-display text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+            One platform. <span className="text-white/50">Custom operating systems.</span>
           </h2>
           <p className="mt-4 text-xs sm:text-sm text-neutral-400 leading-relaxed">
             Scroll down to see the custom operating systems for Vessels, Yards, and Rails stack seamlessly.
@@ -1958,7 +1906,7 @@ function Trust() {
   ];
 
   return (
-    <section className="bg-slate-50 dark:bg-[#020205] py-24 overflow-hidden relative border-y border-slate-200 dark:border-white/10">
+    <section className="bg-[#05060F] py-24 overflow-hidden relative border-y border-white/5">
       <style>{`
         @keyframes marquee-ltr {
           0% { transform: translateX(-50%); }
@@ -2039,10 +1987,10 @@ function Trust() {
           </span>
           Ecosystem Partners
         </span>
-        <h2 className="font-display text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
+        <h2 className="font-display text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
           Trusted Across the Global Logistics Ecosystem
         </h2>
-        <p className="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto">
+        <p className="mt-4 text-sm sm:text-base text-white/60 leading-relaxed max-w-2xl mx-auto">
           Connect seamlessly with shipping lines, freight forwarders, ports, warehouses, customs partners, and enterprise logistics providers through LogiMind.
         </p>
       </motion.div>
@@ -2166,7 +2114,7 @@ function Trust() {
           <div className="absolute h-30 w-30 sm:h-38 sm:w-38 rounded-full border border-dashed border-indigo-500/30 animate-cyber-ccw pointer-events-none" />
 
           {/* Crosshair grid overlay */}
-          <div className="absolute h-26 w-26 sm:h-32 sm:w-32 rounded-full border border-slate-200 dark:border-white/10 flex items-center justify-center animate-pulse pointer-events-none">
+          <div className="absolute h-26 w-26 sm:h-32 sm:w-32 rounded-full border border-white/5 flex items-center justify-center animate-pulse pointer-events-none">
             <div className="absolute top-0 bottom-0 w-px bg-cyan-500/10" />
             <div className="absolute left-0 right-0 h-px bg-cyan-500/10" />
           </div>
@@ -2198,7 +2146,7 @@ function Trust() {
             return (
               <div
                 key={idx}
-                className="relative group overflow-hidden rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-[#060814] p-5 text-center transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl cursor-default select-none"
+                className="relative group overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-[#0a0f24]/70 to-[#05060f]/90 p-5 text-center transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.5)] cursor-default select-none"
               >
                 {/* Specific colored glow behind the card on hover */}
                 <div
@@ -2215,7 +2163,7 @@ function Trust() {
                 <div className={`absolute inset-0 rounded-2xl border transition-all duration-500 ${s.border}`} />
 
                 {/* Metric Icon top right */}
-                <div className="absolute top-3 right-3 flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-neutral-400 transition-all duration-300">
+                <div className="absolute top-3 right-3 flex h-7 w-7 items-center justify-center rounded-full bg-white/5 border border-white/5 text-neutral-400 transition-all duration-300">
                   <Icon className={`h-3.5 w-3.5 ${s.color}`} />
                 </div>
 
@@ -2225,7 +2173,7 @@ function Trust() {
                 </div>
 
                 {/* Label */}
-                <div className="mt-2 text-xs text-slate-500 dark:text-slate-400 font-medium group-hover:text-slate-700 transition-colors duration-300">{s.l}</div>
+                <div className="mt-2 text-xs text-white/50 font-medium group-hover:text-white/80 transition-colors duration-300">{s.l}</div>
               </div>
             );
           })}
@@ -2286,7 +2234,7 @@ function JourneySection() {
   };
 
   return (
-    <section className="relative py-24 bg-slate-50 dark:bg-[#020205] overflow-hidden">
+    <section className="relative py-24 bg-[#05060F] overflow-hidden">
       {/* subtle glowing background effects */}
       <div className="pointer-events-none absolute top-1/2 left-1/4 h-[350px] w-[350px] -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.08),transparent)] blur-3xl" />
       <div className="pointer-events-none absolute top-1/2 right-1/4 h-[350px] w-[350px] -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(37,99,235,0.06),transparent)] blur-3xl" />
@@ -2308,7 +2256,7 @@ function JourneySection() {
               </span>
               System Phases
             </span>
-            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-5xl sm:whitespace-nowrap">
+            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white sm:text-5xl sm:whitespace-nowrap">
               Start your journey with LogiMind AI
             </h2>
           </motion.div>
@@ -2316,17 +2264,17 @@ function JourneySection() {
           <div className="flex gap-3">
             <button
               onClick={() => scroll("left")}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 text-slate-900 dark:text-white hover:bg-slate-100 hover:border-[#38bdf8]/30 transition-all duration-300 active:scale-95 cursor-pointer shadow-md"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white hover:bg-white/[0.08] hover:border-[#38bdf8]/30 transition-all duration-300 active:scale-95 cursor-pointer shadow-md"
               aria-label="Scroll left"
             >
-              <ChevronLeft className="h-5 w-5 text-slate-700 dark:text-slate-300" />
+              <ChevronLeft className="h-5 w-5 text-white/80" />
             </button>
             <button
               onClick={() => scroll("right")}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 text-slate-900 dark:text-white hover:bg-slate-100 hover:border-[#38bdf8]/30 transition-all duration-300 active:scale-95 cursor-pointer shadow-md"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-white hover:bg-white/[0.08] hover:border-[#38bdf8]/30 transition-all duration-300 active:scale-95 cursor-pointer shadow-md"
               aria-label="Scroll right"
             >
-              <ChevronRight className="h-5 w-5 text-slate-700 dark:text-slate-300" />
+              <ChevronRight className="h-5 w-5 text-white/80" />
             </button>
           </div>
         </div>
@@ -2343,7 +2291,7 @@ function JourneySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.6, delay: idx * 0.08, type: "spring", stiffness: 80, damping: 15 }}
-              className="flex-shrink-0 w-[285px] sm:w-[320px] md:w-[340px] snap-start rounded-[24px] border border-slate-200 dark:border-white/10 bg-white dark:bg-[#060814] overflow-hidden transition-shadow transition-colors duration-300 hover:shadow-[0_0_30px_rgba(56,189,248,0.2)] hover:border-[#38bdf8]/30 cursor-default flex flex-col h-[450px] shadow-2xl"
+              className="flex-shrink-0 w-[285px] sm:w-[320px] md:w-[340px] snap-start rounded-[24px] border border-white/10 bg-[#0c0d16] overflow-hidden transition-shadow transition-colors duration-300 hover:shadow-[0_0_30px_rgba(56,189,248,0.2)] hover:border-[#38bdf8]/30 cursor-default flex flex-col h-[450px] shadow-2xl"
             >
               {/* Card text content */}
               <div className="px-6 pt-6 pb-2">
@@ -2352,10 +2300,10 @@ function JourneySection() {
                     {card.badge}
                   </span>
                 )}
-                <h3 className="text-xl font-bold tracking-[0.08em] leading-tight text-slate-900 dark:text-white font-mono uppercase">
+                <h3 className="text-xl font-bold tracking-[0.08em] leading-tight text-white font-mono uppercase">
                   {card.title}
                 </h3>
-                <p className="text-[12.5px] mt-1.5 leading-snug text-slate-600 dark:text-slate-400 min-h-[38px]">
+                <p className="text-[12.5px] mt-1.5 leading-snug text-white/60 min-h-[38px]">
                   {card.subtitle}
                 </p>
               </div>
@@ -2366,7 +2314,7 @@ function JourneySection() {
                   src={card.img}
                   alt={card.title}
                   loading="eager"
-                  className="w-full h-full object-cover object-center rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm"
+                  className="w-full h-full object-cover object-center rounded-2xl border border-white/5 shadow-sm"
                 />
               </div>
             </motion.div>
@@ -2398,7 +2346,7 @@ function SectionHead({
       <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-5xl">
         {title}
       </h2>
-      {sub && <p className="mt-4 text-slate-600 dark:text-slate-400 text-sm sm:text-base">{sub}</p>}
+      {sub && <p className="mt-4 text-white/60 text-sm sm:text-base">{sub}</p>}
     </motion.div>
   );
 }
@@ -2447,7 +2395,7 @@ function HowItWorks() {
     },
   ];
   return (
-    <section id="how" className="py-28 bg-slate-50 dark:bg-[#020205]">
+    <section id="how" className="py-28 bg-[#05060F]">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHead eyebrow="How it works" title="Five steps to closed-loop port autonomy." />
         <ol className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
@@ -2461,7 +2409,7 @@ function HowItWorks() {
               className="relative group overflow-hidden rounded-[24px] h-[450px] p-[1.5px] bg-gradient-to-br from-white/40 via-cyan-500/25 to-blue-500/20 transition-all duration-300 hover:shadow-[0_0_35px_rgba(37,99,235,0.3)] hover:-translate-y-1 hover:from-white/80 hover:via-cyan-500/70 hover:to-blue-500/50 cursor-default select-none"
             >
               {/* Inner content container with dark background */}
-              <div className="relative w-full h-full rounded-[22.5px] overflow-hidden flex flex-col justify-end p-6 bg-slate-50/85 dark:bg-[#020205]/85">
+              <div className="relative w-full h-full rounded-[22.5px] overflow-hidden flex flex-col justify-end p-6 bg-[#05060F]/85">
 
                 <div className="absolute inset-0 z-0">
                   <img
@@ -2471,7 +2419,7 @@ function HowItWorks() {
                     loading="eager"
                     className="w-full h-full object-cover transform-gpu group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/10 dark:from-[#020205] dark:via-[#020205]/70 dark:to-transparent opacity-95" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#020205] via-[#020205]/70 to-transparent opacity-95" />
                 </div>
 
                 {/* Content Container */}
@@ -2479,7 +2427,7 @@ function HowItWorks() {
                   {/* Top Row: Center-aligned Stencil Stiled Number */}
                   <div className="flex justify-center w-full mt-2">
                     <span
-                      className="text-6xl font-black text-slate-800/95/90/95 select-none tracking-widest"
+                      className="text-6xl font-black text-white/95 select-none tracking-widest"
                       style={{ fontFamily: "'Big Shoulders Stencil Display', sans-serif" }}
                     >
                       {parseInt(n)}
@@ -2491,10 +2439,10 @@ function HowItWorks() {
                     <div className="text-[10px] font-bold tracking-[0.22em] text-cyan-400 uppercase mb-2">
                       {cat}
                     </div>
-                    <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-blue-600 transition-colors duration-300">
+                    <h3 className="font-display text-xl font-bold text-white tracking-tight leading-snug group-hover:text-cyan-300 transition-colors duration-300">
                       {t}
                     </h3>
-                    <p className="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-sans line-clamp-4">
+                    <p className="mt-2 text-xs text-white/65 leading-relaxed font-sans line-clamp-4">
                       {d}
                     </p>
                   </div>
@@ -2631,7 +2579,7 @@ function Ecosystem() {
   const themeColor = activeNodeData ? activeNodeData.color : "#38bdf8";
 
   return (
-    <section id="ecosystem" className="border-t border-slate-200 dark:border-white/10 py-28 overflow-hidden bg-slate-50 dark:bg-[#020205] relative">
+    <section id="ecosystem" className="border-t border-white/5 py-28 overflow-hidden bg-[#05060F] relative">
       <style>{`
         @keyframes marvel-rotate-cw {
           from { transform: rotate(0deg); }
@@ -2682,7 +2630,7 @@ function Ecosystem() {
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px)",
+          backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
         }}
       />
@@ -2733,7 +2681,7 @@ function Ecosystem() {
                     {/* Core Line */}
                     <path
                       d={p.d}
-                      stroke={isActive ? card.color : "rgba(0, 0, 0, 0.02)"}
+                      stroke={isActive ? card.color : "rgba(255, 255, 255, 0.08)"}
                       strokeWidth={isActive ? 2 : 1.5}
                       strokeLinecap="round"
                       className="transition-all duration-300"
@@ -2839,8 +2787,8 @@ function Ecosystem() {
               >
                 <div className="eco-core-inner-glow" />
                 <div className="z-10 text-center flex flex-col items-center select-none">
-                  <span className="font-mono text-[9px] uppercase tracking-wider text-slate-500 dark:text-slate-400 block">PM-OS</span>
-                  <span className="font-display text-sm font-black tracking-tight text-slate-900 dark:text-white transition-all duration-300">
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-white/40 block">PM-OS</span>
+                  <span className="font-display text-sm font-black tracking-tight text-white transition-all duration-300">
                     {activeNodeData ? activeNodeData.coreCode : "CORE"}
                   </span>
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping mt-1 block" />
@@ -2859,10 +2807,10 @@ function Ecosystem() {
                     key={c.title}
                     className={`eco-glass-card card-${idx + 1} transition-all duration-300 group cursor-pointer`}
                     style={{
-                      borderColor: isActive ? c.color : "var(--eco-inactive-border)",
+                      borderColor: isActive ? c.color : "rgba(255,255,255,0.08)",
                       boxShadow: isActive
-                        ? `0 12px 35px rgba(0, 0, 0, 0.08), 0 0 20px ${c.color}25, 0 1px 0 rgba(0, 0, 0, 0.02) inset`
-                        : "0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 0 rgba(0, 0, 0, 0.02) inset",
+                        ? `0 12px 35px rgba(0, 0, 0, 0.5), 0 0 20px ${c.color}25, 0 1px 0 rgba(255, 255, 255, 0.08) inset`
+                        : "0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05) inset",
                       transform: isActive ? "translateY(-4px)" : "none"
                     }}
                     onMouseEnter={() => setActiveNode(idx)}
@@ -2873,16 +2821,16 @@ function Ecosystem() {
                         <span
                           className="eco-card-title-icon transition-colors"
                           style={{
-                            color: isActive ? "#fff" : "var(--eco-inactive-text)",
-                            backgroundColor: isActive ? c.color : "var(--eco-inactive-bg)",
-                            borderColor: isActive ? c.color : "var(--eco-inactive-border)"
+                            color: isActive ? "#fff" : "rgba(255,255,255,0.7)",
+                            backgroundColor: isActive ? c.color : "rgba(255, 255, 255, 0.05)",
+                            borderColor: isActive ? c.color : "rgba(255, 255, 255, 0.1)"
                           }}
                         >
                           <Icon className="h-4 w-4" />
                         </span>
                         <div>
                           <span className="eco-card-title block">{c.title}</span>
-                          <span className="text-[8px] text-slate-500 dark:text-slate-400 uppercase tracking-widest font-mono block">
+                          <span className="text-[8px] text-white/30 uppercase tracking-widest font-mono block">
                             Status: Online
                           </span>
                         </div>
@@ -2919,16 +2867,16 @@ function Ecosystem() {
                             transition={{ duration: 0.15 }}
                             className="flex flex-col gap-2 text-left"
                           >
-                            <p className="text-[11px] leading-normal text-slate-700 dark:text-slate-300">
+                            <p className="text-[11px] leading-normal text-white/70">
                               {c.description}
                             </p>
                             <div className="flex flex-col gap-1">
-                              <span className="text-[8px] uppercase tracking-widest font-mono text-slate-500 dark:text-slate-400 block">
+                              <span className="text-[8px] uppercase tracking-widest font-mono text-white/40 block">
                                 Orchestrated Agents
                               </span>
                               <div className="flex flex-wrap gap-1">
                                 {c.agents.map((agent, i) => (
-                                  <span key={i} className="text-[8.5px] font-mono bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-1.5 py-0.5 rounded text-slate-700 dark:text-slate-300 whitespace-nowrap">
+                                  <span key={i} className="text-[8.5px] font-mono bg-white/5 border border-white/10 px-1.5 py-0.5 rounded text-white/80 whitespace-nowrap">
                                     {agent}
                                   </span>
                                 ))}
@@ -3030,7 +2978,7 @@ function Features() {
   ];
 
   return (
-    <section id="platform" className="py-28 bg-slate-50 dark:bg-[#020205] border-t border-slate-200 dark:border-white/10">
+    <section id="platform" className="py-28 bg-[#05060F] border-t border-white/5">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHead eyebrow="Platform" title="Ten systems. One operating model." />
 
@@ -3137,14 +3085,14 @@ function GarudInspectionSection() {
   ];
 
   return (
-    <section id="wagon" className="py-28 bg-slate-50 dark:bg-[#020205] border-t border-slate-200 dark:border-white/10 relative overflow-hidden">
+    <section id="wagon" className="py-28 bg-[#05060F] border-t border-white/5 relative overflow-hidden">
       {/* Conic Border Animation Styles */}
       <style>{`
         .garud-card {
           position: relative;
-          background-color: var(--garud-card-bg);
+          background-color: hsla(240, 15%, 9%, 0.9);
           border-radius: 2.5rem;
-          box-shadow: var(--garud-card-shadow);
+          box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.15) inset;
         }
 
         .garud-card-border {
@@ -3317,7 +3265,7 @@ function GarudInspectionSection() {
           border: 1px solid rgba(var(--holo-color-raw), 0.16);
           background: linear-gradient(
             120deg,
-            rgba(0, 0, 0, 0.02),
+            rgba(255, 255, 255, 0.05),
             rgba(255, 255, 255, 0.01) 45%,
             rgba(0, 0, 0, 0)
           );
@@ -3360,7 +3308,7 @@ function GarudInspectionSection() {
             return (
               <div
                 key={idx}
-                className="garud-card relative flex flex-col lg:flex-row gap-10 lg:gap-16 items-center p-8 lg:p-12 overflow-visible text-left shadow-lg transition-all duration-500 hover:scale-[1.005]"
+                className="garud-card relative flex flex-col lg:flex-row gap-10 lg:gap-16 items-center p-8 lg:p-12 overflow-visible text-left shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 hover:scale-[1.005]"
               >
                 {/* 3D Conic Glowing Border */}
                 <div className={`garud-card-border garud-card-border-${idx}`} />
@@ -3369,16 +3317,16 @@ function GarudInspectionSection() {
                 <div
                   className="absolute inset-[1px] rounded-[2.45rem] pointer-events-none z-10"
                   style={{
-                    backgroundImage: `radial-gradient(at 88% 40%, var(--garud-radial-bg) 0px, transparent 85%),
-                                      radial-gradient(at 49% 30%, var(--garud-radial-bg) 0px, transparent 85%),
-                                      radial-gradient(at 14% 26%, var(--garud-radial-bg) 0px, transparent 85%),
+                    backgroundImage: `radial-gradient(at 88% 40%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
+                                      radial-gradient(at 49% 30%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
+                                      radial-gradient(at 14% 26%, hsla(240, 15%, 9%, 1) 0px, transparent 85%),
                                       ${item.bgRadial}`
                   }}
                 />
 
                 {/* Video Component */}
                 <div className={`w-full lg:w-[48%] flex flex-col justify-center relative z-20 ${!isEven ? "lg:order-2" : ""}`}>
-                  <div className="relative overflow-hidden rounded-[24px] border border-slate-200 dark:border-white/10 bg-white dark:bg-[#060814] shadow-lg flex flex-col">
+                  <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[#05060f] shadow-[0_20px_45px_rgba(0,0,0,0.6)] flex flex-col">
                     
                     {/* Inner video container */}
                     <div className="relative aspect-video w-full overflow-hidden">
@@ -3397,14 +3345,14 @@ function GarudInspectionSection() {
                     </div>
 
                     {/* HUD console overlay info bar */}
-                    <div className="bg-white/95 dark:bg-[#060814]/95 backdrop-blur-md border-t border-slate-200 dark:border-white/10 px-5 py-3 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono w-full">
+                    <div className="bg-[#05060f]/95 backdrop-blur-md border-t border-white/10 px-5 py-3 flex items-center justify-between text-[11px] text-white/50 font-mono w-full">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-slate-500 dark:text-slate-400">STREAM:</span>
-                        <span className="text-slate-900 dark:text-white font-bold">{item.tag}</span>
+                        <span className="text-white/30">STREAM:</span>
+                        <span className="text-white font-bold">{item.tag}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-slate-500 dark:text-slate-400">ENGINE:</span>
-                        <span className="text-slate-900 dark:text-white font-bold">{item.model.split(" ")[0]}</span>
+                        <span className="text-white/30">ENGINE:</span>
+                        <span className="text-white">{item.model.split(" ")[0]}</span>
                       </div>
                     </div>
                   </div>
@@ -3438,26 +3386,26 @@ function GarudInspectionSection() {
                       <span className={`text-[10px] uppercase font-mono tracking-[0.18em] font-extrabold ${item.accentText} border px-3 py-1 rounded-full w-fit block`}>
                         {item.category}
                       </span>
-                      <h3 className="font-display text-2xl lg:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+                      <h3 className="font-display text-2xl lg:text-3xl font-black text-white tracking-tight leading-tight">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 font-mono tracking-wide">
+                      <p className="text-xs text-white/40 font-mono tracking-wide">
                         {item.model}
                       </p>
                     </div>
 
-                    <hr className="w-full h-[1px] bg-slate-200 dark:bg-white/10 border-none" />
+                    <hr className="w-full h-[1px] bg-[#1a1a24] border-none" />
 
                     {/* Checklist style stats list matching user wrapper */}
                     <ul className="space-y-3">
                       {item.checklist.map((text, i) => (
                         <li key={i} className="flex items-center gap-3">
                           <span className="flex items-center justify-center w-[1.1rem] h-[1.1rem] rounded-full text-black shrink-0" style={{ backgroundColor: item.primaryColor }}>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-[0.8rem] h-[0.8rem] text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-[0.8rem] h-[0.8rem] text-[#05060F]">
                               <path fillRule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clipRule="evenodd" />
                             </svg>
                           </span>
-                          <span className="text-xs sm:text-sm font-sans font-medium text-slate-700 dark:text-slate-300">{text}</span>
+                          <span className="text-xs sm:text-sm font-sans font-medium text-white/95">{text}</span>
                         </li>
                       ))}
                     </ul>
@@ -3499,7 +3447,7 @@ export function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-24 relative overflow-hidden bg-slate-50 dark:bg-[#020205] border-t border-slate-200 dark:border-white/10">
+    <section id="faq" className="py-24 relative overflow-hidden bg-[#05060F] border-t border-white/5">
       {/* Glow details */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-sky-500/5 blur-3xl pointer-events-none" />
 
@@ -3605,11 +3553,11 @@ export function FAQ() {
           FAQ
         </div>
 
-        <h2 className="mt-4 font-display text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">
+        <h2 className="mt-4 font-display text-4xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
           Frequently asked questions
         </h2>
 
-        <p className="mt-4 text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+        <p className="mt-4 text-neutral-400 text-sm sm:text-base">
           Haven't found what you're looking for?{" "}
           <a
             href="mailto:support@logimind.ai"
@@ -3619,24 +3567,24 @@ export function FAQ() {
           </a>
         </p>
 
-        <div className="mt-16 max-w-3xl mx-auto flex flex-col border-t border-slate-200 dark:border-white/10 text-left">
+        <div className="mt-16 max-w-3xl mx-auto flex flex-col border-t border-white/5 text-left">
           {faqData.map((item, idx) => {
             const isOpen = openIdx === idx;
             return (
-              <div key={idx} className="border-b border-slate-200 dark:border-white/10 py-6 sm:py-7">
+              <div key={idx} className="border-b border-white/5 py-6 sm:py-7">
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
                   className="w-full flex items-center justify-between text-left gap-4 group cursor-pointer bg-transparent border-none p-0"
                 >
-                  <span className="text-base sm:text-xl font-semibold text-slate-800/95 dark:text-white/95 group-hover:text-blue-600 transition-colors duration-200 tracking-tight">
+                  <span className="text-base sm:text-xl font-semibold text-white/90 group-hover:text-white transition-colors duration-200 tracking-tight">
                     {item.question}
                   </span>
                   <div className="relative w-5 h-5 flex items-center justify-center shrink-0">
                     {/* Horizontal line */}
-                    <div className="absolute w-4.5 h-[1.5px] bg-slate-500 dark:bg-slate-400 group-hover:bg-blue-600 transition-colors duration-200" />
+                    <div className="absolute w-4.5 h-[1.5px] bg-neutral-600 group-hover:bg-neutral-400 transition-colors duration-200" />
                     {/* Vertical line */}
                     <motion.div
-                      className="absolute w-[1.5px] h-4.5 bg-slate-500 dark:bg-slate-400 group-hover:bg-blue-600 transition-colors duration-200"
+                      className="absolute w-[1.5px] h-4.5 bg-neutral-600 group-hover:bg-neutral-400 transition-colors duration-200"
                       animate={{ rotate: isOpen ? 90 : 0, opacity: isOpen ? 0 : 1, scaleY: isOpen ? 0 : 1 }}
                       transition={{ duration: 0.2, ease: "easeInOut" }}
                     />
@@ -3648,7 +3596,7 @@ export function FAQ() {
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   className="overflow-hidden"
                 >
-                  <div className="pt-4 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-[90%] font-normal">
+                  <div className="pt-4 text-sm sm:text-base text-neutral-400 leading-relaxed max-w-[90%] font-normal">
                     {item.answer}
                   </div>
                 </motion.div>
@@ -3723,7 +3671,7 @@ function PricingSection() {
   ];
 
   return (
-    <section id="pricing" className="py-28 bg-slate-50 dark:bg-[#020205] border-t border-slate-200 dark:border-white/10 relative overflow-hidden">
+    <section id="pricing" className="py-28 bg-[#05060F] border-t border-white/5 relative overflow-hidden">
       {/* Dynamic Ticket CSS Styles */}
       <style>{`
         .ticket-canvas {
@@ -3752,9 +3700,9 @@ function PricingSection() {
             box-shadow 0.6s ease;
           box-shadow:
             0 20px 40px rgba(0, 0, 0, 0.8),
-            0 0 0 1px rgba(0, 0, 0, 0.02);
+            0 0 0 1px rgba(255, 255, 255, 0.05);
           background: transparent;
-          filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.08));
+          filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
           text-align: left;
         }
 
@@ -4106,7 +4054,7 @@ function PricingSection() {
                       <div className="t-title">
                         {t.price}
                         {t.price !== "Custom" && (
-                          <span className="text-[14px] lowercase font-normal text-slate-500 dark:text-slate-400 tracking-normal ml-1">
+                          <span className="text-[14px] lowercase font-normal text-white/50 tracking-normal ml-1">
                             / {t.period}
                           </span>
                         )}
