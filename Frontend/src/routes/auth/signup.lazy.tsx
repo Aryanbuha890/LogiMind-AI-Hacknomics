@@ -1,10 +1,20 @@
 import { createLazyFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import {
-  Eye, EyeOff, Mail, User, AlertCircle, Ship, X
+  Eye,
+  EyeOff,
+  Mail,
+  User,
+  AlertCircle,
+  Ship,
+  X,
+  Zap,
+  CheckCircle2,
+  ArrowRight,
+  ShieldCheck,
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { supabase } from "@/lib/supabase";
+import { directLogin, DEMO_PROFILES } from "@/lib/auth";
 
 export const Route = createLazyFileRoute("/auth/signup")({
   component: SignupPage,
@@ -17,12 +27,25 @@ function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [agreed, setAgreed] = useState(false);
+  const [agreed, setAgreed] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [modalType, setModalType] = useState<"terms" | "privacy" | null>(null);
+
+  const handleInstantDemo = () => {
+    setLoading(true);
+    setTimeout(() => {
+      directLogin({
+        name: DEMO_PROFILES[0].name,
+        email: DEMO_PROFILES[0].email,
+        role: DEMO_PROFILES[0].role,
+      });
+      setLoading(false);
+      navigate({ to: "/app" });
+    }, 300);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,30 +69,21 @@ function SignupPage() {
     }
 
     setLoading(true);
-    
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: name,
-        }
-      }
-    });
 
-    setLoading(false);
-
-    if (error) {
-      setError(error.message);
-    } else {
-      alert("Account created successfully! You can now log in.");
-      navigate({ to: "/auth/login" });
-    }
+    // Direct mock registration - instant login without external database
+    setTimeout(() => {
+      directLogin({
+        name,
+        email,
+        role: "Port Operations Specialist",
+      });
+      setLoading(false);
+      navigate({ to: "/app" });
+    }, 350);
   };
 
   return (
-    <div className="relative h-screen w-full bg-[#05060F] text-white flex p-3 sm:p-4 md:p-6 lg:p-8 justify-center items-stretch overflow-hidden box-border">
-      
+    <div className="relative min-h-screen w-full bg-[#05060F] text-white flex p-3 sm:p-4 md:p-6 lg:p-8 justify-center items-center overflow-x-hidden box-border">
       {/* Global CSS to hide the browser scrollbar track */}
       <style>{`
         .no-scrollbar::-webkit-scrollbar {
@@ -82,8 +96,8 @@ function SignupPage() {
       `}</style>
 
       {/* Visual Card Section (Left on Signup) */}
-      <section 
-        className="relative hidden md:flex md:w-[42%] lg:w-[46%] rounded-[24px] lg:rounded-[32px] overflow-hidden border border-white/[0.04] p-8 lg:p-12 flex-col justify-between shadow-2xl shrink-0"
+      <section
+        className="relative hidden md:flex md:w-[42%] lg:w-[46%] rounded-[24px] lg:rounded-[32px] overflow-hidden border border-white/[0.06] p-8 lg:p-12 flex-col justify-between shadow-2xl shrink-0 self-stretch"
         style={{
           background: "linear-gradient(180deg, #091a33 0%, #05060f 100%)",
         }}
@@ -93,10 +107,11 @@ function SignupPage() {
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/10 rounded-full blur-[90px] pointer-events-none" />
 
         {/* Dotted grid background overlay */}
-        <div 
-          className="absolute inset-0 opacity-15 pointer-events-none" 
+        <div
+          className="absolute inset-0 opacity-15 pointer-events-none"
           style={{
-            backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px)",
+            backgroundImage:
+              "radial-gradient(rgba(255, 255, 255, 0.15) 1.5px, transparent 1.5px)",
             backgroundSize: "24px 24px",
           }}
         />
@@ -116,37 +131,77 @@ function SignupPage() {
             Build your autonomous logistics command center.
           </h2>
           <p className="text-slate-400/90 text-sm leading-relaxed">
-            Join leading terminal and rail operators tracking vessel fleets, monitoring railway wagon telemetry, optimizing stack density, and executing closed-loop autonomous dispatch routes.
+            Join leading terminal and rail operators tracking vessel fleets, monitoring railway
+            wagon telemetry, optimizing stack density, and executing closed-loop autonomous dispatch
+            routes.
           </p>
+
+          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.05] p-3 text-xs text-emerald-300/90 space-y-1 backdrop-blur-md">
+            <div className="flex items-center gap-1.5 font-semibold text-emerald-400">
+              <ShieldCheck className="h-4 w-4" />
+              <span>Instant Mock Setup</span>
+            </div>
+            <p className="text-[11px] text-emerald-200/70">
+              Accounts are created locally and cached immediately. Start evaluating all dashboard
+              modules without setting up a remote database.
+            </p>
+          </div>
         </div>
 
         {/* Bottom Status Branding */}
         <div className="flex items-center gap-2 text-xs text-slate-500 z-10 font-mono">
-          <span>✦ PLATFORM OPERATIONAL</span>
+          <span>✦ MOCK AUTH READY · PLATFORM ONLINE</span>
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
         </div>
       </section>
 
       {/* Form Section (Right on Signup) */}
-      <section className="flex-1 flex flex-col justify-center items-center py-4 px-4 md:px-8 z-10 overflow-hidden h-full">
-        <div className="w-full max-w-[360px] sm:max-w-[380px] space-y-4 sm:space-y-5">
-
-          <div className="flex justify-center md:hidden">
+      <section className="flex-1 flex flex-col justify-center items-center py-6 px-4 md:px-8 z-10 overflow-y-auto max-h-screen">
+        <div className="w-full max-w-[390px] sm:max-w-[420px] space-y-4 sm:space-y-5">
+          <div className="flex justify-center md:hidden mb-2">
             <Logo to="/" size="xl" />
           </div>
-          
+
           {/* Header */}
           <div className="space-y-1 text-center md:text-left">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-white">
-              Create an account
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-[11px] font-semibold tracking-wide">
+              <CheckCircle2 className="h-3 w-3" />
+              <span>Direct Profile Creation</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              Create an Account
             </h1>
             <p className="text-slate-400 text-xs">
-              Enter your details below to get started.
+              Instant entry without email verification or database configuration.
             </p>
           </div>
 
+          {/* Quick 1-Click Launch Button */}
+          <button
+            type="button"
+            onClick={handleInstantDemo}
+            disabled={loading}
+            className="group relative w-full h-11 rounded-xl font-semibold text-white overflow-hidden p-[1px] transition-all duration-300 hover:shadow-[0_0_25px_rgba(56,189,248,0.4)] hover:scale-[1.01] cursor-pointer"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600" />
+            <div className="relative h-full w-full bg-[#070d1e]/90 hover:bg-[#070d1e]/75 rounded-[11px] flex items-center justify-center gap-2 px-4 transition-colors">
+              <Zap className="h-4 w-4 text-cyan-400 fill-cyan-400 group-hover:scale-110 transition-transform" />
+              <span className="text-xs sm:text-sm font-semibold tracking-wide">
+                Skip & Launch Demo Account Directly
+              </span>
+              <ArrowRight className="h-4 w-4 text-cyan-400 group-hover:translate-x-1 transition-transform ml-auto" />
+            </div>
+          </button>
+
+          <div className="relative flex items-center justify-center my-1">
+            <div className="absolute inset-x-0 h-px bg-white/10" />
+            <span className="relative bg-[#05060F] px-3 text-[10px] uppercase font-mono tracking-widest text-slate-500">
+              or create custom profile
+            </span>
+          </div>
+
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-3.5">
+          <form onSubmit={handleSubmit} className="space-y-3">
             {error && (
               <div className="flex items-center gap-2 rounded-xl border border-red-500/15 bg-red-500/[0.07] p-2 text-[10px] text-red-300 font-medium">
                 <AlertCircle className="h-3 w-3 shrink-0" />
@@ -156,39 +211,45 @@ function SignupPage() {
 
             {/* Name Input */}
             <div className="space-y-1">
-              <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Full Name</label>
+              <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
+                Full Name
+              </label>
               <div className="relative">
                 <input
                   type="text"
                   required
-                  placeholder="John Doe"
+                  placeholder="e.g. Captain Alex Rivera"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full text-xs text-white bg-white/[0.02] border border-white/[0.08] hover:border-white/15 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
+                  className="w-full text-xs text-white bg-white/[0.03] border border-white/[0.08] hover:border-white/15 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
                 />
-                <User className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-slate-500 pointer-events-none" />
+                <User className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500 pointer-events-none" />
               </div>
             </div>
 
             {/* Email Input */}
             <div className="space-y-1">
-              <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Email</label>
+              <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
+                Email
+              </label>
               <div className="relative">
                 <input
                   type="email"
                   required
-                  placeholder="Email"
+                  placeholder="alex.rivera@portmind.ai"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full text-xs text-white bg-white/[0.02] border border-white/[0.08] hover:border-white/15 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
+                  className="w-full text-xs text-white bg-white/[0.03] border border-white/[0.08] hover:border-white/15 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
                 />
-                <Mail className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-slate-500 pointer-events-none" />
+                <Mail className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500 pointer-events-none" />
               </div>
             </div>
 
             {/* Password Input */}
             <div className="space-y-1">
-              <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Password</label>
+              <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
+                Password
+              </label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -196,21 +257,23 @@ function SignupPage() {
                   placeholder="Create password (min. 6 chars)"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full text-xs text-white bg-white/[0.02] border border-white/[0.08] hover:border-white/15 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
+                  className="w-full text-xs text-white bg-white/[0.03] border border-white/[0.08] hover:border-white/15 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors cursor-pointer"
                 >
-                  {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
             </div>
 
             {/* Confirm Password Input */}
             <div className="space-y-1">
-              <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Confirm Password</label>
+              <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
+                Confirm Password
+              </label>
               <div className="relative">
                 <input
                   type={showConfirmPassword ? "text" : "password"}
@@ -218,14 +281,14 @@ function SignupPage() {
                   placeholder="Confirm password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full text-xs text-white bg-white/[0.02] border border-white/[0.08] hover:border-white/15 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
+                  className="w-full text-xs text-white bg-white/[0.03] border border-white/[0.08] hover:border-white/15 focus:border-sky-500/80 rounded-lg h-9 sm:h-10 px-3 pr-10 focus:outline-none transition focus:ring-1 focus:ring-sky-500/80"
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors cursor-pointer"
                 >
-                  {showConfirmPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
+                  {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
               </div>
             </div>
@@ -239,9 +302,12 @@ function SignupPage() {
                 onChange={(e) => setAgreed(e.target.checked)}
                 className="mt-0.5 h-3.5 w-3.5 rounded border-white/10 bg-white/[0.02] text-sky-600 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-sky-600"
               />
-              <label htmlFor="agree-terms" className="text-[10.5px] text-slate-400 leading-normal select-none cursor-pointer">
+              <label
+                htmlFor="agree-terms"
+                className="text-[10.5px] text-slate-400 leading-normal select-none cursor-pointer"
+              >
                 I agree to the{" "}
-                <button 
+                <button
                   type="button"
                   onClick={() => setModalType("terms")}
                   className="text-sky-400 hover:text-sky-300 transition-colors focus:outline-none cursor-pointer underline"
@@ -249,13 +315,14 @@ function SignupPage() {
                   Terms
                 </button>{" "}
                 and{" "}
-                <button 
+                <button
                   type="button"
                   onClick={() => setModalType("privacy")}
                   className="text-sky-400 hover:text-sky-300 transition-colors focus:outline-none cursor-pointer underline"
                 >
                   Privacy Policy
-                </button>.
+                </button>
+                .
               </label>
             </div>
 
@@ -263,35 +330,42 @@ function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full h-9 sm:h-10 bg-white hover:bg-slate-100 text-black font-semibold rounded-full flex items-center justify-center transition duration-200 cursor-pointer shadow-lg shadow-white/5 pt-[1px] text-xs sm:text-sm"
+              className="w-full h-10 bg-white hover:bg-slate-100 text-black font-semibold rounded-full flex items-center justify-center gap-2 transition duration-200 cursor-pointer shadow-lg shadow-white/5 text-xs sm:text-sm"
             >
-              {loading ? "Creating account..." : "Create account"}
+              {loading ? (
+                <span>Launching...</span>
+              ) : (
+                <>
+                  <span>Create Account & Launch</span>
+                  <ArrowRight className="h-3.5 w-3.5 text-black" />
+                </>
+              )}
             </button>
           </form>
 
           {/* Footer Link */}
-          <div className="text-center text-xs text-slate-400 pt-2">
+          <div className="text-center text-xs text-slate-400 pt-1">
             Already have an account?{" "}
-            <Link to="/auth/login" className="text-sky-400 hover:text-sky-300 font-semibold transition duration-200">
+            <Link
+              to="/auth/login"
+              className="text-sky-400 hover:text-sky-300 font-semibold transition duration-200"
+            >
               Sign In
             </Link>
           </div>
-
         </div>
       </section>
 
       {/* Modal Overlay for Terms / Privacy */}
       {modalType && (
         <div className="fixed inset-0 z-50 bg-[#05060F]/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div 
-            className="relative w-full max-w-lg rounded-[24px] border border-white/10 bg-gradient-to-br from-[#0c1a30] to-[#05060f] p-6 sm:p-8 shadow-2xl flex flex-col max-h-[80vh] animate-in fade-in zoom-in-95 duration-200"
-          >
+          <div className="relative w-full max-w-lg rounded-[24px] border border-white/10 bg-gradient-to-br from-[#0c1a30] to-[#05060f] p-6 sm:p-8 shadow-2xl flex flex-col max-h-[80vh] animate-in fade-in zoom-in-95 duration-200">
             {/* Modal Header */}
             <div className="flex items-center justify-between pb-4 border-b border-white/5 shrink-0">
               <h3 className="text-lg font-bold text-white tracking-tight">
                 {modalType === "terms" ? "Terms of Service" : "Privacy Policy"}
               </h3>
-              <button 
+              <button
                 type="button"
                 onClick={() => setModalType(null)}
                 className="h-8 w-8 rounded-full border border-white/5 bg-white/[0.02] text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
@@ -305,43 +379,105 @@ function SignupPage() {
               {modalType === "terms" ? (
                 <>
                   <p className="font-semibold text-white">Last updated: June 22, 2026</p>
-                  <p>Welcome to LogiMind AI. By creating an account or using our port and rail operating system (the "Platform"), you agree to be bound by these Terms of Service. Please read them carefully.</p>
-                  
-                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">1. Use of the Platform</h4>
-                  <p>LogiMind AI provides real-time logistics analytics, CCTV PPE detection (including safety helmet enforcement), railway wagon OCR processing, and closed-loop vessel coordinates tracking. You agree to use the Platform only for authorized operational purposes in compliance with local port authority regulations.</p>
+                  <p>
+                    Welcome to LogiMind AI. By creating an account or using our port and rail
+                    operating system (the "Platform"), you agree to be bound by these Terms of
+                    Service. Please read them carefully.
+                  </p>
 
-                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">2. User Account & Operator Credentials</h4>
-                  <p>You must maintain the security of your password and credentials. You are responsible for all activities and automated dispatch rules executed under your account. LogiMind AI is not liable for unauthorized access resulting from negligent credential management.</p>
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">
+                    1. Use of the Platform
+                  </h4>
+                  <p>
+                    LogiMind AI provides real-time logistics analytics, CCTV PPE detection (including
+                    safety helmet enforcement), railway wagon OCR processing, and closed-loop vessel
+                    coordinates tracking. You agree to use the Platform only for authorized
+                    operational purposes in compliance with local port authority regulations.
+                  </p>
 
-                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">3. Automated Actions & AI Suggestions</h4>
-                  <p>The Platform provides AI-driven suggestions (via LangGraph agents and vision classifiers) for stack optimization, gate controls, and crew dispatches. Operators retain full responsibility for verifying critical actions before safety overrides or automated executions take place.</p>
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">
+                    2. User Account & Operator Credentials
+                  </h4>
+                  <p>
+                    You must maintain the security of your password and credentials. You are
+                    responsible for all activities and automated dispatch rules executed under your
+                    account. LogiMind AI is not liable for unauthorized access resulting from
+                    negligent credential management.
+                  </p>
 
-                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">4. Disclaimers & Limitation of Liability</h4>
-                  <p>The Platform and its AI telemetry models are provided "as is" and "as available". We do not guarantee 100% accuracy of OCR or machine breakdown predictions. In no event shall LogiMind AI be liable for port delays, machine downtime, or cargo bottlenecks.</p>
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">
+                    3. Automated Actions & AI Suggestions
+                  </h4>
+                  <p>
+                    The Platform provides AI-driven suggestions (via LangGraph agents and vision
+                    classifiers) for stack optimization, gate controls, and crew dispatches. Operators
+                    retain full responsibility for verifying critical actions before safety
+                    overrides or automated executions take place.
+                  </p>
+
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">
+                    4. Disclaimers & Limitation of Liability
+                  </h4>
+                  <p>
+                    The Platform and its AI telemetry models are provided "as is" and "as available".
+                    We do not guarantee 100% accuracy of OCR or machine breakdown predictions. In no
+                    event shall LogiMind AI be liable for port delays, machine downtime, or cargo
+                    bottlenecks.
+                  </p>
                 </>
               ) : (
                 <>
                   <p className="font-semibold text-white">Last updated: June 22, 2026</p>
-                  <p>LogiMind AI respects your privacy and is committed to protecting your terminal data. This Privacy Policy details how we collect, process, and secure operational information within our application.</p>
-                  
-                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">1. Information We Collect</h4>
-                  <p>We process data necessary to provide autonomous port operations, including: CCTV streams (for safety gear checks), railway telemetries, crane coordinates, vessel ETAs, manifest logs, and user credentials (full name, email, and audit logs).</p>
+                  <p>
+                    LogiMind AI respects your privacy and is committed to protecting your terminal
+                    data. This Privacy Policy details how we collect, process, and secure operational
+                    information within our application.
+                  </p>
 
-                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">2. How We Use Data</h4>
-                  <p>Collected feeds and statistics are processed at the edge to calculate safety compliance rates, route autonomous trucks, coordinate yard cranes, detect incident fires, and improve AI model inferences. We do not sell or monetize your terminal metrics to third parties.</p>
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">
+                    1. Information We Collect
+                  </h4>
+                  <p>
+                    We process data necessary to provide autonomous port operations, including: CCTV
+                    streams (for safety gear checks), railway telemetries, crane coordinates, vessel
+                    ETAs, manifest logs, and user credentials (full name, email, and audit logs).
+                  </p>
 
-                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">3. Data Retention & Secure Storage</h4>
-                  <p>Video feeds are analyzed in memory at the edge and are not retained long-term unless flagged for active safety violations. Database logs, wagon telemetry history, and user activity records are securely stored using end-to-end industry encryption standards.</p>
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">
+                    2. How We Use Data
+                  </h4>
+                  <p>
+                    Collected feeds and statistics are processed at the edge to calculate safety
+                    compliance rates, route autonomous trucks, coordinate yard cranes, detect
+                    incident fires, and improve AI model inferences. We do not sell or monetize your
+                    terminal metrics to third parties.
+                  </p>
 
-                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">4. Third-Party Integrations</h4>
-                  <p>Our platform integrates with port operating systems (TOS) via secure APIs. Data exchange is strictly limited to authorized requests required to resolve gate dispatches or crane tasks.</p>
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">
+                    3. Data Retention & Secure Storage
+                  </h4>
+                  <p>
+                    Video feeds are analyzed in memory at the edge and are not retained long-term
+                    unless flagged for active safety violations. Database logs, wagon telemetry
+                    history, and user activity records are securely stored using end-to-end
+                    industry encryption standards.
+                  </p>
+
+                  <h4 className="font-bold text-white uppercase tracking-wider text-[10px] pt-2">
+                    4. Third-Party Integrations
+                  </h4>
+                  <p>
+                    Our platform integrates with port operating systems (TOS) via secure APIs. Data
+                    exchange is strictly limited to authorized requests required to resolve gate
+                    dispatches or crane tasks.
+                  </p>
                 </>
               )}
             </div>
 
             {/* Modal Footer */}
             <div className="pt-4 border-t border-white/5 flex justify-end shrink-0">
-              <button 
+              <button
                 type="button"
                 onClick={() => {
                   if (modalType === "terms") setAgreed(true);
@@ -355,7 +491,6 @@ function SignupPage() {
           </div>
         </div>
       )}
-
     </div>
   );
 }

@@ -156,24 +156,62 @@ const UploadView: React.FC = () => {
 
             {/* Drag & drop upload module */}
             {!file && (
-                <div className="border border-dashed border-border rounded-2xl p-16 text-center hover:border-cyan-500/30 hover:bg-[#0B1A33]/5 dark:hover:bg-[#0B1A33]/15 transition-all bg-card/90 backdrop-blur-md relative group">
-                    <input
-                        type="file"
-                        accept="video/*"
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                        id="video-upload"
-                        onChange={handleFileChange}
-                        disabled={uploading}
-                    />
-                    <div className="flex flex-col items-center">
-                        <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300">
-                            <Upload className="w-7 h-7 text-slate-500 dark:text-slate-400 group-hover:text-cyan-500 transition-colors" />
+                <div className="space-y-4">
+                    <div className="border border-dashed border-border rounded-2xl p-10 text-center hover:border-cyan-500/30 hover:bg-[#0B1A33]/5 dark:hover:bg-[#0B1A33]/15 transition-all bg-card/90 backdrop-blur-md relative group">
+                        <input
+                            type="file"
+                            accept="video/*"
+                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                            id="video-upload"
+                            onChange={handleFileChange}
+                            disabled={uploading}
+                        />
+                        <div className="flex flex-col items-center">
+                            <div className="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
+                                <Upload className="w-6 h-6 text-slate-500 dark:text-slate-400 group-hover:text-cyan-500 transition-colors" />
+                            </div>
+                            <h3 className="text-base font-bold text-slate-800 dark:text-slate-100 mb-1">Upload Video Files</h3>
+                            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4 max-w-sm">Drag and drop inspection video files (MP4, AVI, MOV) for Zero-DCE and OCR deblur processing</p>
+                            <span className="px-5 py-2 bg-gradient-to-r from-[#1b3a6b] to-[#2563eb] text-white text-xs font-semibold rounded-lg shadow-lg shadow-indigo-500/10 cursor-pointer">
+                                Select File
+                            </span>
                         </div>
-                        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">Upload Video Files</h3>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 mb-6 max-w-sm">Drag and drop inspection video files (MP4, AVI, MOV) for Zero-DCE and OCR deblur processing</p>
-                        <span className="px-5 py-2.5 bg-gradient-to-r from-[#1b3a6b] to-[#2563eb] text-white text-xs font-semibold rounded-lg shadow-lg shadow-indigo-500/10 cursor-pointer">
-                            Select File
-                        </span>
+                    </div>
+
+                    {/* Quick project video presets */}
+                    <div className="rounded-xl border border-white/10 bg-card p-4 space-y-2">
+                        <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-400">
+                                ✦ Project Video Samples (Preloaded)
+                            </span>
+                            <span className="text-[10px] text-muted-foreground font-mono">1-click inspect</span>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                            {[
+                                { name: "Wagon OCR Stream", file: "/wagon-ocr.mp4", tag: "Number Detection" },
+                                { name: "Fault & Anomaly Stream", file: "/wagon-faults.mp4", tag: "Axle / Spring Check" },
+                                { name: "Night-Time Zero-DCE", file: "/wagon-night.mp4", tag: "Low-Light Restored" },
+                            ].map((preset, idx) => (
+                                <button
+                                    key={idx}
+                                    type="button"
+                                    onClick={() => {
+                                        setPreviewUrl(preset.file);
+                                        setStatus("Analyzing " + preset.name + "...");
+                                        setInspectionId(1000 + idx);
+                                        setProcessing(true);
+                                    }}
+                                    className="flex flex-col items-start p-2.5 rounded-lg border border-white/10 bg-white/[0.02] hover:border-cyan-500/50 hover:bg-cyan-500/[0.05] transition text-left cursor-pointer group"
+                                >
+                                    <span className="text-xs font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                                        🎥 {preset.name}
+                                    </span>
+                                    <span className="text-[10px] text-slate-400 font-mono mt-0.5">
+                                        {preset.tag}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
             )}
@@ -287,29 +325,37 @@ const UploadView: React.FC = () => {
                                         </div>
 
                                         <div className="grid grid-cols-3 gap-1.5 mt-2">
-                                            {/* Micro visual forensics thumbnails */}
+                                            {/* Micro visual forensics thumbnails with real project images */}
                                             <div className="space-y-1">
-                                                <span className="text-[7.5px] text-slate-500 dark:text-slate-450 uppercase font-mono block">Original</span>
-                                                <div className="aspect-[4/3] bg-black/5 dark:bg-black/20 rounded border border-border flex items-center justify-center relative overflow-hidden">
-                                                    <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-[#0B1A33]/5" />
-                                                    <span className="text-[8px] font-mono text-slate-400 dark:text-slate-550">RAW</span>
+                                                <span className="text-[7.5px] text-slate-400 uppercase font-mono block">Original</span>
+                                                <div className="aspect-[4/3] bg-black/40 rounded border border-white/10 overflow-hidden relative shadow-sm">
+                                                    <img
+                                                        src="/wagons/R1.png"
+                                                        alt="Raw Wagon Frame"
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                    <span className="absolute bottom-0.5 left-0.5 text-[7px] font-mono font-bold text-white bg-black/70 px-1 rounded">RAW</span>
                                                 </div>
                                             </div>
                                             <div className="space-y-1">
-                                                <span className="text-[7.5px] text-slate-500 dark:text-slate-450 uppercase font-mono block">Zero-DCE</span>
-                                                <div className="aspect-[4/3] bg-black/5 dark:bg-black/20 rounded border border-border flex items-center justify-center relative overflow-hidden">
-                                                    <div className="absolute inset-0 bg-gradient-to-br from-black/2 to-[#0B1A33]/10" />
-                                                    <span className="text-[8px] font-mono text-cyan-600 dark:text-cyan-400 font-semibold animate-pulse">DEBLUR</span>
+                                                <span className="text-[7.5px] text-cyan-400 uppercase font-mono block">Zero-DCE</span>
+                                                <div className="aspect-[4/3] bg-black/40 rounded border border-cyan-500/30 overflow-hidden relative shadow-sm">
+                                                    <img
+                                                        src="/wagons/resrult-detection.png"
+                                                        alt="Enhanced Wagon Frame"
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                    <span className="absolute bottom-0.5 left-0.5 text-[7px] font-mono font-bold text-cyan-300 bg-black/70 px-1 rounded">DEBLUR</span>
                                                 </div>
                                             </div>
                                             <div className="space-y-1">
-                                                <span className="text-[7.5px] text-slate-500 dark:text-slate-450 uppercase font-mono block mb-1">Anomaly</span>
-                                                <div className={`aspect-[4/3] bg-black/5 dark:bg-black/20 rounded border flex items-center justify-center relative overflow-hidden ${wagon.anomaly_type ? 'border-rose-500/30 bg-rose-950/5' : 'border-border'}`}>
-                                                    {wagon.anomaly_type ? (
-                                                        <span className="text-[8px] font-mono text-rose-500 dark:text-rose-450 font-bold">ALERT</span>
-                                                    ) : (
-                                                        <span className="text-[8px] font-mono text-emerald-600 dark:text-emerald-500/70">OK</span>
-                                                    )}
+                                                <span className="text-[7.5px] text-slate-400 uppercase font-mono block mb-1">OCR Crop</span>
+                                                <div className="aspect-[4/3] bg-black/40 rounded border border-purple-500/30 overflow-hidden relative shadow-sm flex items-center justify-center p-0.5">
+                                                    <img
+                                                        src="/wagons/WagonNumber.png"
+                                                        alt="OCR Bounding Box"
+                                                        className="w-full h-full object-contain"
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

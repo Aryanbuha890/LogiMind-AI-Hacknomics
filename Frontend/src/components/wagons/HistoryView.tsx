@@ -92,30 +92,36 @@ const HistoryView: React.FC = () => {
             });
     }, [selectedInspection]);
 
-    // Forensic detail block generator
+    // Forensic detail block generator with real project images
     const RenderForensicFrame = ({ label, type }: { label: string, type: 'raw' | 'enhanced' | 'ocr' }) => {
-        let borderClass = 'border-border bg-muted/65';
-        let titleColor = 'text-muted-foreground';
-        let textVal = 'FORENSICS_STREAM';
+        const imgSrc =
+            type === 'enhanced'
+                ? '/wagons/Result-detection-2.png'
+                : type === 'ocr'
+                ? '/wagons/WagonNumber.png'
+                : '/wagons/R2.png';
 
-        if (type === 'enhanced') {
-            borderClass = 'border-cyan-500/20 bg-cyan-500/5 dark:bg-cyan-950/10';
-            titleColor = 'text-cyan-600 dark:text-cyan-400';
-            textVal = 'DEBLUR_PIPELINE';
-        } else if (type === 'ocr') {
-            borderClass = 'border-purple-500/20 bg-purple-500/5 dark:bg-purple-950/10';
-            titleColor = 'text-purple-600 dark:text-purple-400';
-            textVal = 'OCR_SEGMENT';
-        }
+        const titleColor =
+            type === 'enhanced'
+                ? 'text-cyan-400 font-bold'
+                : type === 'ocr'
+                ? 'text-purple-400 font-bold'
+                : 'text-muted-foreground';
 
         return (
             <div className="space-y-1">
                 <span className={`text-[9px] font-mono uppercase tracking-wider ${titleColor}`}>{label}</span>
-                <div className={`w-full h-32 rounded-lg border ${borderClass} flex flex-col items-center justify-center relative overflow-hidden`}>
-                    <div className="absolute inset-0 bg-grid-sm opacity-10 pointer-events-none" />
-                    <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 tracking-wider mb-2 font-bold">{textVal}</span>
-                    <div className="h-6 px-3 border border-border rounded flex items-center justify-center bg-slate-100 dark:bg-black/40">
-                        <span className="text-[8px] font-mono text-slate-500 dark:text-slate-400">ANALYSIS_CHECK_OK</span>
+                <div className="w-full h-32 rounded-lg border border-white/10 bg-black/50 overflow-hidden relative group cursor-pointer shadow-md">
+                    <img
+                        src={imgSrc}
+                        alt={label}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-between p-2">
+                        <span className="text-[8px] font-mono font-bold text-white bg-black/70 px-1.5 py-0.5 rounded border border-white/10 uppercase">
+                            {type === 'enhanced' ? 'DEBLUR_AI' : type === 'ocr' ? 'OCR_PLATE' : 'RAW_CAM'}
+                        </span>
+                        <Eye className="w-3.5 h-3.5 text-white/80 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                 </div>
             </div>

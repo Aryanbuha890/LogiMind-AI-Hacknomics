@@ -1,6 +1,6 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
+import { getCurrentUser, onAuthStateChange, directLogout } from "@/lib/auth";
 import {
   LayoutGrid,
   Wrench,
@@ -40,20 +40,35 @@ const bottomItems: NavItem[] = [
 
 export function AppSidebar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const navigate = useNavigate();
   const [userName, setUserName] = useState("Arjun R.");
+  const [userRole, setUserRole] = useState("Port Operations Lead");
   const [userInitials, setUserInitials] = useState("AR");
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+    const updateUser = () => {
+      const user = getCurrentUser();
       if (user) {
-        const fullName = user.user_metadata?.full_name || user.email?.split('@')[0] || "Port User";
+        const fullName =
+          user.user_metadata?.full_name || user.email?.split("@")[0] || "Port User";
         setUserName(fullName);
-        const initials = fullName.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase();
-        setUserInitials(initials || "U");
+        const role = user.user_metadata?.role || "Port Operations Lead";
+        setUserRole(role);
+        const initials = fullName
+          .split(" ")
+          .map((n: string) => n[0])
+          .join("")
+          .substring(0, 2)
+          .toUpperCase();
+        setUserInitials(initials || "PO");
       }
     };
-    fetchUser();
+
+    updateUser();
+    const unsubscribe = onAuthStateChange(updateUser);
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const isActive = (to: string, exact?: boolean) =>
@@ -145,15 +160,20 @@ export function AppSidebar() {
               {userName}
             </div>
             <div className="truncate text-[10px] text-white/50">
-              Port Operations Lead
+              {userRole}
             </div>
           </div>
-          <Link
-            to="/auth/login"
-            className="grid h-7 w-7 place-items-center rounded-md text-white/40 hover:bg-white/10 hover:text-white"
+          <button
+            type="button"
+            onClick={() => {
+              directLogout();
+              navigate({ to: "/auth/login" });
+            }}
+            title="Sign out (Mock Session)"
+            className="grid h-7 w-7 place-items-center rounded-md text-white/40 hover:bg-white/10 hover:text-white transition-colors cursor-pointer"
           >
             <LogOut className="h-3.5 w-3.5" />
-          </Link>
+          </button>
         </div>
       </div>
     </aside>

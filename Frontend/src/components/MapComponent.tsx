@@ -216,6 +216,7 @@ export default function MapComponent({
   
   // UI States
   const [filterType, setFilterType] = useState<string>("ALL"); 
+  const [mapTheme, setMapTheme] = useState<"tactical" | "satellite" | "ocean" | "osm_dark">("tactical");
   const [showRiskZones, setShowRiskZones] = useState<boolean>(true);
   const [toastMsg, setToastMsg] = useState<string | null>(null); 
   const [showAlerts, setShowAlerts] = useState<boolean>(false);
@@ -293,6 +294,20 @@ export default function MapComponent({
                   <option value="MILITARY">Military (Purple ★)</option>
               </select>
 
+              <div className="flex flex-col gap-1 pt-1 border-t border-border">
+                <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">Map Style</span>
+                <select 
+                  value={mapTheme} 
+                  onChange={(e) => setMapTheme(e.target.value as any)} 
+                  className="p-1.5 rounded bg-muted border border-border text-xs text-foreground w-full cursor-pointer focus:outline-none focus:border-cyan-500"
+                >
+                  <option value="tactical">🌙 Dark Tactical (Esri)</option>
+                  <option value="satellite">🛰️ Satellite Hybrid</option>
+                  <option value="ocean">🌊 Nautical Ocean</option>
+                  <option value="osm_dark">🗺️ OpenStreetMap Dark</option>
+                </select>
+              </div>
+
               <div className="flex items-center justify-between pt-2 border-t border-border">
                  <span className="text-[11px] font-semibold text-muted-foreground">Risk Overlays</span>
                  <input 
@@ -351,10 +366,61 @@ export default function MapComponent({
           vessels={vessels}
           selectedVesselId={selectedVesselId}
         />
-        <TileLayer 
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" 
-          attribution='&copy; <a href="https://carto.com/">CARTO</a>' 
-        />
+
+        {/* ZERO-KEY REQUIRED BASEMAP TILES */}
+        {mapTheme === "tactical" && (
+          <>
+            <TileLayer 
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}" 
+              attribution='&copy; <a href="https://www.esri.com/">Esri</a>' 
+              maxZoom={16}
+            />
+            <TileLayer 
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}" 
+              attribution="" 
+              maxZoom={16}
+            />
+          </>
+        )}
+
+        {mapTheme === "satellite" && (
+          <>
+            <TileLayer 
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" 
+              attribution='&copy; <a href="https://www.esri.com/">Esri</a>' 
+              maxZoom={18}
+            />
+            <TileLayer 
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}" 
+              attribution="" 
+              maxZoom={18}
+            />
+          </>
+        )}
+
+        {mapTheme === "ocean" && (
+          <>
+            <TileLayer 
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}" 
+              attribution='&copy; <a href="https://www.esri.com/">Esri</a>' 
+              maxZoom={13}
+            />
+            <TileLayer 
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}" 
+              attribution="" 
+              maxZoom={13}
+            />
+          </>
+        )}
+
+        {mapTheme === "osm_dark" && (
+          <TileLayer 
+            className="osm-dark-tiles"
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" 
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' 
+            maxZoom={19}
+          />
+        )}
 
         {/* RISK ZONES */}
         {showRiskZones && risks.map((risk) => {
