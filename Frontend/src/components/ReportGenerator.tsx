@@ -202,7 +202,7 @@ export function ReportGenerator({
                 <p className="text-sm text-slate-600 mt-2">Latest simulation run for 'Storm Scenario C' indicates 12% delay risk for inbound vessels. Rail dispatch optimized to mitigate yard congestion.</p>
               </div>
               <div className="border border-slate-200 rounded-lg p-4 bg-slate-50">
-                <h3 className="font-bold text-slate-700">Docs AI (Groq RAG Copilot)</h3>
+                <h3 className="font-bold text-slate-700">LogiMind Copilot Intelligence</h3>
                 <p className="text-sm text-slate-600 mt-2">124 operator queries handled today. Average inference speed: 45ms. All maritime protocols and hazard manuals successfully indexed.</p>
               </div>
             </div>

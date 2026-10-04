@@ -29,7 +29,7 @@ class Settings(BaseSettings):
 
     # ── Groq ──────────────────────────────────────────────────────────────
     groq_api_key: str = ""
-    groq_model: str = "openai/gpt-oss-120b"
+    groq_model: str = "openai/gpt-oss-20b"
     llm_temperature: float = 0.3
     llm_max_tokens: int = 2048
 
@@ -37,7 +37,7 @@ class Settings(BaseSettings):
     embedding_model: str = "BAAI/bge-small-en-v1.5"
 
     # ── Reranker ───────────────────────────────────────────────────────────
-    reranker_model: str = "BAAI/bge-reranker-large"
+    reranker_model: str = "BAAI/bge-reranker-base"
 
     # ── ChromaDB ───────────────────────────────────────────────────────────
     chroma_persist_dir: str = str(PROJECT_ROOT / "chroma_db")

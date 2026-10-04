@@ -30,7 +30,7 @@ if WAGON_DETECTION_PATH not in sys.path:
 # Import ML predict and SimPy simulation logic from subpackages
 from prediction.predict import predict_scenario, predict_vessel_etas, generate_ai_report, compute_kpis
 from prediction.simulator import run_monte_carlo_simulation
-from doc_ai.doc_ai_parser import extract_text_from_file, parse_document_by_template
+from doc_ai.doc_ai_parser import extract_text_from_file, parse_document_by_template, compute_customs_check
 
 app = FastAPI(title="PortMind AI — Port Operations Intelligence API")
 
@@ -384,11 +384,14 @@ async def parse_document(
         filename = file.filename or "document.txt"
         extracted_text = extract_text_from_file(file_bytes, filename)
         parsed_fields = parse_document_by_template(extracted_text, template_id)
+        customs_check = compute_customs_check(parsed_fields, extracted_text, template_id)
         return {
             "status": "success",
             "filename": filename,
             "template_id": template_id,
-            "fields": parsed_fields
+            "fields": parsed_fields,
+            "customs_check": customs_check,
+            "raw_text": extracted_text[:4000]
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Document parsing failed: {str(e)}")

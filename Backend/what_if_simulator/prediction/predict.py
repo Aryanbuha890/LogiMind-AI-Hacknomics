@@ -221,43 +221,67 @@ def _determine_causal_factor(wind_speed, visibility, precipitation,
     return factors[0]
 
 
+def generate_groq_report(prompt: str, api_key: str, model: str = "llama-3.3-70b-versatile"):
+    """Call Groq API using standard library urllib for fast, reliable inference."""
+    try:
+        import urllib.request
+        import json
+
+        url = "https://api.groq.com/openai/v1/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+            "User-Agent": "PortMind-AI/1.0",
+        }
+        payload = {
+            "model": model,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": "You are LogiMind AI, a senior maritime port operations intelligence analyst. Never mention underlying AI models or providers (Groq, Llama, OpenAI, Gemini, etc.). Always identify as LogiMind AI.",
+                },
+                {"role": "user", "content": prompt},
+            ],
+            "temperature": 0.3,
+            "max_tokens": 1024,
+        }
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode("utf-8"),
+            headers=headers,
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            if resp.status == 200:
+                result = json.loads(resp.read().decode("utf-8"))
+                return result["choices"][0]["message"]["content"]
+    except Exception as e:
+        print(f"Groq API call error: {e}")
+    return None
+
+
 def generate_ai_report(predictions, weather_params, vessels):
     """
-    Generate an AI analysis report using Google Gemini 2.0 Flash API (google-genai).
-    Falls back to template-based report if API key is not configured or in error cooldown.
+    Generate an AI analysis report using Groq (Llama-3.3-70B) or Google Gemini 2.0 Flash.
+    Falls back to template-based report if APIs are unavailable or rate-limited.
     """
     global _last_gemini_error_time
-    api_key = os.getenv("GEMINI_API_KEY")
+    groq_key = os.getenv("GROQ_API_KEY")
+    gemini_key = os.getenv("GEMINI_API_KEY")
+    groq_model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 
-    if not api_key:
-        # print("GEMINI_API_KEY not found. Using template-based fallback report.")
-        return generate_fallback_report(predictions, weather_params, vessels)
+    # Build vessel summary for prompt
+    vessel_lines = []
+    for v in vessels:
+        vessel_lines.append(
+            f"  - {v['name']} ({v['vessel_type']}): {v['route']}, "
+            f"Scheduled ETA: {v['scheduled_eta']}, Predicted ETA: {v['predicted_eta']}, "
+            f"Delay: {v['delay_minutes']} min, Status: {v['status']}, "
+            f"Cause: {v['causal_factor']}"
+        )
+    vessel_text = "\n".join(vessel_lines)
 
-    # Check error cooldown to avoid slow Google API round-trips when rate-limited/429
-    current_time = time.time()
-    if current_time - _last_gemini_error_time < _GEMINI_ERROR_COOLDOWN_SEC:
-        remaining = int(_GEMINI_ERROR_COOLDOWN_SEC - (current_time - _last_gemini_error_time))
-        # print(f"Gemini API in error cooldown ({remaining}s remaining). Directly using fallback template report.")
-        return generate_fallback_report(predictions, weather_params, vessels)
-
-    try:
-        from google import genai
-
-        # Initialize the official google-genai Client
-        client = genai.Client(api_key=api_key)
-
-        # Build vessel summary for prompt
-        vessel_lines = []
-        for v in vessels:
-            vessel_lines.append(
-                f"  - {v['name']} ({v['vessel_type']}): {v['route']}, "
-                f"Scheduled ETA: {v['scheduled_eta']}, Predicted ETA: {v['predicted_eta']}, "
-                f"Delay: {v['delay_minutes']} min, Status: {v['status']}, "
-                f"Cause: {v['causal_factor']}"
-            )
-        vessel_text = "\n".join(vessel_lines)
-
-        prompt = f"""You are PortMind AI, a senior maritime port operations intelligence analyst. 
+    prompt = f"""You are PortMind AI, a senior maritime port operations intelligence analyst. 
 Based on real-time ML model predictions for current port conditions, generate a concise professional operational analysis report.
 
 **Current Weather Conditions:**
@@ -290,20 +314,31 @@ Which vessels are most affected, the downstream cascade effects (berth queue, cr
 
 IMPORTANT: Keep total response under 350 words. Use markdown formatting. Be data-driven — reference actual numbers from the data above. Do not use generic advice."""
 
-        # Generate content using gemini-2.0-flash with new Client SDK
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=prompt,
-        )
-        return response.text
+    # 1. Try Groq first (Ultra-fast, reliable, high rate-limit)
+    if groq_key:
+        groq_report = generate_groq_report(prompt, groq_key, groq_model)
+        if groq_report:
+            return groq_report
 
-    except Exception as e:
-        _last_gemini_error_time = time.time()  # Start cooldown timer
-        # if "429" in str(e) or "quota" in str(e).lower():
-        #     print(f"Gemini API Free Tier quota limit reached (429). Falling back to premium template report. Cooldown of {_GEMINI_ERROR_COOLDOWN_SEC}s initiated.")
-        # else:
-        #     print(f"Gemini API exception: {e}. Cooldown of {_GEMINI_ERROR_COOLDOWN_SEC}s initiated. Using fallback report.")
-        return generate_fallback_report(predictions, weather_params, vessels)
+    # 2. Try Gemini if configured and not in cooldown
+    if gemini_key:
+        current_time = time.time()
+        if current_time - _last_gemini_error_time >= _GEMINI_ERROR_COOLDOWN_SEC:
+            try:
+                from google import genai
+                client = genai.Client(api_key=gemini_key)
+                response = client.models.generate_content(
+                    model="gemini-2.0-flash",
+                    contents=prompt,
+                )
+                if response.text:
+                    return response.text
+            except Exception as e:
+                _last_gemini_error_time = time.time()
+                print(f"Gemini API exception: {e}. Cooldown initiated.")
+
+    # 3. Fallback template report
+    return generate_fallback_report(predictions, weather_params, vessels)
 
 
 def generate_fallback_report(predictions, weather_params, vessels):

@@ -149,8 +149,7 @@ app = FastAPI(
     title="Maritime-RAG API",
     description=(
         "Hybrid Retrieval-Augmented Generation system for Maritime Safety "
-        "and Port Operations. Powered by Gemini 2.5 Flash, ChromaDB, and "
-        "BGE reranker."
+        "and Port Operations."
     ),
     version="1.0.0",
     lifespan=lifespan,

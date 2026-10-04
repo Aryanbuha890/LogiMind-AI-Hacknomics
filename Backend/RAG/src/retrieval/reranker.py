@@ -41,10 +41,23 @@ class Reranker:
         self.model_name = model_name or settings.reranker_model
         self.top_k = top_k or settings.rerank_top_k
 
+        if not self.model_name or self.model_name.lower() in ("none", "disabled", "passthrough"):
+            log.info("Reranker set to passthrough mode – skipping HuggingFace model download.")
+            self._model = None
+            return
+
         log.info("Loading reranker model: {}", self.model_name)
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-        self._model = CrossEncoder(self.model_name, max_length=512, device=device)
-        log.info("Reranker loaded successfully")
+        try:
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+            self._model = CrossEncoder(self.model_name, max_length=512, device=device)
+            log.info("Reranker loaded successfully")
+        except Exception as e:
+            log.warning(
+                "Could not load CrossEncoder model '{}' ({}). Reranker running in fail-safe passthrough mode.",
+                self.model_name,
+                e,
+            )
+            self._model = None
 
     # ------------------------------------------------------------------
     # Public API
@@ -72,6 +85,10 @@ class Reranker:
 
         k = top_k or self.top_k
         log.info("Reranking {} candidate(s), returning top {}", len(documents), k)
+
+        if self._model is None:
+            log.info("Reranker model not loaded; returning top {} candidates via vector/hybrid order.", k)
+            return documents[:k]
 
         # Build (query, passage) pairs for cross-encoder
         pairs = [(query, doc.page_content) for doc in documents]

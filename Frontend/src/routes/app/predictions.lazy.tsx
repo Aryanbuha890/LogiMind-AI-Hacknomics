@@ -663,7 +663,7 @@ function PredictionsPage() {
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping" />
-                    <span className="text-[8.5px] text-white/45 uppercase font-semibold">Gemini-2.0-Flash // SECURE</span>
+                    <span className="text-[8.5px] text-white/45 uppercase font-semibold">NEURAL ANALYTICS ENGINE // ACTIVE</span>
                   </div>
                 </div>
 
